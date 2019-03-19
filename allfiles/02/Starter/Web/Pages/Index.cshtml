@@ -1,0 +1,58 @@
+@page
+@model IndexModel
+
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Contoso Photo Gallery</span>
+</nav>
+<div class="mx-5 mb-5">
+    <div class="card">
+        <div class="card-header text-dark">
+            Upload a new image
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" asp-for="Upload">
+                    <label class="custom-file-label">Choose image</label>
+                </div>
+                <button type="submit" class="btn btn-secondary">Upload</button>
+            </form>
+        </div>
+    </div>
+    <h1 class="display-1">Thumbnails</h1>
+    @if (Model.ThumbnailImageList.Count > 0)
+    {
+        <div class="d-flex justify-content-around">
+            @foreach (string imageUrl in Model.ThumbnailImageList)
+            {
+                <li class="media d-flex justify-content-center align-items-center border border-light rounded bg-light" style="height: 250px; width: 250px;">
+                    <img src="@imageUrl" />
+                </li>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            No Thumbnail Images Found
+        </div>
+    }
+    <h1 class="display-1">Full Images</h1>
+    @if (Model.FullImageList.Count > 0)
+    {
+        <div class="card-columns">
+            @foreach (string imageUrl in Model.FullImageList)
+            {
+                <div class="card">
+                    <img src="@imageUrl" class="img-fluid" />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            No Full Images Found
+        </div>
+    }
+</div>
