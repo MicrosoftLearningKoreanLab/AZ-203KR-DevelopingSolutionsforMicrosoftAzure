@@ -4,7 +4,7 @@
 
 *	There is a GitHub repository for the AZ-203, Microsoft Azure Developer, courses.
 
-*	You can access the repositories at https://github.com/orgs/MicrosoftLearning/dashboard
+* You can make the lab files available to students by downloading the .md files, using Pandoc to create the Word docs from the .md files, and then printing and distributing the files to students. 
 
 
 *	For each delivery, trainers should download the latest files from GitHub. Trainers should also check the Issues tab to see if other MCTs have reported any errors.  
