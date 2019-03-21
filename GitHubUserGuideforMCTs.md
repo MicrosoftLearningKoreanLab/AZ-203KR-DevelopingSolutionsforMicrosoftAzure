@@ -1,16 +1,45 @@
-# GitHub User Guide for MCTs
+# GitHub User Guide for MCTs <!-- omit in toc -->
 
-Cloud services, such as Microsoft Azure, are updated frequently. This leads to issues for Microsoft Certified Trainers (MCTs) when they teach courses, such as _20532: Developing Microsoft Azure Solutions_ or _20533: Implementing Microsoft Azure Infrastructure Solutions_, because lab steps change frequently as the service changes. Due to the frequency of the changes and the fact that there may not be any notification when changes occur, it can be difficult for the course development team to rapidly identify and address any lab changes.
+Cloud services, such as Microsoft Azure, are updated frequently. This leads to issues for Microsoft Certified Trainers (MCTs) when they teach courses, such as *AZ-203T01: Develop Azure Infrastructure as a Service compute solutions*, because lab steps change frequently as the service changes. Due to the frequency of the changes and the fact that there may not be any notification when changes occur, it can be difficult for the course development team to rapidly identify and address any lab changes.
 
 To address these issues, we are using GitHub to publish the lab steps and lab scripts for courses that cover cloud services like Azure. Using GitHub allows for collaboration between the course’s authors and MCTs to keep the content current with Azure platform changes. Using GitHub allows the MCTs to provide feedback and suggestions for lab changes, and then the course authors can update lab steps and scripts quickly and relatively easily.
 
 When you prepare to teach these courses, you should ensure that you are using the latest lab steps and scripts by downloading the appropriate files from GitHub.
 
-Note: You can make the lab files available to students by downloading the .md files, using Pandoc to create the Word docs from the .md files, and then printing and distributing the files to students. The lab instructions are also available as a Web page at http://microsoftlearning.github.io/20533-ImplementingMicrosoftAzureInfrastructureSolutions.
+>**Note:** You can make the lab files available to students by downloading the .md files, using Pandoc to create the Word docs from the .md files, and then printing and distributing the files to students.
 
 This user guide is for MCTs who are new to GitHub, and it provides steps for connecting to GitHub, downloading and printing course materials, updating the scripts that students use in labs, and explaining how you can help ensure that this course’s content remains current.
 
-### GitHub terminology
+# Table of Contents <!-- omit in toc -->
+- [GitHub terminology](#github-terminology)
+- [Overview of Microsoft Learning's GitHub solution for course labs](#overview-of-microsoft-learnings-github-solution-for-course-labs)
+- [Prerequisites](#prerequisites)
+  - [Signing up for a Github account](#signing-up-for-a-github-account)
+  - [Installing Github Desktop](#installing-github-desktop)
+  - [Installing Pandoc version 1.19.2](#installing-pandoc-version-1192)
+  - [Installing PowerShell Community Extensions 3.2.0](#installing-powershell-community-extensions-320)
+- [Downloading and printing lab files](#downloading-and-printing-lab-files)
+  - [Downloading the latest materials for course labs](#downloading-the-latest-materials-for-course-labs)
+    - [To clone the course repo to your local machine](#to-clone-the-course-repo-to-your-local-machine)
+  - [Printing the lab and LAK files](#printing-the-lab-and-lak-files)
+    - [To convert the lab files and create the Zip packages:](#to-convert-the-lab-files-and-create-the-zip-packages)
+    - [To print the lab files](#to-print-the-lab-files)
+- [Receiving update notifications, suggesting changes, and collaborating on projects](#receiving-update-notifications-suggesting-changes-and-collaborating-on-projects)
+  - [Watching a repo](#watching-a-repo)
+  - [Suggesting changes and collaborating on a repo](#suggesting-changes-and-collaborating-on-a-repo)
+    - [To create a repo branch:](#to-create-a-repo-branch)
+    - [To delete a repo Branch](#to-delete-a-repo-branch)
+    - [To commit changes using Github Desktop](#to-commit-changes-using-github-desktop)
+    - [To edit files and commit changes in the online repo:](#to-edit-files-and-commit-changes-in-the-online-repo)
+    - [To create a pull request:](#to-create-a-pull-request)
+    - [To review and comment on a pull request](#to-review-and-comment-on-a-pull-request)
+    - [To review and comment on a commit](#to-review-and-comment-on-a-commit)
+    - [To submit an Issue:](#to-submit-an-issue)
+    - [To review and comment on an existing issue:](#to-review-and-comment-on-an-existing-issue)
+    - [To mention a Github user in a comment:](#to-mention-a-github-user-in-a-comment)
+
+## GitHub terminology
+
 GitHub introduces terminology that might be new to you, and the following list includes terms and concepts that this document uses. However, for a full list of GitHub terms, refer to the “GitHub Glossary” at <https://help.github.com/articles/GitHub-glossary/>.
 
 - _Git_ and _GitHub_: _Git_ is an open-source, change-tracking program, and _GitHub_ is a site/solution built on Git. There are other websites and solutions that use Git as their backend. You would use GitHub primarily for open-source (public) development projects, and it is free for those projects. However, if you want to use GitHub for projects that are private, and not open source, you must sign up for a paid version.
@@ -46,9 +75,10 @@ The Microsoft Learning team has created a solution that allows them to publish u
 2.  Install the GitHub Desktop.
 
 3.  Install the prerequisite software:
-  - Pandoc version 1.19.2
+   
+    * Pandoc version 1.19.2
 
-  - Windows PowerShell Community Extensions 3.2.0
+    * Windows PowerShell Community Extensions 3.2.0
 
 Once you sign up for GitHub and install the prerequisite software, the steps for downloading and printing the course-lab materials are the same for each course.
 
@@ -371,3 +401,4 @@ Whenever you create an issue, or a comment on a pull request or commit, you also
 2. Create your comment or issue as described previously, and in the comment text box, type **@**, followed by the user or team name, within the comment.
 
   > **Note:** When you type the **@** symbol, a list appears that contains GitHub users who are collaborators on the applicable project and anyone who is participating in the project’s comments. The list uses autocomplete as you type, so that you can filter the list easily.
+
