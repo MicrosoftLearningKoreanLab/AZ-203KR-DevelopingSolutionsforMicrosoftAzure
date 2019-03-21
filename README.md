@@ -2,7 +2,7 @@
 
 *	We are publishing the lab instructions and lab files on GitHub to allow for interaction between the course authors and MCTs. We hope this will help  keep the content current as the Azure platform changes.
 
-*	There is a GitHub repository for the AZ-203, Microsoft Azure Developer, courses.
+*	This is the GitHub repository for the AZ-203, Microsoft Azure Developer, courses.
 
 * You can make the lab files available to students by downloading the .md files, using Pandoc to create the Word docs from the .md files, and then printing and distributing the files to students. 
 
