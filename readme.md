@@ -1,6 +1,6 @@
 # AZ-203: Developing Solutions for Microsoft Azure
 
-
+[![Build Status](https://microsoftdigitallearning.visualstudio.com/Courseware/_apis/build/status/MicrosoftLearning.AZ-203-DevelopingSolutionsforMicrosoftAzure?branchName=master)](https://microsoftdigitallearning.visualstudio.com/Courseware/_build/latest?definitionId=19&branchName=master)
 
 - **[Download Latest Student Handbook and AllFiles Content](../../releases/latest)**
 - **Are you a MCT?** - Have a look at our [GitHub User Guide for MCTs](https://microsoftlearning.github.io/MCT-User-Guide/)
