@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Monitoring services deployed to Azure'
+    type: 'Answer Key'
+    module: 'Module 5: Monitor, troubleshoot, and optimize Azure solutions '
+---
+
+# Lab: Monitoring services deployed to Azure
 # Student lab answer key
 
 ## Microsoft Azure user interface

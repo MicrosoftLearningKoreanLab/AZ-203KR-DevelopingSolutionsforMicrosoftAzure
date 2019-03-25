@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Constructing a polyglot data solution'
+    type: 'Answer Key'
+    module: 'Module 3: Develop for Azure Storage'
+---
+
+# Lab: Constructing a polyglot data solution
 # Student lab answer key
 
 ## Microsoft Azure user interface

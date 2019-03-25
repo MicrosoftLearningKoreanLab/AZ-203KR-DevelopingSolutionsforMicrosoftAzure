@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Building a web application on Azure Platform-as-a-Service offerings'
+    type: 'Answer Key'
+    module: 'Module 2: Develop Azure platform as a service (PaaS) compute solutions'
+---
+
+# Lab: Building a web application on Azure Platform-as-a-Service offerings
 # Student lab answer key
 
 ## Microsoft Azure user interface

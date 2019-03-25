@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Access resource secrets securely across services'
+    type: 'Answer Key'
+    module: 'Module 4: Implement Azure security'
+---
+
+# Lab: Access resource secrets securely across services
 # Student lab answer key
 
 ## Microsoft Azure user interface

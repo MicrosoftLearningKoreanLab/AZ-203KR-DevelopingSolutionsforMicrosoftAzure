@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Creating a multi-tier solution by using services in Azure'
+    type: 'Answer Key'
+    module: 'Module 6: Connect to and consume Azure, and third-party, services'
+---
+
+# Lab: Creating a multi-tier solution by using services in Azure
 # Student lab answer key
 
 ## Microsoft Azure user interface

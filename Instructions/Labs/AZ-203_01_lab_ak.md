@@ -1,3 +1,11 @@
+---
+lab:
+    title: 'Lab: Deploying compute workloads by using images and containers'
+    type: 'Answer Key'
+    module: 'Module 1: Develop Azure infrastructure as a service (IaaS) compute solutions'
+---
+
+# Lab: Deploying compute workloads by using images and containers
 # Student lab answer key
 
 ## Microsoft Azure user interface
