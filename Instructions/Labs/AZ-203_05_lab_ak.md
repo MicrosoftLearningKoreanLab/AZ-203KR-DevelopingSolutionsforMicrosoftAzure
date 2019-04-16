@@ -44,17 +44,23 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  On the taskbar, select the **Windows PowerShell** icon.
 
-2.  In the PowerShell command prompt, enter the following command and press Enter to change the current working directory to the **Allfiles (F):\\** path:
+2.  In the PowerShell command prompt, change the current working directory to the **Allfiles (F):\\** path:
 
-cd F:
+    ```
+    cd F:
+    ```
 
 3.  Within the command prompt, enter the following command and press Enter to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
 
+    ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure Labfiles
+    ```
 
 4.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203.02** lab:
 
+    ```
     git checkout master -- Allfiles/*
+    ```
 
 5.  Close the currently running **Windows PowerShell** command prompt application.
 
