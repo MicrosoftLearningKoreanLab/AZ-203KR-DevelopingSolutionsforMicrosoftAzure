@@ -48,25 +48,15 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     cd F:
 
-3.  Still within the command prompt, enter the following command and press **Enter** to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
+3.  Within the command prompt, enter the following command and press Enter to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
 
-<!-- end list -->
+    git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure Labfiles
 
-    git clone --depth 1 --no-checkout https://github.com/microsoftlearning-placeholder/AZ-203-DevelopingSolutionsForAzure Labfiles
+4.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203.02** lab:
 
-4.  Still within the command prompt, enter the following command and press **Enter** to change the current working directory to the **Allfiles (F):\\Labfiles\\** path:
+    git checkout master -- Allfiles/*
 
-<!-- end list -->
-
-    cd Labfiles
-
-5.  Still within the command prompt, enter the following command and press Enter to check out the lab files necessary to complete the **AZ-203.03** lab:
-
-<!-- end list -->
-
-    git checkout master -- 03/*
-
-6.  Close the currently running **Windows PowerShell** command prompt application.
+5.  Close the currently running **Windows PowerShell** command prompt application.
 
 ### Exercise 1: Creating database resources in Azure
 
