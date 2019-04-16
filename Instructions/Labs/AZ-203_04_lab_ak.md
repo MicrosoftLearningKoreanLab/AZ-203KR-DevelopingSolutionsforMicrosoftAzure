@@ -49,7 +49,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 3.  Within the command prompt, enter the following command and press Enter to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
 
     ```
-    git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure Labfiles
+    git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
 4.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203.02** lab:
