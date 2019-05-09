@@ -354,15 +354,17 @@ In this exercise, you created an API App in Azure and then deployed your ASP.NET
     
     3.  In the **Resource group** section, select **Use existing**, and then select **ManagedPlatform**.
     
-    4.  In the **OS** section, select **Windows**.
+    4.  In the **Publish** section, select **Code**.
     
-    5.  In the **Publish** section, select **Code**.
+    5.  In the **Runtime stack** section, select **.NET Core 2.2**.
     
-    6.  Leave the **App Service plan/Location** field set to its default value.
+    6.  In the **OS** section, select **Windows**.
     
-    7.  Leave the **Application Insights** field set to its default value.
+    7.  Leave the **App Service plan/Location** field set to its default value.
     
-    8.  Select **Create**.
+    8.  Leave the **Application Insights** field set to its default value.
+    
+    9.  Select **Create**.
 
 7.  Wait for the creation task to complete before you move forward with this lab.
 
