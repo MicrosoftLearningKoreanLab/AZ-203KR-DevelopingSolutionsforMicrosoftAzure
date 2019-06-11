@@ -328,7 +328,7 @@ In this exercise, you created a new Azure Storage account and built an index wit
 
 1. In the **File Explorer** dialog box that opens, perform the following actions:
     
-    1.  Go to **Allfiles (F):\\Allfiles\\06\\Starter**.
+    1.  Go to **Allfiles (F):\\Allfiles\\Labs\\06\\Starter**.
     
     1.  Select the **products.csv** file.
     

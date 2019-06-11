@@ -228,7 +228,7 @@ In this exercise, you created the resources that you will use for the remainder 
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\05\\Starter\\Api**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\05\\Starter\\Api**, and then select **Select Folder**.
 
 1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
 
@@ -294,8 +294,9 @@ In this exercise, you created the resources that you will use for the remainder 
 
 1.  Locate the command prompt at the bottom of the screen. In the command prompt, enter the following command and press Enter to execute the .NET Core web application.
 
-dotnet run
-
+    ```
+    dotnet run
+    ```
 1.  On the taskbar, select the **Microsoft Edge** icon.
 
 1.  In the open browser window, navigate to the **/api/values** relative path of your test application hosted at **localhost** on port **5000**.
@@ -328,7 +329,7 @@ dotnet run
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\Starter\\Api**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\Starter\\Api**, and then select **Select Folder**.
 
 1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane, and then select **Open in Terminal**.
 
@@ -368,10 +369,10 @@ dotnet run
     az webapp list --resource-group MonitoredAssets --query "\[?starts\_with(name, 'smpapi')\].{Name:name}" --output tsv
     ```
 
-1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Labfiles\\05\\Starter** directory that contains the deployment files:
+1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\05\\Starter** directory that contains the deployment files:
 
     ```
-    cd F:\\Labfiles\\05\\Starter\\
+    cd F:\\Allfiles\\Labs\\05\\Starter\\
     ```
 
 1. Enter the following command and press Enter to deploy the **api.zip** file to the **API app** that you created earlier in this lab:
@@ -412,7 +413,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\Starter\\Console**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Starter\\Console**, and then select **Select Folder**.
 
 1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane, and then select **Open in Terminal**.
 
@@ -600,7 +601,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
 1. On the **File** menu, select **Open Folder**.
 
-1. In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\Starter\\Console**, and then select **Select Folder**.
+1. In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\05\\Starter\\Console**, and then select **Select Folder**.
 
 1. In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane, and then select **Open in Terminal**.
 
@@ -621,7 +622,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
     at System.Net.Http.HttpClient.GetStringAsyncCore(Task\`1 getTask)
 
-    at SimpleConsole.Program.Run() in F:\\Labfiles\\Starter\\Console\\Program.cs:line 20
+    at SimpleConsole.Program.Run() in F:\\Allfiles\\Labs\\05\\Starter\\Console\\Program.cs:line 20
     ```
 
     > **Note**: This exception occurs because the API app is no longer available.

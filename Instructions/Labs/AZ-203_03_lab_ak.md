@@ -296,7 +296,7 @@ In this exercise, you created all the Azure resources that you will need for a p
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\Starter**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\03\\Starter**, and then select **Select Folder**.
 
 #### Task 2: Update application settings
 

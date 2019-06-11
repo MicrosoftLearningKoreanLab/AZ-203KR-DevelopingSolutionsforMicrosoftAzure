@@ -515,7 +515,7 @@ In this exercise, you securely used a service identity to read the value of a se
     
     1.  In the **Files** section, select the **Folder** icon.
     
-    1.  In the File Explorer dialog box, go to **Allfiles (F):\\Labfiles\\04\\Starter**, select the **records.json** file, and then select **Open**.
+    1.  In the File Explorer dialog box, go to **Allfiles (F):\\Allfiles\\Labs\\04\\Starter**, select the **records.json** file, and then select **Open**.
     
     1.  Ensure that **Overwrite if files already exist** is selected.
     
@@ -571,7 +571,7 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1.  In the **View files** tab, select **Upload**.
 
-1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\04\\Starter**, select the **function.proj** file, and then select **Open**.
+1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\04\\Starter**, select the **function.proj** file, and then select **Open**.
 
 1.  Select the **function.proj** file to view the contents of the file.
 

@@ -168,7 +168,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
     1.  In the **Files** section, select the **Folder** icon.
 
-    1.  In the File Explorer dialog box that appears, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **grilledcheese.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that appears, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **grilledcheese.jpg** file, and then select **Open**.
 
     1.  Ensure that the **Overwrite if files already exist** check box is selected.
 
@@ -240,7 +240,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\API**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\API**, and then select **Select Folder**.
 
 1.  In the **Explorer** pane of the Visual Studio Code window, expand the **Controllers** folder and double-click the **ImagesController.cs** file to open the file in the editor.
 
@@ -288,7 +288,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgapi')].{Name:name}" --output tsv
     ```
 
-1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Labfiles\\02\\Starter\\API** directory that contains the lab files:
+1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\API** directory that contains the lab files:
 
     ```
     cd F:\Labfiles\02\Starter\API\
@@ -392,7 +392,7 @@ In this exercise, you created an API App in Azure and then deployed your ASP.NET
 
 1.  On the **File** menu, select **Open Folder**.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Web**, and then select **Select Folder**.
+1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Web**, and then select **Select Folder**.
 
 1.  In the **Explorer** pane of the Visual Studio Code window, expand the **Pages** folder and double-click the **Index.cshtml.cs** file to open the file in the editor.
 
@@ -438,7 +438,7 @@ In this exercise, you created an API App in Azure and then deployed your ASP.NET
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgweb')].{Name:name}" --output tsv
     ```
 
-1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Labfiles\\02\\Starter\\Web** directory that contains the lab files:
+1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Web** directory that contains the lab files:
 
     ```
     cd F:\Labfiles\02\Starter\Web\
@@ -468,7 +468,7 @@ In this exercise, you created an API App in Azure and then deployed your ASP.NET
     
     1.  Select **Browse**.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **bahnmi.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **bahnmi.jpg** file, and then select **Open**.
     
     1.  Select **Upload**.
 
@@ -560,7 +560,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
 
 1.  In the **View files** tab, select **Upload**.
 
-1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter**, select the **function.proj** file, and then select **Open**.
+1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter**, select the **function.proj** file, and then select **Open**.
 
 1.  Back in the **View files** tab, select the **function.json** file to view the editor for the function’s configuration.
 
@@ -709,7 +709,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
 
     1.  In the **Files** section, select the **Folder** icon.
 
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **veggie.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **veggie.jpg** file, and then select **Open**.
 
     1.  Ensure the **Overwrite if files already exist** check box is selected.
 
@@ -745,7 +745,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
     
     1.  Select **Browse**.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **blt.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **blt.jpg** file, and then select **Open**.
     
     1.  Select **Upload**.
 
@@ -753,7 +753,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
     
     1.  Select **Browse**.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **sub.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **sub.jpg** file, and then select **Open**.
     
     1.  Select **Upload**.
 
@@ -761,7 +761,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
     
     1.  Select **Browse**.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Labfiles\\02\\Starter\\Images**, select the **burger.jpg** file, and then select **Open**.
+    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **burger.jpg** file, and then select **Open**.
     
     1.  Select **Upload**.
 
