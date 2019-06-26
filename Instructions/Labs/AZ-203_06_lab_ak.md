@@ -130,7 +130,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
 
-1.  In the **Search Service** blade, select **Add index**.
+1.  In the **Search Service Overview** blade, select **Add index**.
 
 1.  In the **Add index** blade, perform the following actions:
     
@@ -388,7 +388,7 @@ In this exercise, you created a new Azure Storage account and built an index wit
     
     1. In the **Type** list, observe the hard-coded option of **Edm.String**.
     
-    1. Select **Retrievable**.
+    1. Leave **Retrievable** selected.
     
     1. Leave **Filterable** unselected.
     
@@ -456,7 +456,7 @@ In this exercise, you created a new Azure Storage account and built an index wit
     
     1. In the **Interval** field, enter **5**.
     
-    1. Leave the **Start time** field set to its default value.
+    1. Set the **Start time** field to midnight UTC on today's date.
     
     1. Leave the **Track deletions** field set to its default value.
     
@@ -480,15 +480,11 @@ In this exercise, you created a new Azure Storage account and built an index wit
 
     > **Note**: It can take from one to five minutes for the indexer to run. You will know that the indexer was successful if its status is listed as **Success** in the **Search Service** blade.
 
-1. Back in the **Search Service** blade, select the **Indexers** tab.
-
 1. In the **Indexers** tab, observe the metadata of the **tableindexer** indexer, such as the document count and the status of the last indexing operation.
-
-1. Close the **Indexer** blade.
 
 #### Task 4: Validate the indexed table data
 
-1.  In the **Search Service** blade, select **Search Explorer**.
+1.  In the **Search Service Overview** blade, select **Search Explorer** at the top of the blade.
 
 1.  In the **Search Explorer** blade, select **Search**.
 
@@ -525,6 +521,8 @@ In this exercise, you created a new Azure Storage account and built an index wit
     ```
 
 1. Observe the results of the search query.
+
+1. Close the **Search Explorer** blade.
 
 #### Task 5: Retrieve your Azure Search base URL
 
