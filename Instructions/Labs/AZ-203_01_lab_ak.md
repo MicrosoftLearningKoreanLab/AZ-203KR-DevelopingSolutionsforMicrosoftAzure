@@ -130,7 +130,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     1.  In the **Authentication type** section, select **Password**.
 
-    1.  In the **User name** text box, enter **Student**.
+    1.  In the **Username** text box, enter **Student**.
 
     1.  In the **Password** and **Confirm password** fields, enter **StudentPa55w.rd**.
 
@@ -138,9 +138,9 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     1.  In the **Public inbound ports** section, select **Allow selected ports**.
 
-    1.  In the **Selected inbound ports** drop-down list, select only **SSH (22)**.
+    1.  In the **Select inbound ports** drop-down list, select only **SSH (22)**.
 
-    1.  Select **Next: Disks \>**.
+    1.  Select **Next : Disks \>**.
 
 1. In the **Disks** tab, perform the following actions:
 
@@ -166,9 +166,9 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Connect to virtual machine** pop-up that appears, perform the following actions:
     
-    1.  In the **IP address** text box, select **Public IP address**.
+    1.  In the **IP address** text box, confirm **Public IP address**.
     
-    2.  In the **Port number** text box, enter **22**.
+    2.  In the **Port number** text box, confirm **22**.
     
     3.  **Copy** the text in the **Login using VM local account** text box.
 
