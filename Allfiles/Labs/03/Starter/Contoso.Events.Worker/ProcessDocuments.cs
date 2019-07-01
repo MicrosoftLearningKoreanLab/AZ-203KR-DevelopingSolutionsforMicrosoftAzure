@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,6 +45,22 @@ namespace Contoso.Events.Worker
                 List<string> registrants = new List<string>();
 
                 return registrants;
+            }
+        }
+
+        private static async Task<MemoryStream> ProcessStorageMessage(string eventKey)
+        {
+            SignInDocumentGenerator documentGenerator = new SignInDocumentGenerator();
+
+            using (EventsContext eventsContext = _connection.GetSqlContext())
+            {
+                await eventsContext.Database.EnsureCreatedAsync();
+                
+                Event eventEntry = await eventsContext.Events.SingleOrDefaultAsync(e => e.EventKey == eventKey);
+
+                List<string> registrants = new List<string>();
+
+                return MemoryStream.Null as MemoryStream;
             }
         }
     }
