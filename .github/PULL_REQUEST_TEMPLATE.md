@@ -1,9 +1,11 @@
-# Module: 00
-## Lab/Demo: 00
+## Location
 
-Fixes # .
+- Course: 00
+- Exercise: 00
+- Task: 00
+- Step[s]: 00
 
-Changes proposed in this pull request:
+# Proposed Changes
 
 -
 -
