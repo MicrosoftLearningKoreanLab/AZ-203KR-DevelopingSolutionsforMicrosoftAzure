@@ -212,21 +212,23 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  In the **ManagedPlatform** blade, select the **imgapi\*** API app that you created earlier in this lab.
 
-1.  In the **API App** blade, on the left side of the blade in the **Settings** section, select the **Application settings (Classic)** link.
+1.  In the **API App** blade, on the left side of the blade in the **Settings** section, select the **Configuration** link.
 
-1.  In the **Application settings** section, perform the following actions:
+1.  In the **Configuration** section, perform the following actions:
     
-    1.  Scroll down until you see the **Application settings** subsection.
+    1.  Select the **Application settings** tab.
     
-    1.  Select **+ Add new setting**.
+    1.  Select **+ New application setting**.
     
-    1.  In the **Enter a name** field, enter **StorageConnectionString**.
+    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **StorageConnectionString**.
     
-    1.  In the **Enter a value** field, enter the **Storage Connection String** you copied earlier in this lab.
+    1.  In the **Value** field, enter the **Storage Connection String** you copied earlier in this lab.
     
-    1.  Leave the **Slot Setting** field set to its default value.
+    1.  Leave the **deployment slot setting** field set to its default value.
+
+    1.  Select **OK** to close the popup and return to the **Configuration** section.
     
-    1.  Select **Save** at the top of the blade.
+    1.  Select **Save** at the top of the blade to persist your settings.
 
 1.  Wait for your application settings to persist before you move forward with the lab.
 
@@ -368,21 +370,23 @@ In this exercise, you created an API App in Azure and then deployed your ASP.NET
 
 1.  In the **ManagedPlatform** blade, select the **imgweb\*** web app that you created earlier in this lab.
 
-1.  In the **Web App** blade, on the left side of the blade, in the **Settings** section, select the **Application settings** link.
+1.  In the **Web App** bladeblade, on the left side of the blade in the **Settings** section, select the **Configuration** link.
 
-1.  In the **Application settings (Classic)** section, perform the following actions:
+1.  In the **Configuration** section, perform the following actions:
     
-    1.  Scroll down until you see the **Application settings** subsection.
+    1.  Select the **Application settings** tab.
     
-    1.  Select **+ Add new setting**.
+    1.  Select **+ New application setting**.
     
-    1.  In the **Enter a name** field, enter **ApiUrl**.
+    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **ApiUrl**.
     
-    1. In the **Enter a value** field, enter the API app **URL** you copied earlier in this lab.
+    1.  In the **Value** field, enter the API app **URL** you copied earlier in this lab.
     
-    1. Leave the **Slot Setting** field set to its default value.
+    1.  Leave the **deployment slot setting** field set to its default value.
+
+    1.  Select **OK** to close the popup and return to the **Configuration** section.
     
-    1. Select **Save** at the top of the blade.
+    1.  Select **Save** at the top of the blade to persist your settings.
 
 1.  Wait for your application settings to persist before you move forward with the lab.
 
@@ -510,7 +514,7 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
     
     1.  In the **Location** list, select **East US**.
     
-    1.  In the **Runtime Stack** list, select **.NET**.
+    1.  In the **Runtime Stack** list, select **.NET Core**.
     
     1.  In the **Storage** section, select **Use existing**, and then select the **imgstor\*** storage account you created earlier in this lab.
     
