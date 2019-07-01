@@ -555,7 +555,7 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1.  In the **Admin user** section, select **Enable**.
     
-    1.  Select **Save**.
+    > **Note**: Your changes are automatically saved.
 
 1.  Close the **Update container registry** blade.
 
