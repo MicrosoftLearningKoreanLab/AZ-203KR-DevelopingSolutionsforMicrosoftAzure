@@ -52,13 +52,13 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  Select **Sign in**.
 
-    > Note: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to begin using the portal.
+    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to begin using the portal.
 
 #### Task 2: Create a resource group
 
 1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
 
-    > Note: If you cannot find the **Create a resource** link, the “Create a resource” icon is a plus-sign character located on the left side of the portal.
+    > **Note**: If you cannot find the **Create a resource** link, the “Create a resource” icon is a plus-sign character located on the left side of the portal.
 
 1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
 
@@ -70,7 +70,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the additional **Resource group** blade, observe the tabs at the top of the blade, such as **Basics**.
 
-    > Note: Each tab represents a step in the workflow to create a new **resource group**. At any time, you can select **Review + create** to skip the remaining tabs.
+    > **Note**: Each tab represents a step in the workflow to create a new **resource group**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1.  On the **Basics** tab, perform the following actions:
     
@@ -102,7 +102,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Create a virtual machine** blade, observe the tabs at the top of the blade, such as **Basics** and **Disks**.
 
-    > Note: Each tab represents a step in the workflow to create a new **virtual machine**. At any time, you can select **Review + create** to skip the remaining tabs.
+    > **Note**: Each tab represents a step in the workflow to create a new **virtual machine**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1.  In the **Basics** tab, perform the following actions:
     
@@ -166,17 +166,17 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Connect to virtual machine** pop-up that appears, perform the following actions:
     
-    1.  In the **IP address** text box, confirm **Public IP address**.
+    1.  In the **IP address** text box, select **Public IP address**.
     
-    2.  In the **Port number** text box, confirm **22**.
+    2.  In the **Port number** text box, enter **22**.
     
     3.  **Copy** the text in the **Login using VM local account** text box.
 
-        > Note: The command that you copied will connect to the VM by using SSH from a remote computer. You will use this command later in the lab.
+        > **Note**: The command that you copied will connect to the VM by using SSH from a remote computer. You will use this command later in the lab.
 
 1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
 
-    > Note: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
+    > **Note**: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
 
     ![](media/image1.png)
 
@@ -190,13 +190,13 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Cloud Shell** command prompt at the bottom of the portal, **paste** the command you copied earlier in this lab and press Enter to connect to your new VM by using SSH.
 
-    > Note: This command will be dependent on your username and IP address. For example, if the username is **Student** and the IP address is **40.125.245.5**, the command would be **ssh Student@40.125.245.5**.
+    > **Note**: This command will be dependent on your username and IP address. For example, if the username is **Student** and the IP address is **40.125.245.5**, the command would be **ssh Student@40.125.245.5**.
 
 1.  The SSH tool will first inform you that the authenticity of the host can’t be established and then ask if you want to continue connecting. Enter **yes** in the prompt and then press Enter to continue connecting to the VM.
 
 1. The SSH tool will then ask you for a password. Enter **StudentPa55w.rd** and then press Enter to authenticate with the VM.
 
-    > Note: Characters do not show when typing password. Please be advised.
+    > **Note**: Characters do not show when typing password. Please be advised.
 
 1. After you are connected to the VM by using SSH, you will see a prompt for the Bash shell in the VM. In the prompt, type in the following command and press Enter to view the computer name of the Linux VM:
 
@@ -410,18 +410,21 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
 8.  Copy and paste the following code into the **Dockerfile** file:
 
     ```
-    FROM microsoft/dotnet:2.2-sdk AS build
+    FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS build
     WORKDIR /app
-    
+
     COPY *.csproj ./
     RUN dotnet restore
-    
+
     COPY . ./
-    RUN dotnet publish --configuration Release --output out --runtime ubuntu.18.04-x64 --self-contained
-    
-    FROM microsoft/dotnet:2.2-runtime
+    RUN dotnet publish --configuration Release --output out
+
+    FROM mcr.microsoft.com/dotnet/core/runtime:2.2-alpine
     WORKDIR /app
+
     COPY --from=build /app/out .
+
+    ENTRYPOINT ["dotnet", "ipcheck.dll"]
     ```
 
 1.  **Save** the **Dockerfile** file by using either the menu in the graphical editor or the **Ctrl+S** keyboard shortcut.
@@ -530,7 +533,7 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
 
 1.  Observe the metadata for the version of your container image with the **latest** tag.
 
-    > Note: You can also select the **Run ID** hyperlink to view metadata about the build task.
+    > **Note**: You can also select the **Run ID** hyperlink to view metadata about the build task.
 
 #### Review
 
@@ -608,7 +611,7 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1.  **Password**
 
-        > Note: You will use these values later in this lab when you create another **container instance**.
+        > **Note**: You will use these values later in this lab when you create another **container instance**.
 
 1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
 
@@ -622,7 +625,7 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1. In the **Create Container Instances** blade, observe the tabs on the left of the blade, such as **Basics** and **Advanced**.
 
-    > Note: Each tab represents a step in the workflow to create a new **container instance**.
+    > **Note**: Each tab represents a step in the workflow to create a new **container instance**.
 
 1. In the **Basics** tab, perform the following actions:
 
@@ -632,17 +635,17 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1.  In the **Container name** text box, enter **manualcompute**.
 
-    1. In the **Location** drop-down list, select **(US) East US**.
+    1. In the **Region** drop-down list, select **(US) East US**.
     
     1.  In the **Image type** section, select **Private**.
     
     1.  In the **Image name** text box, enter the **Login server** value that you recorded earlier and then add the suffix /**ipcheck:latest**.
 
-        > Note: For example, if your **Login server** value is **azadmin.azurecr.io**, then your container image name would be **azadmin.azurecr.io/ipcheck:latest**
+        > **Note**: For example, if your **Login server** value is **azadmin.azurecr.io**, then your container image name would be **azadmin.azurecr.io/ipcheck:latest**
 
     1.  In the **Image registry login server** text box, enter the **Login server** value that you recorded earlier in this lab.
 
-    1.  In the **Image registry username** text box, enter the **Username** value that you recorded earlier in this lab.
+    1.  In the **Image registry user name** text box, enter the **Username** value that you recorded earlier in this lab.
 
     1.  In the **Image registry password** text box, enter the **Password** value that you recorded earlier in this lab.
 
@@ -678,9 +681,7 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1. Leave the **Environment variable** text box empty.
     
-    1. In the **Command override** text box, enter **./ipcheck**.
-
-        > Note: The **ipcheck** tool is the .NET Core command line application that you created earlier in this lab.
+    1. Leave the **Command override** text box empty.
 
     1. Select **Review + create**.
 
@@ -702,7 +703,10 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1.  In the **Containers** section, observe the list of **Events**.
 
-> Note: After the application finished executing, the container was terminated because it had completed its work.
+1.  Select the **Logs** tab and observe the text logs from the container instance.
+> **Note**: You can also optionally view the **Events** and **Logs** from the **managedcompute** container instance.
+
+> **Note**: After the application finished executing, the container was terminated because it had completed its work.
 
 #### Review
 
