@@ -20,7 +20,7 @@ namespace Contoso.Events.Management
                 {
                     var eventsContext = services.GetRequiredService<EventsContext>();
                     var registrationsContext = services.GetRequiredService<RegistrationContext>();
-                    var task = new ContextInitializer().InitializeAsync(eventsContext, registrationsContext);
+                    var task = new ContextInitializer().InitializeAsync(eventsContext);
                     task.GetAwaiter().GetResult();
                 }
                 catch (Exception ex)
