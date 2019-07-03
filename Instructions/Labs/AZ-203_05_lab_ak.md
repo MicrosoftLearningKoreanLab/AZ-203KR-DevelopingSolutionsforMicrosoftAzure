@@ -160,11 +160,17 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **Application Insights** blade, perform the following actions:
     
-    1.  In the **Application Insights site extensions** section, select **Enable**.
+    1.  In the **Application Insights** section, select **Enable**.
     
-    1. In the **Link to an Application Insights resource** section, select **Select existing resource** and then select the **instrm\*** Application Insights account that you created earlier in this lab.
+    1. In the **Change your resource** section, select **Select existing resource** and then select the **instrm\*** Application Insights account that you created earlier in this lab.
     
     1. In the **Instrument your application** section, select the **.NET Core** tab and then select **Recommended**.
+
+    1. In the **Profiler** section, select **On**.
+
+    1. In the **Snapshot debugger** section, select **On**.
+
+    1. In the **SQL Commands** section, select **On**.
     
     1. Select **Apply**.
 
@@ -184,9 +190,9 @@ Microsoft updates this training course as soon as the community brings needed ch
     
     1.  Select the **Application settings** tab.
 
-    1. Select **Show Values** to view the secrets associated with your API.
+    1.  Select **Show Values** to view the secrets associated with your API.
 
-    1. Observe the value corresponding to the **APPINSIGHTS\_INSTRUMENTATIONKEY** key. This value was set automatically when you built your API App resource.
+    1.  Observe the value corresponding to the **APPINSIGHTS\_INSTRUMENTATIONKEY** key. This value was set automatically when you built your API App resource.
 
 1. In the **App Service** blade, on the left side of the blade within the **Settings** category, select the **Properties** link.
 
@@ -222,7 +228,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 In this exercise, you created the resources that you will use for the remainder of the lab.
 
-### Exercise 2: Build and deploy an ASP.NET Core Web API application
+### Exercise 2: Build and deploy an .NET Core Web API application
 
 #### Task 1: Build a .NET Core Web API project
 
@@ -240,10 +246,10 @@ In this exercise, you created the resources that you will use for the remainder 
     dotnet new webapi --output . --name SimpleApi
     ```
 
-1.  In the command prompt, enter the following command and press Enter to add the **1.1.1** version of the **Microsoft.ApplicationInsights.AspNetCore** package from NuGet to the current project:
+1.  In the command prompt, enter the following command and press Enter to add the **2.7.1** version of the **Microsoft.ApplicationInsights.AspNetCore** package from NuGet to the current project:
 
     ```
-    dotnet add package Microsoft.ApplicationInsights.AspNetCore --version 1.1.1
+    dotnet add package Microsoft.ApplicationInsights.AspNetCore --version 2.7.1
     ```
 
 1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
@@ -266,9 +272,9 @@ In this exercise, you created the resources that you will use for the remainder 
 1.  Replace that block of code with the following block of code that enables **Application Insights** telemetry for the project:
 
     ```
-    public static IWebHostBuilder CreateWebHostBuilder(string\[\] args) =\>
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup\<Startup\>()
+                .UseStartup<Startup>()
                 .UseApplicationInsights();
     ```
 
@@ -362,25 +368,25 @@ In this exercise, you created the resources that you will use for the remainder 
 1.  Enter the following command and press Enter to find the **apps** that have the prefix **smpapi\***:
 
     ```
-    az webapp list --resource-group MonitoredAssets --query "\[?starts\_with(name, 'smpapi')\]"
+    az webapp list --resource-group MonitoredAssets --query "[?starts_with(name, 'smpapi')]"
     ```
 
 1. Enter the following command and press Enter to print out only the name of the single app that has the prefix **smpapi\***:
 
     ```
-    az webapp list --resource-group MonitoredAssets --query "\[?starts\_with(name, 'smpapi')\].{Name:name}" --output tsv
+    az webapp list --resource-group MonitoredAssets --query "[?starts_with(name, 'smpapi')].{Name:name}" --output tsv
     ```
 
 1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\05\\Starter** directory that contains the deployment files:
 
     ```
-    cd F:\\Allfiles\\Labs\\05\\Starter\\
+    cd F:\Allfiles\Labs\05\Starter\
     ```
 
 1. Enter the following command and press Enter to deploy the **api.zip** file to the **API app** that you created earlier in this lab:
 
     ```
-    az webapp deployment source config-zip --resource-group MonitoredAssets --src api.zip --name \<name-of-your-api-app\>
+    az webapp deployment source config-zip --resource-group MonitoredAssets --src api.zip --name <name-of-your-api-app>
     ```
 
     > **Note**: Replace the **\<name-of-your-api-app\>** placeholder with the name of the API app that you created earlier in this lab. You recently queried this app’s name in the previous steps.
@@ -425,16 +431,10 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
     dotnet new console --output . --name SimpleConsole
     ```
 
-1.  In the command prompt, enter the following command and press Enter to add the **1.1.29** version of the **Microsoft.Net.Http** package from NuGet to the current project:
+1.  In the command prompt, enter the following command and press Enter to add the **7.1.0** version of the **Polly** package from NuGet to the current project:
 
     ```
-    dotnet add package Microsoft.Net.Http --version 1.1.29
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to add the **1.0.2** version of the **Polly** package from NuGet to the current project:
-
-    ```
-    dotnet add package Polly --version 1.0.2
+    dotnet add package Polly --version 7.1.0
     ```
 
 1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
@@ -463,17 +463,11 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
     ```
     class Program
-
     {
-
-    static void Main(string\[\] args)
-
-    {
-
-    Console.WriteLine("Hello World\!");
-
-    }
-
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
     }
     ```
 
@@ -481,34 +475,26 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
     ```
     class Program
-
     {
-
-    private const string \_api = "";
-
-    private static HttpClient \_client = new HttpClient(){ BaseAddress = new Uri(\_api) };
-
-    static void Main(string\[\] args)
-
-    {
-
-    Run().Wait();
-
-    }
-
-    static async Task Run()
-
-    {
-
-    }
-
+        private const string _api = "";
+        private static HttpClient _client = new HttpClient(){ BaseAddress = new Uri(_api) };
+    
+        static void Main(string[] args)
+        {
+            Run().Wait();
+        }
+    
+        static async Task Run()
+        {
+    
+        }
     }
     ```
 
 1.  Locate the **\_api** constant at line **9**:
 
     ```
-    private const string \_api = "";
+    private const string _api = "";
     ```
 
 1.  Update the **\_api** constant by setting the value of the variable to the **URL** of the API app you recorded earlier in this lab:
@@ -518,7 +504,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 1.  Within the **Run** method, add the following line of code to asynchronously invoke the **HttpClient.GetStringAsync** method passing in a string for the relative path of **/api/values/**:
 
     ```
-    string response = await \_client.GetStringAsync("/api/values/");
+    string response = await _client.GetStringAsync("/api/values/");
     ```
 
 1.  Within the **Run** method, add an additional line of code to write out the response from the **GET** request to the console:
@@ -531,43 +517,27 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
     ```
     using System;
-
     using System.Net.Http;
-
     using System.Threading.Tasks;
 
     namespace SimpleConsole
-
     {
-
-    class Program
-
-    {
-
-    private const string \_api = "http://\<your-api-name\>.azurewebsites.net ";
-
-    private static HttpClient \_client = new HttpClient(){ BaseAddress = new Uri(\_api) };
-
-    static void Main(string\[\] args)
-
-    {
-
-    Run().Wait();
-
-    }
-
-    static async Task Run()
-
-    {
-
-    string response = await \_client.GetStringAsync("/api/values/");
-
-    Console.WriteLine(response);
-
-    }
-
-    }
-
+        class Program
+        {
+            private const string _api = "http://<your-api-name>.azurewebsites.net/";
+            private static HttpClient _client = new HttpClient(){ BaseAddress = new Uri(_api) };
+        
+            static void Main(string[] args)
+            {
+                Run().Wait();
+            }
+        
+            static async Task Run()
+            {
+                string response = await _client.GetStringAsync("/api/values/");
+                Console.WriteLine(response);    
+            }
+        }
     }
     ```
 
@@ -584,7 +554,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 1.  Observe that the application successfully invokes the API app in Azure and returns the same JSON array that you observed earlier in this lab. Your result should appear similar to the following JSON content:
 
     ```
-    \["value1","value2"\]
+    ["value1","value2"]
     ```
 
 1.  Return to your currently open browser window displaying the **Azure portal**.
@@ -624,7 +594,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 
     at System.Net.Http.HttpClient.GetStringAsyncCore(Task\`1 getTask)
 
-    at SimpleConsole.Program.Run() in F:\\Allfiles\\Labs\\05\\Starter\\Console\\Program.cs:line 20
+    at SimpleConsole.Program.Run() in F:\Allfiles\Labs\05\Starter\Console\Program.cs:line 20
     ```
 
     > **Note**: This exception occurs because the API app is no longer available.
@@ -640,13 +610,13 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 1.  Locate the **\_client** constant at line **10**:
 
     ```
-    private static HttpClient \_client = new HttpClient(){ BaseAddress = new Uri(\_api) };
+    private static HttpClient _client = new HttpClient(){ BaseAddress = new Uri(_api) }; 
     ```
 
 1.  Update the **\_client** constant by updating the **HttpClient** constructor to use a new instance of the **PollyHandler** class:
 
     ```
-    private static HttpClient \_client = new HttpClient(new PollyHandler()){ BaseAddress = new Uri(\_api) };
+    private static HttpClient _client = new HttpClient(new PollyHandler()){ BaseAddress = new Uri(_api) };
     ```
 
 1.  **Save** the **Program.cs** file.
@@ -684,7 +654,7 @@ In this exercise, you created an API by using ASP.NET Core and configured it to 
 1. Observe that the application finally successfully invokes the API app in Azure and returns the same JSON array that you observed earlier in this lab. Your result should resemble the following JSON content:
 
     ```
-    \["value1","value2"\]
+    ["value1","value2"]
     ```
 
 1. Close the currently running **Visual Studio Code** application.
