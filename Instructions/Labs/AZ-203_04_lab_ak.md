@@ -322,25 +322,25 @@ In this exercise, you created a server-assigned managed service identity for you
 
 1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
 
-1.  In the **Application Settings** blade, perform the following actions:
+1.  In the **Configuration** section, perform the following actions:
     
-    1.  Scroll down until you see the **Application settings** section.
+    1.  Select the **Application settings** tab.
     
-    1.  Select **+ Add new setting**.
+    1.  Select **+ New application setting**.
     
-    1.  In the **Enter a name** text box, enter **StorageConnectionString**.
+    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **StorageConnectionString**.
     
-    1.  In the **Enter a value** text box, construct a value by using the following syntax: **@Microsoft.KeyVault(SecretUri=\<Secret Identifier\>)**
+    1.  In the **Value** field, construct a value by using the following syntax: **@Microsoft.KeyVault(SecretUri=\<Secret Identifier\>)**
 
       > Note: You will need to build a reference to your **Secret Identifier** by using the above syntax. For example, if your Secret Identifier is **https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf**, then your value would be **@Microsoft.KeyVault(SecretUri= https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf)**
+    
+    1.  Leave the **deployment slot setting** field set to its default value.
 
-    1.  Leave the **deployment slot Setting** text box set to its default value.
+    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    
+    1.  Select **Save** at the top of the blade to persist your settings.
 
-    1. Click **Update**.
-
-1.  Scroll back to the top of the tab and then select **Save**.
-
-1.  Wait for your application settings to persist before you move forward with this lab.
+1.  Wait for your application settings to persist before you move forward with the lab.
 
 #### Task 2: Create a HTTP-triggered function
 

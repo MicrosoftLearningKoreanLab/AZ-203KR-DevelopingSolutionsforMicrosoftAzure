@@ -178,13 +178,15 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **MonitoredAssets** blade, select the **smpapi\*** API app you that created earlier in this lab.
 
-1. In the **App Service** blade, on the left side of the blade, within the **Settings** category, select the **Application settings (classic)** link.
+1. In the **App Service** blade, on the left side of the blade, within the **Settings** category, select the **Configuration** link.
 
-1. In the **Application settings** section, scroll down until you find a list of **Application settings** for the API.
+1.  In the **Configuration** section, perform the following actions:
+    
+    1.  Select the **Application settings** tab.
 
-1. Select **Show Values** to view the secrets associated with your API.
+    1. Select **Show Values** to view the secrets associated with your API.
 
-1. Observe the value corresponding to the **APPINSIGHTS\_INSTRUMENTATIONKEY** key. This value was set automatically when you built your API App resource.
+    1. Observe the value corresponding to the **APPINSIGHTS\_INSTRUMENTATIONKEY** key. This value was set automatically when you built your API App resource.
 
 1. In the **App Service** blade, on the left side of the blade within the **Settings** category, select the **Properties** link.
 
