@@ -94,21 +94,29 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  In the **Azure Search** blade, select **Create**.
 
-1.  In the **New Search Service** blade, perform the following actions:
+6.  In the **New Search Service** blade, observe the tabs at the top of the blade, such as **Basics**.
+
+    > **Note**: Each tab represents a step in the workflow to create a new **search account**. At any time, you can select **Review + create** to skip the remaining tabs.
+
+6.  In the **Basics** tab, perform the following actions:
+    
+    2.  Leave the **Subscription** field set to its default value.
+    
+    3.  In the **Resource group** section, select **Create new**, in the pop-up field enter **MultiTierService**, and then select **OK**.
     
     1.  In the **URL** field, enter the value **prodsearch\[*your name in lowercase*\]**.
     
-    1.  Leave the **Subscription** field set to its default value.
+    4.  In the **Location** list, select **East US**.
     
-    1.  In the **Resource group** section, select **Create new**, in the pop-up field enter **MultiTierService**, and then select **OK**.
+    5.  Select the **Pricing tier** link. In the **Pricing tier** blade, select **Basic** and then select **Select**.
     
-    1.  In the **Location** list, select **East US**.
-    
-    1.  Select the **Pricing tier** link. In the **Pricing tier** blade, select **Basic** and then select **Select**.
-    
-    1.  Select **Create**.
+    9.  Select **Review + Create**.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+7.  In the **Review + Create** tab, review the options that you selected during the previous steps.
+
+8.  Select **Create** to create the search account by using your specified configuration.
+
+9.  Wait for the creation task to complete before you move forward with this lab.
 
 1.  In the left navigation pane of the portal, select **Resource groups**.
 
@@ -130,7 +138,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
 
-1.  In the **Search Service Overview** blade, select **Add index**.
+1.  In the **Search Service** blade, select **Add index**.
 
 1.  In the **Add index** blade, perform the following actions:
     
@@ -162,6 +170,8 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  Within the **Add index** blade, perform the following actions to configure the new **name** field:
     
+    1. Select **+ Add field**.
+    
     1. In the **Field Name** field, enter **name**.
     
     1. In the **Type** list, select **Edm.String**.
@@ -182,6 +192,8 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  Within the **Add index** blade, perform the following actions to configure the new **price** field:
     
+    1. Select **+ Add field**.
+    
     1. In the **Field Name** field, enter **price**.
     
     1. In the **Type** list, select **Edm.Double**.
@@ -198,6 +210,8 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 1.  Within the **Add index** blade, perform the following actions to configure the new **quantity** field:
     
+    1. Select **+ Add field**.
+    
     1. In the **Field Name** field, enter **quantity**.
     
     1. In the **Type** list, select **Edm.Int32**.
@@ -213,6 +227,8 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
     1. Select **+ Add field**.
 
 1. Within the **Add index** blade, perform the following actions to configure the new **manufacturer** field:
+    
+    1. Select **+ Add field**.
     
     1. In the **Field Name** field, enter **manufacturer**.
     
@@ -232,7 +248,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 
 #### Review
 
-In this exercise, you created a new Azure Storage account and built an index within the account.
+In this exercise, you created a new Azure Search account and built an index within the account.
 
 ### Exercise 2: Index an Azure Storage table in Azure Search
 
@@ -466,6 +482,8 @@ In this exercise, you created a new Azure Storage account and built an index wit
 
 1. Back in the **Search Service** blade, select the **Indexers** tab.
 
+    > **Note**: If you do not see your indexer yet, you may need to refresh the blade.
+
 1. In the **Indexers** tab, select the **tableindexer** indexer that you created earlier in this lab.
 
 1. In the **Indexer** blade, perform the following actions:
@@ -484,7 +502,7 @@ In this exercise, you created a new Azure Storage account and built an index wit
 
 #### Task 4: Validate the indexed table data
 
-1.  In the **Search Service Overview** blade, select **Search Explorer** at the top of the blade.
+1.  In the **Search Service** blade, select **Search Explorer** at the top of the blade.
 
 1.  In the **Search Explorer** blade, select **Search**.
 
