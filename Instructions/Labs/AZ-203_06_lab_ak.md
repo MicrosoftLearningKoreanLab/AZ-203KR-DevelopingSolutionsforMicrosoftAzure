@@ -886,8 +886,6 @@ In this exercise, you built a proxy tier between your Azure Search account and a
 
     > **Note**: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
 
-    ![](media/image1.png)
-
 1.  If this is your first time opening the **Cloud Shell** by using your subscription, a **Welcome to Azure Cloud Shell** wizard will display how to configure **Cloud Shell** for first-time usage. Perform the following actions:
     
     1.  When offered a choice between **Bash** or **PowerShell**, select **Bash**.

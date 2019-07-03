@@ -178,8 +178,6 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     > **Note**: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
 
-    ![](media/image1.png)
-
 1.  If this is your first time opening the **Cloud Shell** by using your subscription, a **Welcome to Azure Cloud Shell Wizard** will appear that allows you to configure **Cloud Shell** for first-time usage. Perform the following actions in the wizard:
     
     1.  A dialog box will appear that prompts you to create a new Storage Account to begin using the shell. Accept the default settings and select **Create storage**.
