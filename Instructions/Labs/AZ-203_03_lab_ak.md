@@ -144,7 +144,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **Review + Create** tab, review the options that you selected during the previous steps.
 
-1. Select **Create** to create the storage account by using your specified configuration.
+1. Select **Create** to create the SQL Database by using your specified configuration.
 
 1. Wait for the creation task to complete before you move forward with this lab.
 
@@ -220,7 +220,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
 
-1.  Select **Create** to create the storage account by using your specified configuration.
+1.  Select **Create** to create the Azure Cosmos DB account by using your specified configuration.
 
 1.  Wait for the creation task to complete before you move forward with this lab.
 
