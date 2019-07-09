@@ -134,7 +134,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     1.  In the **Password** and **Confirm password** fields, enter **StudentPa55w.rd**.
 
-    1.  In the **Login with Azure Active Directory (Preview)** section (if present), select **Off**.
+    1.  In the **Login with Azure Active Directory (Preview)** section, select **Off**.
 
     1.  In the **Public inbound ports** section, select **Allow selected ports**.
 
