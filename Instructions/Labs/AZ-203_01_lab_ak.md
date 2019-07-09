@@ -166,9 +166,9 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Connect to virtual machine** pop-up that appears, perform the following actions:
     
-    1.  In the **IP address** text box, select **Public IP address** if it is not already selected.
+    1.  In the **IP address** text box, select **Public IP address**.
     
-    2.  In the **Port number** text box, enter **22** if it is not already present.
+    2.  In the **Port number** text box, enter **22**.
     
     3.  **Copy** the text in the **Login using VM local account** text box.
 
@@ -575,11 +575,11 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1.  Leave the **Container image** text box set to its default value.
     
-    1.  In the **OS type** section, select **Linux** if it is not already selected.
+    1.  In the **OS type** section, select **Linux**.
     
     1.  Leave the **Subscription** text box set to its default value.
     
-    1.  In the **Resource group** drop-down list, select **ContainerCompute** if it is not already selected.
+    1.  In the **Resource group** drop-down list, select **ContainerCompute**.
     
     1.  In the **Location** drop-down list, select **East US**.
     
@@ -649,15 +649,15 @@ In this exercise, you created a .NET Core console application to display a machi
 
     1.  In the **Image registry password** text box, enter the **Password** value that you recorded earlier in this lab.
 
-    1. In the **OS type** section, select **Linux** if it is not already selected.
+    1. In the **OS type** section, select **Linux**.
 
     1. In the **Size** section, select the **Change size** link.
 
     1. In the **Change container size** blade, perform the following actions:
 
-        1. In the **Number of CPU cores** textbox, enter **1** if it is not already present.
+        1. In the **Number of CPU cores** textbox, enter **1**.
 
-        1. In the **Memory (GiB)** textbox, enter **1.5** if it is not already present.
+        1. In the **Memory (GiB)** textbox, enter **1.5**.
 
         1. Leave the default value for the **GPU type** drop-down list.
 
@@ -667,7 +667,7 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1. In the **Networking** tab, perform the following actions:
     
-    1. In the **Include Public IP address** section, select **Yes** if it is not already selected.
+    1. In the **Include Public IP address** section, select **Yes**.
 
     1. Ensure in the **Ports** section, the port **80** is there, with the port protocol **TCP**.
     
