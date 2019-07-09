@@ -114,7 +114,7 @@ Microsoft updates this training course as soon as the community brings needed ch
     
     1.  In the **Region** drop-down list, select the **(US) East US** location.
 
-    1. In the **Availability options** drop-down list, ensure **No infrastructure redundacy required** is selected.
+    1. In the **Availability options** drop-down list, ensure **No infrastructure redundancy required** is selected.
     
     1.  In the **Image** text box, make sure that the **Ubuntu Server 18.04 LTS** option is selected.
     
@@ -134,7 +134,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
     1.  In the **Password** and **Confirm password** fields, enter **StudentPa55w.rd**.
 
-    1.  In the **Login with Azure Active Directory (Preview)** section, select **Off**.
+    1.  In the **Login with Azure Active Directory (Preview)** section (if present), select **Off**.
 
     1.  In the **Public inbound ports** section, select **Allow selected ports**.
 
@@ -166,9 +166,9 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Connect to virtual machine** pop-up that appears, perform the following actions:
     
-    1.  In the **IP address** text box, select **Public IP address**.
+    1.  In the **IP address** text box, select **Public IP address** if it is not already selected.
     
-    2.  In the **Port number** text box, enter **22**.
+    2.  In the **Port number** text box, enter **22** if it is not already present.
     
     3.  **Copy** the text in the **Login using VM local account** text box.
 
@@ -184,7 +184,7 @@ Microsoft updates this training course as soon as the community brings needed ch
     
     1.  Wait for the **Cloud Shell** to finish its first-time setup procedures before moving forward with the lab.
 
-    >Note: If you do not see the configuration options for the **Cloud Shell**, this is most likely because you are using an existing subscription with this course's labs. The labs are written from the presumption that you are using a new subscription.
+    > **Note**: If you do not see the configuration options for the **Cloud Shell**, this is most likely because you are using an existing subscription with this course's labs. The labs are written from the presumption that you are using a new subscription.
 
 1.  In the **Cloud Shell** command prompt at the bottom of the portal, **paste** the command you copied earlier in this lab and press Enter to connect to your new VM by using SSH.
 
@@ -264,6 +264,8 @@ In this exercise, you created a new VM manually by using the Azure portal interf
     az vm create --resource-group ContainerCompute --name quickvm --image Debian --admin-username student --admin-password StudentPa55w.rd
     ```
 
+    > **Note**: If this command fails with an error indicating `Resource group 'ContainerCompute'` could not be found, it likely means you either made an error naming your resource group at the start of this lab, or you have more than one subscription associated with your login name.  If you named the resource group wrong, substitute the correct name in the command.  If you have more than one subscription, you can use the `az account set --subscription` command to select the proper subscription.
+
 1.  Wait for the VM creation process to complete. After the process completes, the command will return a JSON file containing details about the machine.
 
 1.  Type the following command and press Enter to view a more detailed JSON file that contains various metadata about the newly created VM:
@@ -272,13 +274,13 @@ In this exercise, you created a new VM manually by using the Azure portal interf
     az vm show --resource-group ContainerCompute --name quickvm
     ```
 
-`.  Type the following command and press Enter to list all the IP addresses associated with the VM:
+1.  Type the following command and press Enter to list all the IP addresses associated with the VM:
 
     ```
     az vm list-ip-addresses --resource-group ContainerCompute --name quickvm
     ```
 
-8.  Type the following command and press Enter to filter the output to only return the first IP address value:
+1.  Type the following command and press Enter to filter the output to only return the first IP address value:
 
     ```
     az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv
@@ -393,7 +395,7 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
     }
     ```
 
-1.  **Save** the **Program.cs** file by using either the menu in the graphical editor or the **Ctrl+S** keyboard shortcut.
+1.  **Save** the **Program.cs** file by using either the `...` menu in the upper-right corner of the graphical editor, or the **Ctrl+S** keyboard shortcut.  Do not close the graphical editor.
 
 1.  Back in the command prompt, type the following command and press Enter to execute the application:
 
@@ -525,7 +527,7 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
 
 1.  In the **Container Registry** blade, locate the **Services** section and select the **Repositories** link.
 
-1.  In the **Repository** section, select the **ipcheck** container image repository.
+1.  In the **Repositories** section, select the **ipcheck** container image repository.
 
 1.  In the **Repository** blade, select the **latest** tag.
 
@@ -547,21 +549,21 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1.  In the **ContainerCompute** blade, select the container registry that you created earlier in this lab.
 
-1.  In the **Container Registry** blade, select **Update**.
+1.  In the **Container Registry** blade, select **Update** from the top of the blade.
 
 1.  In the **Update container registry** blade, perform the following actions:
     
     1.  In the **Admin user** section, select **Enable**.
     
-    > **Note**: Your changes are automatically saved.
-
+    1.  Select **Save**.
+    
 1.  Close the **Update container registry** blade.
 
 #### Task 2: Deploy a container image automatically to an Azure Container instance
 
 1.  In the **Container Registry** blade, locate the **Services** section and select the **Repositories** link.
 
-1.  In the **Repository** section, select the **ipcheck** container image repository.
+1.  In the **Repositories** section, select the **ipcheck** container image repository.
 
 1.  In the **Repository** blade, select the ellipsis menu located immediately to the right of the **latest** tag entry.
 
@@ -573,11 +575,11 @@ In this exercise, you created a .NET Core console application to display a machi
     
     1.  Leave the **Container image** text box set to its default value.
     
-    1.  In the **OS type** section, select **Linux**.
+    1.  In the **OS type** section, select **Linux** if it is not already selected.
     
     1.  Leave the **Subscription** text box set to its default value.
     
-    1.  In the **Resource group** drop-down list, select **ContainerCompute**.
+    1.  In the **Resource group** drop-down list, select **ContainerCompute** if it is not already selected.
     
     1.  In the **Location** drop-down list, select **East US**.
     
@@ -601,7 +603,7 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1.  In the **Container Registry** blade, locate the **Settings** section and select the **Access keys** link.
 
-1.  In the **Access Keys** section, copy the values for the following fields:
+1.  In the **Access Keys** section, copy the values for the following fields and save them in a **Notepad** file:
     
     1.  **Login server**
     
@@ -615,9 +617,9 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
 
-1.  In the search text box, enter **Container** and press **Enter**.
+1.  In the search text box, enter **Container instance** and press **Enter**.
 
-1.  In the **Everything** search-results blade, select the **Container Instances** result.
+1.  In the **Everything** search results blade, select the **Container Instances** result.
 
 1. In the **Container Instances** blade, select **Create**.
 
@@ -647,31 +649,31 @@ In this exercise, you created a .NET Core console application to display a machi
 
     1.  In the **Image registry password** text box, enter the **Password** value that you recorded earlier in this lab.
 
-    1. In the **OS type** section, select **Linux**
+    1. In the **OS type** section, select **Linux** if it is not already selected.
 
-    1. In the **Size** section, click the **Change size** link.
+    1. In the **Size** section, select the **Change size** link.
 
     1. In the **Change container size** blade, perform the following actions:
 
-        1. In the **Number of CPU cores** textbox, enter **1**.
+        1. In the **Number of CPU cores** textbox, enter **1** if it is not already present.
 
-        1. In the **Memory (GiB)** textbox, enter **1.5**
+        1. In the **Memory (GiB)** textbox, enter **1.5** if it is not already present.
 
         1. Leave the default value for the **GPU type** drop-down list.
 
-        1. Click **Ok**
+        1. Select **Ok**.
     
-    1. Click **Next: Networking**
+    1. Select **Next: Networking**
 
 1. In the **Networking** tab, perform the following actions:
     
-    1. In the **Include Public IP address** section, select **Yes**.
+    1. In the **Include Public IP address** section, select **Yes** if it is not already selected.
 
     1. Ensure in the **Ports** section, the port **80** is there, with the port protocol **TCP**.
     
     1. Leave the **DNS name label** text box empty.
 
-    1. Click **Next: Advanced**.
+    1. Select **Next: Advanced**.
 
 1. In the **Advanced** tab, perform the following actions:
     
@@ -704,7 +706,7 @@ In this exercise, you created a .NET Core console application to display a machi
 1.  Select the **Logs** tab and observe the text logs from the container instance.
 > **Note**: You can also optionally view the **Events** and **Logs** from the **managedcompute** container instance.
 
-> **Note**: After the application finished executing, the container was terminated because it had completed its work.
+> **Note**: After the application finished executing, the container was terminated because it had completed its work.  For the manually created container instance, you indicated that you indicated that a successful exit was acceptable, so the container shows a single execution run.  The automatically created instance did not offer you this option, and assumes the container should always be running, so you will see repeated restarts of the container.
 
 #### Review
 
