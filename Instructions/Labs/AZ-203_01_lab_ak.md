@@ -395,7 +395,7 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
     }
     ```
 
-1.  **Save** the **Program.cs** file by using either the `...` menu in the upper-right corner of the graphical editor, or the **Ctrl+S** keyboard shortcut.  Do not close the graphical editor.
+1.  **Save** the **Program.cs** file by using either the menu in the the graphical editor, or the **Ctrl+S** keyboard shortcut.  Do not close the graphical editor.
 
 1.  Back in the command prompt, type the following command and press Enter to execute the application:
 
@@ -603,7 +603,7 @@ In this exercise, you created a .NET Core console application to display a machi
 
 1.  In the **Container Registry** blade, locate the **Settings** section and select the **Access keys** link.
 
-1.  In the **Access Keys** section, copy the values for the following fields and save them in a **Notepad** file:
+1.  In the **Access Keys** section, record the values for the following fields:
     
     1.  **Login server**
     
