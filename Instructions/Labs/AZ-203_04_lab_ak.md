@@ -192,7 +192,7 @@ Microsoft updates this training course as soon as the community brings needed ch
     
     1.  In the **Storage** section, select **Use existing**, and then select **securestor\[your name in lowercase\]** from the list.
     
-    1.  Leave the **Application Insights** text box set to its default value.
+    1.  Leave the **Application Insights** option set to its default value.
     
     1. Select **Create**.
 
