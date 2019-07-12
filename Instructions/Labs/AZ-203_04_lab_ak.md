@@ -188,7 +188,7 @@ Microsoft updates this training course as soon as the community brings needed ch
     
     1.  In the **Location** drop-down list, select **East US**.
     
-    1.  In the **Runtime Stack** drop-down list, select **.NET**.
+    1.  In the **Runtime Stack** drop-down list, select **.NET Core**.
     
     1.  In the **Storage** section, select **Use existing**, and then select **securestor\[your name in lowercase\]** from the list.
     
