@@ -376,33 +376,26 @@ In this exercise, you created a server-assigned managed service identity for you
     #r "Newtonsoft.Json"
 
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.Extensions.Primitives;
-
     using Newtonsoft.Json;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req, ILogger log)
-
+    public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
     {
 
-    log.LogInformation("C\# HTTP trigger function processed a request.");
+        log.LogInformation("C\# HTTP trigger function processed a request.");
 
-    string name = req.Query\["name"\];
+        string name = req.Query\["name"\];
 
-    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+        string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-    dynamic data = JsonConvert.DeserializeObject(requestBody);
+        dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-    name = name ?? data?.name;
+        name = name ?? data?.name;
 
-    return name \!= null
-
-    ? (ActionResult)new OkObjectResult($"Hello, {name}")
-
-    : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
-
+        return name != null
+            ? (ActionResult)new OkObjectResult($"Hello, {name}")
+            : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
     }
     ```
 
@@ -412,15 +405,11 @@ In this exercise, you created a server-assigned managed service identity for you
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    return new OkObjectResult("Test Successful");
-
+        return new OkObjectResult("Test Successful");
     }
     ```
 
@@ -438,11 +427,9 @@ In this exercise, you created a server-assigned managed service identity for you
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
 
     }
@@ -459,21 +446,17 @@ In this exercise, you created a server-assigned managed service identity for you
     ```
     return new OkObjectResult(connectionString);
     ```
+    
 1.  The **Run** method should now look like this:
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-
-    return new OkObjectResult(connectionString);
-
+        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+        return new OkObjectResult(connectionString);
     }
     ```
 
@@ -599,15 +582,11 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.WindowsAzure.Storage;
-
     using Microsoft.WindowsAzure.Storage.Blob;
-
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
 
     }
@@ -649,27 +628,17 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.WindowsAzure.Storage;
-
     using Microsoft.WindowsAzure.Storage.Blob;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-
-    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-
-    CloudBlobClient blobClient = account.CreateCloudBlobClient();
-
-    CloudBlobContainer container = blobClient.GetContainerReference("drop");
-
-    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-
+        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+        CloudBlobClient blobClient = account.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference("drop");
+        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
     }
     ```
 
@@ -691,31 +660,19 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.WindowsAzure.Storage;
-
     using Microsoft.WindowsAzure.Storage.Blob;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-
-    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-
-    CloudBlobClient blobClient = account.CreateCloudBlobClient();
-
-    CloudBlobContainer container = blobClient.GetContainerReference("drop");
-
-    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-
-    string content = await blob.DownloadTextAsync();
-
-    return new OkObjectResult(content);
-
+        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+        CloudBlobClient blobClient = account.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference("drop");
+        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+        string content = await blob.DownloadTextAsync();
+        return new OkObjectResult(content);
     }
     ```
 
@@ -737,27 +694,17 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.WindowsAzure.Storage;
-
     using Microsoft.WindowsAzure.Storage.Blob;
-
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-
-    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-
-    CloudBlobClient blobClient = account.CreateCloudBlobClient();
-
-    CloudBlobContainer container = blobClient.GetContainerReference("drop");
-
-    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-
+        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+        CloudBlobClient blobClient = account.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference("drop");
+        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
     }
     ```
 
@@ -775,19 +722,12 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
-
     {
-
-    Permissions = SharedAccessAccountPermissions.Read,
-
-    Services = SharedAccessAccountServices.Blob,
-
-    ResourceTypes = SharedAccessAccountResourceTypes.Object,
-
-    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
-
-    Protocols = SharedAccessProtocol.HttpsOnly
-
+        Permissions = SharedAccessAccountPermissions.Read,
+        Services = SharedAccessAccountServices.Blob,
+        ResourceTypes = SharedAccessAccountResourceTypes.Object,
+        SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
+        Protocols = SharedAccessProtocol.HttpsOnly
     };
     ```
 
@@ -813,49 +753,28 @@ In this exercise, you securely used a service identity to read the value of a se
 
     ```
     using System.Net;
-
     using Microsoft.AspNetCore.Mvc;
-
     using Microsoft.WindowsAzure.Storage;
-
     using Microsoft.WindowsAzure.Storage.Blob;
 
-    public static async Task\<IActionResult\> Run(HttpRequest req)
-
+    public static async Task<IActionResult> Run(HttpRequest req)
     {
-
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-
-    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-
-    CloudBlobClient blobClient = account.CreateCloudBlobClient();
-
-    CloudBlobContainer container = blobClient.GetContainerReference("drop");
-
-    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-
-    SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
-
-    {
-
-    Permissions = SharedAccessAccountPermissions.Read,
-
-    Services = SharedAccessAccountServices.Blob,
-
-    ResourceTypes = SharedAccessAccountResourceTypes.Object,
-
-    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
-
-    Protocols = SharedAccessProtocol.HttpsOnly
-
-    };
-
-    string sasToken = account.GetSharedAccessSignature(policy);
-
-    string secureBlobUrl = $"{blob.Uri}{sasToken}";
-
-    return new OkObjectResult(secureBlobUrl);
-
+        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+        CloudBlobClient blobClient = account.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference("drop");
+        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+        SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
+        {
+            Permissions = SharedAccessAccountPermissions.Read,
+            Services = SharedAccessAccountServices.Blob,
+            ResourceTypes = SharedAccessAccountResourceTypes.Object,
+            SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
+            Protocols = SharedAccessProtocol.HttpsOnly
+        };
+        string sasToken = account.GetSharedAccessSignature(policy);
+        string secureBlobUrl = $"{blob.Uri}{sasToken}";
+        return new OkObjectResult(secureBlobUrl);
     }
     ```
 
