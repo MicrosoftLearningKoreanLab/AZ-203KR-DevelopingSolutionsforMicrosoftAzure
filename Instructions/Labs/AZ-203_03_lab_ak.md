@@ -78,7 +78,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  Select **Sign in**.
 
-    > Note: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
 
 #### Task 2: Create a SQL Database resource
 
@@ -124,7 +124,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **Create SQL Database** blade, observe the tabs at the top of the blade, such as **Basics**, **Additional settings** and **Tags**.
 
-    > Note: Each tab represents a step in the workflow to create a new **Azure SQL database**. At any time, you can select **Review + create** to skip the remaining tabs.
+    > **Note**: Each tab represents a step in the workflow to create a new **Azure SQL database**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1. In the **Basics** tab, perform the following actions:
     
@@ -158,7 +158,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **Connection strings** pane, copy the value of the **ADO.NET** connection string. Be sure to replace the placeholder values for *{your\_username}* and *{your\_password}* with the values testuser** **and TestPa$$w0rd, respectively.
 
-    > Note: For example, if your copied connection string is
+    > **Note**: For example, if your copied connection string is
 
     ```
     Server=tcp:polysqlsrvrstudent.database.windows.net,1433;Initial Catalog=polysqldb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;,
@@ -182,7 +182,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. At the top of the blade, select **Save**.
 
-    > Note: It might take a few minutes for the firewall changes to get updated on the server.
+    > **Note**: It might take a few minutes for the firewall changes to get updated on the server.
 
 1. After the save operation is complete, select **OK** to dismiss the confirmation dialog.
 
@@ -198,7 +198,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Create Azure Cosmos DB Account** blade, observe the tabs at the top of the blade, such as **Basics**, **Network** and **Tags**.
 
-    > Note: Each tab represents a step in the workflow to create a new **Azure Cosmos DB account**. At any time, you can select **Review + create** to skip the remaining tabs.
+    > **Note**: Each tab represents a step in the workflow to create a new **Azure Cosmos DB account**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1.  In the **Basics** tab, perform the following actions:
     
@@ -246,7 +246,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Create storage account** blade, observe the tabs at the top of the blade, such as **Basics**, **Advanced** and **Tags**.
 
-    > Note: Each tab represents a step in the workflow to create a new **Azure Storage Account**. At any time, you can select **Review + create** to skip the remaining tabs.
+    > **Note**: Each tab represents a step in the workflow to create a new **Azure Storage Account**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1.  In the **Basics** tab, perform the following actions:
     

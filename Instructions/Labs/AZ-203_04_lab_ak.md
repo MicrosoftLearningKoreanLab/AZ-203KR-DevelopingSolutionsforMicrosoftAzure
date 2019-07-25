@@ -76,7 +76,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  Select **Sign in**.
 
-    > Note: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
 
 #### Task 2: Create an Azure Storage account
 
@@ -90,7 +90,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Create storage account** blade, observe the tabs at the top of the blade, such as **Basics**.
 
-  > Note: Each tab represents a step in the workflow to create a new **storage account**. At any time, you can select **Review + create** to skip the remaining tabs.
+  > **Note**: Each tab represents a step in the workflow to create a new **storage account**. At any time, you can select **Review + create** to skip the remaining tabs.
 
 1.  In the **Basics** tab, perform the following actions:
     
@@ -128,7 +128,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1. In the **Access keys** blade, select any one of the keys and record the value in either of the **Connection string** fields. You will use this value later in this lab.
 
-    > Note: It does not matter which connection string you choose to use. They are interchangeable.
+    > **Note**: It does not matter which connection string you choose to use. They are interchangeable.
 
 #### Task 3: Create an Azure Key Vault
 
@@ -270,7 +270,7 @@ In this exercise, you created all the resources that you will use for this lab.
     
     1. Record the value of the **Secret Identifier** text box because you will use this later in the lab.
 
-      > Note: You are recording the value of the **Secret Identifier** field, not the **Secret Value** field.
+      > **Note**: You are recording the value of the **Secret Identifier** field, not the **Secret Value** field.
 
 #### Task 3: Configure a Key Vault access policy
 
@@ -310,7 +310,39 @@ In this exercise, you created a server-assigned managed service identity for you
 
 ### Exercise 3: Write function app code 
 
-#### Task 1: Create a Key Vault-derived application setting 
+#### Task 1: Create a .NET Core application setting
+
+1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+
+1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+
+1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+
+1.  In the **Function App** blade, select the **Platform features** tab.
+
+1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
+
+1.  In the **Configuration** section, perform the following actions:
+    
+    1.  Select the **Application settings** tab.
+    
+    1.  Select **+ New application setting**.
+    
+    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **DOTNET_SKIP_FIRST_TIME_EXPERIENCE**.
+    
+    1.  In the **Value** field, enter **true**.
+
+        > **Note**: The ``DOTNET_SKIP_FIRST_TIME_EXPERIENCE`` application setting tells .NET Core to disable it's built-in NuGet package caching mechanisms. On a temporary compute instance, this would effectively be a waste of time and cause build issues with your Azure Function.
+    
+    1.  Leave the **deployment slot setting** field set to its default value.
+
+    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    
+    1.  Select **Save** at the top of the blade to persist your settings.
+
+1.  Wait for your application settings to persist before you move forward with the lab.
+
+#### Task 2: Create a Key Vault-derived application setting 
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -332,7 +364,7 @@ In this exercise, you created a server-assigned managed service identity for you
     
     1.  In the **Value** field, construct a value by using the following syntax: **@Microsoft.KeyVault(SecretUri=\<Secret Identifier\>)**
 
-      > Note: You will need to build a reference to your **Secret Identifier** by using the above syntax. For example, if your Secret Identifier is **https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf**, then your value would be **@Microsoft.KeyVault(SecretUri= https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf)**
+      > **Note**: You will need to build a reference to your **Secret Identifier** by using the above syntax. For example, if your Secret Identifier is **https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf**, then your value would be **@Microsoft.KeyVault(SecretUri= https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf)**
     
     1.  Leave the **deployment slot setting** field set to its default value.
 
@@ -342,7 +374,7 @@ In this exercise, you created a server-assigned managed service identity for you
 
 1.  Wait for your application settings to persist before you move forward with the lab.
 
-#### Task 2: Create a HTTP-triggered function
+#### Task 3: Create a HTTP-triggered function
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -419,7 +451,7 @@ In this exercise, you created a server-assigned managed service identity for you
 
 1. Observe the **Output** text box in the **Test** pane. You should now see the value **Test Successful** returned from the function.
 
-#### Task 3: Test an application setting
+#### Task 4: Test the Key Vault-derived application setting
 
 1.  Delete the existing code within the **Run** method of the script.
 
@@ -536,9 +568,9 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1. You should now see an error message indicating that the resource was not found.
 
-    > Note: If you do not see the error message, your browser might have cached the file. Use **Ctrl+F5** to refresh the page until you see the error message.
+    > **Note**: If you do not see the error message, your browser might have cached the file. Use **Ctrl+F5** to refresh the page until you see the error message.
 
-#### Task 2: Configure a Storage Account SDK
+#### Task 2: Pull the Storage Account SDK from NuGet
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -548,7 +580,7 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1.  In the **Function App** blade, locate and select the existing **FileParser** function to open the editor for the function.
 
-    > Note: You might need to expand the **Functions** option in the menu on the left side of the blade.
+    > **Note**: You might need to expand the **Functions** option in the menu on the left side of the blade.
 
 1.  On the right side of the editor, select **View files** to open the tab.
 
@@ -562,7 +594,7 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1. Minimize the **View files** tab.
 
-    > Note: You can minimize the tab by selecting the arrow immediately to the right of the tab header.
+    > **Note**: You can minimize the tab by selecting the arrow immediately to the right of the tab header.
 
 1. Within the editor, delete the existing code within the **Run** method of the script.
 

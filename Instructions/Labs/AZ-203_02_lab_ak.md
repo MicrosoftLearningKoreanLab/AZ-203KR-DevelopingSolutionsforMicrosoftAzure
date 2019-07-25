@@ -110,7 +110,7 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
     
     1.  In the **Account kind** list, select **StorageV2 (general purpose v2)**.
     
-    1.  In the **Replication** list, select **Zone-redundant storage (ZRS)**.
+    1.  In the **Replication** list, select **Locally-redundant storage (LRS)**.
     
     1.  In the **Access tier (default)** section, ensure that **Hot** is selected.
     
@@ -524,7 +524,39 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
 
 1.  Wait for the creation task to complete before moving on with this lab.
 
-#### Task 2: Author a function to process blobs
+#### Task 2: Create a .NET Core application setting
+
+1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+
+1.  In the **Resource groups** blade, locate and select the **ManagedPlatform** resource group that you created earlier in this lab.
+
+1.  In the **ManagedPlatform** blade, select the **imgfunc\*** function app that you created earlier in this lab.
+
+1.  In the **Function App** blade, select the **Platform features** tab.
+
+1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
+
+1.  In the **Configuration** section, perform the following actions:
+    
+    1.  Select the **Application settings** tab.
+    
+    1.  Select **+ New application setting**.
+    
+    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **DOTNET_SKIP_FIRST_TIME_EXPERIENCE**.
+    
+    1.  In the **Value** field, enter **true**.
+
+        > **Note**: The ``DOTNET_SKIP_FIRST_TIME_EXPERIENCE`` application setting tells .NET Core to disable it's built-in NuGet package caching mechanisms. On a temporary compute instance, this would effectively be a waste of time and cause build issues with your Azure Function.
+    
+    1.  Leave the **deployment slot setting** field set to its default value.
+
+    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    
+    1.  Select **Save** at the top of the blade to persist your settings.
+
+1.  Wait for your application settings to persist before you move forward with the lab.
+
+#### Task 3: Author a function to process blobs
 
 1.  On the left navigation pane of the portal, select **Resource groups**.
 
@@ -698,7 +730,7 @@ SixLabors.ImageSharp](https://www.nuget.org/packages/SixLabors.ImageSharp/1.0.0-
 
 1. Select **Save** to save the script and compile the code again.
 
-#### Task 3: Validate a web solution
+#### Task 4: Validate the web solution
 
 1.  On the left navigation pane of the portal, select **Resource groups**.
 
@@ -774,7 +806,7 @@ SixLabors.ImageSharp](https://www.nuget.org/packages/SixLabors.ImageSharp/1.0.0-
 
 1. Observe that the list of gallery images has been updated with your new image.
 
-1. Observe the list of thumbnails at the top of the page. Refresh your page every minute until all four of your thumbnails have been generated.
+1. Observe the list of thumbnails at the top of the page. Refresh your page every minute until your thumbnails have been generated.
 
 #### Review
 
