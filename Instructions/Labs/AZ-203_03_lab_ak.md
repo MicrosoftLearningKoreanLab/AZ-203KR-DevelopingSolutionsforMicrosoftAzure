@@ -18,7 +18,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 ### Before you start
 
-#### Sign in to lab virtual machine
+#### Sign in to the lab virtual machine
 
 Sign in to your **Windows 10** virtual machine using the following credentials:
     
@@ -48,7 +48,7 @@ Observe the taskbar located at the bottom of your **Windows 10** desktop. The ta
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
+1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .

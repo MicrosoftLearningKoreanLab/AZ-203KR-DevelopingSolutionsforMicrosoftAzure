@@ -20,21 +20,21 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 #### Sign in to the lab virtual machine
 
-  - Sign in to your **Windows 10** virtual machine using the following credentials:
+Sign in to your **Windows 10** virtual machine using the following credentials:
     
-      - **Username**: Admin
-    
-      - **Password**: Pa55w.rd
+-   **Username**: Admin
 
-    > **Note**: Lab virtual machine sign in instructions will be provided to you by your instructor.
+-   **Password**: Pa55w.rd
+
+> **Note**: Lab virtual machine sign in instructions will be provided to you by your instructor.
 
 #### Review installed applications
 
-  - Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
     
-      - Microsoft Edge
-    
-      - File Explorer
+-   Microsoft Edge
+
+-   File Explorer
 
 ### Exercise 1: Create a virtual machine (VM) by using the Azure portal
 

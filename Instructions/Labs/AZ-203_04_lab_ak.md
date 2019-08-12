@@ -20,21 +20,21 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 #### Sign in to the lab virtual machine
 
-  - Sign in to your **Windows 10** virtual machine by using the following credentials:
+Sign in to your **Windows 10** virtual machine by using the following credentials:
     
-      - **Username**: Admin
-    
-      - **Password**: Pa55w.rd
+-   **Username**: Admin
 
-    > **Note**: Lab virtual machine sign-in instructions will be provided to you by your instructor.
+-   **Password**: Pa55w.rd
+
+> **Note**: Lab virtual machine sign-in instructions will be provided to you by your instructor.
 
 #### Review installed applications
 
-  - Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
     
-      - Microsoft Edge
-    
-      - File Explorer
+-   Microsoft Edge
+
+-   File Explorer
 
 #### Download the lab files
 
@@ -46,13 +46,13 @@ Microsoft updates this training course as soon as the community brings needed ch
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to Clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Labfiles** directory:
+1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-201.02** lab:
+1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T04** lab:
 
     ```
     git checkout master -- Allfiles/*
