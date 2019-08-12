@@ -1,0 +1,62 @@
+@page "{add:guid?}"
+@model Cart
+@inject IOptions<Settings> Settings
+@{ 
+    decimal totalPrice = Model.Products.Sum(p => p.ListPrice);
+}
+<div class="text-center pb-3">
+    <h1 class="display-4">
+        Shopping Cart
+    </h1>
+</div>
+@if (Settings.Value.CartAvailable)
+{
+    @if (Model.Products.Any())
+    {
+        <ul class="list-unstyled">
+            @foreach (var product in Model.Products)
+            {
+                <li class="media d-flex justify-content-between">
+                    <img src="@Flurl.Url.Combine(Settings.Value?.BlobContainerUrl, @product.Photo)" class="mr-3" alt="@product.Name">
+                    <div class="media-body">
+                        <h3 class="mt-0 mb-1">
+                            @product.Name
+                        </h3>
+                        <p class="text-muted">@product.Category</p>
+                    </div>
+                    <div class="text-right font-weight-bold">
+                        @($"{product.ListPrice:C}")
+                    </div>
+                </li>
+            }
+        </ul>
+        <div class="d-flex justify-content-between">
+            <form asp-page-handler="Clear" method="post">
+                <button type="submit" class="btn btn-secondary">Clear</button>
+            </form>
+            <form asp-page-handler="Checkout" method="post">
+                <button type="submit" class="btn btn-secondary">Checkout</button>
+            </form>
+            <span class="text-right text-uppercase font-weight-bolder">
+                Total: @($"{totalPrice:C}")
+            </span>
+        </div>
+    }
+    else
+    {
+        <div class="jumbotron text-center">
+            <div class="container">
+                <p class="lead">
+                    Your cart is currently empty.
+                </p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="jumbotron bg-danger text-light">
+        <h1 class="display-4">Checkout is disabled!</h1>
+        <p class="lead">Enable checkout using the <code class="text-white-50">Settings.CartAvailable</code> configuration setting.</p>
+    </div>
+}
