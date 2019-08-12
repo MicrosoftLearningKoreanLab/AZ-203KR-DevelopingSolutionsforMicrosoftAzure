@@ -1,0 +1,59 @@
+@page
+@model Checkout
+@inject IOptions<Settings> Settings
+@{
+    decimal totalPrice = Model.Products.Sum(p => p.ListPrice);
+}
+<div class="text-center pb-3">
+    <h1 class="display-4">
+        Thanks for Checking Out!
+    </h1>
+</div>
+@if (Settings.Value.CartAvailable)
+{
+    <p class="lead">
+        Your order number is:
+        <span class="badge badge-secondary m-1">
+            @Model.OrderNumber
+        </span>
+    </p>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <th scope="row">
+                        @product.Name
+                    </th>
+                    <td>
+                        @product.Category
+                    </td>
+                    <td class="text-right font-weight-bold">
+                        @($"{product.ListPrice:C}")
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row" class="text-right text-uppercase font-weight-bolder" colspan="3">
+                    @($"{totalPrice:C}")
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="jumbotron bg-danger text-light">
+        <h1 class="display-4">Checkout is disabled!</h1>
+        <p class="lead">Enable checkout using the <code class="text-white-50">Settings.CartAvailable</code> configuration setting.</p>
+    </div>
+}
