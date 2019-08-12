@@ -20,23 +20,23 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 #### Sign in to lab virtual machine
 
-  - Sign in to your **Windows 10** virtual machine using the following credentials:
+Sign in to your **Windows 10** virtual machine using the following credentials:
     
-      - **Username**: Admin
-    
-      - **Password**: Pa55w.rd
+-   **Username**: Admin
+
+-   **Password**: Pa55w.rd
 
 > **Note**: Lab virtual machine sign in instructions will be provided to you by your instructor.
 
 #### Review installed applications
 
-  - Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
     
-      - Microsoft Edge
-    
-      - File Explorer
-    
-      - Visual Studio Code
+-   Microsoft Edge
+
+-   File Explorer
+
+-   Visual Studio Code
 
 #### Download the lab files
 
@@ -54,7 +54,7 @@ Microsoft updates this training course as soon as the community brings needed ch
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203.03** lab:
+1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T03** lab:
 
     ```
     git checkout master -- Allfiles/*
@@ -120,7 +120,7 @@ Microsoft updates this training course as soon as the community brings needed ch
 
 1.  In the **Access keys** pane, record the value in the **Primary connection string (StackExchange.Redis)** field. You will use this value later in this lab.
 
-#### Task 3: Create an Azure SQL logical server resource
+#### Task 3: Create an Azure SQL server resource
 
 1.  In the navigation pane on the left side of the Azure portal, select **All services**.
 
@@ -258,7 +258,7 @@ In this exercise, you created all the Azure resources that you will need for a p
 
 ### Exercise 2: Import databases and images
 
-### Task 1: Upload image blobs
+#### Task 1: Upload image blobs
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -300,7 +300,7 @@ In this exercise, you created all the Azure resources that you will need for a p
 
 1. Wait for all of the blobs to be uploaded before you continue with this lab.
 
-### Task 2: Upload SQL .bacpac file
+#### Task 2: Upload SQL .bacpac file
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -336,7 +336,7 @@ In this exercise, you created all the Azure resources that you will need for a p
 
 1. Wait for the blob to be uploaded before you continue with this lab.
 
-### Task 3: Import SQL database
+#### Task 3: Import SQL database
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -544,7 +544,7 @@ In this exercise, you imported all of the resources you will use with your web a
 
 In this exercise, you configured your ASP.NET Core web application to connect to your resources in Azure.
 
-### Exercise 4: Migrating SQL cata to Azure Cosmos DB
+### Exercise 4: Migrating SQL data to Azure Cosmos DB
 
 #### Task 1: Create migration project
 
@@ -829,7 +829,7 @@ In this exercise, you configured your ASP.NET Core web application to connect to
 
 #### Task 7: Validate migration
 
-1.  Return to your browser window showing the **Azure portal**.
+1.  Return to the **Microsoft Edge** browser window showing the **Azure portal**.
 
 1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
 
@@ -900,6 +900,12 @@ In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB
     ```
 
     > **Note**: The ``dotnet add reference`` command will add a reference to the model classes contained in the **AdventureWorks.Models** project.
+
+1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
+
+    ```
+    dotnet build
+    ```
 
 1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
 
@@ -987,7 +993,7 @@ In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB
     }
     ```
 
-1.  Within the **FindModelAsync** method, add the following blocks of code to create a LINQ query, transform it into an iterator, iterator over the result set, and then return the single item in the result set:
+1.  Within the **FindModelAsync** method, add the following blocks of code to create a LINQ query, transform it into an iterator, iterate over the result set, and then return the single item in the result set:
 
     ```
     var iterator = _container.GetItemLinqQueryable<Model>()
@@ -1037,7 +1043,7 @@ In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB
     }
     ```
 
-1.  Within the **FindProductAsync** method, add the following blocks of code to execute a sql query, get the query result iterator, iterator over the result set, and then return the single item in the result set:
+1.  Within the **FindProductAsync** method, add the following blocks of code to execute a sql query, get the query result iterator, iterates over the result set, and then return the single item in the result set:
 
     ```
     string query = $@"SELECT VALUE products
@@ -1083,7 +1089,7 @@ In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB
 
 1.  Double-click (or double-select) the **appsettings.json** file.
 
-1.  In the JSON object, in line 4, locate the **ConnectionStrings.AdventureWorksSqlContext** path. Observe that the current value is empty:
+1.  In the JSON object, in line 4, locate the **ConnectionStrings.AdventureWorksCosmosContext** path. Observe that the current value is empty:
 
     ```
     "ConnectionStrings": {
@@ -1212,6 +1218,12 @@ In this exercise, you wrote C# code to query an Azure Cosmos DB collection using
 
     > **Note**: The ``dotnet add package`` command will add the **[StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/2.0.601)** package from **NuGet**.
 
+1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
+
+    ```
+    dotnet build
+    ```
+
 1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
 
 #### Task 2: Write .NET code to connect to Azure Cache for Redis
@@ -1220,7 +1232,7 @@ In this exercise, you wrote C# code to query an Azure Cosmos DB collection using
 
 1.  Access the context menu or right-click the **AdventureWorks.Context** folder node and then select **New File**.
 
-1.  In the prompt that appears, enter the value **AdventureWorksRedisContext .cs**.
+1.  In the prompt that appears, enter the value **AdventureWorksRedisContext.cs**.
 
 1.  In the code editor tab for the **AdventureWorksRedisContext.cs** file, add the following lines of code to import the **AdventureWorks.Models** namespace from the referenced **AdventureWorks.Models** project:
 
@@ -1302,7 +1314,7 @@ In this exercise, you wrote C# code to query an Azure Cosmos DB collection using
     }
     ```
 
-1.  Within the **AddProductToCartAsync** method, add the following blocks of code to get the current value from a key, create a new list if one does not already exists, add the product to the list, and then store the list as the new value for the key in the database.
+1.  Within the **AddProductToCartAsync** method, add the following blocks of code to get the current value from a key, create a new list if one does not already exists, add the product to the list, and then store the list as the new value for the key in the database:
     
     ```
     RedisValue result = await _database.StringGetAsync(uniqueIdentifier);
@@ -1481,13 +1493,9 @@ In this exercise, you wrote C# code to query an Azure Cosmos DB collection using
 
 1.  On the shopping cart page, observe the empty cart.
 
-1.  Close your currently running web browser application.
-
-1.  Return to the **Visual Studio Code** window.
+1.  Close the browser window showing your web application.
 
 1.  Back in the **Visual Studio Code** window, select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-1.  Close the **Visual Studio Code** application.
 
 #### Review
 
