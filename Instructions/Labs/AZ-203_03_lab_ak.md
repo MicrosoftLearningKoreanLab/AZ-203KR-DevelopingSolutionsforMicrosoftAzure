@@ -893,14 +893,6 @@ In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB
 
     > **Note**: The ``dotnet add package`` command will add the **[Microsoft.Azure.Cosmos](https://www.nuget.org/packages/Microsoft.Azure.Cosmos/3.0.0)** package from **NuGet**.
 
-1.  In the command prompt, enter the following command and press Enter to add a reference to the existing **AdventureWorks.Models** project:
-
-    ```
-    dotnet add reference ..\AdventureWorks.Models\AdventureWorks.Models.csproj
-    ```
-
-    > **Note**: The ``dotnet add reference`` command will add a reference to the model classes contained in the **AdventureWorks.Models** project.
-
 1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
 
     ```
