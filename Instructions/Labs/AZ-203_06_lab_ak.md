@@ -514,6 +514,8 @@ In this exercise, you created a new Azure Search account and built an index with
     
     1. Select **Submit**.
 
+        > **Note**: You may need to select and then unselect the **Track deletions** field and **Once/Custom** options to get the **Submit** button to appear. This behavior is due to a portal bug.
+
 1. Back in the **Search Service** blade, select the **Indexers** tab.
 
     > **Note**: If you do not see your indexer yet, you may need to refresh the blade.
