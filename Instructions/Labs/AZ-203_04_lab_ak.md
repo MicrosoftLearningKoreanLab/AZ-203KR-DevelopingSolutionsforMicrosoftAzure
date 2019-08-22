@@ -584,9 +584,26 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1.  On the right side of the editor, select **View files** to open the tab.
 
-1.  In the **View files** tab, select **Upload**.
+1.  In the **View files** tab, select **Add**.
 
-1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\04\\Starter**, select the **function.proj** file, and then select **Open**.
+1.  In the filename dialog that appears, enter **function.proj**.
+
+1.  In the file editor, insert this configuration content:
+
+    ```
+    <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <TargetFramework>netstandard2.0</TargetFramework>
+        </PropertyGroup>
+        <ItemGroup>
+            <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.0.0" />
+        </ItemGroup>
+    </Project>
+    ```
+
+1. In the editor, select **Save** button to persist your changes to the configuration.
+
+    > **Note**: This **.proj** file contains the NuGet package reference necessary to import the [SixLabors.ImageSharp](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/11.0.0) package.
 
 1.  Select the **function.proj** file to view the contents of the file.
 
@@ -598,16 +615,16 @@ In this exercise, you securely used a service identity to read the value of a se
 
 1. Within the editor, delete the existing code within the **Run** method of the script.
 
-1. At the top of the code file, add the following line of code to create a **using** block for the **Microsoft.WindowsAzure.Storage** namespace:
+1. At the top of the code file, add the following line of code to create a **using** block for the **Microsoft.Azure.Storage** namespace:
 
     ```
-    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.Azure.Storage;
     ```
 
-1. Add the following line of code to create a **using** block for the **Microsoft.WindowsAzure.Storage.Blob** namespace:
+1. Add the following line of code to create a **using** block for the **Microsoft.Azure.Storage.Blob** namespace:
 
     ```
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage.Blob;
     ```
 
 1. The **Run** method should now look like this:
@@ -615,8 +632,8 @@ In this exercise, you securely used a service identity to read the value of a se
     ```
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
     
     public static async Task<IActionResult> Run(HttpRequest req)
     {
@@ -661,8 +678,8 @@ In this exercise, you securely used a service identity to read the value of a se
     ```
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
 
     public static async Task<IActionResult> Run(HttpRequest req)
     {
@@ -693,8 +710,8 @@ In this exercise, you securely used a service identity to read the value of a se
     ```
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
 
     public static async Task<IActionResult> Run(HttpRequest req)
     {
@@ -727,8 +744,8 @@ In this exercise, you securely used a service identity to read the value of a se
     ```
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
     
     public static async Task<IActionResult> Run(HttpRequest req)
     {
@@ -786,8 +803,8 @@ In this exercise, you securely used a service identity to read the value of a se
     ```
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
 
     public static async Task<IActionResult> Run(HttpRequest req)
     {
