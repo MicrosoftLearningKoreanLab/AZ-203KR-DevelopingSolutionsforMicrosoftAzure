@@ -80,7 +80,41 @@ Observe the taskbar located at the bottom of your **Windows 10** desktop. The ta
 
     > **Note**: If this is your first time signing in to the **Azure portal**, a dialog box will display offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
 
-#### Task 2: Create an Azure Search account
+#### Task 2: Create API Management resource
+
+1.  In the left navigation pane of the portal, select **+ Create a resource**.
+
+1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+
+1.  In the search field, enter **API** and press Enter.
+
+1.  In the **Everything** search results blade, select the **API Management** result.
+
+1.  In the **API Management** blade, select **Create**.
+
+1.  In the **API Management Service** blade, perform the following actions:
+    
+    1.  In the **Name** field, enter **prodapi\[*your name in lowercase*\]**.
+    
+    1.  Leave the **Subscription** field set to its default value.
+    
+    1.  In the **Resource group** list, select **MultiTierService**.
+    
+    1.  In the **Location** list, select **East US**.
+    
+    1.  In the **Organization name** field, enter **Contoso**.
+    
+    1.  Leave the **Administrator email** field set to its default value.
+    
+    1.  In the **Pricing tier** list, select **Developer (No SLA)**.
+    
+    1.  Select **Create**.
+
+1.  Wait for the creation task to complete before you move forward with this lab.
+
+    > **Note**: It usually takes between 20 and 30 minutes to create an API Management service.
+
+#### Task 3: Create an Azure Search account
 
 1.  In the left navigation pane of the portal, select **+ Create a resource**.
 
@@ -130,7 +164,7 @@ Observe the taskbar located at the bottom of your **Windows 10** desktop. The ta
 
     > **Note**: It does not matter which connection string you choose to use. They are interchangeable.
 
-#### Task 3: Create an index
+#### Task 4: Create an index
 
 1.  In the left navigation pane of the portal, select **Resource groups**.
 
@@ -558,41 +592,7 @@ In this exercise, you created an Azure Storage account and indexed a Storage tab
 
 ### Exercise 3: Build an API proxy tier by using Azure API Management
 
-#### Task 1: Create an API Management resource
-
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
-
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
-
-1.  In the search field, enter **API** and press Enter.
-
-1.  In the **Everything** search results blade, select the **API Management** result.
-
-1.  In the **API Management** blade, select **Create**.
-
-1.  In the **API Management Service** blade, perform the following actions:
-    
-    1.  In the **Name** field, enter **prodapi\[*your name in lowercase*\]**.
-    
-    1.  Leave the **Subscription** field set to its default value.
-    
-    1.  In the **Resource group** list, select **MultiTierService**.
-    
-    1.  In the **Location** list, select **East US**.
-    
-    1.  In the **Organization name** field, enter **Contoso**.
-    
-    1.  Leave the **Administrator email** field set to its default value.
-    
-    1.  In the **Pricing tier** list, select **Developer (No SLA)**.
-    
-    1.  Select **Create**.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-    > **Note**: It usually takes between 20 and 30 minutes to create an API Management service.
-
-#### Task 2: Define a new API
+#### Task 1: Define a new API
 
 1.  In the left navigation pane of the portal, select **Resource groups**.
 
@@ -704,7 +704,7 @@ In this exercise, you created an Azure Storage account and indexed a Storage tab
 
 1. Select the **Design** tab to return to the list of operations.
 
-#### Task 3: Manipulate an API response
+#### Task 2: Manipulate an API response
 
 1.  Back in the **Design** tab, in the list of operations, select **List All Documents** .
 
