@@ -594,13 +594,27 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
 
 1.  On the right side of the function editor, select **View files** to open the tab.
 
-1.  In the **View files** tab, select **Upload**.
+1.  In the **View files** tab, select **Add**.
 
-1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter**, select the **function.proj** file, and then select **Open**.
+1.  In the filename dialog that appears, enter **function.proj**.
 
-    > **Note**: This **.proj** file contains the NuGet package reference necessary to import the [
-SixLabors.ImageSharp](https://www.nuget.org/packages/SixLabors.ImageSharp/1.0.0-beta0006) package.
+1.  In the file editor, insert this configuration content:
 
+    ```
+    <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <TargetFramework>netstandard2.0</TargetFramework>
+        </PropertyGroup>
+        <ItemGroup>
+            <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+        </ItemGroup>
+    </Project>
+    ```
+
+1. In the editor, select **Save** button to persist your changes to the configuration.
+
+    > **Note**: This **.proj** file contains the NuGet package reference necessary to import the [SixLabors.ImageSharp](https://www.nuget.org/packages/SixLabors.ImageSharp/1.0.0-beta0006) package.
+    
 1.  Back in the **View files** tab, select the **function.json** file to view the editor for the function’s configuration.
 
 1. In the JSON editor, observe the current configuration:
