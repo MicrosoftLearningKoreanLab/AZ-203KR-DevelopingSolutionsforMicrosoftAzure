@@ -1,730 +1,705 @@
+﻿---
+랩:
+    제목: '랩: Azure 에서 서비스를 사용하여 다중 계층 솔루션 만들기
+    유형: '답변 키'
+    모듈: ‘모듈 6: Azure 및 타사 서비스'에 연결하고 사용'
 ---
-lab:
-    title: 'Lab: Creating a multi-tier solution by using services in Azure'
-    type: 'Answer Key'
-    module: 'Module 6: Connect to and consume Azure, and third-party, services'
----
 
-# Lab: Creating a multi-tier solution by using services in Azure
-# Student lab answer key
+# 랩: Azure 에서 서비스를 사용하여 다중 계층 솔루션 만들기
+# 학생 랩 답변 키
 
-## Microsoft Azure user interface
+## 마이크로소프트 Azure 사용자 인터페이스
 
-Given the dynamic nature of Microsoft cloud tools, you might experience Azure user interface (UI) changes after the development of this training content. These changes might cause the lab instructions and steps to not match up.
+Microsoft 클라우드 도구의 동적 특성을 감안할 때 이 교육 콘텐츠를 개발한 후 Azure 사용자 인터페이스(UI) 변경 사항이 발생할 수 있습니다. 이러한 변경으로 인해 랩 지침 및 단계가 일치하지 않을 수 있습니다.
 
-The Microsoft Worldwide Learning team updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
+Microsoft 전 세계 학습 팀은 커뮤니티에서 필요한 변경 사항을 가져오는 즉시 이 교육 과정을 업데이트합니다. 그러나 클라우드 업데이트가 자주 발생하기 때문에 이 교육 콘텐츠가 업데이트되기 전에 UI가 변경될 수 있습니다. **이 경우 변경 사항에 적응하고 필요에 따라 랩에서 작업합니다.**
 
-## Instructions
+## 지침
 
-### Before you start
+### 시작하기 전에
 
-#### Sign in to the lab virtual machine
+#### 랩 가상 기계에 로그인
 
-Sign in to your **Windows 10** virtual machine by using the following credentials:
+  - 다음 자격 증명을 사용하여 **Windows 10** 가상 기계에 로그인합니다.
     
--   **Username**: Admin
-
--   **Password**: Pa55w.rd
-
-> **Note**: Lab virtual machine sign-in instructions will be provided to you by your instructor.
-
-#### Review installed applications
-
-Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+      - **사용자 이름**: 관리자
     
--   Microsoft Edge
+      - **암호**: Pa55w.rd
 
--   File Explorer
+> > **참고**: 랩 가상 시스템 로그인 지침은 교수자가 제공합니다.
 
--   Microsoft Azure Storage Explorer
+#### 설치된 응용 프로그램 검토
 
-#### Download the lab files
+  - **Windows 10** 바탕 하단에 있는 작업 표시줄을 관찰합니다. 작업 표시줄에는 이 랩에서 사용할 응용 프로그램에 대한 아이콘이 포함되어 있습니다.
+    
+      - 마이크로소프트 에지
+    
+      - 파일 탐색기 
+    
+      - 마이크로소프트 Azure 스토리지 탐색기
 
-1.  On the taskbar, select the **Windows PowerShell** icon.
+#### 랩 파일 다운로드
 
-1.  In the PowerShell command prompt, change the current working directory to the **Allfiles (F):\\** path:
+1.  작업 표시줄에서 **Windows PowerShell** 아이콘을 선택합니다.
+
+2.  PowerShell 명령 프롬프트에서 현재 작업 디렉토리를 **Allfiles(F):\\* * 경로로 변경합니다:
 
     ```
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsforMicrosoftAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
+3.  명령 프롬프트 내에서 다음 명령을 입력하고 GitHub 에서 호스팅되는 **microsoftlearning/AZ-203-개발솔루션ForAzure** 프로젝트를 복제하기 위해 입력을 **랩파일** 디렉토리로 누릅니다.
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T06** lab:
+4.  명령 프롬프트 내에서 다음 명령을 입력하고 **Enter** 를 눌러 **AZ-203.02** 랩을 완료하는 필요한 랩 파일을 체크 아웃합니다.
 
     ```
     git checkout master -- Allfiles/*
     ```
 
-1.  Close the currently running **Windows PowerShell** command prompt application.
+5.  현재 실행 중인 **Windows PowerShell** 명령 프롬프트 응용 프로그램을 닫습니다.
 
-### Exercise 1: Creating an Azure Search service in the portal
+### 연습 1: 포털에서 Azure 검색 서비스 만들기
 
-#### Task 1: Open the Azure portal
+#### 작업 1: Azure 포털 열기
 
-1.  On the taskbar, select the **Microsoft Edge** icon.
+1.  작업 표시줄에서 **Microsoft Edge** 아이콘을 선택합니다.
 
-1.  In the open browser window, navigate to the [**Azure portal**](https://portal.azure.com) (portal.azure.com).
+2.  열린 브라우저 창에서 [**Azure 포털**](https://portal.azure.com)(portal.azure.com)로 이동합니다.
 
-1.  At the sign-in page, enter the **email address** for your Microsoft account.
+3.  로그인 페이지에서 Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
 
-1.  Select **Next**.
+4.  **다음** 을 선택합니다.
 
-1.  Enter the **password** for your Microsoft account.
+5.  Microsoft 계정의 **비밀번호** 를 입력합니다.
 
-1.  Select **Sign in**.
+6.  **로그인** 을 선택합니다.
 
-    > **Note**: If this is your first time signing in to the **Azure portal**, a dialog box will display offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+> **참고**: **Azure 포털** 에 처음 로그인하는 경우 포털 둘러보기를 제공하는 대화 상자가 표시됩니다. 둘러보기를 건너뛰고 포털 사용을 시작하려면 **시작하기** 를 선택합니다.
 
-#### Task 2: Create API Management resource
+#### 작업 2: Azure 검색 계정 만들기
 
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
+1.  포털의 왼쪽 네비게인션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+> **참고**: 링크를 찾을 수 없는 경우 리소스 만들기 아이콘은 포털의 왼쪽에 있는 더하기 기호 문자입니다.
 
-1.  In the search field, enter **API** and press Enter.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the **Everything** search results blade, select the **API Management** result.
+3.  검색 필드에 텍스트 **검색** 을 입력하고 Enter 를 누릅니다.
 
-1.  In the **API Management** blade, select **Create**.
+4.  **모든** 검색 결과 블레이드에서 **Azure 검색** 결과를 선택합니다.
 
-1.  In the **API Management Service** blade, perform the following actions:
-    
-    1.  In the **Name** field, enter **prodapi\[*your name in lowercase*\]**.
-    
-    1.  Leave the **Subscription** field set to its default value.
-    
-    1.  In the **Resource group** list, select **MultiTierService**.
-    
-    1.  In the **Location** list, select **East US**.
-    
-    1.  In the **Organization name** field, enter **Contoso**.
-    
-    1.  Leave the **Administrator email** field set to its default value.
-    
-    1.  In the **Pricing tier** list, select **Developer (No SLA)**.
-    
-    1.  Select **Create**.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-    > **Note**: It usually takes between 20 and 30 minutes to create an API Management service.
-
-#### Task 3: Create an Azure Search account
-
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
-
-    > **Note**: If you cannot find the link, the Create a resource icon is a plus-sign character located on the left side of the portal.
-
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
-
-1.  In the search field, enter the text **Search** and press Enter.
-
-1.  In the **Everything** search results blade, select the **Azure Search** result.
-
-1.  In the **Azure Search** blade, select **Create**.
+5.  **Azure 검색** 블레이드에서 **만들기** 를 선택합니다.
 
-6.  In the **New Search Service** blade, observe the tabs at the top of the blade, such as **Basics**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **search account**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-6.  In the **Basics** tab, perform the following actions:
+6.  **새 검색 서비스** 블레이드에서 다음 작업을 수행합니다.
     
-    2.  Leave the **Subscription** field set to its default value.
+    1.  **URL** 필드에 **prodsearch\[*your name in lowercase*\]** 의 값을 입력합니다.
     
-    3.  In the **Resource group** section, select **Create new**, in the pop-up field enter **MultiTierService**, and then select **OK**.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **URL** field, enter the value **prodsearch\[*your name in lowercase*\]**.
+    3.  **리소스 그룹** 섹션에서 팝업 필드에서 **새 만들기** 를 선택하고 **MultiTierService**  입력하고 **확인** 을 선택합니다.
     
-    4.  In the **Location** list, select **East US**.
+    4.  **파트** 목록에서 **동료** 를 선택합니다.
     
-    5.  Select the **Pricing tier** link. In the **Pricing tier** blade, select **Basic** and then select **Select**.
+    5.  **가격 계층** 링크를 선택합니다. **가격 계층** 블레이드에서 **기본** 을 선택하고 **선택** 을 선택합니다.
     
-    9.  Select **Review + Create**.
-
-7.  In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-8.  Select **Create** to create the search account by using your specified configuration.
+    6.  **만들기** 를 선택합니다.
 
-9.  Wait for the creation task to complete before you move forward with this lab.
+7.  이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+8.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+9.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1. In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
+10. **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodsearch\*** 검색 서비스를 선택합니다.
 
-1. In the **Search Service** blade, in the **Settings** section, select the **Keys** link.
+11. **검색 서비스** 블레이드에서 **설정** 섹션에서 **키** 링크를 선택합니다.
 
-1. In the **Keys** section, select any one of the keys and record the value. You will use this value later in the lab.
+12. **키** 섹션에서 키 중 하나를 선택하고 값을 기록합니다. 이 값은 랩의 나중에 사용합니다.
 
-    > **Note**: It does not matter which connection string you choose to use. They are interchangeable.
+> > **참고**: 어떤 연결 문자열을 사용하든 상관없습니다. 서로 교환할 수 있습니다.
 
-#### Task 4: Create an index
+#### 작업 3: 인덱스 만들기
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
+3.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodsearch\*** 검색 서비스를 선택합니다.
 
-1.  In the **Search Service** blade, select **Add index**.
+4.  **검색 서비스** 블레이드에서 **인덱스 추가** 를 선택합니다.
 
-1.  In the **Add index** blade, perform the following actions:
+5.  **인덱스 추가** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Index name** field, enter **retail**.
+    1.  **인덱스 이름** 필드에서 **소매** 를 입력합니다.
     
-    1.  In the **Key** list, select **id**.
+    2.  **키** 목록에서 **id** 를 선택합니다.
     
-    1.  Leave the **Suggester name** field blank.
+    3.  **제안자 이름** 필드 빈칸을 비워 둡니다.
     
-    1.  Leave the **Search mode** list blank.
+    4.  **검색 모드** 목록을 비워 둡니다.
 
-1.  Within the **Add index** blade, a list of fields is displayed. Perform the following actions to configure the **id** field:
+6.  **인덱스 추가** 블레이드 내에 필드 목록이 표시됩니다. 다음 작업을 수행하여 **ID** 필드를 구성합니다.
     
-    1.  In the **Field Name** field, observe the hard-coded value of **id**.
+    5.  **필드 이름** 필드에서 **id** 의 하드 코딩된 값을 관찰합니다. 
     
-    1.  In the **Type** list, observe the hard-coded option of **Edm.String**.
+    6.  **유형** 목록에서 ** Edm.String** 의 하드 코딩된 옵션을 준수합니다.
     
-    1.  In the **Retrievable** option, observe that it is hard-coded to **true**.
+    7.  **회복 가능** 옵션에서 **true** 로 하드 코딩되어 있는지 관찰합니다.
     
-    1.  Leave **Filterable** unselected.
+    8.  **필터링** 할 수 없는 상태로 둡니다.
     
-    1.  Select **Sortable**.
+    9.  **정렬 가능** 을 선택합니다.
     
-    1. Leave **Facetable** unselected.
+    10. **페이스 테이블** 을 선택하지 않은 상태로 둡니다.
     
-    1. Leave **Searchable** unselected.
+    11. **검색 가능** 하지 않은 상태로 둡니다.
 
-    1. Select **+ Add field**.
-
-1.  Within the **Add index** blade, perform the following actions to configure the new **name** field:
-    
-    1. Select **+ Add field**.
+7.  **인덱스** 블레이드 추가 내에서 다음 작업을 수행하여 새 **이름** 필드를 구성합니다. 
     
-    1. In the **Field Name** field, enter **name**.
+    12. 필드 **이름** 필드에 **이름을** 입력합니다.
     
-    1. In the **Type** list, select **Edm.String**.
+    13. **유형** 목록에서 **Edm.String** 를 선택합니다.
     
-    1. Select **Retrievable**.
+    14. **회복 가능** 을 선택합니다.
     
-    1. Leave **Filterable** unselected.
+    15. **필터링** 수 없는 상태로 둡니다.
     
-    1. Select **Sortable**.
+    16. **정렬 가능** 을 선택합니다.
     
-    1. Leave **Facetable** unselected.
+    17. **페이스 테이블** 을 선택하지 않은 상태로 둡니다.
     
-    1. Select **Searchable**.
+    18. **검색 가능** 을 선택합니다.
     
-    1. In the **Analyzer** list, select **Standard - Lucene**.
+    19. **분석기** 목록에서 **표준루센** 을 선택합니다.
 
-    1. Select **+ Add field**.
-
-1.  Within the **Add index** blade, perform the following actions to configure the new **price** field:
-    
-    1. Select **+ Add field**.
+8.  **인덱스 추가** 블레이드 내에서 다음 작업을 수행하여 새 **가격** 필드를 구성합니다.
     
-    1. In the **Field Name** field, enter **price**.
+    20. **필드 이름** 필드에 **가격** 을 입력합니다.
     
-    1. In the **Type** list, select **Edm.Double**.
+    21. **유형** 목록에서 **Edm.Double** 를 선택합니다.
     
-    1. Select **Retrievable**.
+    22. **검색 가능** 을 선택합니다.
     
-    1. Select **Filterable**.
+    23. **필터링 가능** 을 선택합니다.
     
-    1. Select **Sortable**.
+    24. **정렬 가능** 을 선택합니다.
     
-    1. Select **Facetable**.
+    25. **페이스 테이블** 을 선택합니다.
 
-    1. Select **+ Add field**.
-
-1.  Within the **Add index** blade, perform the following actions to configure the new **quantity** field:
-    
-    1. Select **+ Add field**.
+9.  **인덱스 추가** 블레이드 내에서 다음 작업을 수행하여 새 **수량** 필드를 구성합니다.
     
-    1. In the **Field Name** field, enter **quantity**.
+    26. **필드 이름** 필드에 **수량** 을 입력합니다.
     
-    1. In the **Type** list, select **Edm.Int32**.
+    27. **유형** 목록에서 **Edm.Int32** 를 선택합니다.
     
-    1. Select **Retrievable**.
+    28. **검색 가능** 을 선택합니다.
     
-    1. Select **Filterable**.
+    29. **필터링 가능** 을 선택합니다.
     
-    1. Select **Sortable**.
+    30. **정렬 가능** 을 선택합니다.
     
-    1. Select **Facetable**.
+    31. **페이스 테이블** 을 선택합니다.
 
-    1. Select **+ Add field**.
-
-1. Within the **Add index** blade, perform the following actions to configure the new **manufacturer** field:
-    
-    1. Select **+ Add field**.
+10. **인덱스 추가** 블레이드 내에서 다음 작업을 수행하여 새 **제조업체** 필드를 구성합니다.
     
-    1. In the **Field Name** field, enter **manufacturer**.
+    32. **필드 이름** 필드에 **제조업체** 를 입력합니다.
     
-    1. In the **Type** list, select **Edm.String**.
+    33. **유형** 목록에서 **Edm.String** 을 선택합니다.
     
-    1. Select **Retrievable**.
+    34. **회복 가능** 을 선택합니다.
     
-    1. Select **Filterable**.
+    35. **필터링 가능** 을 선택합니다.
     
-    1. Select **Sortable**.
+    36. **정렬 가능** 을 선택합니다.
     
-    1. Select **Facetable**.
+    37. **페이스 테이블** 을 선택합니다.
     
-    1. Leave **Searchable** unselected.
+    38. **검색 가능** 하지 않은 상태로 둡니다.
 
-1. Within the **Add index** blade, select **Create**.
+11. **인덱스 추가** 블레이드 내에서 **만들기** 를 선택합니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created a new Azure Search account and built an index within the account.
+이 연습에서는 새 Azure Storage 계정을 만들고 계정 내에 인덱스를 작성했습니다.
 
-### Exercise 2: Index an Azure Storage table in Azure Search
+### 연습 2: Azure 검색에서 Azure 저장소 테이블 인덱싱
 
-#### Task 1: Create an Azure Storage account
+#### 작업 1: Azure 저장소 계정 만들기
 
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
+1.  포털의 왼쪽 네비게이션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the search field, enter **Storage** and press Enter.
+3.  검색 필드에 **저장소** 를 입력하고Enter를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Storage Account** result.
+4.  **모든** 검색 결과 블레이드에서 **저장소 계정** 결과를 선택합니다.
 
-1.  In the **Storage Account** blade, select **Create**.
+5.  **저장소 계정** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Create Storage Account** blade, observe the tabs at the top of the blade.
+6.  **저장소 계정 만들기** 블레이드에서 블레이드 상단의 탭을 관찰합니다.
 
-    >  **Note**: Each tab represents a step in the workflow to create a new **storage account**. At any time, you can select **Review + create** to skip the remaining tabs.
+> **참고**: 각 탭은 새 **저장소 계정** 을 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토+ 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
 
-1.  In the **Basics** tab, perform the following actions:
+7.  **기본** 탭에서 다음 작업을 수행합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    1.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** list, select **MultiTierService**.
+    2.  **리소스 그룹** 목록에서 **다중 계층 서비스** 를 선택합니다.
     
-    1.  In the **Storage Account Name** field, enter **prodstorage\[*your name in lowercase*\]**.
+    3.  **저장소 계정 이름** 필드에 **prodstorage\[*소문자*\]** 를 입력합니다.
     
-    1.  In the **Location** list, select **(US) East US**.
+    4.  **위치** 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  In the **Performance** section, select **Standard**.
+    5.  **성능** 섹션에서 **표준** 을 선택합니다.
     
-    1.  In the **Account kind** list, select **StorageV2 (general purpose v2)** .
+    6.  **계정 종류** 목록에서 **StorageV2(일반용 v2)** 를 선택합니다.
     
-    1.  In the **Replication** list, select **Read-access geo-redundant storage (RA-GRS)**.
+    7.  **복제 목록** 에서 **읽기 액세스 지리적 중복 저장소(RA-GRS) ** 를 선택합니다.
     
-    1.  In the **Access tier** section, ensure that **Hot** is selected.
+    8.  **액세스 계층** 섹션에서 **핫** 이 선택되어 있는지 확인합니다.
     
-    1.  Select **Review + Create**.
+    9.  **검토 + 만들기** 를 선택합니다.
 
-1.  In the **Review + Create** tab, review the options that you entered in the previous steps.
+8.  **검토 + 만들기** 탭에서 이전 단계에서 입력한 옵션을 검토합니다.
 
-1.  Select **Create** to create the Storage account by using your specified configuration.
+9.  지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
 
-1. Wait for the creation task to complete before you move forward with this lab.
+10. 이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1. In the left navigation pane of the portal, select **Resource groups**.
+11. 포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1. In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+12. **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1. In the **MultiTierService** blade, select the **prodstorage\*** storage account that you created earlier in this lab.
+13. **MultiTierService 블레이드에서** 이전에 랩에서 만든 **prodstorage\*** 저장소 계정을 선택합니다.
 
-1. In the **Storage Account** blade, on the left side of the blade, in the **Settings** section, select the **Access keys** link.
+14. **저장 계정** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션에서 **액세스 키** 링크를 선택합니다.
 
-1. In the **Access keys** blade, select any one of the keys and record the value of either of the **Connection string** fields. You will use this value later in this lab.
+15. **Access 키** 블레이드에서 키 중 하나를 선택하고 **연결 문자열** 필드 중 하나의 값을 기록합니다. 이 랩의 나중에 이 값을 사용합니다.
 
-    > **Note**: It does not matter which connection string you choose. They are interchangeable.
+> > **참고**: 어떤 연결 문자열을 선택하든 상관없습니다. 서로 교환할 수 있습니다.
 
-#### Task 2: Upload table entities to Azure Storage
+#### 작업 2: Azure 저장소에 테이블 엔터티 업로드
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodstorage\*** storage account that you created earlier in this lab.
+3.  **MultiTierService 블레이드에서** 이전에 랩에서 만든 **prodstorage\*** 저장소 계정을 선택합니다.
 
-1.  In the **Storage Account** blade, on the left side of the blade, in the **Table service** section, select the **Tables** link.
+4.  **저장소 계정** 블레이드에서 블레이드 왼쪽에 **테이블 서비스** 섹션에서 **테이블** 링크를 선택합니다.
 
-1.  In the **Tables** section, select **+ Table**.
+5.  **테이블** 섹션에서 **+테이블** 을 선택합니다.
 
-1.  In the **Add table** window, perform the following actions:
+6.  **테이블 추가** 창에서 다음 작업을 수행합니다.
     
-    1.  In the **Table** **Name** field, enter **products**.
+    1.  **표** **이름** 필드에 **제품** 을 입력합니다.
     
-    1.  Select **OK**.
+    2.  **확인** 을 선택합니다.
 
-1.  Back in the **Tables** section, on the left side of the blade, select the **Overview** link.
+7.  **테이블** 섹션의 블레이드 왼쪽에 있는 **개요** 링크를 선택합니다.
 
-    > **Note**: You might have to scroll up or down the menu on the left side of the blade.
+> > **참고**: 블레이드 왼쪽의 메뉴를 위 또는 아래로 스크롤해야 할 수 있습니다.
 
-1.  Back in the **Overview** section, select **Open in Explorer**.
+8.  **개요** 섹션으로 돌아가서 **탐색기에서 열기** 를 선택합니다.
 
-1.  In the **Azure Storage Explorer** window, select the **Open Azure Storage Explorer** link.
+9.  **Azure 저장소 탐색기** 창에서 **Azure저장소 탐색기 열기** 링크를 선택합니다.
 
-    > **Note**: If this is your first time opening the **Azure Storage Explorer** by using the portal, you might be prompted to allow the portal to open these types of links in the future. You should accept the prompt.
+> > **참고**: 포털을 사용하여 **Azure Storage 탐색기** 를 처음 여는 경우 포털에서 나중에 이러한 유형의 링크를 열 수 있도록 허용하라는 메시지가 표시될 수 있습니다. 프롬프트를 수락해야 합니다.
 
-1. In the **Azure Storage Explorer** application that appears, locate and expand the **prodstorage\* S**torage account that you created earlier in this lab.
+10. 표시되는 **Azure 저장소 탐색기** 응용 프로그램에서 이전에 랩에서 만든 **prodstorage\* S**torage 계정을 찾아 확장합니다.
 
-1. Within the **prodstorage\*** storage account, locate and expand the **Tables** node.
+11. **Prodstorage\*** 저장소 계정 내에서 **테이블** 노드를 찾아 확장합니다.
 
-1. Within the **Tables** node, select the **products** table that you created earlier in this lab.
+12. **테이블** 노드 내에서 이전에 랩에서 만든 **제품** 테이블을 선택합니다.
 
-1. In the **Products Table** tab, select **Import**.
+13. **제품 테이블** 탭에서 **가져오기** 를 선택합니다.
 
-1. In the **File Explorer** dialog box that opens, perform the following actions:
+14. 열리는 **파일 탐색기** 대화 박스에서 다음 작업을 수행합니다.
     
-    1.  Go to **Allfiles (F):\\Allfiles\\Labs\\06\\Starter**.
+    3.  **Allfiles (F):\\Labfiles\\06\\Starter** 로 이동합니다.
     
-    1.  Select the **products.csv** file.
+    4.  **products.csv** 파일을 선택합니다.
     
-    1.  Select **Open**.
+    5.  **열기** 를 선택합니다.
 
-1. In the **Import Entities** window that appears, select **Insert**.
+15. 표시되는 **수입 엔터티** 에서 **삽입** 을 선택합니다.
 
-1. Wait for the table entities to be uploaded before you continue with this lab.
+16. 이 랩을 계속하기 전에 테이블 엔터티가 업로드될 때까지 기다립니다.
 
-1. Observe the five entities that were added to your **products** table.
+17. **제품** 테이블에 추가된 5개의 엔터티를 확인합니다.
 
-1. Return to the browser window showing the **Azure portal**.
+18. **Azure 포털** 을 보여 주면 브라우저 창으로 돌아갑니다.
 
-#### Task 3: Create an Azure Search indexer
+#### 작업 3: Azure 검색 인덱서 만들기
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 창에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service you created earlier in this lab.
+3.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodsearch\*** 검색 서비스를 선택합니다.
 
-1.  In the **Search Service** blade, select **Import Data**.
+4.  **검색 서비스** 블레이드에서 **수입 데이터** 를 선택합니다.
 
-1.  In the **Import Data** blade, observe the tabs at the top of the blade.
+5.  **수입 데이터** 블레이드에서 블레이드 상단의 탭을 관찰합니다.
 
-1.  In the **Connect to your data** tab, perform the following actions:
+6.  **데이터 연결** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Data Source** list, select **Azure Table Storage**.
+    1.  **데이터 원본** 목록에서 **Azure 테이블 저장소** 를 선택합니다.
     
-    1.  In the **Name** field, enter **tabledatasource**.
+    2.  **이름** 필드에 **테이블 데이터 원본** 을 입력합니다.
     
-    1.  In the **Connection string** field, select **Choose an existing connection**. In the **Choose storage account** window, select the **prodstorage\*** Storage account that you created earlier in this lab.
+    3.  **연결 문자열** 필드에서 **기존 연결 선택** 을 선택합니다. **저장소 선택 계정 창에서** 이전에 랩에서 만든 **prodstorage\*** 저장소 계정을 선택합니다.
     
-    1.  In the **Table name** field, enter **products**.
+    4.  **테이블 이름** 필드에서 **제품** 을 입력합니다.
     
-    1.  Leave the **Query** field empty.
+    5.  **쿼리** 필드를 비워 둡니다.
     
-    1.  Leave the **Description** field empty.
+    6.  **설명** 필드를 비워 둡니다.
     
-    1.  Select **Next: Add cognitive search (Optional)**.
+    7.  **다음** 을 선택합니다.** 인지 검색 추가(선택 사항)**.
 
-        > **Note**: Azure Search validates your settings at each step. It can take a few minutes to complete validation and move to the next tab in the list.
+> > **참고**: Azure Search 는 각 단계에서 설정의 유효성을 검사합니다. 유효성 검사를 몇 분을 걸려서 완료하고 목록에 다음 탭으로 이동합니다.
 
-1.  In the **Add cognitive search (optional)** tab, select **Skip to: Customize target index**.
+7.  **인지 검색 추가** 탭에서 **다음** 을 선택합니다.** 대상 인덱스 사용자** 를 지정합니다.
 
-1.  In the **Customize target index** tab, perform the following actions:
+8.  **대상 인덱스 사용자** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Index name** field, enter **products**.
+    8.  **인덱스 이름** 필드에 **제품** 을 입력합니다.
     
-    1.  In the **Key** list, select **RowKey**.
+    9.  **키** 목록에서 **로우 키** 를 선택합니다.
 
-1.  In the **Customize target index** tab, a list of fields is displayed. Leave the configuration of the **PartitionKey**, **RowKey**, **ETag,** and **Timestamp** fields set to their default values.
+9.  **대상 인덱스 사용자** 탭에서 필드 목록이 표시됩니다.  **PartitionKey**,**RowKey**, **ETag** 및 **타임스탬프** 필드의 구성을 기본값으로 설정합니다.
 
-1. In the **Customize target index** tab, perform the following actions to configure the **Key** field:
+10. **대상 인덱스 사용자** 탭에서 다음 작업을 수행하여 **키** 필드를 구성합니다.
     
-    1. In the **Field Name** field, observe the hard-coded value of **Key**.
+    39. **필드 이름** 필드에서 ** Key** 의 하드 코딩된 값을 관찰합니다.
     
-    1. In the **Type** list, observe the hard-coded option of **Edm.String**.
+    40. **유형** 목록에서 **Edm.String** 의 하드 코딩된 옵션을 준수합니다.
     
-    1. Leave **Retrievable** selected.
+    41. **회복 가능** 을 선택합니다.
     
-    1. Leave **Filterable** unselected.
+    42. **필터링** 할 수 없는 상태로 둡니다.
     
-    1. Select **Sortable**.
+    43. **정렬 가능** 을 선택합니다.
     
-    1. Leave **Facetable** unselected.
+    44. **페이스 테이블** 을 선택하지 않은 상태로 둡니다.
     
-    1. Leave **Searchable** unselected.
+    45. **검색 가능** 하지 않은 상태로 둡니다.
 
-1. In the **Customize target index** tab, perform the following actions to configure the **name** field:
+11. **대상 인덱스 사용자** 탭에서 다음 작업을 수행하여 **이름** 필드를 구성합니다.
     
-    1. In the **Field Name** field, observe the hard-coded value of **name**.
+    10. **필드 이름** 필드에서 **이름** 의 하드 코딩된 값을 관찰합니다.
     
-    1. In the **Type** list, observe the hard-coded option of **Edm.String**.
+    11. **유형** 목록에서 ** Edm.String** 의 하드 코딩된 옵션을 준수합니다.
     
-    1. Select **Retrievable**.
+    12. **회복 가능** 을 선택합니다.
     
-    1. Leave **Filterable** unselected.
+    13. **필터링** 할 수 없는 상태로 둡니다.
     
-    1. Select **Sortable**.
+    14. **정렬 가능** 을 선택합니다.
     
-    1. Leave **Facetable** unselected.
+    15. **페이스 테이블** 을 선택하지 않은 상태로 둡니다.
     
-    1. Select **Searchable**.
+    16. **검색 가능** 을 선택합니다.
     
-    1. In the **Analyzer** list, select **Standard - Lucene**.
+    17. **분석기** 목록에서 **표준- 루센** 을 선택합니다.
 
-1. In the **Customize target index** tab, perform the following actions to configure the **price** field:
+12. **대상 인덱스 사용자** 탭에서 다음 작업을 수행하여 **가격** 필드를 구성합니다.
     
-    1. In the **Field Name** field, observe the hard-coded value of **price**.
+    18. **필드 이름** 필드에서 **가격** 의 하드 코딩된 값을 관찰합니다.
     
-    1. In the **Type** list, observe the hard-coded option of **Edm.Double**.
+    19. **유형** 목록에서 **Edm.Double** 의 하드 코딩된 옵션을 준수합니다.
     
-    1. Select **Retrievable**.
+    20. **검색 가능** 을 선택합니다.
     
-    1. Select **Filterable**.
+    21. **필터링 가능** 을 선택합니다.
     
-    1. Select **Sortable**.
+    22. **정렬 가능** 을 선택합니다.
     
-    1. Select **Facetable**.
+    23. **페이스 테이블** 을 선택합니다.
 
-1. In the **Customize target index** tab, perform the following actions to configure the **quantity** field:
+13. **대상 인덱스 사용자** 탭에서 다음 작업을 수행하여 **수량** 필드를 구성합니다.
     
-    1. In the **Field Name** field, observe the hard-coded value of **quantity**.
+    24. **필드 이름** 필드에서 **수량** 의 하드 코딩된 값을 관찰합니다.
     
-    1. In the **Type** list, observe the hard-coded option of **Edm.Int32**.
+    25. **유형** 목록에서 **Edm.Int32** 의 하드 코딩된 옵션을 준수합니다.
     
-    1. Select **Retrievable**.
+    26. **검색 가능** 을 선택합니다.
     
-    1. Select **Filterable**.
+    27. **필터링 가능** 을 선택합니다.
     
-    1. Select **Sortable**.
+    28. **정렬 가능** 을 선택합니다.
     
-    1. Select **Facetable**.
+    29. **페이스 테이블** 을 선택합니다.
 
-1. In the **Customize target index** tab, select **Next: Create an indexer**.
+14. **대상인덱스 사용자** 지정 탭에서 **다음** 을 선택합니다.** 인덱스 만들기**.
 
-    > **Note**: Azure Search validates your settings at each step. It can take a few minutes to complete validation and move to the next tab in the list.
+> > **참고**: Azure Search 는 각 단계에서 설정의 유효성을 검사합니다. 유효성 검사를 몇 분을 걸려 완료하고 목록에서 다음 텝으로 이공합니다.
 
-1. In the **Create an indexer** tab, perform the following actions:
+15. **인덱서 만들기** 탭에서 다음 작업을 수행합니다.
     
-    1. In the **Name** field, enter **tableindexer**.
+    30. **이름** 필드에 **테이블 인덱서** 를 입력합니다.
     
-    1. In the **Schedule** section, select **Custom**.
+    31. **일정** 섹션에서 사용자 **습관** 을 선택합니다.
     
-    1. In the **Interval** field, enter **5**.
+    32. **간격** 필드에 **5** 를 입력합니다.
     
-    1. Set the **Start time** field to midnight UTC on today's date.
+    33. **시작 시간** 필드를 기본값으로 설정합니다.
     
-    1. Leave the **Track deletions** field set to its default value.
+    34. **트랙 삭제** 필드를 기본값으로 설정합니다.
     
-    1. Leave the **Description** field blank.
+    35. **설명** 필드를 비워 둡니다.
     
-    1. Select **Submit**.
+    36. **전송**을 선택합니다.
 
-        > **Note**: You may need to select and then unselect the **Track deletions** field and **Once/Custom** options to get the **Submit** button to appear. This behavior is due to a portal bug.
+16. **검색 서비스** 블레이드에서 **인덱서** 탭을 선택합니다.
 
-1. Back in the **Search Service** blade, select the **Indexers** tab.
+17. **인덱서** 탭에서 이전에 랩에서 만든 **테이블 인덱서** 인덱서를 선택합니다.
 
-    > **Note**: If you do not see your indexer yet, you may need to refresh the blade.
-
-1. In the **Indexers** tab, select the **tableindexer** indexer that you created earlier in this lab.
-
-1. In the **Indexer** blade, perform the following actions:
+18. **인덱서** 블레이드에서 다음 작업을 수행합니다.
     
-    1. Select **Run**.
+    37. **실행** 을 선택합니다.
     
-    1. When prompted for confirmation, select **Yes**.
+    38. 확인 메시지가 표시되면 **예** 를 선택합니다.
     
-    1. Close the **Indexer** blade.
+    39. **인덱서** 블레이드를 닫습니다.
+
+19. 인덱서가 실행이 완료될 때까지 기다린 다음 블레이드 상단에서 새로 **고침** 을 선택합니다.
+
+> > **참고**: 인덱서가 실행되는 데 1~5분 정도 걸릴 수 있습니다. 상태가 **검색 서비스** 블레이드에서 **성공** 으로 나열된 경우 인덱서가 성공했다는 것을 알 수있습니다.
+
+20. **검색 서비스** 블레이드에서 **인덱서** 탭을 선택합니다.
 
-1. Wait for the indexer to finish running and then select **Refresh** at the top of the blade.
+21. **인덱서** 탭에서 문서 수및 마지막 인덱싱 작업의 상태와 같은 **테이블 인덱서** 인덱서의 메타데이터를 관찰합니다.
 
-    > **Note**: It can take from one to five minutes for the indexer to run. You will know that the indexer was successful if its status is listed as **Success** in the **Search Service** blade.
+22. **인덱서** 블레이드를 닫습니다.
 
-1. In the **Indexers** tab, observe the metadata of the **tableindexer** indexer, such as the document count and the status of the last indexing operation.
+#### 작업 4: 인덱싱된 테이블 데이터의 유효성 검사
 
-#### Task 4: Validate the indexed table data
+1.  **검색 서비스** 블레이드에서 **검색** 탐색기를 선택합니다.
 
-1.  In the **Search Service** blade, select **Search Explorer** at the top of the blade.
+2.  **검색 탐색기** 블레이드에서 **검색** 을 선택합니다. 
 
-1.  In the **Search Explorer** blade, select **Search**.
+3.  모든 문서를 검색한 결과를 관찰합니다.
 
-1.  Observe the results of a search for all documents.
+4.  **쿼리 문자열** 필드에 다음 쿼리를 입력한 다음 **검색** 을 누릅니다.
 
-1.  In the **Query string** field, enter the following query and then press **Search**:
+<!-- end list -->
 
-    ```
     search=seat
-    ```
 
-1.  Observe the results of the search query.
+5.  검색 쿼리의 결과를 관찰합니다.
 
-1.  In the **Query string** field, enter the following query and then press **Search**:
+6.  **쿼리 문자열** 필드에 다음 쿼리를 입력한 다음 **검색** 을 누릅니다.
 
-    ```
+<!-- end list -->
+
     $filter=price lt 100
-    ```
 
-1.  Observe the results of the search query.
+7.  검색 쿼리의 결과를 관찰합니다.
 
-1.  In the **Query string** field, enter the following query and then press **Search**:
+8.  **쿼리 문자열** 필드에 다음 쿼리를 입력한 다음 **검색** 을 누릅니다.
 
-    ```
+<!-- end list -->
+
     facet=quantity,interval:25
-    ```
 
-1.  Observe the results of the search query.
+9.  검색 쿼리의 결과를 관찰합니다.
 
-1. In the **Query string** field, enter the following query and then press **Search**:
+10. **쿼리 문자열** 필드에 다음 쿼리를 입력한 다음 **검색** 을 누릅니다.
 
-    ```
+<!-- end list -->
+
     $filter=quantity gt 25&facet=price,values:100|1000|10000
-    ```
 
-1. Observe the results of the search query.
+11. 검색 쿼리의 결과를 관찰합니다.
 
-1. Close the **Search Explorer** blade.
+#### 작업 5: Azure 검색 기본 URL 검색
 
-#### Task 5: Retrieve your Azure Search base URL
+1.  포털의 왼쪽 네비게이션 창에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+3.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodsearch\*** 검색 서비스를 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
+4.  **검색 서비스** 블레이드에서 **URL** 필드의 값을 복사합니다. 이 랩의 나중에 이 값을 사용합니다.
 
-1.  In the **Search Service** blade, copy the value of the **URL** field. You will use this value later in this lab.
+#### 검토
 
-#### Review
+이 연습에서는 Azure Storage 계정을 만들고 Azure Search 를 사용하여 계정 내의 저장소 테이블을 인덱싱했습니다. 테이블을 인덱싱한 후 Storage 테이블의 엔터티 복사본에 대해 검색 쿼리를 발급할 수 있었습니다.
 
-In this exercise, you created an Azure Storage account and indexed a Storage table within the account by using Azure Search. After the table was indexed, you were able to issue search queries against a copy of the entities in the Storage table.
+### 연습 3: Azure API 관리를 사용하여 API 프록시 계층 빌드
 
-### Exercise 3: Build an API proxy tier by using Azure API Management
+#### 작업 1: API 관리 리소스 만들기
 
-#### Task 1: Define a new API
+1.  포털의 왼쪽 네비게이션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+3.  검색 필드에 **API** 를 입력하고 Enter 를 누릅니다.
 
-1.  In the **MultiTierService** blade, select the **prodapi\*** API Management account that you created earlier in this lab.
+4.  **모든** 검색 결과 블레이드에서 **API 관리** 결과를 선택합니다.
 
-1.  In the **API Management Service** blade, on the left side of the blade, in the **API Management** section, select **APIs** .
+5.  **API관리** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Add a new API** section, select **Blank API**.
-
-1.  In the **Create a blank API** window, perform the following actions:
+6.  **API관리 서비스** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Display name** field, enter **Search API**.
+    1.  **이름** 필드에 **prodapi\[*소문자*\]** 를 입력합니다.
     
-    1.  In the **Name** field, enter **search-api**.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Web service URL** field, enter the URL from the **Search Service URL** field that you copied earlier in this lab.
+    3.  **리소스 그룹** 목록에서 **다중 계층 서비스** 를 선택합니다.
     
-    1.  Append the value of the **Web service URL** field with the following relative URL:
-
-    ```
-    /indexes/products/docs
-    ```
-
-    > **Note**: For example, if your web service URL is https://prodsearchstudent.search.windows.net, then your new URL will be https://prodsearchstudent.search.windows.net/indexes/products/docs.
-
-1.  In the **API URL suffix** field, enter **search**.
-
-1.  In the **Products** field, select both **Starter** and **Unlimited**.
-
-1.  Select **Create.**
-
-1.  Wait for the new API to finish being created.
-
-1.  In the **Design** tab, select **+ Add operation**.
-
-1.  In the **Add operation** section, perform the following actions:
+    4.  **위치** 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  In the **Display name** field, enter **List All Documents**.
+    5.  **조직 이름** 필드에 **Contoso** 를 입력합니다.
     
-    1.  In the **Name** field, enter **list-all-documents**.
+    6.  **관리자 전자 메일** 필드를 기본값으로 설정된 상태로 둡니다.
     
-    1. In the **URL** list, select **GET**.
+    7.  **가격 계층** 목록에서 **개발자(SLA없음)** 를 선택합니다.
     
-    1. In the **URL** field, enter **/**.
+    8.  **만들기** 를 선택합니다.
+
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
+
+> > **참고**: API 관리 서비스를 만드는 데 일반적으로 20~30 분이 걸립니다.
+
+#### 작업 2: 새 API 정의
+
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
+
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
+
+3.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodapi\*** API 관리 계정을 선택합니다.
+
+4.  **API 관리 서비스** 블레이드에서 블레이드 왼쪽에 **API 관리** 섹션에서 **API** 를 선택합니다.
+
+5.  **새 API 추가** 섹션에서 **빈칸 API** 를 선택합니다.
+
+6.  **빈칸 API 만들기** 창에서 다음 작업을 수행합니다.
     
-    1. Select **Save**.
-
-1. Back in the **Design** tab, in the list of operations, select **All Operations**.
-
-1. In the **Design** section for **All Operations**, locate the **Inbound processing** tile and select **+ Add policy**.
-
-1. In the **Add inbound policy** section, select the **Set headers** tile.
-
-1. In the **Inbound processing, Set Headers** section, perform the following actions:
+    1.  **표시 이름** 필드에 **API 찾기** 를 입력합니다.
     
-    1. In the **Name** field, enter **api-key**.
+    2.  **이름** 필드에 ** search-api** 를 입력합니다.
     
-    1. In the **Value** field, select the list, select **+ Add Value**, and then enter the value for the **Search Service Key** that you recorded earlier in this lab.
+    3.  **웹 서비스 URL** 필드에 이전에 랩에서 복사한 **검색 서비스 URL** 필드의 URL을 입력합니다.
     
-    1. In the **Action** list, select the **override** option.
+    4.  **웹 서비스 URL** 필드의 값을 다음 상대 URL로 보겠습니다.
+
+> 
+> 
+>     /인덱스/제품/문서
+> 
+> > **참고**: 예를 들어 웹 서비스 URL이 https://prodsearchstudent.search.windows.net 경우 새 URL이 https://prodsearchstudent.search.windows.net/indexes/products/docs 됩니다.
+
+5.  **API URL 접미사** 필드에 **검색** 을 입력합니다.
+
+6.  **제품** 필드에서 **시작** 및 **무제한** 을 모두 선택합니다.
+
+7.  **만들기.** 를 선택합니다
+
+<!-- end list -->
+
+7.  새 API가 생성될 때까지 기다립니다.
+
+8.  **디자인** 탭에서 **+ 작업 추가** 를 선택합니다.
+
+9.  **작업 추가** 섹션에서 다음 작업을 수행합니다.
     
-    1. Select **Save**.
-
-1. Back in the **Design** tab, in the list of operations, select **All Operations**.
-
-1. In the **Design** section for **All Operations**, locate the **Inbound processing** tile and select **+ Add policy**.
-
-1. In the **Add inbound policy** section, select the **Set query parameters** tile.
-
-1. In the **Inbound processing, Set Query Parameters** section, perform the following actions:
+    8.  **이름 표시** 필드에 **모든 문서 목록** 을 입력합니다.
     
-    1. In the **Name** field, enter **api-version**.
+    9.  **이름** 필드에 **모든 문서 목록** 을 입력합니다.
     
-    1. In the **Value** field, enter **2017-11-11**.
+    10. **URL** 목록에서 **GET** 를 선택합니다.
     
-    1. In the **Action** list, select **override**.
+    11. ** URL** 필드에 **/** 입력합니다.
     
-    1. Select **Save**.
+    12. **저장** 을 선택합니다.
 
-1. Back in the **Design** tab, in the list of operations, select **List All Documents**.
+10. **디자인** 탭에서 작업 목록에서 **모든 작업** 을 선택합니다.
 
-1. In the **Design** section for the **List All Documents** operation, locate the **Inbound processing** tile and select the **+ Add policy** button.
+11. **모든 작업** 에 대한 **디자인** 섹션에서 **인바운드 처리** 타일을 찾고 **정책 추가** 를 선택합니다.
 
-1. In the **Add inbound policy** section, select the **Set query parameters** tile.
+12. **인바운드 정책 추가** 섹션에서 **헤더 설정** 타일을 선택합니다.
 
-1. In the **Inbound processing, Set Query Parameters** section, perform the following actions:
+13. **인바운드 처리에서 헤더 설정** 섹션에서 다음 작업을 수행합니다.
     
-    1. In the **Name** field, enter **search**.
+    13. **이름** 필드에 **API 키** 를 입력합니다.
     
-    1. In the **Value** field, enter **\***.
+    14. **값** 필드에서 목록을 선택하고 **+ 값 추가** 를 선택하고 이전에 랩에서 기록한 **검색 서비스 키** 에 값을 입력합니다.
     
-    1. In the **Action** list, select **override**.
+    15. **작업** 목록에서 **재정의 옵션** 을 선택합니다.
     
-    1. Select **Save**.
+    16. **저장** 을 선택합니다.
 
-1. Back in the **Design** tab, in the list of operations, select **List All Documents**.
+14. **디자인** 탭에서 작업 목록에서 **모든 작업** 을 선택합니다.
 
-1. Select the **Test** tab.
+15. **모든 작업** 에 대한 **디자인** 섹션에서 **인바운드 처리** 타일을 찾고 **정책 추가** 를 선택합니다.
 
-1. Select the **List All Documents** operation.
+16. **인바운드 정책 추가** 섹션에서 **쿼리 매개 변수** 타일 설정을 선택합니다.
 
-1. In the **List All Documents** section, select **Send**.
+17. **인바운드 처리에서 쿼리 매개 변수 설정** 섹션에서 다음 작업을 수행합니다.
+    
+    17. **이름** 필드에 ** api버전** 을 입력합니다.
+    
+    18. **값** 필드에 **2017-11-11** 을 입력합니다.
+    
+    19. **작업** 목록에서 **재정** 을 선택합니다.
+    
+    20. **저장** 을 선택합니다.
 
-1. Observe the results of the API request.
+18. **디자인** 탭에서 작업 목록에서 **모든 문서 목록** 을 선택합니다.
 
-    > **Note**: Observe how there is a large amount of Azure Search metadata in the response. You might not want API users to know the implementation details that occur behind the scenes. In the next task, you will obfuscate much of this data.
+19. **모든 문서 목록** 작업의 **디자인** 섹션에서 **인바운드 처리** 타일을 찾고 **+ 정책 추가** 단추를 선택합니다.
 
-1. Select the **Design** tab to return to the list of operations.
+20. **인바운드 정책 추가** 섹션에서 **쿼리 매개 변수 타일 설정** 을 선택합니다.
 
-#### Task 2: Manipulate an API response
+21. **인바운드 처리에서 쿼리 매개 변수 설정** 섹션에서 다음 작업을 수행합니다.
+    
+    21. **이름** 필드에 **검색** 을 입력합니다.
+    
+    22. **값** 필드에 **\*** 를 입력합니다.
+    
+    23. **작업** 목록에서 **개정** 을 선택합니다.
+    
+    24. **저장** 을 선택합니다.
 
-1.  Back in the **Design** tab, in the list of operations, select **List All Documents** .
+22. **디자인** 탭에서 작업 목록에서 **모든 문서 목록** 을 선택합니다.
 
-1.  In the **Design** section for the **List All Documents** operation, locate the **Outbound processing** tile and select **+ Add policy**.
+23. **문자** 탭을 선택합니다.
 
-1.  In the **Add outbound policy** section, select the **Other policies** tile.
+24. **모든 문서 목록** 작업을 선택합니다.
 
-1.  In the policy code editor, locate the following block of XML content:
+25. **모든 문서 목록** 섹션에서 **보내기** 를 선택합니다.
 
-    ```
-    <outbound>
+26. API 요청의 결과를 관찰합니다.
+
+> > **참고**: 응답에 많은 양의 Azure Search 메타데이터가 있는 방법을 관찰합니다. API 사용자가 무대 뒤에서 발생하는 구현 세부 정보를 알지 않도록 할 수 있습니다. 다음 작업에서는 이 데이터의 대부분을 난독 처리합니다.
+
+27. 작업 목록으로 돌아가려면 **디자인** 탭을 선택합니다.
+
+#### 작업 3: API 응답 조작
+
+1.  **디자인** 탭에서 작업 목록에서 **모든 문서 목록** 을 선택합니다.
+
+2.  **모든 문서 목록** 작업의 **디자인** 섹션에서 **아웃바운드 처리** 타일을 찾아 **+ 정책 추가** 를 선택합니다.
+
+3.  **아웃바운드 정책 추가** 섹션에서 기타 **정책** 타일을 선택합니다.
+
+4.  정책 코드 편집기에서 XML 콘텐츠의 다음 블록을 찾습니다.
+
+<!-- end list -->
+
+    <outbound></outbound>
         <base />
     </outbound>
-    ```
 
-1. Replace that block of XML with the following XML:
+XML 의 해당 블록을 다음 XML 로 바꿉니다.
 
-    ```
     <outbound>
         <base />
         <set-body>
@@ -734,284 +709,307 @@ In this exercise, you created an Azure Storage account and indexed a Storage tab
         }
         </set-body>
     </outbound>
-    ```
 
-1.  In the policy code editor, select **Save**.
+5.  정책 코드 편집기에서 **저장** 을 선택합니다.
 
-1.  Back in the **Design** tab, in the list of operations, select **List All Documents**.
+6.  **디자인** 탭에서 작업 목록에서 **모든 문서 목록** 을 선택합니다.
 
-1.  In the **Design** section for the **List All Documents** operation, locate the **Outbound processing** tile and select **+ Add policy**.
+7.  **모든 문서 목록** 작업의 **디자인** 섹션에서 **아웃바운드 처리** 타일을 찾아 **+ 정책 추가** 를 선택합니다.
 
-1.  In the **Add outbound policy** section, select the **Set headers** tile.
+8.  **아웃바운드 정책 추가** 섹션에서 헤더 **설정** 타일을 선택합니다.
 
-1.  In the **Outbound processing, Set Headers** section, perform the following actions:
+9.  **아웃바운드 처리** 에서 헤더 설정 섹션에서 다음 작업을 수행합니다.
     
-    1.  In the **Name** field, enter **preference-applied**.
+    1.  **이름** 필드에 **기본 설정 적용** 을 입력합니다.
     
-    1.  In the **Action** list, select **delete**.
+    2.  **작업** 목록에서 **삭젝** 을 선택합니다.
     
-    1.  Select **+** **Add header**.
+    3.  **+** **헤더 추가** 를 선택합니다.
     
-    1.  In the new **Name** field, enter **odata-version**.
+    4.  새 **이름** 필드에 **odata 버전** 을 입력합니다.
     
-    1.  In the new **Action** list, select **delete**.
+    5.  새 **작업** 목록에서 **삭제** 를 선택합니다.
     
-    1.  Select **+ Add header**.
+    6.  **+헤더 추가** 를 선택합니다.
     
-    1.  In the new **Name** field, enter **powered-by**.
+    7.  새 **이름** 필드에 **powered-by** 를 입력합니다.
     
-    1.  In the new **Value** field, select the list, select the **+ Add Value** link, and then enter **Contoso**.
+    8.  새 **값** 필드에서 목록을 선택하고 **+ 값 추가** 링크를 선택한다음 **Contoso** 를 입력합니다.
     
-    1.  In the new **Action** list, select **override**.
+    9.  새 **작업** 목록에서 **재정** 를 선택합니다.
     
-    1. Select **Save**.
+    10. **저장** 을 선택합니다.
 
-1. Back in the **Design** tab, in the list of operations, select **List All Documents**.
+10. **디자인** 탭에서 작업 목록에서 **모든 문서 목록**을  선택합니다.
 
-1. Select the **Test** tab.
+11. **문자** 탭을 선택합니다.
 
-1. Select the **List All Documents** operation.
+12. **모든 문서 목록** 작업을 선택합니다.
 
-1. In the **List All Documents** section, select **Send**.
+13. **모든 문서 목록** 섹션에서 **보내기** 를 선택합니다.
 
-1. Observe the results of the API request.
+14. API 요청의 결과를 관찰합니다.
 
-    > **Note**: You will observe that the **preference-applied** and **odata-version** headers that you specified have been deleted and replaced with a new **powered-by** header. You will also notice that the response doesn’t contain context data about the OData response, but instead contains a flattened JSON array as the response body.
+> > **참고**: 지정한 기본 **설정 적용** 및 **odata 버전** 헤더가 삭제되고 새 **전원이 지정된** 헤더로 대체된 것을 관찰할 수 있습니다. 또한 응답에는 OData 응답에 대한 컨텍스트 데이터가 포함되지 않고 대신 평판이 난 JSON 배열을 응답 본문으로 포함합니다.
 
-#### Review
+#### 검토
 
-In this exercise, you built a proxy tier between your Azure Search account and any developers who wish to make search queries.
+이 연습에서는 Azure Search 계정과 검색 쿼리를 만들려는 개발자 간에 프록시 계층을 구축했습니다.
 
-### Exercise 4: Create new table entities by using Azure Logic Apps
+### 연습 4: Azure 논리 앱을 사용하여 새 테이블 엔터티 만들기
 
-#### Task 1: Create a Logic Apps resource
+#### 작업 1: 논리 앱 리소스 만들기
 
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
+1.  포털의 왼쪽 네비게이션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the search field, enter **Logic** and press Enter.
+3.  검색 필드에서 **로직을** 입력하고 Enter 를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Logic App** result.
+4.  **모든** 검색 결과 블레이드에서 **로직 어플** 결과를 선택합니다.
 
-1.  In the **Logic App** blade, select **Create**.
+5.  **로직 어플** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Logic App** blade, perform the following actions:
+6.  **로직 어플** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Name** field, enter **prodworkflow\[*your name in lowercase*\]**.
+    1.  **이름** 필드에 **prodworkflow\[*소문자*\]** 를 입력합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** section, select **Use existing** and then select the **MultiTierService** option from the list.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택하고 목록에서 **MultiTierService** 옵션을 선택합니다.
     
-    1.  In the **Location** list, select **East US**.
+    4.  **위치** 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  In the **Log Analytics** section, select **Off**.
+    5.  **로그 분석** 섹션에서 **Off** 을 선택합니다.
     
-    1.  Select **Create**.
+    6.  **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-#### Task 2: Create a trigger for Logic Apps workflow
+#### 작업 2: 로직 어플 워크플로우에 대한 트리거 만들기
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodworkflow\*** logic app that you created earlier in this lab.
+3.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodworkflow\*** 로직 어플을 선택합니다.
 
-1.  In the **Logic Apps Designer** blade, select the **Blank Logic App** template.
+4.  **로직 어플 디자이너** 블레이드에서 **빈칸 로직 어플** 템플릿을 선택합니다.
 
-1.  In the **Designer** area, perform the following actions to add a **HTTP Trigger**:
+5.  **디자이너** 영역에서 다음 작업을 수행하여 **HTTP 트리거** 를 추가합니다.
     
-    1.  In the **Search connectors and triggers** field, enter **HTTP**.
+    1.  **검색 커넥터 및 트리거** 필드에서 ** HTTP** 를 입력합니다.
     
-    1.  In the **Triggers** result list, select **When a HTTP request is received**.
+    2.  **트리거 결과** 목록에서 ** HTTP요청이 수신된 경우** 를 선택합니다.
     
-    1.  Select **Use sample payload to generate schema**.
+    3.  **샘플 페이로드 사용을 선택하여스키마를 생성** 를 선택합니다.
     
-    1.  In the **Enter or paste a sample JSON payload** window, enter the following JSON object:
+    4.  **샘플 JSON 페이로드 창을 입력하거나 붙여넣기** 다음에 JSON 개체를 입력합니다.
 
-    ```
-    { 
-        "id": "",
-        "manufacturer": "",
-        "price": 0.00,
-        "quantity": 0,
-        "name": ""
-    }
-    ```
+> 
+> 
+> ``` 
+> { 
+> ```
+> 
+> ``` 
+>     "id": "",
+> ```
+> 
+> ``` 
+>     "manufacturer": "",
+> ```
+> 
+> ``` 
+>     "price": 0.00,
+> ```
+> 
+> ``` 
+>     "quantity": 0,
+> ```
+> 
+> ``` 
+>     "name": ""
+> ```
+> 
+> ``` 
+> }
+> ```
 
-1.  Select **Done**.
+5.  **완료** 를 선택합니다.
 
-1.  Observe the schema in the **Request Body JSON Schema** field. This schema is built by Azure automatically based on the JSON content that you entered in the previous step.
+6.  **요청 본문 JSON 스키마** 필드에서 스키마를 관찰합니다. 이 스키마는 이전 단계에서 입력한 JSON 콘텐츠를 기반으로 Azure 에서 자동으로 빌드됩니다.
 
-#### Task 3: Build a connector for Azure Storage
+#### 작업 3: Azure 저장소용 커넥터 구축
 
-1.  In the **Designer** area, select **+ New step**.
+1.  **디자이너** 영역에서 **+새 단계** 를 선택합니다. 
 
-1.  In the **Designer** area, perform the following actions to add an **Insert or Replace Entity Action**:
+2.  **디자이너** 영역에서 다음 작업을 수행하여 **엔터티 삽입 또는바꾸기 작업** 을 추가합니다.
     
-    1.  In the **Search connectors and triggers** field, enter **Table**.
+    1.  **검색 커넥터 및 트리거** 필드에서 **표** 를 입력합니다.
     
-    1.  In the category list, select **Azure Table Storage**.
+    2.  범주 목록에서 **Azure 테이블 저장소** 를 선택합니다.
     
-    1.  In the **Actions** result list, select **Insert or Replace Entity**.
+    3.  **작업** 결과 목록에서 엔터티 **삽입 또는 바꾸기** 를 선택합니다.
     
-    1.  In the **Connection Name** field, enter **tableconnection**.
+    4.  **연결 이름** 필드에 **테이블 연결** 을 입력합니다.
     
-    1.  In the **Storage Account** section, select the **prodstorage\*** Storage account that you created earlier in this lab.
+    5.  **저장소 계정** 섹션에서 이잔에 랩에서 만든 **prodstorage\*** 저장소 계정을 선택합니다.
     
-    1.  Select **Create**.
+    6.  **만들기** 를 선택합니다.
     
-    1.  Wait for the connector resource to finish creating.
+    7.  커넥터 리소스가 작성이 완료될 때까지 기다립니다.
 
-        > **Note**: These resources take one to five minutes to create.
+> **참고**: 이러한 리소스를 만드는 데 1~5 분정도 걸릴 수 있습니다.
 
-1.  In the **Table** list, select **products**.
+8.  **테이블** 목록에서 **제품** 을 선택합니다.
 
-1.  On the right side of the **Partition Key** field, in the **Dynamic content** pane, within the **When a HTTP request is received** category, select **manufacturer**.
+9.  **파티션 키** 필드의 오른쪽에 있는 **동적 콘텐츠** 페인에서 **HTTP 요청이 수신된 범주** 내에서 **제조업체** 를 선택합니다.
 
-1. On the right side of the **Row Key** field, in the **Dynamic content** pane, within the **When a HTTP request is received** category, select **id**.
+10. **로 키** 필드의 오른쪽에 있는 **동적 콘텐츠** 페인에서 **HTTP 요청이 수신된 범주** 내에서 **ID** 를 선택합니다.
 
-1. On the right side of the **Entity** field, in the **Dynamic content** pane, within the **When a HTTP request is received** category, select **Body**.
+11. **엔터티** 필드의 오른쪽에 있는 **동적 콘텐츠** 페인에서 **HTTP 요청이 수신된 범주** 내에서 **Body** 를 선택합니다.
 
-#### Task 4: Build a HTTP response action
+#### 작업 4: HTTP 응답 작업 빌드
 
-1.  In the **Designer** area, select **+ New step**.
+1.  **디자이너** 영역에서 **+새 단계** 를 선택합니다. 
 
-1.  In the **Designer** area, perform the following actions to add a **Response Action**:
+2.  **디자이너** 영역에서 다음 작업을 수행하여 **응답 작업** 을 추가합니다.
     
-    1.  In the **Search connectors and triggers** field, enter **Response**.
+    1.  **검색 커넥터 및 트리거** 필드에서 **응답** 을 입력합니다.
     
-    1.  In the **Actions** result list, select **Response**.
+    2.  **작업** 결과 목록에서 **응답** 을 선택합니다.
     
-    1.  In the **Status Code** field, enter **201**.
+    3.  **상태 코드** 필드에 **201** 을 입력합니다.
     
-    1.  On the right side of the **Body** field, in the **Dynamic content** pane, within the **Insert of Replace Entity** category, select **Body**.
+    4.  **Body** 필드의 오른쪽에 있는 **동적 콘텐츠** 페인에서 **엔터티 바꾸기 삽입 범주** 내에서 **Body** 를 선택합니다.
 
-#### Task 5: Retrieve a HTTP trigger POST URL
+#### 작업 5: HTTP 트리거 POST URL 검색
 
-1.  In the **Designer** area, select **Save**.
+1.  **대상** 영역에서 **최대** 를 선택합니다.
 
-1.  After the workflow is saved, the **HTTP POST URL** field in the **When a HTTP request is received** trigger will be updated with a new URL that you’ll need to start this workflow. Copy the URL in the **HTTP POST URL** field. You will use this URL later in this lab.
+2.  워크플로를 저장한 후 **HTTP 요청이 수신될 때** 트리거의 **HTTP POST URL** 필드가 이워크플로를 시작해야 하는 새URL로 업데이트됩니다. **HTTP POST URL** 필드의 URL을 복사합니다. 이 랩의 나중에 이 URL을 사용합니다.
 
-    > **Note**: This is a very long URL because it includes the URL with the SAS token. Make sure that you copy the entire URL.
+> > **참고**: SAS 토큰이 있는 URL을 포함하기 때문에 매우 긴 URL입니다. 전체 URL을 복사해야 합니다.
 
-#### Task 6: Validate that logic app results are indexed
+#### 작업 6: 로직 어플 결과가 인덱싱되어 있는지 확인
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+1.  포털 상단에서 **클라우드 셸** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-    > **Note**: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
+> **참고**: **Cloud Shell** 아이콘은 기호보다 큰 기호 및 밑줄 문자로 표시됩니다.
 
-1.  If this is your first time opening the **Cloud Shell** by using your subscription, a **Welcome to Azure Cloud Shell** wizard will display how to configure **Cloud Shell** for first-time usage. Perform the following actions:
+![](media/image1.png)
+
+2.  구독을 사용하여 **클라우드 셸** 을 처음 여는 경우 처음 사용할 수 있도록 **클라우드 셸** 어떻게 구성을 **Azure클라우드 셸에 환영함** 으로 표시합니다. 다음 작업을 수행하십시오.
     
-    1.  When offered a choice between **Bash** or **PowerShell**, select **Bash**.
+    1.  **Bash** 또는 **PowerShell** 중에서 선택할 수 있는 경우 **배쉬** 를 선택합니다.
     
-    1.  A dialog box prompts you to create a new Storage account to begin by using the shell. Accept the default settings and select **Create storage**.
+    2.  대화 박스는 셸을 사용하여 시작할 새 저장소 계정을 만들라는 메시지를 표시합니다. 기본 설정을 수락하고 **저장소 만들기** 를 선택합니다.
     
-    1.  Wait for the **Cloud Shell** to finish its first-time setup procedures before you move forward with the lab.
+    3.  랩을진행하기 전에 **Cloud Shell이** 처음 설치 절차를 완료할 때까지 기다립니다.
 
-        > **Note**: If you the configuration options for the **Cloud Shell** do not appear, this is most likely because you are using an existing subscription with this course's labs. The labs are written from the perspective that you are using a new subscription.
+> > **참고**: **Cloud Shell** 의 구성 옵션이 나타나지 않는 경우이 코스의 랩에서 기존 구독을 사용하고 있기 때문일 수 있습니다. 랩은 새 구독을 사용하는 관점에서 작성됩니다.
 
-1.  At the bottom of the portal, in the **Cloud Shell** command prompt, enter the following partial **CURL** command to issue a **HTTP POST** request to the Logic Apps instance and then press **Enter**:
+3.  포털 하단에 **Cloud Shell** 명령 프롬프트에서 다음 부분 **CURL** 명령을 입력하여 로직 어플 인스턴스에 **HTTP POST** 요청을 실행하고 **Enter** 를 누릅니다.
 
-    ```
+<!-- end list -->
+
     curl \
     --header "Content-Type: application/json" \
     --data '{"id":"6","manufacturer":"VEHTOP","price":750,"quantity":6,"name":"car roof rack"}' \
-    ```
 
-1.  Next, enter the logic app’s **HTTP POST URL** that you copied earlier in this lab, ensuring that you place the URL within **quotation marks** so that the URL characters are not escaped. Press **Enter** to execute the command.
+4.  그런 다음 이전에 랩에서 복사한 로직 어플의 **HTTP POST URL** 을 입력하여 URL 문자가이스케이프되지 않도록 **따옴표** 내에 URL을 배치합니다. **Enter** 키를 눌러 수식 작성을 완료합니다.
 
-    > **Note**: For example, if the URL is https://prod.eastus.logic.azure.com:443/workflows/test/triggers/invoke?api-version=2016\&sig=3, then you would insert “https://prod.eastus.logic.azure.com:443/workflows/test/triggers/manual?invoke?api-version=2016\&sig=3”. If you don’t include the quotation marks, you will get an error message indicating that the SAS token has been truncated and is required to issue the request. This occurs because the query string separator, **&,** is truncated if not enclosed in quotation marks.
+> > **참고**: 예를 들어 URL 이 https://prod.eastus.logic.azure.com:443/workflows/test/triggers/invoke?api-version=2016\&sig=3, then you would insert “https://prod.eastus.logic.azure.com:443/workflows/test/triggers/manual?invoke?api-version=2016\&sig=3” 따옴표를 포함하지 않으면 SAS 토큰이 잘렸으며 요청을 실행해야 한다는 오류 메시지가 표시됩니다. 이 문제는따옴표로 묶이지 않으면 쿼리 문자열 **&,** 가 잘리기 때문에 발생합니다.
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+5.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+6.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1.  In the **MultiTierService** blade, select the **prodsearch\*** Search service that you created earlier in this lab.
+7.  **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodsearch\*** 검색 서비스를 선택합니다.
 
-1.  In the **Search Service** blade, select the **Indexers** tab.
+8.  **검색 서비스** 블레이드에서 **인덱서** 탭을 선택합니다.
 
-1.  In the **Indexers** tab, select the **tableindexer** indexer that you created earlier in this lab.
+9.  **인덱서** 탭에서 이전에 랩에서 만든 **테이블 인덱서** 인덱서를 선택합니다.
 
-1. In the **Indexer** blade, perform the following actions:
+10. **인덱서** 블레이드에서 다음 작업을 수행합니다.
     
-    1. Select **Run**.
+    40. **실행** 을 선택합니다.
     
-    1. When prompted for confirmation, select **Yes**.
+    41. 확인 메시지가 표시되면 **예** 를 선택합니다.
     
-    1. Close the **Indexer** blade.
+    42. **인덱서** 블레이드를 닫습니다.
 
-1. Wait for the indexer to finish running, and then select **Refresh** at the top of the blade.
+11. 인덱서가 실행이 완료될 때까지 기다린 다음블레이드 상단에서 새로 **고침** 을 선택합니다.
 
-1. Back in the **Search Service** blade, select **Search Explorer**.
+<!-- end list -->
 
-1. In the **Search Explorer** blade, select **Search**.
+12. **검색 서비스** 블레이드에서 **검색 탐색기** 를 선택합니다.
 
-1. Observe the results of a search for all documents.
+13. **검색탐색기** 블레이드에서 **검색** 을 선택합니다.
 
-    > **Note**: At this point, you will notice a sixth document in your index representing the new document that was inserted by the logic app.
+14. 모든 문서를 검색한 결과를 관찰합니다.
 
-1. In the left navigation pane of the portal, select **Resource groups**.
+> > **참고**: 이 시점에서 로직 어플에 의해 삽입된 새 문서를 나타내는 인덱스의 여섯 번째 문서를 확인할 수 있습니다.
 
-1. In the **Resource groups** blade, select the **MultiTierService** resource group that you created earlier in this lab.
+15. 포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1. In the **MultiTierService** blade, select the **prodapi\*** API Management account that you created earlier in this lab.
+16. **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **MultiTierService** 리소스 그룹을 선택합니다.
 
-1. In the **API Management Service** blade, on the left side of the blade, in the **API Management** section, select **APIs** .
+17. **MultiTierService** 블레이드에서 이전에 랩에서 만든 **prodapi\*** API 관리 계정을 선택합니다.
 
-1. In the **APIs** section, select **Search API**.
+18. **API 관리 서비스** 블레이드에서 블레이드 왼쪽에 **API 관리** 섹션에서 **API** 를 선택합니다.
 
-1. In the **Design** tab, select the **Test** tab.
+19. **API** 섹션에서 **검색 API** 를 선택합니다.
 
-1. Select the **List All Documents** operation.
+20. **디자인** 탭에서 **테스트** 탭을 선택합니다.
 
-1. In the **List All Documents** section, select **Send**.
+21. **모든 문서 목록** 작업을 선택합니다.
 
-1. Observe the results of the API request.
+22. **모든 문서 목록** 섹션에서 **보내기** 를 선택합니다.
 
-    > **Note**: Observe that there are six documents now instead of five.
+23. API 요청의 결과를 관찰합니다.
 
-#### Review
+> > **참고**: 이제 5개가 아닌 6개의 문서가 있는지 관찰합니다.
 
-In this exercise, you created a logic app that takes a HTTP request and then persists the JSON body of the request as a new Azure Storage table entity.
+#### 검토
 
-### Exercise 5: Clean up subscription 
+이 연습에서는 HTTP 요청을 받아 JSON 요청의 JSON 본문을 새 Azure Storage 테이블 엔터티로 유지 하는 로직 어플을 만들었습니다.
 
-#### Task 1: Open Cloud Shell
+### 연습 5: 구독 정리 
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+#### 작업 1: 오픈 클라우드 쉘
 
-1.  At the bottom of the portal, in the **Cloud Shell** command prompt, type the following command and press Enter to list all resource groups in the subscription:
+1.  포털 상단에서 **클라우드 셸** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-    ```
+2.  포털 하단에서 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 리소스 그룹을 나열합니다.
+
+<!-- end list -->
+
     az group list
-    ```
 
-1.  Type the following command and press Enter to view a list of possible commands to delete a resource group:
+3.  다음 명령을 입력하고 Enter 를 눌러 리소스 그룹을 삭제할 수 있는 명령 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az group delete --help
-    ```
 
-#### Task 2: Delete resource groups
+#### 작업 2: 리소스 그룹 삭제
 
-1.  Type the following command and press Enter to delete the **MultiTierService** resource group:
+1.  다음 명령을 입력하고 Enter 를 눌러 **MultiTierService** 리소스 그룹을 삭제합니다.
 
-    ```
+<!-- end list -->
+
     az group delete --name MultiTierService --no-wait --yes
-    ```
-    
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
 
-#### Task 3: Close active applications
+2.  포털 하단의 **클라우드 셸** 창을 닫습니다.
 
-1.  Close the currently running **Microsoft Edge** application.
+#### 작업 3: 액티브 응용 프로그램 닫기
 
-1.  Close the currently running **Microsoft Azure Storage Explorer** application.
+1.  현재 실행 중인 **Microsoft Edge** 응용 프로그램을 닫습니다.
 
-#### Review
+2.  현재 실행 중인 **Microsoft Azure** 저장소 탐색기 응용 프로그램을 닫습니다.
 
-In this exercise, you cleaned up your subscription by removing the **resource groups** used in this lab.
+#### 검토
+
+이 연습에서는 이 랩에 사용된 **리소스 그룹** 을 제거하여 구독을 정리했습니다.

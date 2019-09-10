@@ -1,378 +1,393 @@
+﻿---
+랩:
+    제목: '랩: 이미지 및 컨테이너를 사용하여 컴퓨팅 워크로드를 배치합니다.
+    유형: '답변 키'
+    모듈: '모듈 1: 서비스(IaaS) 컴퓨팅 솔루션으로 Azure 인프라를 개발합니다’
 ---
-lab:
-    title: 'Lab: Deploying compute workloads by using images and containers'
-    type: 'Answer Key'
-    module: 'Module 1: Develop Azure infrastructure as a service (IaaS) compute solutions'
----
 
-# Lab: Deploying compute workloads by using images and containers
-# Student lab answer key
+# 랩: 이미지 및 컨테이너를 사용하여 컴퓨팅 워크로드를 배치합니다.
+# 학생 랩 답변 키
 
-## Microsoft Azure user interface
+## Microsoft Azure 사용자 인터페이스
 
-Given the dynamic nature of Microsoft cloud tools, you might experience Azure user interface (UI) changes after the development of this training content. These changes might cause the lab instructions and lab steps to not match up.
+Microsoft 클라우드 도구의 동적 특성을 감안할 때 이 교육 콘텐츠를 개발한 후 Azure 사용자 인터페이스(UI) 변경 사항이 발생할 수 있습니다. 이러한 변경으로 인해 랩 지침 및 랩 단계가 일치하지 않을 수 있습니다.
 
-Microsoft updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
+Microsoft 는 커뮤니티에서 필요한 변경 사항을 가져오는 즉시 이 교육 과정을 업데이트합니다. 그러나 클라우드 업데이트가 자주 발생하기 때문에 이 교육 콘텐츠가 업데이트되기 전에 UI가 변경될 수 있습니다. **이 경우 변경 사항에 적응하고 필요에 따라 랩에서 작업합니다.**
 
-## Instructions
+## 지침
 
-### Before you start
+### 시작하기 전에
 
-#### Sign in to the lab virtual machine
+#### 랩 가상 기계에 로그인
 
-Sign in to your **Windows 10** virtual machine using the following credentials:
+  - 다음 자격 증명을 사용하여 **Windows 10** 가상 기계에 로그인합니다.
     
--   **Username**: Admin
-
--   **Password**: Pa55w.rd
-
-> **Note**: Lab virtual machine sign in instructions will be provided to you by your instructor.
-
-#### Review installed applications
-
-Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+      - **사용자 이름**: 관리자
     
--   Microsoft Edge
+      - **비밀번호**: Pa55w.rd
 
--   File Explorer
+> > **참고**: 랩 가상 기계 로그인 지침은 교수자가 제공합니다.
 
-### Exercise 1: Create a virtual machine (VM) by using the Azure portal
+#### 설치된 응용 프로그램 검토
 
-#### Task 1: Open the Azure portal
-
-1.  On the taskbar, select the **Microsoft Edge** icon.
-
-1.  In the open browser window, navigate to the **Azure portal** ([portal.azure.com](https://portal.azure.com)).
-
-1.  Enter the **email address** for your Microsoft account.
-
-1.  Select **Next**.
-
-1.  Enter the **password** for your Microsoft account.
-
-1.  Select **Sign in**.
-
-    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to begin using the portal.
-
-#### Task 2: Create a resource group
-
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
-
-    > **Note**: If you cannot find the **Create a resource** link, the “Create a resource” icon is a plus-sign character located on the left side of the portal.
-
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
-
-1.  In the search text box, enter the text **Resource Group** and press Enter.
-
-1.  In the **Everything** search results blade, select the **Resource group** result.
-
-1.  In the **Resource group** blade, select **Create**.
-
-1.  In the additional **Resource group** blade, observe the tabs at the top of the blade, such as **Basics**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **resource group**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-1.  On the **Basics** tab, perform the following actions:
+  - **Windows 10** 바탕 하단에 있는 작업 표시줄을 관찰합니다. 작업 표시줄에 이 랩에서 사용할 응용 프로그램의 아이콘을 포함되어 있습니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+      - 마이크로소프트 에지
     
-    1.  In the **Resource group** text box, enter the value **ContainerCompute**.
+      - 파일 탐색기
+
+### 연습 1: Azure 포털을 사용하여 가상 기계를(VM) 만들겁니다.
+
+#### 작업 1: Azure 포털 열기
+
+1.  작업 표시줄에서 **Microsoft Edge** 아이콘을 선택합니다. 
+
+2.  열린 브라우저 창에서 **Azure portal** 으로 이동합니다.([portal.azure.com](https://portal.azure.com)).
+
+3.  Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
+
+4.  **다음** 을 선택합니다.
+
+5.  Microsoft 계정의 **비밀번호** 를 입력합니다.
+
+6.  **로그인** 을 선택합니다.
+
+> > 참고: **Azure portal** 에 처음 로그인하는 경우에 대화 상자가 나타나고 포털 투어 시작하겠습니다. **시작 하기** 버튼을 선택하여 투어를 건너뜁니다.
+
+#### 작업 2: 리소스 그룹 만들기
+
+1.  포털 왼쪽에 있는 네비게이션 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
+
+> 참고: **리소스 만들기** 링크를 찾을 수 없는 경우 아이콘은 포털의 왼쪽에 있는 "리소스 만들기" 아이콘은 더하기 기호입니다.
+
+2.  **새** 블레이드 상단에서 피쳐 서비스 목록 위에 **마켓플레이스 검색** 텍스트 박스를 있습니다.
+
+3.  검색 텍스트 박스에 텍스트 **리소스 그룹** 을 입력하고 입력하다 를 누릅니다.
+
+4.  **모든** 검색 결과 블레이드에서 **리소스 그룹** 결과를 선택합니다.
+
+5.  **리소스 그룹** 블레이드에서 **만들기** 를 선택합니다.
+
+6.  추가으로 **리소스 그룹** 블레이드에서 **기본** 과 같은 블레이드 상단의 탭을 관찰합니다.
+
+> 참고: 각 탭은 워크플로의 단계를 나타내어 새 **리소스 그룹** 을 만듭니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지탭을 건너뛸 수 있습니다.
+
+7.  **기본** 탭에서 다음작업을 수행합니다.
     
-    1.  In the **Region** drop-down list, select the **(US) East US** location.
+    1.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  Select **Review +** **Create**.
-
-1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-1.  Select **Create** to create the resource group by using your specified configuration.
-
-1. Wait for the creation task to complete before moving forward with this lab.
-
-#### Task 3: Create a Linux virtual machine resource
-
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
-
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
-
-1.  In the search text box, enter **Ubuntu Server 18** and press Enter.
-
-1.  In the **Everything** search results blade, select the **Ubuntu Server 18.04 LTS** result.
-
-1.  In the **Ubuntu Server 18.04 LTS** blade, select **Create**.
-
-1.  In the **Create a virtual machine** blade, observe the tabs at the top of the blade, such as **Basics** and **Disks**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **virtual machine**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-1.  In the **Basics** tab, perform the following actions:
+    2.  **리소스 그룹** 텍스트 박스에 **컨테이너컴퓨팅** 값을 입력합니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+    3.  **지역** 드롭다운 목록에서 **미국 동부** 위치를 선택합니다.
     
-    1.  In the **Resource group** drop-down list, select the existing **ContainerCompute** option.
+    4.  **검토 +** **만들기** 를 선택합니다.
 
-    1.  In the **Virtual machine name** text box, enter **simplevm**.
+8.  **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
+
+9.  지정된 구성을 사용하여 리소스 그룹을 만들려면 **만들기** 를 선택합니다.
+
+10. 이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
+
+#### 작업 3: Linux 가상 기계 리소스 만들기
+
+1.  포털 왼쪽에 있는 네비게이션 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
+
+2.  **새** 블레이드 상단에서 피쳐 서비스 목록 위에 **마켓플레이스 검색** 텍스트 박스를 있습니다.
+
+3.  검색 텍스트 박스에서 **우분투 서버 18** 을 입력하고 Enter 를 누릅니다.
+
+4.  **모든** 검색 결과 블레이드에서 **우분투 서버 18.04 LTS** 결과를 선택합니다.
+
+5.  **우분투 서버 18.04 LTS** 블레이드에서 **만들기** 를 선택합니다.
+
+6.  **가상 기계 만들기** 블레이드에서 **기본** 및 **디스크** 와 같은 블레이드 상단의 탭을 관찰합니다.
+
+> 참고: 각 탭은 새 **가상 기계** 를 만들 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
+
+7.  **기본** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Region** drop-down list, select the **(US) East US** location.
-
-    1. In the **Availability options** drop-down list, ensure **No infrastructure redundancy required** is selected.
+    1.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Image** text box, make sure that the **Ubuntu Server 18.04 LTS** option is selected.
+    2.  **리소스 그룹** 섹션에서 기존 **컨테이너컴퓨팅** 옵션을 선택합니다.
     
-    1.  In the **Size** text box, select the **Change size** link.
-
-1.  In the **Select a VM size** blade, perform the following actions:
-
-    1.  Select the **B1s** option from the list of sizes.
-
-    2.  Press **Select**.
-
-1.  Go back to the **Basics** tab and perform the following actions:
-
-    1.  In the **Authentication type** section, select **Password**.
-
-    1.  In the **Username** text box, enter **Student**.
-
-    1.  In the **Password** and **Confirm password** fields, enter **StudentPa55w.rd**.
-
-    1.  In the **Login with Azure Active Directory (Preview)** section, select **Off**.
-
-    1.  In the **Public inbound ports** section, select **Allow selected ports**.
-
-    1.  In the **Select inbound ports** drop-down list, select only **SSH (22)**.
-
-    1.  Select **Next : Disks \>**.
-
-1. In the **Disks** tab, perform the following actions:
-
-    1.  In the **OS disk type** section, select **Standard SSD**.
-
-    1.  Select **Review + create**.
-
-1. In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-1. Select **Create** to create the VM by using your specified configuration.
-
-1. Wait for the creation task to complete before moving forward with this lab.
-
-#### Task 4: Validate the virtual machine
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **ContainerCompute** resource group that you created earlier in this lab.
-
-1.  In the **ContainerCompute** blade, select the **simplevm** VM that you created earlier in this lab.
-
-1.  In the **Virtual Machine** blade, select **Connect**.
-
-1.  In the **Connect to virtual machine** pop-up that appears, perform the following actions:
+    3.  **가상 기계 이름** 텍스트 박스에서 **simplevm** 을 입력합니다.
     
-    1.  In the **IP address** text box, select **Public IP address**.
+    4.  **지역** 드롭다운 목록에서 **미국 동부** 위치를 선택합니다.
     
-    2.  In the **Port number** text box, enter **22**.
+    5.  **이미지** 텍스트 박스에서 **우분투 서버 18.04 LTS** 옵션을 선택했는지 확인합니다.
     
-    3.  **Copy** the text in the **Login using VM local account** text box.
+    6.  **사이즈** 텍스트 박스에서 **사이즈 변경** 링크를 선택합니다.
 
-        > **Note**: The command that you copied will connect to the VM by using SSH from a remote computer. You will use this command later in the lab.
+8.  **VM 사이즈 선택하기** 블레이드에서 다음 작업을 수행합니다.
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+<!-- end list -->
 
-    > **Note**: The **Cloud Shell** icon is represented by a greater than symbol and underscore character.
+1.  사이즈 목록에서 **B1s** 옵션을 선택합니다.
 
-1.  If this is your first time opening the **Cloud Shell** by using your subscription, a **Welcome to Azure Cloud Shell Wizard** will appear that allows you to configure **Cloud Shell** for first-time usage. Perform the following actions in the wizard:
+2.  **선택** 를 눌릅니다.
+
+<!-- end list -->
+
+9.  **기본** 탭으로 돌아가고 다음 작업을 수행합니다.
+
+<!-- end list -->
+
+1.  **인증 유형** 섹션에서 **비밀번호** 를 선택합니다.
+
+2.  **사용자 이름** 텍스트 박스에서 **학생** 를 입력합니다.
+
+3.  **비밀번호** 및 **비밀번호 확인** 필드에서 **StudentPa55w.rd** 를 입력합니다.
+
+4.  **Azure Active Directory 로그인** 섹션에서 **Off** 를 선택합니다.
+
+5.  **공용 인바운드 포트** 섹션에서 **선택한 포트 허용** 을 선택합니다.
+
+6.  **선택한 인바운드 포트** 드롭다운 목록에서 **SSH (22)** 만 선택합니다.
+
+7.  **다음:** 선택합니다.** 디스크 \>**.
+
+<!-- end list -->
+
+10. **디스크** 탭에서 다음 작업을 수행합니다.
+
+<!-- end list -->
+
+1.  **OS 디스크 유형** 섹션에서 **표준 SSD**를 선택합니다.
+
+2.  **검토 + 만들기** 를 선택합니다.
+
+<!-- end list -->
+
+11. **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
+
+12. 지정된 구성을 사용하여 VM 을 만들려면 **만들기** 를 선택합니다.
+
+13. 이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
+
+#### 작업 4: 가상 기계 검증
+
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스그룹** 링크를 선택합니다.
+
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **컨테이너컴퓨팅** 리소스 그룹을 찾아서 선택합니다.
+
+3.  **컨테이너컴퓨팅** 블레이드에서 이전에 랩에서 만든 **simplevm** VM 을 선택합니다.
+
+4.  **가상 기계** 블레이드에서 **연결** 을 선택합니다.
+
+5.  **가상 기계에 연결** 팝업을 난타나고 나서 다음 작업을 수행합니다.
     
-    1.  A dialog box will appear that prompts you to create a new Storage Account to begin using the shell. Accept the default settings and select **Create storage**.
+    1.  **IP 주소** 텍스트 박스에서 **공용 IP 주소** 를 선택합니다.
     
-    1.  Wait for the **Cloud Shell** to finish its first-time setup procedures before moving forward with the lab.
+    2.  **포트 번호** 텍스트 박스에서 **22** 를 입력합니다.
+    
+    3.  **VM 로컬 계정 로그인** 텍스트 박스를 사용하여 로그인 텍스트를 **복사** 합니다.
 
-    > **Note**: If you do not see the configuration options for the **Cloud Shell**, this is most likely because you are using an existing subscription with this course's labs. The labs are written from the presumption that you are using a new subscription.
+> 참고: 복사한 명령은 리모트 컴퓨터에서 SSH 를 사용하여 VM 에 연결됩니다. 이 명령은 랩에 나중에 사용합니다.
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, **paste** the command you copied earlier in this lab and press Enter to connect to your new VM by using SSH.
+6.  포털 상단에 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-    > **Note**: This command will be dependent on your username and IP address. For example, if the username is **Student** and the IP address is **40.125.245.5**, the command would be **ssh Student@40.125.245.5**.
+> 참고: **Cloud Shell** 아이콘은 기호보다 큰 기호 및 밑줄 문자로 표시됩니다.
 
-1.  The SSH tool will first inform you that the authenticity of the host can’t be established and then ask if you want to continue connecting. Enter **yes** in the prompt and then press Enter to continue connecting to the VM.
+![](media/image1.png)
 
-1. The SSH tool will then ask you for a password. Enter **StudentPa55w.rd** and then press Enter to authenticate with the VM.
+7.  구독을 사용하여 **Cloud Shell** 을 처음 여는 경우 처음으로 사용할 수 있도록 **Cloud Shell** 을 구성할 수 있는 **Azure Cloud Shell 마법사 환영합니다** 는 게 나타납니다. 마법사에서 다음 작업을 수행합니다.
+    
+    4.  배쉬 또는 파워쉘 중에서 선택할 경우 **배쉬** 옵션을 선택합니다.
+    
+    5.  셸 사용을 시작하려면 새 저장소 계정을 만들라는 메시지가 표시되는 대화 박스가 나타납니다. 기본 설정을 수락하고 **저장소 만들기** 를 선택합니다.
+    
+    6.  랩으로진행하기 전에 **Cloud Shell** 이 첫 번째 설치 절차를 완료할 때까지 기다립니다.
 
-    > **Note**: Characters do not show when typing password. Please be advised.
+> > 참고: **Cloud Shell** 에 대한 구성 옵션이 표시되지 않으면 이 코스의 랩에서 기존 구독을 사용하고 있기 때문일 수 있습니다. 랩은 새 구독을 사용 한다는 가정에서 작성됩니다.
 
-1. After you are connected to the VM by using SSH, you will see a prompt for the Bash shell in the VM. In the prompt, type in the following command and press Enter to view the computer name of the Linux VM:
+8.  포털하단의 **Cloud Shell** 명령 프롬프트에서 이전에 랩에서 **복사된** 명령을 붙여넣은 다음 Enter 를 눌러 SSH 를 사용하여 새 VM 에 연결합니다.
 
-    ```
+> 참고: 이 명령은 사용자 이름과 IP 주소에 따라 달라집니다. 예를 들어 사용자 이름이 **학생** 이고 IP 주소가 **40.125.245.5** 인 경우 명령은 **ssh Student@40.125.245.5** 일겁니다.
+
+9.  SSH 도구는 먼저 호스트의 진위를 확인할 수 없다는 것을 알려주고 계속 연결을 원하는지 묻겠습니다. 프롬프트에 **예** 를 입력한 다음 Enter 를 눌러 VM 에 계속 연결합니다.
+
+10. SSH 도구가 비밀번호를 묻겠습니다. **StudentPa55w.rd** 를 입력한 다음 Enter 를 눌러 VM으로 인증합니다.
+
+> 참고: 비밀번호를 입력할 때 문자가 표시되지 않습니다. 주의 주시기를 부탁드립니다.
+
+11. SSH 를 사용하여 VM 에 연결하면 VM 에서 배쉬 셸에 대한 프롬프트가 표시됩니다. 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 Linux VM 의 컴퓨터 이름을 봅니다.
+
+<!-- end list -->
+
     uname -mnipo
-    ```
 
-12. In the prompt, type in the following command and press Enter to view information about the distribution and operating system of the Linux VM.
+12. 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 Linux VM 의 배포 및 운영 체제에 대한 정보를 봅니다.
 
-    ```
+<!-- end list -->
+
     uname -srv
-    ```
 
-13. Close the **Cloud Shell** pane at the bottom of the portal.
+13. 포털 하단에 **Cloud Shell** 페인을 닫습니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created a new VM manually by using the Azure portal interface and connected to the VM by using the Cloud Shell and SSH.
+이 연습에서는 Azure 포털 인터페이스를 사용하여 수동으로 새 VM 을 만들고 Cloud Shell 및 SSH 를 사용하여 VM 에 연결했습니다.
 
-### Exercise 2: Create a virtual machine by using Azure CLI 
+### 연습 2: Azure CLI 를 사용하여 가상 시스템 만들기 
 
-#### Task 1: Open Cloud Shell
+#### 작업 1: 클라우드 쉘 열기
 
-1.  In the top navigation bar in the Azure Portal, select the **Cloud Shell** icon to open a new shell instance.
+1.  Azure 포털 상단 네비게인션 바에서 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-1.  Wait for the **Cloud Shell** to finish connecting to an instance before moving forward with the lab.
+2.  랩에 진행하기 전에 **Cloud Shell** 이 인스턴스에 연결완료될 때까지 기다립니다.
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type the following command and press Enter to view the version of the Azure CLI tool:
+3.  포털 하단의 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 Azure CLI 도구의 버전을 봅니다.
 
-    ```
+<!-- end list -->
+
     az --version
-    ```
 
-#### Task 2: Use the Azure CLI commands
+#### 작업 2: Azure CLI 명령 사용
 
-1.  Type the following command and press Enter to view a list of subgroups and commands at the root level of the CLI:
+1.  다음 명령을 입력하고 Enter 를 눌러 CLI 의 루트 수준에서 하위 그룹 및 명령 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az --help
-    ```
 
-1.  Type the following command and press Enter to view a list of subgroups and commands for **virtual machines**:
+2.  다음 명령을 입력하고 Enter 를 눌러 **가상 기계** 에 대한 하위 그룹 및 명령 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az vm --help
-    ```
 
-1.  Type the following command and press Enter to view a list of arguments and examples for the **Create Virtual Machine** command:
+3.  다음 명령을 입력하고 Enter 를 눌러 **가상 기계 만들기** 명령에 대한 인수 및 예제 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az vm create --help
-    ```
 
-1.  Type the following command and press Enter to create a new **virtual machine** with the following settings:
+4.  다음 명령을 입력하고 Enter 를 눌러 다음 설정을 사용하여 새 **가상 기계** 를 만듭니다.
     
-      - **Resource group**: ContainerCompute
+      - **리소스 그룹**: 컨테이너계산
     
-      - **Name**: quickvm
+      - **이름**: quickvm
     
-      - **Image**: Debian
+    <!-- end list -->
     
-      - **Username**: Student
+      - **이미지**： 데비안
     
-      - **Password**: StudentPa55w.rd
+      - **사용자 이름**: 학생
+    
+      - **비밀번호**: StudentPa55w.rd
 
-    ```
+<!-- end list -->
+
     az vm create --resource-group ContainerCompute --name quickvm --image Debian --admin-username student --admin-password StudentPa55w.rd
-    ```
 
-    > **Note**: If this command fails with an error indicating `Resource group 'ContainerCompute'` could not be found, it likely means you either made an error naming your resource group at the start of this lab, or you have more than one subscription associated with your login name.  If you named the resource group wrong, substitute the correct name in the command.  If you have more than one subscription, you can use the `az account set --subscription` command to select the proper subscription.
+5.  VM 만들기 프로세스가 완료될 때까지 기다립니다. 프로세스가 완료된면 명령이 기계의 세부 정보가 포함된 JSON 파일을 반환합니다.
 
-1.  Wait for the VM creation process to complete. After the process completes, the command will return a JSON file containing details about the machine.
+6.  다음 명령을 입력하고 Enter 를 눌러 새로 만든 VM 에 대한 다양한 메타데이터가 포함된 상세한 JSON 파일을 봅니다.
 
-1.  Type the following command and press Enter to view a more detailed JSON file that contains various metadata about the newly created VM:
+<!-- end list -->
 
-    ```
     az vm show --resource-group ContainerCompute --name quickvm
-    ```
 
-1.  Type the following command and press Enter to list all the IP addresses associated with the VM:
+7.  다음 명령을 입력하고 Enter 를 눌러 VM 과 연결된 모든 IP 주소를 나열합니다.
 
-    ```
+<!-- end list -->
+
     az vm list-ip-addresses --resource-group ContainerCompute --name quickvm
-    ```
 
-1.  Type the following command and press Enter to filter the output to only return the first IP address value:
+8.  다음 명령을 입력하고 Enter 를 눌러 출력을 필터링하여 첫 번째 IP 주소 값만 반환합니다.
 
-    ```
+<!-- end list -->
+
     az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv
-    ```
 
-1.  Type the following command and press Enter to store the results of the previous command in a new Bash shell variable named *ipAddress*:
+9.  다음 명령을 입력하고 enter 를 눌러 *ipAddress* 라는 새 배쉬 셸 변수에 이전 명령의 결과를 저장합니다.
 
-    ```
+<!-- end list -->
+
     ipAddress=$(az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv)
-    ```
 
-1. Type the following command and press Enter to print the value of the Bash shell variable *ipAddress*:
+10. 다음 명령을 입력하고 Enter 를 눌러 배쉬셸 변수 *ipAddress* 의 값을 인쇄합니다.
 
-    ```
+<!-- end list -->
+
     echo $ipAddress
-    ```
 
-1. Type the following command and press Enter to connect to the VM that you created earlier in this lab by using the SSH tool and the IP address stored in the Bash shell variable *ipAddress*:
+11. 다음 명령을 입력하고 Enter 를 눌러 SSH 도구 및 배쉬 셸 변수 *ipAddress* 에 저장된 IP 주소를 사용하여 이전에 랩에서 만든 VM 에 연결됩니다.
 
-    ```
+<!-- end list -->
+
     ssh student@$ipAddress
-    ```
 
-1. The **SSH** tool will first inform you that the authenticity of the host can’t be established and then ask if you want to continue connecting. Enter **yes** and then press Enter to continue connecting to the VM.
+12. **SSH** 도구는 먼저 호스트의 진위를 확인할 수 없다는 것을 알려주고 계속 연결원하는지 묻겠습니다. **예** 를 입력한다음 Enter 를 눌러 VM 에 계속 연결합니다.
 
-1. The **SSH** tool will then ask you for a password. Enter **StudentPa55w.rd** and then press Enter to authenticate with the VM.
+13. **SSH** 도구가 비밀번호를 묻겠습니다. **StudentPa55w.rd** 를 입력한 다음 Enter 를 눌러 VM으로 인증합니다.
 
-1. After you connect to the VM using SSH, type the following command and press Enter to view metadata describing the Linux VM:
+14. SSH 를 사용하여 VM 에 연결한 다음 명령을 입력하고 Enter 를 눌러 Linux VM 을 설명하는 메타데이터를 봅니다.
 
-    ```
+<!-- end list -->
+
     uname -a
-    ```
 
-1. Close the **Cloud Shell** pane at the bottom of the portal.
+15. 포털 하단에 **Cloud Shell** 페인을 닫습니다.
 
-#### Review
+#### 검토
 
-In this exercise, you used the Azure Cloud Shell to create a VM as part of an automated script.
+이 연습에서는 Azure Cloud Shell 을 사용하여 자동된 스크립트의 일부로 VM 을 만들었습니다.
 
-### Exercise 3: Create a Docker container image and deploy it to Azure Container Registry
+### 연습 3: 도커 컨테이너 이미지를 만들고 Azure 컨테이너 레지스트리에 배치합니다.
 
-#### Task 1: Open Cloud Shell and editor
+#### 작업 1: Cloud Shell 및 편집기 열기
 
-1.  In the top navigation bar in the Azure Portal, select the **Cloud Shell** icon to open a new shell instance.
+1.  Azure 포털 상단 네비게인션 바에서 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-1.  Wait for the **Cloud Shell** to finish connecting to an instance before moving on with the lab.
+2.  랩으로 이동하기 전에 **Cloud Shell** 이 인스턴스에 연결완료될 때까지 기다립니다.
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type the following command and press **Enter** to move from the root directory to the **\~/clouddrive** directory:
+3.  포털 하단의 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 **Enter** 를 눌러 루트 디렉토리에서 **\~/clouddrive** 디렉터리로 이동합니다.
 
-    ```
+<!-- end list -->
+
     cd ~/clouddrive
-    ```
 
-1.  Type the following command and press Enter to create a new directory named **ipcheck** within the **\~/clouddrive** directory:
+4.  다음 명령을 입력하고 Enter 를 눌러 **\~/clouddrive** 디렉터리 내에서 **ipcheck** 라는 새 디렉터리를 만듭니다.
 
-    ```
+<!-- end list -->
+
     mkdir ipcheck
-    ```
 
-1.  Type the following command and press Enter to change the active directory from **\~/clouddrive** to **\~/clouddrive/ipcheck**:
+5.  다음 명령을 입력하고 Enter 를 눌러 액티브 디렉터리를 **\~/clouddrive** 에서 **\~/clouddrive/ipcheck** 로 변경합니다.
 
-    ```
+<!-- end list -->
+
     cd ~/clouddrive/ipcheck
-    ```
 
-1.  Type the following command and press Enter to create a new .NET Core console application in the current directory:
+6.  다음 명령을 입력하고 Enter 를 눌러 현재 디렉터리에서 새 .NET 코어 콘솔 응용 프로그램을 만듭니다.
 
-    ```
+<!-- end list -->
+
     dotnet new console --output . --name ipcheck
-    ```
 
-1.  Type the following command and press Enter to create a new file in the **\~/clouddrive/ipcheck** directory named **Dockerfile**:
+7.  다음 명령을 입력하고 Enter 를 눌러 **Dockerfile** 이라는 **\~/clouddrive/ipcheck** 디렉터리에서 새 파일을 만듭니다.
 
-    ```
+<!-- end list -->
+
     touch Dockerfile
-    ```
 
-1.  Type the following command and press Enter to open the embedded graphical editor in the context of the current directory:
+8.  다음 명령을 입력하고 Enter 를 눌러 현재 디렉터리 컨텍스트에서 포함된 그래픽 편집기를 엽니다.
 
-    ```
+<!-- end list -->
+
     code .
-    ```
 
-#### Task 2: Create and test a .NET Core application
+#### 작업 2: .NET 코어 응용 프로그램 만들기 및 테스트
 
-1.  Within the graphical editor, locate the **FILES** pane and double-select the **Program.cs** file to open that file in the editor.
+1.  그래픽 편집기 내에서 **파일** 페인을 찾아서 **Program.cs** 파일을 두번 클릭하여 편집기에서 해당 파일을 엽니다.
 
-1.  Delete the entire contents of the **Program.cs** file.
+2.  **Program.cs** 파일의 전체 내용을 삭제합니다.
 
-1.  Copy and paste the following code into the **Program.cs** file:
+3.  다음 코드를 복사하여 **Program.cs** 파일에 붙여넣습니다.
 
-    ```
+<!-- end list -->
+
     public class Program
     {
         public static void Main(string[] args)
@@ -393,357 +408,354 @@ In this exercise, you used the Azure Cloud Shell to create a VM as part of an au
             }
         }
     }
-    ```
 
-1.  **Save** the **Program.cs** file by using either the menu in the the graphical editor, or the **Ctrl+S** keyboard shortcut.  Do not close the graphical editor.
+4.  그래픽 편집기의 메뉴 또는 **Ctrl+S** 키보드 바로 가기 키를 사용하여 **Program.cs** 파일을 **저장** 합니다.
 
-1.  Back in the command prompt, type the following command and press Enter to execute the application:
+5.  명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 응용 프로그램을 실행합니다.
 
-    ```
+<!-- end list -->
+
     dotnet run
-    ```
 
-1.  Observe the results of the execution. There should be at least one IP address listed for the Cloud Shell instance.
+6.  실행 결과를 관찰합니다. Cloud Shell 인스턴스에 나열된 IP 주소가 하나 이상 있어야 합니다.
 
-1.  Within the graphical editor, locate the **FILES** pane on the left side of the editor and double-select the **Dockerfile** file to open that file in the editor.
+7.  그래픽 편집기 내에서 편집기 왼쪽에 있는 **파일** 페인을 찾아서 **도커파일** 파일을 다시 선택하여 편집기에서 해당 파일을 엽니다.
 
-8.  Copy and paste the following code into the **Dockerfile** file:
+8.  다음 코드를 복사하여 **도커파일** 파일에 붙여넣습니다.
 
-    ```
-    FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS build
+<!-- end list -->
+
+    FROM microsoft/dotnet:2.2-sdk AS build
     WORKDIR /app
-
+    
     COPY *.csproj ./
     RUN dotnet restore
-
+    
     COPY . ./
-    RUN dotnet publish --configuration Release --output out
-
-    FROM mcr.microsoft.com/dotnet/core/runtime:2.2-alpine
+    RUN dotnet publish --configuration Release --output out --runtime ubuntu.18.04-x64 --self-contained
+    
+    FROM microsoft/dotnet:2.2-runtime
     WORKDIR /app
-
     COPY --from=build /app/out .
 
-    ENTRYPOINT ["dotnet", "ipcheck.dll"]
-    ```
+9.  그래픽 편집기의 메뉴 또는 **Ctrl+S** 키보드 바로 가기를 사용하여 **도터파일** 파일을 **저장** 합니다.
 
-1.  **Save** the **Dockerfile** file by using either the menu in the graphical editor or the **Ctrl+S** keyboard shortcut.
+10. 포털 하단에 **Cloud Shell** 페인을 닫습니다.
 
-1. Close the **Cloud Shell** pane at the bottom of the portal.
+#### 작업 3: Azure 컨테이너 레지스트리 리소스 만들기
 
-#### Task 3: Create an Azure Container Registry resource
+1.  포털 왼쪽에 있는 네비게인션 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
+2.  **새** 블레이드 상단에서 피쳐 서비스 목록 위의 **마켓플레이스 검색** 텍스트 박스를 찾습니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
+3.  검색 텍스트 박스에 **컨테이너** 를 입력하고 **Enter** 를 누릅니다.
 
-1.  In the search text box, enter **Container Registry** and press **Enter**.
+4.  **모든** 검색 결과 블레이드에서 **컨테이너 레지스트리** 결과를 선택합니다.
 
-1.  In the **Everything** search results blade, select the **Container Registry** result.
+5.  **컨테이너 레지스트리** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Container Registry** blade, select **Create**.
+6.  **컨테이너 레지스트리 만들기** 블레이드에서 다음 작업을 수행합니다.
 
-1.  In the **Create container registry** blade, perform the following actions:
+<!-- end list -->
 
-    1.  In the **Registry name** text box, give your registry a globally unique name.
+1.  **레지스트리 이름** 텍스트 박스에 레지스트리에 전세게적으로 유일한 이름을 지정합니다.
 
-        >  Note: The blade will automatically check the name for uniqueness and inform you if you are required to choose a different name.
+> > 참고: 블레이드는 자동으로 이름이 독특성을 체크하고 다른 이름을 선택해야 하는 경우 알려주겠습니다.
 
-    1.  Leave the **Subscription** text box set to its default value.
+2.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
 
-    1.  In the **Resource group** drop-down list, select the existing **ContainerCompute** option.
+3.  **리소스 그룹** 드롭다운 목록에서 기존 **ContainerCompute** 옵션을 선택합니다.
 
-    1.  In the **Location** text box, select **East US**.
+4.  **위치** 텍스트 박스에서 **미국 동부** 를 선택합니다.
 
-    1.  In the **Admin user** section, select **Disable**.
+5.  **관리 사용자** 섹션에서 사용 **안 함** 옵션을 선택합니다.
 
-    1.  In the **SKU** drop-down list, select **Basic**.
+6.  **SKU** 드롭다운 목록에서 **기본** 을 선택합니다.
 
-    1.  Select **Create**.
+7.  **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before moving forward with this lab.
+<!-- end list -->
 
-#### Task 4: Open Cloud Shell and store Azure Container Registry metadata
+7.  이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+#### 작업 4: Cloud Shell 을 열고 Azure 컨테이너 레지스트리 메타데이터를 저장합니다
 
-1.  Wait for the **Cloud Shell** to finish connecting to an instance before moving forward with the lab.
+1.  포털 상단에 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type the following command and press Enter to view a list of all container registries in your subscription:
+2.  랩에 진행하기 전에 **Cloud Shell** 이 인스턴스에 연결완료될 때까지 기다립니다.
 
-    ```
+3.  포털 하단의 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 컨테이너 레지스트리 목록을 봅니다.
+
+<!-- end list -->
+
     az acr list
-    ```
 
-1.  Type the following command and press Enter:
+4.  다음 명령을 입력하고 Enter 를 누릅니다.
 
-    ```
+<!-- end list -->
+
     az acr list --query "max_by([], &creationDate).name" --output tsv
-    ```
 
-1.  Type the following command and press Enter:
+5.  다음 명령을 입력하고 Enter 를 누릅니다.
 
-    ```
+<!-- end list -->
+
     acrName=$(az acr list --query "max_by([], &creationDate).name" --output tsv)
-    ```
 
-1.  Type the following command and press Enter:
+6.  다음 명령을 입력하고 Enter 를 누릅니다.
 
-    ```
+<!-- end list -->
+
     echo $acrName
-    ```
 
-#### Task 5: Deploy a Docker container image to the Azure Container Registry
+#### 작업 5: Azure 컨테이너 레지스트리에 도커 컨테이너 이미지 배치합니다.
 
-1.  Type the following command and press Enter to change the active directory from **\~/** to **\~/clouddrive/ipcheck**:
+1.  다음 명령을 입력하고 Enter 를 눌러 액티브 디렉터리를 **\~/** **\~/clouddrive/ipcheck** 로 변경합니다.
 
-    ```
+<!-- end list -->
+
     cd ~/clouddrive/ipcheck
-    ```
 
-1.  Type the following command and press Enter to view the contents of the current directory:
+2.  다음 명령을 입력하고 Enter 를 눌러 현재 디렉터리 내용을 봅니다.
 
-    ```
+<!-- end list -->
+
     dir
-    ```
 
-1.  Type the following command and press Enter to upload the source code to your **Container Registry** and build the container image as an **Azure Container Registry Task**:
+3.  다음 명령을 입력하고 Enter 를 눌러 **컨테이너 레지스트리** 에 소스 코드를 업로드하고 컨테이너 이미지를 **Azure 컨테이너 레지스트리 태스크** 으로 빌듭니다:
 
-    ```
+<!-- end list -->
+
     az acr build --registry $acrName --image ipcheck:latest .
-    ```
 
-1.  Wait for the build task to complete before moving forward with this lab.
+4.  이 랩을 진행하기 전에 빌드 태스크 완료될 때까지 기다립니다.
 
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
+5.  포털 하단에 **Cloud Shell** 페인을 닫습니다.
 
-#### Task 6: Validate your container image in the Azure Container Registry
+#### 작업 6: Azure 컨테이너 레지스트리에서 컨테이너 이미지 검증합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **ContainerCompute** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **컨테이너컴퓨팅** 리소스 그룹을 찾아 서 선택합니다.
 
-1.  In the **ContainerCompute** blade, select the container registry that you created earlier in this lab.
+3.  **컨테이너컴퓨팅** 블레이드에서 이전에 랩에서 만든 컨테이너 레지스트리를 선택합니다.
 
-1.  In the **Container Registry** blade, locate the **Services** section and select the **Repositories** link.
+4.  **컨테이너 레지스트리** 블레이드에서 **서비스** 섹션을 찾아서 **리포지토리** 링크를 선택합니다.
 
-1.  In the **Repositories** section, select the **ipcheck** container image repository.
+5.  **리포지토리** 섹션에서 **ipcheck** 컨테이너 이미지 리포지토리를 선택합니다.
 
-1.  In the **Repository** blade, select the **latest** tag.
+6.  **리포지토리** 블레이드에서 **최신** 태그를 선택합니다.
 
-1.  Observe the metadata for the version of your container image with the **latest** tag.
+7.  **최신** 태그가 있는 컨테이너 이미지 버전의 메타데이터를 관찰합니다.
 
-    > **Note**: You can also select the **Run ID** hyperlink to view metadata about the build task.
+> 참고: **실행 ID** 하이퍼링크를 선택하여 빌드 작업에 대한 메타데이터를 볼 수도 있습니다.
 
-#### Review
+#### 복습
 
-In this exercise, you created a .NET Core console application to display a machine’s current IP address. You then added the Dockerfile file to the application so that it could be converted into a Docker container image. Finally, you deployed the container image to Azure Container Registry.
+이 연습에서는 컴퓨터의 현재 IP 주소를 표시하는 .NET 코어 콘솔 응용 프로그램을 만들었습니다. 그 다음 응용 프로그램에 도커 파일을 추가하여 도커 컨테이너 이미지로 변환할 수 있겠습니다. 마지막으로 Azure 컨테이너 레지스트리에 컨테이너 이미지를 배치했습니다.
 
-### Exercise 4: Deploy an Azure container instance 
+### 연습 4: Azure Container Instances를 배치합니다. 
 
-#### Task 1: Enable Admin User in Azure Container Registry
+#### 작업 1: Azure 컨테이너 레지스트리에서 관리자 사용자 사용
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **ContainerCompute** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **컨테이너컴퓨팅** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **ContainerCompute** blade, select the container registry that you created earlier in this lab.
+3.  **컨테이너컴퓨팅** 블레이드에서 이전에 랩에서 만든 컨테이너 레지스트리를 선택합니다.
 
-1.  In the **Container Registry** blade, select **Update** from the top of the blade.
+4.  **컨테이너 레지스트리** 블레이드에서 **업데이트** 를 선택합니다.
 
-1.  In the **Update container registry** blade, perform the following actions:
+5.  **업데이트 컨테이너 레지스트리** 블레이드에서 다음 작업을 수행합니다:
     
-    1.  In the **Admin user** section, select **Enable**.
+    1.  **관리 사용자** 섹션에서 **할 수 있음** 을 선택합니다.
     
-    1.  Select **Save**.
+    2.  **저장** 을 선택합니다.
+
+6.  **컨테이너 레지스트리 업데이트** 를 블레이드에서 닫습니다.
+
+#### 작업 2: Azure Container Instances에 컨테이너 이미지를 자동으로 배치합니다.
+
+1.  **컨테이너 레지스트리** 블레이드에서 **서비스** 섹션을 찾아서 **리포지토리** 링크를 선택합니다.
+
+2.  **리포지토리** 섹션에서 **ipcheck** 컨테이너 이미지 리포지토리를 선택합니다.
+
+3.  **리포지토리** 블레이드에서 최신 **태그** 항목의 오른쪽에 있는 타원 메뉴를 선택합니다.
+
+4.  표시되는 팝업 메뉴에서 **인스턴스 실행** 링크를 선택합니다.
+
+5.  표시되는 **컨테이너 인스턴스 만들기** 블레이드에서 다음 작업을 수행합니다.
     
-1.  Close the **Update container registry** blade.
-
-#### Task 2: Deploy a container image automatically to an Azure Container instance
-
-1.  In the **Container Registry** blade, locate the **Services** section and select the **Repositories** link.
-
-1.  In the **Repositories** section, select the **ipcheck** container image repository.
-
-1.  In the **Repository** blade, select the ellipsis menu located immediately to the right of the **latest** tag entry.
-
-1.  In the pop-up menu that appears, select the **Run instance** link.
-
-1.  In the **Create container instance** blade that appears, perform the following actions:
+    1.  **컨테이너 이름** 텍스트 박스에 **managedcompute** 을 입력합니다.
     
-    1.  In the **Container name** text boxtext box, enter **managedcompute**.
+    2.  **컨테이너 이미지** 텍스트 박스를 기본값으로 설정합니다.
     
-    1.  Leave the **Container image** text box set to its default value.
+    3.  **OS 유형** 섹션에서 **Linux** 을 선택합니다.
     
-    1.  In the **OS type** section, select **Linux**.
+    4.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+    5.  **리소스 그룹** 드롭다운 목록에서 **컨테이너컴퓨팅** 을 선택합니다.
     
-    1.  In the **Resource group** drop-down list, select **ContainerCompute**.
+    6.  **위치** 드롭다운 목록에서 **미국동부** 를 선택합니다.
     
-    1.  In the **Location** drop-down list, select **East US**.
+    7.  **코어 수** 드롭다운 목록에서 **2** 를 선택합니다.
     
-    1.  In the **Number of cores** drop-down list, select **2**.
+    8.  **메모리(GB)** 텍스트 박스에 **4** 를 입력합니다.
     
-    1.  In the **Memory (GB)** text box, enter **4**.
+    9.  **공용 IP 주소** 섹션에서 **아니요** 를 선택합니다.
     
-    1.  In the **Public IP address** section, select **No**.
+    10. **확인** 을 선택합니다.
+
+6.  이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
+
+#### 작업 3: Azure Container Instances에 컨테이너 이미지를 수동으로 배치합니다
+
+1.  포털의 왼쪽에 있는 네비게인션 메뉴에서 **리소스그룹** 링크를 선택합니다.
+
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **컨테이너컴퓨팅** 리소스 그룹을 찾아서 선택합니다.
+
+3.  **컨테이너컴퓨팅** 블레이드에서 이전에 랩에서 만든 컨테이너 레지스트리를 선택합니다.
+
+4.  **컨테이너 레지스트리** 블레이드에서 **설정** 섹션을 찾아서 **액세스 키** 링크를 선택합니다.
+
+5.  **액세스 키** 섹션에서 다음 필드의 값을 복사합니다.
     
-    1. Select **OK**.
-
-1.  Wait for the creation task to complete before moving forward with this lab.
-
-#### Task 3: Deploy a container image manually to an Azure Container instance
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **ContainerCompute** resource group that you created earlier in this lab.
-
-1.  In the **ContainerCompute** blade, select the container registry that you created earlier in this lab.
-
-1.  In the **Container Registry** blade, locate the **Settings** section and select the **Access keys** link.
-
-1.  In the **Access Keys** section, record the values for the following fields:
+    1.  **로그인 서버**
     
-    1.  **Login server**
+    2.  **사용자 이름**
     
-    1.  **Username**
+    3.  **암호**
+
+> 참고: 다른 **컨테이너 인스턴스** 를 만들 때 이랩의 나중에 이러한 값을 사용합니다.
+
+6.  포털 왼쪽에 있는 탐색 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
+
+7.  **새** 블레이드 상단에서 피쳐 서비스 목록 위의 **마켓플레이스 검색** 텍스트 박스를 찾습니다.
+
+8.  검색 텍스트 박스에 **컨테이너** 를 입력하고 **Enter** 를 누릅니다.
+
+9.  **모든** 검색 결과 블레이드에서 **컨테이너 인스턴스** 결과를 선택합니다.
+
+10. **컨테이너 인스턴스** 블레이드에서 **만들기** 를 선택합니다.
+
+11. **컨테이너 인스턴스 만들기** 블레이드에서 블레이드 왼쪽의 **기본** 및 **구성** 과 같은 탭을관찰합니다.
+
+> 참고: 각 탭은 새 **컨테이너 인스턴스** 를 만드는 워크플로의 단계를 나타냅니다.
+
+12. **기본** 탭에서 다음 작업을 수행합니다:
     
-    1.  **Password**
-
-        > **Note**: You will use these values later in this lab when you create another **container instance**.
-
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
-
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
-
-1.  In the search text box, enter **Container instance** and press **Enter**.
-
-1.  In the **Everything** search results blade, select the **Container Instances** result.
-
-1. In the **Container Instances** blade, select **Create**.
-
-1. In the **Create Container Instances** blade, observe the tabs on the left of the blade, such as **Basics** and **Advanced**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **container instance**.
-
-1. In the **Basics** tab, perform the following actions:
-
-    1. Leave the **Subscription** text box set to its default value.
-
-    1. In the **Resource group** drop-down list, select **ContainerCompute**.
+    4.  **컨테이너 이름** 텍스트 박스에 **수동 계산** 을 입력합니다.
     
-    1.  In the **Container name** text box, enter **manualcompute**.
-
-    1. In the **Region** drop-down list, select **(US) East US**.
+    5.  **컨테이너 이미지 유형** 섹션에서 **개인** 를 선택합니다.
     
-    1.  In the **Image type** section, select **Private**.
+    6.  **컨테이너 이미지** 텍스트 박스에 이전에 기록한 **로그인 서버** 값을 입력한 다음 접미사 /**ipcheck:latest를 추가합니다.**
+
+> > 참고: 예를 들어 **로그인 서버** 값이 **azadmin.azurecr.io** 경우 컨테이너 이미지 이름이 **azadmin.azurecr.io/ipcheck:latest** 일겁니다.
+
+7.  **이미지 레지스트리 로그인 서버** 텍스트 박스에 이전에 랩에서 기록한 **로그인 서버** 값을입력합니다.
+
+8.  **이미지 레지스트리 사용자 이름** 텍스트 박스에 이전에 랩에서 기록한 **사용자 이름** 값을 입력합니다.
+
+9.  **이미지 레지스트리 비밀번호** 텍스트 박스에 이전에 랩에서 기록한 **비밀번호** 값을 입력합니다.
+
+10. **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
+
+11. **리소스 그룹** 드롭다운 목록에서 **컨테이너컴퓨팅** 을 선택합니다.
+
+12. **위치** 드롭다운 목록에서 **미국 동부** 를 선택합니다.
+
+13. **확인** 을 선택합니다.
+
+<!-- end list -->
+
+13. **구성** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Image name** text box, enter the **Login server** value that you recorded earlier and then add the suffix /**ipcheck:latest**.
-
-        > **Note**: For example, if your **Login server** value is **azadmin.azurecr.io**, then your container image name would be **azadmin.azurecr.io/ipcheck:latest**
-
-    1.  In the **Image registry login server** text box, enter the **Login server** value that you recorded earlier in this lab.
-
-    1.  In the **Image registry user name** text box, enter the **Username** value that you recorded earlier in this lab.
-
-    1.  In the **Image registry password** text box, enter the **Password** value that you recorded earlier in this lab.
-
-    1. In the **OS type** section, select **Linux**.
-
-    1. In the **Size** section, select the **Change size** link.
-
-    1. In the **Change container size** blade, perform the following actions:
-
-        1. In the **Number of CPU cores** textbox, enter **1**.
-
-        1. In the **Memory (GiB)** textbox, enter **1.5**.
-
-        1. Leave the default value for the **GPU type** drop-down list.
-
-        1. Select **Ok**.
+    14. **OS 유형** 섹션에서 **Linux** 을 선택합니다.
     
-    1. Select **Next: Networking**
-
-1. In the **Networking** tab, perform the following actions:
+    15. **코어 수** 드롭다운 목록에서 **1** 을 선택합니다.
     
-    1. In the **Include Public IP address** section, select **Yes**.
-
-    1. Ensure in the **Ports** section, the port **80** is there, with the port protocol **TCP**.
+    16. **메모리(GB)** 텍스트 박스에 **1.5** 를 입력합니다.
     
-    1. Leave the **DNS name label** text box empty.
-
-    1. Select **Next: Advanced**.
-
-1. In the **Advanced** tab, perform the following actions:
+    17. **공용 IP 주소** 섹션에서 **예** 를 입력합니다.
     
-    1. In the **Restart policy** drop-down list, select **On failure**.
+    18. **DNS 이름 레이블** 텍스트 박스를 비워 둡니다.
     
-    1. Leave the **Environment variable** text box empty.
+    19. **포트** 텍스트 박스에 **80** 을 입력합니다.
     
-    1. Leave the **Command override** text box empty.
+    20. **추가 포트 열기** 섹션에서 **아니요** 를 선택합니다.
+    
+    21. **포트 프로토콜** 드롭다운 목록에서 **TCP** 를 선택합니다.
+    
+    22. **다시 시작 정책** 드롭다운 목록에서 **실패 시** 를 선택합니다.
+    
+    23. **환경 변수** 텍스트 박스를 비워 둡니다.
+    
+    24. **추가의 환경 변수 추가** 섹션에서 **아니요** 를 선택합니다.
+    
+    25. **명령 재정의** 텍스트 박스자에서 **/ipcheck** 를 입력합니다.
 
-    1. Select **Review + create**.
+> > 참고: **ipcheck** 도구는 이 랩의 앞에서 만든 .NET Core 명령줄 응용 프로그램입니다.
 
-1. In the **Review + create** tab, review the selected options.
+26. **확인** 을 선택합니다.
 
-1. Select **Create** to create the container instance by using your specified configuration.
+<!-- end list -->
 
-1. Wait for the creation task to complete before moving forward with this lab.
+14. **요약** 탭에서 선택한 옵션을 검토합니다. 
 
-#### Task 4: Validate that the container instance ran successfully
+15. 지정된 구성을 사용하여 컨테이너 인스턴스를 만들려면 **확인** 을 선택합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+16. 이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
 
-1.  In the **Resource groups** blade, locate and select the **ContainerCompute** resource group that you created earlier in this lab.
+#### 작업 4: 컨테이너 인스턴스가 성공적으로 실행된지 검증합니다.
 
-1.  In the **ContainerCompute** blade, select the **manualcompute** container instance that you created earlier in this lab.
+1.  포털의 왼쪽에 있는 네비세인션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Container Instance** blade, locate the **Settings** section and select the **Containers** link.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **컨테인너컴퓨팅** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **Containers** section, observe the list of **Events**.
+3.  **컨테인너컴퓨팅** 블레이드에서 이전에 랩에서 만든 **수동 계산** 컨테이너 인스턴스를 선택합니다.
 
-1.  Select the **Logs** tab and observe the text logs from the container instance.
-> **Note**: You can also optionally view the **Events** and **Logs** from the **managedcompute** container instance.
+4.  **컨테이너 인스턴스** 블레이드에서 **설정** 섹션을 찾아서 **컨테이너** 링크를 선택합니다.
 
-> **Note**: After the application finished executing, the container was terminated because it had completed its work.  For the manually created container instance, you indicated that you indicated that a successful exit was acceptable, so the container shows a single execution run.  The automatically created instance did not offer you this option, and assumes the container should always be running, so you will see repeated restarts of the container.
+5.  **컨테이너** 섹션에서 **이벤트** 목록을 관찰합니다.
 
-#### Review
+> 참고: 응용 프로그램 실행이 완료된 후 컨테이너가 작업을 완료했기 때문에 종료되었습니다.
 
-In this exercise, you used multiple methods to deploy a container image to an Azure container instance. By using the manual method, you were also able to customize the deployment further and execute task-based applications as part of a container run.
+#### 복습
 
-### Exercise 5: Clean up subscription 
+이 연습에서 다양한 메서드를 사용하여 컨테이너 이미지를 Azure Container Instances에 배치했습니다. 수동 메서드를 통해서 배치를 추가로 지정도 가능하고 컨테이너 실행의 일부로 작업형 응용 프로그램을 실행도 가능합니다.
 
-#### Task 1: Open Cloud Shell and list resource groups
+### 연습 5: 구독 정리 
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+#### 작업 1: Cloud Shell 열기 및 리소스 그룹 나열하기
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type in the following command and press Enter to list all resource groups in the subscription:
+1.  포털 상단에 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-    ```
+2.  포털 하단의 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 리소스 그룹을 나열합니다.
+
+<!-- end list -->
+
     az group list
-    ```
 
-1.  Type the following command and press Enter to view a list of possible commands to delete a resource group:
+3.  다음 명령을 입력하고 Enter 를 눌러 리소스 그룹을 삭제할 수 있는 명령 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az group delete --help
-    ```
 
-#### Task 2: Delete resource groups
+#### 작업 2: 리소스 그룹 삭제
 
-1.  Type the following command and press Enter to delete the **ContainerCompute** resource group:
+1.  다음 명령을 입력하고 Enter 를 눌러 **컨테이너컴퓨팅** 리소스 그룹을 삭제합니다.
 
-    ```
+<!-- end list -->
+
     az group delete --name ContainerCompute --no-wait --yes
-    ```
 
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
+2.  포털 하단에 **Cloud Shell** 페인을 닫습니다.
 
-#### Task 3: Close active applications
+#### 작업 3: 액티브 응용 프로그램 닫기
 
-1.  Close the currently running **Microsoft Edge** application.
+1.  현재 실행 중인 **Microsoft Edge** 응용 프로그램을 닫습니다.
 
-#### Review
+#### 복습
 
-In this exercise, you cleaned up your subscription by removing the **resource groups** used in this lab.
+이 연습에서는 이 랩에 사용된 **리소스 그룹** 을 제거하여 구독을 정리했습니다.

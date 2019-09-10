@@ -1,1531 +1,1010 @@
+﻿---
+랩:
+    제목: '랩: 수개 국어 데이터 솔루션 생성'
+    유형: '답변 키'
+    모듈 ‘모듈 3: Azure 스토리지용 개발'
 ---
-lab:
-    title: 'Lab: Constructing a polyglot data solution'
-    type: 'Answer Key'
-    module: 'Module 3: Develop for Azure Storage'
----
 
-# Lab: Constructing a polyglot data solution
-# Student lab answer key
+# 랩: 수개 국어 데이터 솔루션 생성
+# 학생 랩 답변 키
 
-## Microsoft Azure user interface
+## Microsoft Azure 사용자 인터페이스
 
-Given the dynamic nature of Microsoft cloud tools, you might experience Azure user interface (UI) changes following the development of this training content. These changes might cause the lab instructions and steps to not match up correctly.
+Microsoft 클라우드 도구의 동적 특성을 감안할 때 이 교육 콘텐츠의 개발 후 Azure 사용자 인터페이스(UI) 변경 사항이 발생할 수 있습니다. 이러한 변경으로 인해 랩 지침 및 단계가 올바르게 일치하지 않을 수 있습니다.
 
-Microsoft updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
+Microsoft 는 커뮤니티에서 필요한 변경 사항을 가져오는 즉시 이 교육 과정을 업데이트합니다. 그러나 클라우드 업데이트가 자주 발생하기 때문에 이 교육 콘텐츠가 업데이트되기 전에 UI가 변경될 수 있습니다. **이 경우 변경 사항에 적응하고 필요에 따라 랩에서 작업합니다.**
 
-## Instructions
+## 지침
 
-### Before you start
+### 시작하기 전에
 
-#### Sign in to the lab virtual machine
+#### 랩 가상 기계에 로그인
 
-Sign in to your **Windows 10** virtual machine using the following credentials:
+  - 다음 자격 증명을 사용하여 **Windows 10** 가상 컴퓨터에 로그인합니다.
     
--   **Username**: Admin
-
--   **Password**: Pa55w.rd
-
-> **Note**: Lab virtual machine sign in instructions will be provided to you by your instructor.
-
-#### Review installed applications
-
-Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+      - **사용자 이름**: 관리자
     
--   Microsoft Edge
+      - **비밀번호**: Pa55w.rd
 
--   File Explorer
+> > **참고**: 랩 가상 기계 로그인 지침은 교수자가 제공합니다.
 
--   Visual Studio Code
+#### 설치된 응용 프로그램 검토
 
-#### Download the lab files
+  - **Windows 10** 바탕 하단에 있는 작업 표시줄을 관찰합니다. 작업 표시줄에는 이 랩에서 사용할 응용 프로그램에 대한 아이콘이 포함되어 있습니다.
+    
+      - 마이크로소프트 에지
+    
+      - 파일 탐색기 
+    
+      - Visual Studio Code:
 
-1.  On the taskbar, select the **Windows PowerShell** icon.
+#### 랩 파일 다운로드
 
-1.  In the PowerShell command prompt, change the current working directory to the **Allfiles (F):\\** path:
+1.  작업 표시줄에서 **Windows PowerShell** 아이콘을 선택합니다. 
+
+2.  PowerShell 명령 프롬프트에서 현재 작업 디렉토리를 **Allfiles(F):\\** 경로로 변경합니다.
 
     ```
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsforMicrosoftAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
+3.  명령 프롬프트 내에서 다음 명령을 입력하고  Enter 를 누르며 GitHub 에서 호스팅되는 **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** 프로젝트를 **랩파일** 디렉토리로 복제합니다.
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T03** lab:
+4.  명령 프롬프트 내에서 다음 명령을 입력하고 **Enter** 를 눌러 **AZ-203.02** 랩을 완료할 때 필요한 랩 파일을 체크 아웃합니다.
 
     ```
     git checkout master -- Allfiles/*
     ```
 
-1.  Close the currently running **Windows PowerShell** command prompt application.
+5.  현재 실행 중인 **Windows PowerShell** 명령 프롬프트 응용 프로그램을 닫습니다.
 
-### Exercise 1: Creating database resources in Azure
+### 연습 1: Azure에서 데이터베이스 리소스 만들기
 
-#### Task 1: Open the Azure portal
+#### 작업 1: Azure 포털 열기
 
-1.  On the taskbar, select the **Microsoft Edge** icon.
+1.  작업 표시줄에서 **Microsoft Edge** 아이콘을 선택합니다.
 
-1.  In the open browser window, navigate to the **Azure portal** ([portal.azure.com](https://portal.azure.com)).
+2.  열린 브라우저 창에서 **Azure portal** 로 이동합니다. ([portal.azure.com](https://portal.azure.com)) 
 
-1.  Enter the **email address** for your Microsoft account.
+3.  Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
 
-1.  Select **Next**.
+4.  **다음** 을 선택합니다.
 
-1.  Enter the **password** for your Microsoft account.
+5.  Microsoft 계정의 **비밀번호** 를 입력합니다.
 
-1.  Select **Sign in**.
+6.  **로그인** 을 선택합니다.
 
-    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+> > 참고: **Azure Portal** 에 처음 로그인하는 경우 포털 둘러보기를 제공하는 대화 박스가 나타납니다. 둘러보기를 건너뛰고 포털 사용을 시작하려면 **시작하기** 를 선택합니다.
 
-#### Task 2: Create an Azure Cache for Redis resource
+#### 작업 2: SQL 데이터베이스 리소스 만들기
 
-1.  In the navigation pane on the left side of the Azure portal, select **All services**.
+1.  Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
 
-1.  In the **All services** blade, select **Azure Cache for Redis**.
+2.  **모든 서비스** 블레이드에서 **SQL 서버** 를 선택합니다.
 
-1.  In the **Azure Cache for Redis** blade, view the list of your Redis cache instances.
+3.  **SQL 서버** 블레이드에서 SQL 서버 인스턴스 목록을 봅니다.
 
-1.  At the top of the **Azure Cache for Redis** blade, select **+ Add**.
+4.  **SQL 서버** 블레이드 상단에서 **추가** 를 선택합니다.
 
-1.  In the **New Redis Cache** blade, perform the following actions:
-
-    1.  IN the **DNS name** field, enter the value **polyrediscache\[your name in lowercase\]** 
-
-    1.  Leave the **Subscription** drop-down list set to its default value.
+5.  **SQL 서버(로직 서버만)** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Resource group** section, select **Create new**, enter **PolyglotData**, and then select **OK**.
+    1.  **서버 이름** 필드에 **polysqlsrvr\[소문자로 이름]** 값을 입력합니다.
     
-    1.  In the **Location** drop-down list, select the **East US** option.
-
-    1.  In the **Pricing tier** list, select the **Basic C0 (250MB Cache)** option.
-
-    1.  In the **Unblock port 6379 (not SSL encrypted)** section, ensure the checkbox is not selected.
+    2.  **서버 관리자 로그인** 필드에 **testuser** 값을 입력합니다.
     
-    1. Select **Create**.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-    > **Note**: An Azure Cache for Redis resource can take anywhere from **15-30 minutes** to become ready for use. You can choose to move forward with the lab, but you must remember that this resource and its connection string is required for **Exercise 6: Authoring .NET code to connect to Azure Redis Cache**.
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **polyrediscache\*** Azure Cache for Redis instance that you created earlier in this lab.
-
-1.  In the **Azure Cache for Redis** blade, locate the **Settings** section on the left side of the blade and select the **Access keys** link.
-
-1.  In the **Access keys** pane, record the value in the **Primary connection string (StackExchange.Redis)** field. You will use this value later in this lab.
-
-#### Task 3: Create an Azure SQL server resource
-
-1.  In the navigation pane on the left side of the Azure portal, select **All services**.
-
-1.  In the **All services** blade, select **SQL servers**.
-
-1.  In the **SQL servers** blade, view your list of SQL server instances.
-
-1.  At the top of the **SQL servers** blade, select **+ Add**.
-
-1.  In the **Create SQL Database Server** blade, observe the tabs at the top of the blade, such as **Basics**, **Networking** and **Additional settings**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **Azure SQL Database server**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-1.  In the **Basics** tab, perform the following actions:
+    3.  **비밀번호** 필드에 비밀번호를 **입력합니다**.
     
-    1.  Leave the **Subscription** drop-down list set to its default value.
+    4.  **비밀번호 확인** 필드에 **TestPa$$w0rd** 값을 다시 입력합니다.
     
-    1.  In the **Resource group** section, select **PolyglotData** from the list.
+    5.  **구독** 드롭다운 목록을 기본값으로 설정합니다.
     
-    1.  In the **Server name** field, enter the value **polysqlsrvr\[your name in lowercase\]**.
+    6.  **리소스 그룹** 섹션에서 **새 만들기** 를 선택하고 **수개 국어 데이터** 를 입력한 다음 **확인** 을 선택합니다.
     
-    1.  In the **Location** drop-down list, select the **(US) East US** option.
+    7.  **위치** 드롭다운 목록에서 **미국 동부** 옵션을 선택합니다.
     
-    1.  In the **Server admin login** field, enter the value **testuser**.
+    8.  **Azure 서비스 서버 액세스 허용** 섹션에서 확인란이 선택되어 있는지 확인합니다.
     
-    1.  In the **Password** field, enter the value **TestPa$$w0rd**.
+    9.  **고급 데이터 보안** 섹션에서 **지금 하지 않음** 옵션을 선택합니다.
     
-    1.  In the **Confirm password** field, enter the value **TestPa$$w0rd** again.
+    10. **만들기** 를 선택합니다.
 
-    1.  Select **Next: Networking >**.
+6.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1.  In the **Networking** tab, perform the following actions:
+7.  Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
 
-    1. In the **Allow Azure services and resources to access this server** section, select **Yes**.
+8.  **모든 서비스** 블레이드에서 **SQL 데이터베이스** 를 선택합니다.
+
+9.  **SQL 데이터베이스** 블레이드에서 SQL 데이터베이스 인스턴스 목록을 봅니다.
+
+10. **SQL 데이터베이스** 블레이드 맨 위에 있는 **추가** 를 선택합니다.
+
+11. **SQL 데이터베이스 만들기** 블레이드에서 **기본**, **추가 설정** 및 **태그** 와 같은 블레이드 상단의 탭을 관찰합니다.
+
+> 참고: 각 탭은 새 **Azure SQL 데이터베이스** 를 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
+
+12. **기본** 탭에서 다음 작업을 수행합니다：
     
-    1.  Select **Review + Create**.
-
-1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-1.  Select **Create** to create the Azure SQL Database server by using your specified configuration.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-#### Task 4: Create an Azure Cosmos DB account resource
-
-1.  In the navigation pane on the left side of the Azure portal, select **All services**.
-
-1.  In the **All services** blade, select **Azure Cosmos DB**.
-
-1.  In the **Azure Cosmos DB** blade, view your list of Azure Cosmos DB instances.
-
-1.  At the top of the **Azure Cosmos DB** blade, select **+ Add**.
-
-1.  In the **Create Azure Cosmos DB Account** blade, observe the tabs at the top of the blade, such as **Basics**, **Network** and **Tags**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **Azure Cosmos DB account**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-1.  In the **Basics** tab, perform the following actions:
+    11. **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  Leave the **Subscription** list set to its default value.
+    12. **리소스 그룹** 섹션의 목록에서 **수개 국어 데이터** 를 선택합니다.
     
-    1.  In the **Resource group** section, select **PolyglotData** from the list.
+    13. **데이터베이스** **이름** 텍스트 박스에 **polysqldb** 를 입력합니다.
     
-    1.  In the **AccountName** field, enter **polycosmos\[your name in lowercase\]**.
+    14. **서버** 필드에서 **polysqlsrvr\[소문자에서 이름]]** 옵션을 선택합니다.
     
-    1.  In the **API** drop-down list, select the **Core (SQL)** option.
+    15. **SQL 탄력 풀을 사용하려고 함** 섹션에서 **아니오** 옵션을 선택합니다.
     
-    1.  In the **Location** drop-down list, select the **East US** region.
+    16. **계산 + 저장소** 옵션을 기본값으로 설정합니다.
     
-    1.  In the **Geo-Redundancy** section, select the **Disable** option.
+    17. **검토 + 만들기** 를 선택합니다.
+
+13. **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
+
+14. 지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
+
+15. 이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
+
+16. Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
+
+17. **모든 서비스** 블레이드에서 **SQL 데이터베이스** 를 선택합니다.
+
+18. **SQL 데이터베이스** 블레이드에서 **polysqldb** 라는 SQL 데이터베이스 인스턴스를 선택합니다.
+
+19. **SQL 데이터베이스** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션을 찾아 **연결 문자열** 링크를 선택합니다.
+
+20. **연결 문자열** 페인에서 **ADO.NET** 연결 문자열의 값을 복사합니다. *{your\_username}* 및 * {your\_password}*의 플레이스 홀더 값을 각각 테스트유저****와 TestPa$$w0rd로 바꿔야 합니다.
+
+> > 참고: 예를 들어 복사된 연결 문자열이
+
+    Server=tcp:polysqlsrvrstudent.database.windows.net,1433;Initial Catalog=polysqldb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;,
+
+> > 업데이트된 연결 문자열은
+
+    Server=tcp:polysqlsrvrstudent.database.windows.net,1433;Initial Catalog=polysqldb;Persist Security Info=False;User ID=testuser;Password=TestPa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+21. Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
+
+22. **모든 서비스** 블레이드에서 **SQL 서버** 를 선택합니다.
+
+23. **SQL 서버** 블레이드에서 접두사 **polysqlsrvr** 이 있는 SQL 서버 인스턴스를 선택합니다.
+
+24. **SQL 서버** 블레이드에서 블레이드 왼쪽에 있는 **보안** 섹션을 찾아 **방화벽 및 가상 네트워크** 링크를 선택합니다.
+
+25. **방화벽 및 가상 네트워크** 페인에서 **클라이언트 IP 추가** 를 선택하여 가상 기계의 IP 주소를 허용된 IP 주소 범위 목록에 추가합니다.
+
+26. 페이지 위쪽에서 사이트 **저장** 을 선택합니다.
+
+> > 참고: 방화벽이 서버에서 업데이트되는 경우 몇 분 정도 걸릴 수 있습니다.
+
+27. 저장 작업이 완료되면 **확인** 대화 박스를 해제하려면 확인을 선택합니다.
+
+#### 작업 3: Azure 코스모스 DB 계정 리소스 만들기
+
+1.  Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
+
+2.  **모든 서비스** 블레이드에서 **Azure 코스모스 DB** 를 선택합니다.
+
+3.  **Azure 코스모스 DB** 블레이드에서 Azure 코스모스 DB 인스턴스 목록을 봅니다.
+
+4.  **Azure 코스모스 DB** 블레이드 상단에서 **추가** 를 선택합니다.
+
+5.  **Azure Cosmos DB 계정 만들기** 블레이드에서 **기본**, **네트워크** 및 **태그** 와 같은 블레이드 상단의 탭을 관찰합니다.
+
+> 참고: 각 탭은 새 **Azure Cosmos DB 계정** 을 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
+
+6.  **기본** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Multi-region Writes** section, select the **Disable** option.
+    1.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  Select **Review + Create**.
-
-1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-1.  Select **Create** to create the Azure Cosmos DB account by using your specified configuration.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **polycosmos\*** Azure Cosmos DB account that you created earlier in this lab.
-
-1.  In the **Azure Cosmos DB account** blade, locate the **Settings** section on the left side of the blade and select the **Keys** link.
-
-1.  In the **Keys** pane, record the value in the **PRIMARY CONNECTION STRING** field. You will use this value later in this lab.
-
-#### Task 5: Create an Azure Storage account resource
-
-1.  In the navigation pane on the left side of the Azure portal, select **All services**.
-
-1.  In the **All services** blade, select **Storage Accounts**.
-
-1.  In the **Storage accounts** blade, view your list of Storage instances.
-
-1.  At the top of the **Storage accounts** blade, select **+ Add**.
-
-1.  In the **Create storage account** blade, observe the tabs at the top of the blade, such as **Basics**, **Advanced** and **Tags**.
-
-    > **Note**: Each tab represents a step in the workflow to create a new **Azure Storage Account**. At any time, you can select **Review + create** to skip the remaining tabs.
-
-1.  In the **Basics** tab, perform the following actions:
+    2.  **리소스 그룹** 섹션의 목록에서 **수개 국어 데이터** 를 선택합니다.
     
-    1.  Leave the **Subscription** list set to its default value.
+    3.  **계정** **이름** 텍스트 박스에 **polycosmos\[소문자로 이름]** 입력합니다.
     
-    1.  In the **Resource group** section, select **PolyglotData** from the list.
+    4.  **API** 드롭다운 목록에서 **코어(SQL)** 옵션을 선택합니다.
     
-    1.  In the **Storage account name** field, enter **polystor\[your name in lowercase\]**.
+    5.  **위치** 드롭다운 목록에서 **미국 동부** 지역을 선택합니다.
     
-    1.  In the **Location** drop-down list, select the **East US** region.
+    6.  **지리적 중복성** 섹션에서 **사용 안 함** 옵션을 선택합니다.
     
-    1.  In the **Performance** section, select **Standard**.
+    7.  **다중 영역 쓰기** 섹션에서 **사용 안 함** 옵션을 선택합니다.
     
-    1.  In the **Account kind** drop-down list, select **StorageV2 (general purpose v2)**.
+    8.  **검토 + 만들기** 를 선택합니다.
+
+7.  **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
+
+8.  지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
+
+9.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
+
+10. Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
+
+11. **모든 서비스** 블레이드에서 **Azure 코스모스 DB** 를 선택합니다.
+
+12. **Azure Cosmos DB** 블레이드에서 접두사 **폴리코스모스** 가 포함된 Azure Cosmos DB 계정 인스턴스를 선택합니다.
+
+13. **Azure Cosmos DB 계정** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션을 찾아 **키** 링크를 선택합니다.
+
+14. **키** 페인에서 **URI** 및 **기본 키** 필드의 값을 기록합니다. 이 랩의 나중에 이러한 값을 사용합니다.
+
+#### 작업 4: Azure 저장소 계정 리소스 만들기
+
+1.  Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
+
+2.  **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
+
+3.  **저장소 계정** 블레이드에서 저장소 인스턴스 목록을 봅니다.
+
+4.  **저장소 계정** 블레이드 상단에서 **추가** 를 선택합니다.
+
+5.  **저장소 계정 만들기** 블레이드에서 **기본**,  **고급** 및 **태그** 와 같은 블레이드 상단의 탭을 관찰합니다.
+
+> 참고: 각 탭은 새 **Azure 저장소 계정** 을 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
+
+6.  **기본** 탭에서 다음 작업을 수행합니다.
     
-    1.  In the **Replication** drop-down list, select **Locally-redundant storage (LRS)**.
+    1.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Access tier (default)** section, ensure that **Hot** is selected.
+    2.  **리소스 그룹** 섹션의 목록에서 **수개 국어 데이터** 를 선택합니다.
     
-    1.  Select **Review + Create**.
-
-1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
-
-1.  Select **Create** to create the storage account by using your specified configuration.
-
-1.  Wait for the creation task to complete before you move forward with this lab.
-
-#### Review
-
-In this exercise, you created all the Azure resources that you will need for a polyglot data solution.
-
-### Exercise 2: Import databases and images
-
-#### Task 1: Upload image blobs
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **polystor\*** storage account that you created earlier in this lab.
-
-1.  In the **Storage account** blade, select the **Blobs** link located in the **Blob service** section on the left side of the blade.
-
-1.  In the **Blobs** section, select **+ Container**.
-
-1.  In the **New container** pop-up, perform the following actions:
+    3.  **저장소 계정** **이름** 텍스트 박스에 **polystor\[소문자로 이름]** 을 입력합니다.
     
-    1.  In the **Name** field, enter **images**.
+    4.  **위치** 드롭다운 목록에서 **미국 동부** 지역을 선택합니다.
     
-    1.  In the **Public access level** drop-down list, select **Blob (anonymous read access for blobs only)**.
+    5.  **성능** 섹션에서 **표준** 을 선택합니다.
     
-    1.  Select **OK**.
-
-1.  Back in the **Blobs** section, select the newly created **images** container.
-
-1.  In the **Container** blade, locate the **Settings** section on the left side of the blade and select the **Properties** link.
-
-1.  In the **Properties** pane, record the value in the **URL** field. You will use this value later in this lab.
-
-1.  Locate and select the **Overview** link on the left side of the blade.
-
-1.  At the top of the blade, select **Upload**.
-
-1.  In the **Upload blob** pop-up, perform the following actions:
+    6.  **계정 종류** 드롭다운 목록에서 **StorageV2(일반용 v2)를 선택합니다***.*
     
-    1.  In the **Files** section, select the **Folder** icon.
+    7.  **복제** 드롭다운 목록에서 ** 로컬 중복 저장소(LRS)** 를 선택합니다.
     
-    1.  In the File Explorer dialog box, go to **Allfiles (F):\\Allfiles\\Labs\\03\\Starter\\Images**, select all fourty-two **.jpg** image files, and then select **Open**.
+    8.  **액세스 계층(기본값)** 섹션에서 **Hot ** 가 선택되어 있는지 확인합니다.
     
-    1.  Ensure that **Overwrite if files already exist** is selected.
-    
-    1.  Select **Upload**.
+    9.  **검토 + 만들기** 를 선택합니다.
 
-1. Wait for all of the blobs to be uploaded before you continue with this lab.
+7.  **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
 
-#### Task 2: Upload SQL .bacpac file
+8.  지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+9.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
+10. Azure 포털의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
 
-1.  In the **PolyglotData** blade, select the **polystor\*** storage account that you created earlier in this lab.
+11. **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
 
-1.  In the **Storage account** blade, select the **Blobs** link located in the **Blob service** section on the left side of the blade.
+12. **저장소 계정** 블레이드에서 접두사 **polystor** 가 있는 Azure Storage 계정 인스턴스를 선택합니다.
 
-1.  In the **Blobs** section, select **+ Container**.
+13. **저장소 계정** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션을 찾아 **액세스 키** 링크를 선택합니다.
 
-1.  In the **New container** pop-up, perform the following actions:
-    
-    1.  In the **Name** field, enter **databases**.
-    
-    1.  In the **Public access level** drop-down list, select **Private (no anonymous access)**.
-    
-    1.  Select **OK**.
+14. **액세스 키** 블레이드에서 키 중 하나를 선택하고 **연결 문자열** 텍스트 상자에 값을 기록합니다. 이 랩의 나중에 이 값을 사용합니다.
 
-1.  Back in the **Blobs** section, select the newly created **databases** container.
+#### 검토
 
-1.  In the **Container** blade, select **Upload**.
+이 연습에서는 수개 국어 데이터 솔루션에 필요한 모든 Azure 리소스를 만들었습니다.
 
-1.  In the **Upload blob** pop-up, perform the following actions:
-    
-    1.  In the **Files** section, select the **Folder** icon.
-    
-    1.  In the File Explorer dialog box, go to **Allfiles (F):\\Allfiles\\Labs\\03\\Starter**, select the **AdventureWorks.bacpac** file, and then select **Open**.
-    
-    1.  Ensure that **Overwrite if files already exist** is selected.
-    
-    1.  Select **Upload**.
+### 연습 2: ASP.NET 코어 웹 응용 프로그램 열기 및 구성
 
-1. Wait for the blob to be uploaded before you continue with this lab.
+#### 작업 1: 웹 응용 프로그램 열기
 
-#### Task 3: Import SQL database
+1.  **시작** 화면에서 **비주얼 스튜디오 코드** 타일을 선택합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+2.  **파일 메뉴에서** **폴더 열기** 를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
+3.  열리는 파일 탐색기 페인에서 **Allfiles (F):\\Labfiles\\Starter** 으로 이동하여 **폴더 선택** 을 선택합니다.
 
-1.  In the **PolyglotData** blade, select the **polysqlsrvr\*** SQL server that you created earlier in this lab.
+#### 작업 2: 응용 프로그램 설정 업데이트
 
-1.  In the **SQL server** blade, select **Import database**.
+1.  비주얼 스튜디오 코드 창의 **탐색기** 페인에서 **Contoso.Events.Web** 프로젝트를 확장합니다.
 
-1.  In the **Import database** blade that appears, perform the following actions:
+2.  **탐색기** 페인에서 **appsettings.json** 을 두 번 클릭합니다.
 
-    1.  Leave the **Subscription** list set to its default value.
+3.  JSON 오브젝트에서 13줄에서 **onnectionStrings.EventsContextConnectionString** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-    1.  Select the **Storage** option.
+<!-- end list -->
 
-    1.  In the **Storage accounts** blade that appears, select the **polystor\*** storage account that you created earlier in this lab. 
-
-    1.  In the **Containers** blade that appears, select the **databases** container that you created earlier in this lab. 
-
-    1.  In the **Container** blade that appears, select the **AdventureWorks.bacpac** blob that you created earlier in this lab and then select **Select** to close the blade.
-
-    1.  Back in the **Import database** blade, leave the **Pricing tier** option set to its default value.
-
-    1.  In the **Database name** field, enter **AdventureWorks**.
-
-    1.  Leave the **Collation** field set to its default value.
-
-    1.  In the **Server admin login** field, enter the value **testuser**.
-    
-    1.  In the **Password** field, enter the value **TestPa$$w0rd**.
-    
-    1.  Select **OK**.
-
-1. Wait for the database to be created before you continue with this lab.
-
-#### Task 4: Use imported SQL Database
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **polysqlsrvr\*** SQL server that you created earlier in this lab.
-
-1.  In the **SQL server** blade, locate the **Security** section on the left side of the blade and select the **Firewalls and virtual networks** link.
-
-1.  In the **Firewalls and virtual networks** pane, select **Add client IP** and then select **Save**.
-
-    > **Note**: This step will ensure that your local machine will have access to the databases associated with this server.
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **AdventureWorks** SQL database that you created earlier in this lab.
-
-1.  In the **SQL database** blade, locate the **Settings** section on the left side of the blade and select the **Connection strings** link.
-
-1.  In the **Connection strings** pane, record the value in the **ADO.NET (SQL Authentication)** field. You will use this value later in this lab.
-
-1.  Update the connection string you recorded by performing the following actions:
-
-    1.  Within the connection string, locate the ``{your_username}`` placeholder and replace it with ``testuser``.
-
-    1.  Within the connection string, locate the ``{your_password}`` placeholder and replace it with ``TestPa$$w0rd``.
-
-        > **Note**: For example, if your connection string was originally ``Server=tcp:polysqlsrvrinstructor.database.windows.net,1433;Initial Catalog=AdventureWorks;User ID={your_username};Password={your_password};``, your updated connection string will be ``Server=tcp:polysqlsrvrinstructor.database.windows.net,1433;Initial Catalog=AdventureWorks;User ID=testuser;Password=TestPa$$w0rd;``
-
-1.  Locate and select the **Query editor** link on the left side of the blade.
-
-1.  In the **Query editor** pane, perform the following actions:
-
-    1.  In the **Login** field, enter the value **testuser**.
-
-    1.  In the **Password** field, enter the value **TestPa$$w0rd**.
-
-    1.  Select **OK**.
-
-1.  In the open query editor, enter the following query:
-
-    ```
-    SELECT * FROM AdventureWorks.dbo.Models
-    ```
-
-1.  Select **Run** to execute the query.
-
-1.  Observe the results of the query.
-
-    > **Note**: This query will return a list of models that will appear on the homepage of the web application.
-
-1.  In the query editor, replace the existing query with the following query:
-
-    ```
-    SELECT * FROM AdventureWorks.dbo.Products
-    ```
-
-1.  Select **Run** to execute the query.
-
-1.  Observe the results of the query.
-
-    > **Note**: This query will return a list of products associated with each model.
-
-#### Review
-
-In this exercise, you imported all of the resources you will use with your web application.
-
-### Exercise 3: Open and configure a .NET Core web application
-
-#### Task 1: Open and build the web application
-
-1.  On the **Start** screen, select the **Visual Studio Code** tile.
-
-1.  On the **File** menu, select **Open Folder**.
-
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\03\\Starter\\AdventureWorks**, and then select **Select Folder**.
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-    > **Note**: The ``dotnet build`` command will automatically restore any missing NuGet packages prior to building all projects in the folder.
-
-1.  Observe the results of the build printed in the terminal. The build should complete successfully with no errors or warning messages.
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 2: Update SQL connection string
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Web** project.
-
-1.  Double-click (or double-select) the **appsettings.json** file.
-
-1.  In the JSON object, in line 3, locate the **ConnectionStrings.AdventureWorksSqlContext** path. Observe that the current value is empty:
-
-    ```
     "ConnectionStrings": {
-        "AdventureWorksSqlContext": "",
-        ...
+    "EventsContextConnectionString": ""
     },
-    ```
 
-1.  Update the value of the **AdventureWorksSqlContext** property by setting its value to the **ADO.NET (SQL Authentication) connection string** of the **SQL database** that you recorded earlier in this lab.
+4.  이 랩에서 이전에 기록한 **SQL 데이터베이스** 의 **연결 문자열**에 해당 값을 설정하여 **EventsContextConnectionString** 속성의 값을 업데이트합니다.
 
-    > **Note**: It is important that you use your updated connection string here. The original connection string copied from the portal will not have the username and password necessary to connect to the SQL database.
+5.  JSON 오브젝트에서 9 줄에서 **CosmosSettings.EndpointUrl** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-1.  Save the **appsettings.json** file.
+<!-- end list -->
 
-#### Task 3: Update blob base URL
+    "CosmosSettings": {
+    "DatabaseId": "EventsDatabase ",
+    "CollectionId": "RegistrationCollection",
+    "EndpointUrl": "",
+    "AuthorizationKey": ""
+    },
 
-1.  In the JSON object, in line 8, locate the **Settings.BlobContainerUrl** path. Observe that the current value is empty:
+6.  이전에 랩에서 기록한 **Azure Cosmos DB 계정** 의 **Endpoint Uri** 로 값을 설정하여 **EndpointUrl** 속성의 값을 업데이트합니다.
 
-    ```
-    "Settings": {
-        "BlobContainerUrl": "",
-        ...
-    }
-    ```
+7.  JSON 오브젝트에서 10줄에서 **CosmosSettings.AuthorizationKey** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-1.  Update the value of the **BlobContainerUrl** property by setting its value to the **URL** property of the **Azure Storage** blob container named **images** that you recorded earlier in this lab.
+<!-- end list -->
 
-1.  Save the **appsettings.json** file.
+    "CosmosSettings": {
+    "DatabaseId": "EventsDatabase ",
+    "CollectionId": "RegistrationCollection",
+    "EndpointUrl": "",
+    "AuthorizationKey": ""
+    },
 
-#### Task 4: Validate web application
+8.  이전에 랩에서 기록한 **Azure Cosmos DB 계정** 의 **키** 에 해당 값을 설정 하여 **AuthorizationKey** 속성의 값을 업데이트합니다.
 
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
+9.  **Appsettings.json** 파일을 저장합니다.
 
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Web** folder:
+10. 비주얼 스튜디오 코드 창의 **탐색기** 페인에서 **Contoso.Events.Worker** 프로젝트를 확장합니다.
 
-    ```
-    cd .\AdventureWorks.Web\
-    ```
+11. **탐색기** 페인에서 **local.settings.json** 을 두 번 클릭합니다.
 
-1.  In the command prompt, enter the following command and press Enter to run the .NET Core web application:
+12. JSON 오브젝트에서 4 줄에서 **AzureWebJobsStorage** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-    ```
-    dotnet run
-    ```
+<!-- end list -->
 
-    > **Note**: The ``dotnet run`` command will automatically build any changes to the project and then start the web application without a debugger attached. The command will output the URL of the running application and any assigned ports.
+    "AzureWebJobsStorage": "",	
 
-1.  On the taskbar, select the **Microsoft Edge** icon.
+13. 이전에 랩에서 기록한 **저장소 계정**의 **연결 문자열** 에 값을 설정하여 **AzureWebJobsStorage** 속성의 값을 업데이트합니다.
 
-1.  In the open browser window, navigate to the your currently running web application (<http://localhost:5000>).
+14. JSON 오브젝트에서 5줄에서 **AzureWebJobsDashboard** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-1.  In the web application, observe the list of models displayed on the front page.
+<!-- end list -->
 
-1.  Locate the **Water Bottle** model and select **View Details**.
+    "AzureWebJobsDashboard": "",
 
-1.  On the **Water Bottle** product detail page, select **Add to Cart**.
+15. 이전에 랩에서 기록한 **저장소 계정** 의 **연결 문자열** 에 값을 설정하여 **AzureWebJobsDashboard** 속성의 값을 업데이트합니다.
 
-1.  Observe that the checkout functionality is currently disabled.
+16. JSON 오브젝트에서  6줄에서 **EventsContextConnectionString** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-    > **Note**: For now, only the product page functionality is implemented. You will implement the checkout logic later in this lab.
+<!-- end list -->
 
-1.  Close the browser window showing your web application.
+    "EventsContextConnectionString": "",
 
-1.  Return to the **Visual Studio Code** window.
+17. 이전에 랩에서 기록한 **SQL** 데이터베이스의 **연결 문자열** 에 해당 값을 설정하여 **EventsContextConnectionString** 속성의 값을 업데이트합니다.
 
-1.  Back in the **Visual Studio Code** window, select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
+18. JSON 오브젝트에서 7 줄에서 **CosmosEndpointUrl** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-#### Review
+<!-- end list -->
 
-In this exercise, you configured your ASP.NET Core web application to connect to your resources in Azure.
+    "CosmosEndpointUrl": "",
 
-### Exercise 4: Migrating SQL data to Azure Cosmos DB
+19. 이전에 랩에서 기록한 **Azure Cosmos DB 계정** 의 **Endpoint Uri** 로 값을 설정하여 **CosmosEndpointUrl** 속성의 값을 업데이트합니다.
 
-#### Task 1: Create migration project
+20. JSON 오브젝트에서 8줄에서 **CosmosAuthorizationKey** 경로를 찾습니다. 현재 값이 비어 있는지 관찰합니다.
 
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
+<!-- end list -->
 
-1.  In the open command prompt, enter the following command and press Enter to create a new .NET project named **AdventureWorks.Migrate** in a folder with the same name:
+    "CosmosAuthorizationKey": "",
 
-    ```
-    dotnet new console --name AdventureWorks.Migrate --langVersion preview
-    ```
+21. 이전에 랩에서 기록한 **Azure Cosmos DB 계정** 의 **키** 에 해당 값을 설정하여 ** CosmosAuthorizationKey** 속성의 값을 업데이트합니다.
 
-    > **Note**: The ``dotnet new`` command will create a new **console** project in a folder with the same name as the project.
+22. **Local.settings.json** 파일을 저장합니다.
 
-1.  In the command prompt, enter the following command and press Enter to add a reference to the existing **AdventureWorks.Models** project:
+#### 검토
 
-    ```
-    dotnet add .\AdventureWorks.Migrate\AdventureWorks.Migrate.csproj reference .\AdventureWorks.Models\AdventureWorks.Models.csproj
-    ```
+이 연습에서는 Azure의 리소스에 연결하도록 ASP.NET Core 웹 응용 프로그램을 구성했습니다.
 
-    > **Note**: The ``dotnet add reference`` command will add a reference to the model classes contained in the **AdventureWorks.Models** project.
+### 연습 3: Azure SQL 데이터베이스에 연결하는 엔터티 프레임워크 코드 작성
 
-1.  In the command prompt, enter the following command and press Enter to add a reference to the existing **AdventureWorks.Context** project:
+#### 작업 1: 데이터베이스 초기화 로직 구성
 
-    ```
-    dotnet add .\AdventureWorks.Migrate\AdventureWorks.Migrate.csproj reference .\AdventureWorks.Context\AdventureWorks.Context.csproj
-    ```
+1.  비주얼 스튜디오 코드 창의 탐색기 페인에서 **Contoso.Events.Data** 프로젝트를 확장합니다.
 
-    > **Note**: The ``dotnet add reference`` command will add a reference to the context classes contained in the **AdventureWorks.Context** project.
+2.  탐색기 페인에서 **ContextInitializer.cs** 를 두 번 클릭합니다.
 
-1.  In the command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Migrate** folder:
+3.  **InitializeAsync** 메서드를 찾습니다.
 
-    ```
-    cd .\AdventureWorks.Migrate
-    ```
+<!-- end list -->
 
-1.  In the command prompt, enter the following command and press Enter to import version **2.2.6** of the **Microsoft.EntityFrameworkCore.SqlServer** from NuGet:
+    public async Task InitializeAsync(EventsContext eventsContext)
 
-    ```
-    dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 2.2.6
-    ```
+4.  **InitializeAsync** 메서드 내에서 다음 코드 줄을 추가하여 데이터베이스가 만들어지도록 합니다.
 
-    > **Note**: The ``dotnet add package`` command will add the **[Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/2.2.6)** package from **NuGet**.
+<!-- end list -->
 
-1.  In the command prompt, enter the following command and press Enter to import version **3.0.0** of the **Microsoft.Azure.Cosmos** from NuGet:
+    await eventsContext.Database.EnsureCreatedAsync();
 
-    ```
-    dotnet add package Microsoft.Azure.Cosmos --version 3.0.0
-    ```
+5.  다음 코드 블록을 추가하여 데이터베이스에 이벤트가 없는 경우 **if** 블록 내에서만 코드를 실행하는 블록인 경우 조건부 코드를 만듭니다.
 
-    > **Note**: The ``dotnet add package`` command will add the **[Microsoft.Azure.Cosmos](https://www.nuget.org/packages/Microsoft.Azure.Cosmos/3.0.0)** package from **NuGet**.
+<!-- end list -->
 
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 2: Create .NET class 
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Migrate** project.
-
-1.  Double-click (or double-select) the **Program.cs** file.
-
-1.  In the code editor tab for the **Program.cs** file, delete all code in the existing file.
-
-1.  Add the following lines of code to import the **AdventureWorks.Models** and **AdventureWorks.Context** namespaces from the referenced **AdventureWorks.Models** and **AdventureWorks.Context** projects:
-
-    ```
-    using AdventureWorks.Context;
-    using AdventureWorks.Models;
-    ```
-
-1.  Add the following line of code to import the **Microsoft.Azure.Cosmos** namespace from the **Microsoft.Azure.Cosmos** package imported from NuGet:
-
-    ```
-    using Microsoft.Azure.Cosmos;
-    ```
-
-1.  Add the following line of code to import the **Microsoft.EntityFrameworkCore** namespace from the **Microsoft.EntityFrameworkCore.SqlServer** package imported from NuGet:
-
-    ```
-    using Microsoft.EntityFrameworkCore;
-    ```
-
-1.  Add the following lines of code to add using blocks for built-in namespaces that will be used in this file:
-
-    ```
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    ```
-
-1.  Enter the following code to create a new **Program** class:
-
-    ```
-    public class Program
+    if (!await eventsContext.Events.AnyAsync())
     {
     }
-    ```
 
-1.  Within the **Program** class, enter the following line of code to create a new string constant named **sqlDBConnectionString**:
+6.  새로 생성된 **if** 블록 내에서 다음 코드 줄을 추가하여 **Event** 클래스의 새 인스턴스를 만듭니다.
 
-    ```
-    private const string sqlDBConnectionString = "";
-    ```
+<!-- end list -->
 
-1.  Update the the **sqlDBConnectionString** string constant by setting its value to the **ADO.NET (SQL Authentication) connection string** of the **SQL database** that you recorded earlier in this lab.
+    Event eventItem = new Event();
 
-    > **Note**: It is important that you use your updated connection string here. The original connection string copied from the portal will not have the username and password necessary to connect to the SQL database.
+7.  **If** 블록 내에서 다음 코드 블록을 추가하여 새 **Event** 클래스 인스턴스의 다양한 속성을 설정합니다.
 
-1.  Within the **Program** class, enter the following line of code to create a new string constant named **cosmosDBConnectionString**: 
+<!-- end list -->
 
-    ```
-    private const string cosmosDBConnectionString = "";
-    ```
+    eventItem.EventKey = "FY17SepGeneralConference";
+    eventItem.StartTime = DateTime.Today;
+    eventItem.EndTime = DateTime.Today.AddDays(3d);
+    eventItem.Title = "FY17 September Technical Conference";
+    eventItem.Description = "Sed in euismod mi.";
+    eventItem.RegistrationCount = 1;
 
-1.  Update the the **cosmosDBConnectionString** string constant by setting its value to the **PRIMARY CONNECTION STRING** of the **Azure Cosmos DB account** that you recorded earier in this lab.
+8.  **If** 블록 내에서 다음 코드 줄을 **DbSet\<Event\>** 형식의 속성을 가진 **Event** 가 새 **Events** 클래스 인스턴스에 추가합니다.
 
-1.  Within the **Program** class, enter the following code to create a new asynchronous **Main** method:
+<!-- end list -->
 
-    ```
-    public static async Task Main(string[] args)
+    eventsContext.Events.Add(eventItem);
+
+9.  **if 블록 외부 와 이후의 경우 다음 코드 줄을 추가하여 변경 내용을 데이터베이스 컨텍스트에 저장합니다.
+
+<!-- end list -->
+
+    await eventsContext.SaveChangesAsync();
+
+10. **InitializeAsync** 메서드는 이제 다음과 같이  보입니다.
+
+<!-- end list -->
+
+    public async Task InitializeAsync(EventsContext eventsContext)
     {
-    }
-    ```
-
-1.  Within the **Main** method, add the following line of code to print an introductory message to the console:
-
-    ```
-    await Console.Out.WriteLineAsync("Start Migration");
-    ```
-
-1.  Save the **Program.cs** file.
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Migrate** folder:
-
-    ```
-    cd .\AdventureWorks.Migrate
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 4: Get SQL database records using Entity Framework
-
-1.  Within the **Main** method of the **Program** class within the **Program.cs** file, add the following line of code to create a new instance of the **AdventureWorksSqlContext** class passing in the **sqlDBConnectionString** variable as the connection string value:
-
-    ```
-    AdventureWorksSqlContext context = new AdventureWorksSqlContext(sqlDBConnectionString);
-    ```
-
-1.  Within the **Main** method, add the following block of code to issue a LINQ query to get all **Models** and child **Products** from the database and store them in an in-memory **List<>** collection:
-
-    ```
-    List<Model> items = await context.Models
-        .Include(m => m.Products)
-        .ToListAsync<Model>();
-    ```
-
-1.  Within the **Main** method, add the following line of code to print out the number of records imported from **Azure SQL Database**:
-
-    ```
-    await Console.Out.WriteLineAsync($"Total Azure SQL DB Records: {items.Count}");
-    ```
-
-1.  Save the **Program.cs** file.
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Migrate** folder:
-
-    ```
-    cd .\AdventureWorks.Migrate
-    ```
+    await eventsContext.Database.EnsureCreatedAsync();
     
-1.  In the command prompt,  enter the following command and press Enter to build the .NET Core web application:
+    if (!await eventsContext.Events.AnyAsync())
+    {
+    Event eventItem = new Event();
+    eventItem.EventKey = "FY17SepGeneralConference";
+    eventItem.StartTime = DateTime.Today;
+    eventItem.EndTime = DateTime.Today.AddDays(3d);
+    eventItem.Title = "FY17 September Technical Conference";
+    eventItem.Description = "Sed in euismod mi.";
+    eventItem.RegistrationCount = 1;
+    eventsContext.Events.Add(eventItem);
+    }
+    
+    await eventsContext.SaveChangesAsync();
+    }
 
-    ```
-    dotnet build
-    ```
+11. **ContextInitializer.cs** 파일을 **저장합니다**.
 
-    > **Note**: If there are any build errors, please review the **Program.cs** file located in the **Allfiles (F):\\Allfiles\\Labs\\03\\Solution\\AdventureWorks\\AdventureWorks.Migrate** folder.
+#### 작업 2: 데이터베이스 초기화 업데이트
 
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
+1.  비주얼 스튜디오 코드 창의 탐색기 페인에서 **Contoso.Events.Data** 프로젝트를 확장합니다.
 
-#### Task 5: Insert items into Azure Cosmos DB
+2.  탐색기 페인에서 **ContextInitializer.cs** 를 두 번 클릭합니다.
 
-1.  Within the **Main** method of the **Program** class within the **Program.cs** file, add the following line of code to create a new instance of the **CosmosClient** class passing in the **cosmosDBConnectionString** variable as the connection string value:
+3.  **InitializeAsync** 메서드를 찾습니다.
 
-    ```
-    CosmosClient client = new CosmosClient(cosmosDBConnectionString);
-    ```
+<!-- end list -->
 
-1.  Within the **Main** method, add the following line of code to create a new **database** named **Retail** if it does not already exist in the Azure Cosmos DB account:
+    public async Task InitializeAsync(EventsContext eventsContext)
 
-    ```
-    Database database = await client.CreateDatabaseIfNotExistsAsync("Retail");
-    ```
+4.  메서드를 다음 메서드 구현으로 바꿉니다.
 
-1.  Within the **Main** method, add the following block of code to create a new **container** named **Online** if it does not already existing in the Azure Cosmos DB account with a partition key path of **/Category** and a throughput of **1000 RUs**:
+<!-- end list -->
 
-    ```
-    Container container = await database.CreateContainerIfNotExistsAsync("Online",
-        partitionKeyPath: $"/{nameof(Model.Category)}",
-        throughput: 1000
+    public async Task InitializeAsync(EventsContext eventsContext)
+    {
+    await eventsContext.Database.EnsureCreatedAsync();
+    
+    if (!await eventsContext.Events.AnyAsync())
+    {
+    await eventsContext.Events.AddRangeAsync(
+    new List<Event>() 
+    {
+    new Event { EventKey = "GeneralConferenceAlpha", StartTime = DateTime.Today, EndTime = DateTime.Today.AddDays(5d), Title = "First General Conference", Description = "Sed in euismod mi.", RegistrationCount = 15 },
+    new Event { EventKey = "GeneralConferenceBravo", StartTime = DateTime.Today.AddDays(10d), EndTime = DateTime.Today.AddDays(15d), Title = "Second General Conference", Description = "Sed in euismod mi.", RegistrationCount = 20 },
+    new Event { EventKey = "GeneralConferenceCharlie", StartTime = DateTime.Today.AddDays(20d), EndTime = DateTime.Today.AddDays(25d), Title = "Third General Conference", Description = "Sed in euismod mi.",  RegistrationCount = 5 },
+    new Event { EventKey = "GeneralConferenceDelta", StartTime = DateTime.Today.AddDays(30d), EndTime = DateTime.Today.AddDays(35d), Title = "Fourth General Conference", Description = "Sed in euismod mi.", RegistrationCount = 25 },
+    new Event { EventKey = "GeneralConferenceEcho", StartTime = DateTime.Today.AddDays(40d), EndTime = DateTime.Today.AddDays(45d), Title = "Fifth General Conference", Description = "Sed in euismod mi.", RegistrationCount = 10 },
+    new Event { EventKey = "GeneralConferenceFoxtrot", StartTime = DateTime.Today.AddDays(50d), EndTime = DateTime.Today.AddDays(55d), Title = "Sixth General Conference", Description = "Sed in euismod mi.", RegistrationCount = 0 }
+    }
     );
-    ```
+    
+    await eventsContext.SaveChangesAsync();
+    }
+    }
 
-1.  Within the **Main** method, add the following line of code to create an **int** variable named **count**:
+5.  **ContextInitializer.cs** 파일을 **저장합니다**.
 
-    ```
+#### 작업 3: ASP.NET MVC 컨트롤러에 엔터티 프레임워크 쿼리 작성
+
+1.  비주얼 스튜디오 코드 창의 탐색기 ** ** 페인에서 **Contoso.Events.Web** 프로젝트를 확장합니다.
+
+2.  탐색기 페인에서 **컨트롤러** 폴더를 확장합니다.
+
+3.  탐색기 ** ** 페인에서 **HomeController.cs** 를 두 번 클릭합니다.
+
+4.  **인덱스** 메서드를 찾습니다.
+
+<!-- end list -->
+
+    public IActionResult Index([FromServices] EventsContext eventsContext, [FromServices] IOptions<ApplicationSettings> appSettings)
+
+5.  **Index** 메서드 내에서 다음 코드 줄을 찾습니다.
+
+<!-- end list -->
+
+    var upcomingEvents = Enumerable.Empty<Event>();
+
+6.  해당 코드 줄을 다음 코드 블록으로 대체하여 **Events** 테이블을 쿼리하고 **StartTime** 속성별로 결과를 정렬한 다음 응용 프로그램설정에 따라 결과의 부분 집합을 검색(테이크)합니다.
+
+<!-- end list -->
+
+    var upcomingEvents = eventsContext.Events
+    .Where(e => e.StartTime >= DateTime.Today)
+    .OrderBy(e => e.StartTime)
+    .Take(appSettings.Value.LatestEventCount);
+
+7.  **HomeController.cs** 파일을 **저장합니다**.
+
+8.  탐색기 ** ** 페인에서 **EventsController.cs** 를 두 번 클릭합니다.
+
+9.  **인덱스** 메서드를 찾습니다.
+
+<!-- end list -->
+
+    public IActionResult Index([FromServices] EventsContext eventsContext, [FromServices] IOptions<ApplicationSettings> appSettings, int? page)
+
+10. **Index** 메서드 내에서 다음 코드 줄을 찾습니다.
+
+<!-- end list -->
+
+    var pagedEvents = Enumerable.Empty<Event>();
+
+11. 해당 코드 줄을 다음 코드 블록으로 바꿔 **Events** 테이블을 쿼리하고 **킵** 및 **테이크** 메서드를 사용하여 현재 페이지 번호를 기반으로 결과 페이지를 만듭니다.
+
+<!-- end list -->
+
+    int currentPage = page ?? 1;
+    int totalRows = eventsContext.Events.Count();
+    int pageSize = appSettings.Value.GridPageSize;
+    var pagedEvents = eventsContext.Events
+    .OrderByDescending(e => e.StartTime)
+    .Skip(pageSize * (currentPage - 1))
+    .Take(pageSize);
+
+12. **Index** 메서드 내에서 다음 코드 블록을 찾습니다.
+
+<!-- end list -->
+
+    EventsGridViewModel viewModel = new EventsGridViewModel
+    {
+    CurrentPage = 0,
+    PageSize = 0,
+    TotalRows = 0,
+    Events = pagedEvents
+    };	
+
+13. 해당 코드 블록을 다음 코드 블록으로 바꿔 **EventsGridViewModel** 클래스 인스턴스의 다양한 속성을 설정합니다.
+
+<!-- end list -->
+
+    EventsGridViewModel viewModel = new EventsGridViewModel
+    {
+    CurrentPage = currentPage,
+    PageSize = pageSize,
+    TotalRows = totalRows,
+    Events = pagedEvents
+    };
+
+14. **세부** 정보 메서드를 찾습니다.
+
+<!-- end list -->
+
+    public IActionResult Detail([FromServices] EventsContext eventsContext, string key)
+
+15. **세부** 메서드 내에서 다음 코드 줄을 찾습니다.
+
+<!-- end list -->
+
+    var matchedEvent = default(Event);
+
+16. 해당 코드 줄을 다음 코드 블록으로 바꿔 **Events** Table에서 **EventKey** 속성과 일치하는 싱글 레코드를 쿼리합니다.
+
+<!-- end list -->
+
+    var matchedEvent = eventsContext.Events
+    .SingleOrDefault(e => e.EventKey == key);
+
+17. **EventsController.cs** 파일을 **저장합니다**.
+
+#### 검토
+
+이 연습에서는 엔터티 프레임워크를 사용하여 Azure SQL 데이터베이스에 연결하는 C\# 코드를 작성했습니다.
+
+### 연습 4: Azure 코스모스 DB 에 연결하는 Cosmos DB 클라이언트 라이브러리 코드 작성
+
+#### 작업 1: Azure Functions 프로젝트에서 등록자 이름 검색
+
+1.  비주얼 스튜디오 코드 창의 탐색기 창에서 **Contoso.Events.Worker** 프로젝트를 확장하고 **ProcessDocuments.cs** 파일을 두 번 클릭합니다.
+
+2.  **ProcessDocuments.cs** 파일의 코드 편집기 탭에서 **ProcessDocuments** 클래스를 찾습니다.
+
+<!-- end list -->
+
+    public static class ProcessDocuments
+
+3.  **ProcessDocuments** 클래스 내에서 19줄에 새 코드 줄을 추가하여 **RegistrationContext** 클래스의 새 스태틱 인스턴스를 만듭니다.
+
+<!-- end list -->
+
+    private static RegistrationContext _registrationsContext = _connection.GetCosmosContext();
+
+4.  **프로세스HttpRequestMessage** 메서드를 찾습니다.
+
+<!-- end list -->
+
+    private static async Task<List<string>> ProcessHttpRequestMessage(string eventKey)
+
+5.  **ProcessHttpRequestMessage** 메서드 내에서 40줄에 새 코드 줄을 추가하여 **RegistrationContext** 클래스의 **ConfigureConnectionAsync** 메서드를 사용하여 Azure Cosmos DB에 대한 연결을 구성합니다.
+
+<!-- end list -->
+
+    await _registrationsContext.ConfigureConnectionAsync();
+
+6.  **등록자** 변수에 문자열 값의 빈 컬렉션을 저장하는 41 줄에서 코드 줄을 찾습니다.
+
+<!-- end list -->
+
+    List<string> registrants = new List<string>();
+
+7.  41줄의 코드 줄을 **GetRegistrantsForEvent** **등록 컨텍스트** 클래스의 호출하는 새 코드 줄로 바꿉니다.
+
+<!-- end list -->
+
+    List<string> registrants = await _registrationsContext.GetRegistrantsForEvent(eventKey);
+
+8.  **ProcessDocuments.cs** 파일을 저장합니다.
+
+#### 작업 2: 등록컨텍스트 클래스 구현
+
+1.  비주얼 스튜디오 코드 창의 탐색기** ** 페인에서 **Contoso.Events.Data** 프로젝트를 확장하고 **RegistrationContext.cs 파일** 을 두 번 클릭합니다.
+
+2.  **RegistrationContext.cs** 파일의 코드 편집기 탭에서 **RegisterContext** 클래스를 찾습니다.
+
+<!-- end list -->
+
+    public class RegistrationContext
+
+3.  **RegistrationContext** 클래스 내에서 새 코드 줄을 추가하여 **데이터베이스** 형식의 새 속성을 만듭니다.
+
+<!-- end list -->
+
+    protected Database Database { get; set; }
+
+4.  **RegisterContext** 클래스 내에서 새 코드 줄을 추가하여 **문서컬렉션** 형식의 새 속성을 만듭니다.
+
+<!-- end list -->
+
+    protected DocumentCollection Collection { get; set; }
+
+5.  **RegisterContext** 클래스 내에서 새 코드 줄을 추가하여 **DocumentClient** 형식의 새 속성을 만듭니다.
+
+<!-- end list -->
+
+    protected DocumentClient Client { get; set; }
+
+6.  **RegistrationContext** 클래스 내에서 기존 **RegistrationContext** 생성자  위치를 찾습니다. 
+
+<!-- end list -->
+
+    public RegistrationContext(IOptions<CosmosSettings> cosmosSettings)
+    {
+    CosmosSettings = cosmosSettings.Value;
+    }
+
+7.  생성자 내에서 새 코드 줄을 추가하여 새 **DocumentClient** 인스턴스를 만들고 *Client* 속성에 저장합니다.
+
+<!-- end list -->
+
+    Client = new DocumentClient(new Uri(CosmosSettings.EndpointUrl), CosmosSettings.AuthorizationKey);
+
+8.  **RegisterContext** 클래스 내에서 **ConfigureConnectionAsync** 메서드를 찾아 메서드내의 기존 코드를 삭제합니다.
+
+<!-- end list -->
+
+    public async Task ConfigureConnectionAsync()
+    {
+    
+    }
+
+9.  **ConfigureConnectionAsync** 메서드 내에서 새 코드 줄을 추가하여 새 **데이터베이스** 인스턴스를 만들고 **데이터베이스** 속성에 저장합니다.
+
+<!-- end list -->
+
+    Database = await Client.CreateDatabaseIfNotExistsAsync(new Database { Id = CosmosSettings.DatabaseId });
+
+10. 새 코드 줄을 추가하여 새 **DocumentCollection** 인스턴스를 만들고 **컬렉션** 속성에 저장합니다.
+
+<!-- end list -->
+
+    Collection = await Client.CreateDocumentCollectionIfNotExistsAsync(Database.SelfLink, new DocumentCollection { Id = CosmosSettings.CollectionId });
+
+11. **RegistrationContext** 클래스 내에서 **GetRegistrantCountAsync** 메서드를 찾아 메서드 내의 기존 코드를 삭제합니다.
+
+<!-- end list -->
+
+    public async Task<int> GetRegistrantCountAsync()
+    {
+    
+    }
+
+12. **GetRegistrantCountAsync** 메서드 내에서 새 코드 줄을 추가하여 **EnableCrossPartitionQuery** 속성이 true 값으로 설정된 **FeedOptions** 클래스의 새 인스턴스를 만듭니다.
+
+<!-- end list -->
+
+    FeedOptions options = new FeedOptions { EnableCrossPartitionQuery = true };
+
+13. 새 코드 줄을 추가하여 등록자 수를 얻고 정수 값 컬렉션을 반환하는 쿼리를 만듭니다.
+
+<!-- end list -->
+
+    IDocumentQuery<int> query = Client.CreateDocumentQuery<int>(Collection.SelfLink, "SELECT VALUE COUNT(1) FROM registrants", options).AsDocumentQuery();
+
+14. 코드의 새 블록을 추가하여count라는 정수 변수를 만들고 **IDocumentQuery\<\>** 클래스의 **HasMoreResults** 속성을 반복하고 ***count** **변수의** 최종 값을 반환하는 while 루프를 만듭니다.
+
+<!-- end list -->
+
     int count = 0;
-    ```
-
-1.  Within the **Main** method, add the following block of code to create a **foreach** loop that iterates over the objects in the **items** collection:
-
-    ```
-    foreach (var item in items)
+    while (query.HasMoreResults)
     {
-    }
-    ```
-
-1.  Within the **foreach** loop contained in **Main** method, add the following line of code to **upsert** the object into the Azure Cosmos DB collection and save the result in a variable of type **ItemResponse<>** named **document**:
-
-    ```
-    ItemResponse<Model> document = await container.UpsertItemAsync<Model>(item);
-    ```
-
-1.  Within the **foreach** loop contained in **Main** method, add the following line of code to print out the **activity id** of each upsert operation:
-
-    ```
-    await Console.Out.WriteLineAsync($"Upserted document [Activity Id: {document.ActivityId}]");
-    ```
-
-1.  Back within the **Main** method (outside of the foreach loop), add the following line of code to print out the number of documents exported to **Azure Cosmos DB**:
-
-    ```
-    await Console.Out.WriteLineAsync($"Total Azure Cosmos DB Documents: {count}");
-    ```
-
-1.  Save the **Program.cs** file.
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Migrate** folder:
-
-    ```
-    cd .\AdventureWorks.Migrate
-    ```
     
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-    > **Note**: If there are any build errors, please review the **Program.cs** file located in the **Allfiles (F):\\Allfiles\\Labs\\03\\Solution\\AdventureWorks\\AdventureWorks.Migrate** folder.
-
-#### Task 6: Perform migration
-
-1.  In the open command prompt, enter the following command and press Enter to run the .NET Core web application:
-
-    ```
-    dotnet run
-    ```
-
-    > **Note**: The ``dotnet run`` command will start the console application.
-
-1.  Observe the various data that is printed to the screen including; initial SQL record count, individual upsert activity identifiers, final Azure Cosmos DB document count.
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 7: Validate migration
-
-1.  Return to the **Microsoft Edge** browser window showing the **Azure portal**.
-
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
-
-1.  In the **Resource groups** blade, locate and select the **PolyglotData** resource group that you created earlier in this lab.
-
-1.  In the **PolyglotData** blade, select the **polycosmos\*** Azure Cosmos DB account that you created earlier in this lab.
-
-1.  In the **Azure Cosmos DB account** blade, locate and select the **Query editor** link on the left side of the blade.
-
-1.  In the **Query editor** pane, expand the **Retail** database node.
-
-1.  Expand the **Online** container node.
-
-1.  Select **New SQL Query**.
-
-    > **Note**: The label for this option may be hidden. You can view labels by hovering over the icons at the top of the **Data Explorer** pane.
-
-1.  In the query tab that appears, enter the following text:
-
-    ```
-    SELECT * FROM models
-    ```
-
-1.  Select **Execute Query**.
-
-1.  Observe the list of JSON models returned by the query.
-
-1.  Back in the query editor, replace the existing text with the following text:
-
-    ```
-    SELECT VALUE COUNT(1) FROM models
-    ```
-
-1.  Select **Execute Query**.
-
-1.  Observe the result of the **COUNT** aggregate operation.
-
-1.  Return to the **Visual Studio Code** window.
-
-#### Review
-
-In this exercise, you used Entity Framework and the .NET SDK for Azure Cosmos DB to migrate data from Azure SQL Database to Azure Cosmos DB.
-
-### Exercise 5: Accessing Azure Cosmos DB using .NET
-
-#### Task 1: Update Library with the Cosmos SDK and references
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Context** folder:
-
-    ```
-    cd .\AdventureWorks.Context\
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to import the **Microsoft.Azure.Cosmos** from NuGet:
-
-    ```
-    dotnet add package Microsoft.Azure.Cosmos --version 3.0.0
-    ```
-
-    > **Note**: The ``dotnet add package`` command will add the **[Microsoft.Azure.Cosmos](https://www.nuget.org/packages/Microsoft.Azure.Cosmos/3.0.0)** package from **NuGet**.
-
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 2: Write .NET code to connect to Azure Cosmos DB
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Context** project.
-
-1.  Access the context menu or right-click the **AdventureWorks.Context** folder node and then select **New File**.
-
-1.  In the prompt that appears, enter the value **AdventureWorksCosmosContext.cs**.
-
-1.  In the code editor tab for the **AdventureWorksCosmosContext.cs** file, add the following lines of code to import the **AdventureWorks.Models** namespace from the referenced **AdventureWorks.Models** project:
-
-    ```
-    using AdventureWorks.Models;
-    ```
-
-1.  Add the following lines of code to import the **Microsoft.Azure.Cosmos** and **Microsoft.Azure.Cosmos.Linq** namespaces from the **Microsoft.Azure.Cosmos** package imported from NuGet:
-
-    ```
-    using Microsoft.Azure.Cosmos;
-    using Microsoft.Azure.Cosmos.Linq;
-    ```
-
-1.  Add the following lines of code to add using blocks for built-in namespaces that will be used in this file:
-
-    ```
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    ```
-
-1.  Enter the following code to add a **AdventureWorks.Context** namespace block:
-
-    ```
-    namespace AdventureWorks.Context
-    {
     }
-    ```
+    return count;
 
-1.  Within the **AdventureWorks.Context** namespace, enter the following code to create a new **AdventureWorksCosmosContext** class:
+15. while 루프 내에서 **ExecuteNextAsync\<\>** ** IDocumentQuery\<\>** 클래스의 메서드를 호출하는 코드 줄을 추가하고 그결과를 ***results** * 의 **FeedResponse\&&>>** 로 저장합니다.
 
-    ```
-    public class AdventureWorksCosmosContext
+<!-- end list -->
+
+    FeedResponse<int> results = await query.ExecuteNextAsync<int>();
+
+16. while 루프 내에서results변수에 저장된 컬렉션에서 **Sum** LINQ 메서드를 호출한 결과로 count변수를 증분하는 코드 줄을 추가합니다.
+
+<!-- end list -->
+
+    count += results.Sum();
+
+17. **RegistrationContext** 클래스 내에서 **GetRegistrantsForEvent** 메서드를 찾아 메서드 내의 기존 코드를 삭제합니다.
+
+<!-- end list -->
+
+    public async Task<List<string>> GetRegistrantsForEvent(string eventKey)
     {
-    }
-    ```
-
-1.  Update the declaration of the **AdventureWorksCosmosContext** class by adding a specification indicating that this class will implement the **IAdventureWorksProductContext** interface:
-
-    ```
-    public class AdventureWorksCosmosContext : IAdventureWorksProductContext
-    {
-    }
-    ```
-
-1.  Within the **AdventureWorksCosmosContext** class, enter the following line of code to create a new readonly **Container** variable named **_container**:
-
-    ```
-    private readonly Container _container;
-    ```
-
-1.  Within the **AdventureWorksCosmosContext** class, add a new constructor with the following signature:
-
-    ```
-    public AdventureWorksCosmosContext(string connectionString, string database = "Retail", string container = "Online")
-    {
-    }
-    ```
-
-1.  Within the constructor, add the following block of code to create a new instance of the **CosmosClient** class and then obtain both a **Database** and **Container** instance from the client:
-
-    ```
-    _container = new CosmosClient(connectionString)
-        .GetDatabase(database)
-        .GetContainer(container);
-    ```
-
-1.  Within the **AdventureWorksCosmosContext** class, add a new **FindModelAsync** method with the following signature:
-
-    ```
-    public async Task<Model> FindModelAsync(Guid id)
-    {
-    }
-    ```
-
-1.  Within the **FindModelAsync** method, add the following blocks of code to create a LINQ query, transform it into an iterator, iterate over the result set, and then return the single item in the result set:
-
-    ```
-    var iterator = _container.GetItemLinqQueryable<Model>()
-        .Where(m => m.id == id)
-        .ToFeedIterator<Model>();
-
-    List<Model> matches = new List<Model>();
-    while (iterator.HasMoreResults)
-    {
-        var next = await iterator.ReadNextAsync();
-        matches.AddRange(next);
-    }
-
-    return matches.SingleOrDefault();
-    ```
-
-1.  Within the **AdventureWorksCosmosContext** class, add a new **GetModelsAsync** method with the following signature:
-
-    ```
-    public async Task<List<Model>> GetModelsAsync()
-    {
-    }
-    ```
-
-1.  Within the **GetModelsAsync** method, add the following blocks of code to execute a sql query, get the query result iterator, iterator over the result set, and then return the union of all results:
-
-    ```
-    string query = $@"SELECT * FROM items";
-
-    var iterator = _container.GetItemQueryIterator<Model>(query);
-
-    List<Model> matches = new List<Model>();
-    while (iterator.HasMoreResults)
-    {
-        var next = await iterator.ReadNextAsync();
-        matches.AddRange(next);
-    }
-
-    return matches;
-    ```
-
-1.  Within the **AdventureWorksCosmosContext** class, add a new **FindProductAsync** method with the following signature:
-
-    ```
-    public async Task<Product> FindProductAsync(Guid id)
-    {
-    }
-    ```
-
-1.  Within the **FindProductAsync** method, add the following blocks of code to execute a sql query, get the query result iterator, iterates over the result set, and then return the single item in the result set:
-
-    ```
-    string query = $@"SELECT VALUE products
-                        FROM models
-                        JOIN products in models.Products
-                        WHERE products.id = '{id}'";
-
-    var iterator = _container.GetItemQueryIterator<Product>(query);
-
-    List<Product> matches = new List<Product>();
-    while (iterator.HasMoreResults)
-    {
-        var next = await iterator.ReadNextAsync();
-        matches.AddRange(next);
-    }
-
-    return matches.SingleOrDefault();
-    ```
-
-1.  Save the **AdventureWorksCosmosContext.cs** file.
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Context** folder:
-
-    ```
-    cd .\AdventureWorks.Context
-    ```
     
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-    > **Note**: If there are any build errors, please review the **AdventureWorksCosmosContext.cs** file located in the **Allfiles (F):\\Allfiles\\Labs\\03\\Solution\\AdventureWorks\\AdventureWorks.Context** folder.
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 3: Update Azure Cosmos DB connection string
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Web** project.
-
-1.  Double-click (or double-select) the **appsettings.json** file.
-
-1.  In the JSON object, in line 4, locate the **ConnectionStrings.AdventureWorksCosmosContext** path. Observe that the current value is empty:
-
-    ```
-    "ConnectionStrings": {
-        ...
-        "AdventureWorksCosmosContext": "",
-        ...
-    },
-    ```
-
-1.  Update the value of the **AdventureWorksCosmosContext** property by setting its value to the **PRIMARY CONNECTION STRING** of the **Azure Cosmos DB account** that you recorded earier in this lab.
-
-1.  Save the **appsettings.json** file.
-
-#### Task 4: Update .NET application startup logic
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Web** project.
-
-1.  Double-click (or double-select) the **Startup.cs** file.
-
-1.  In the **Startup** class, locate the existing **ConfigureProductService** method:
-
-    ```
-    public void ConfigureProductService(IServiceCollection services)
-    {
-        services.AddScoped<IAdventureWorksProductContext, AdventureWorksSqlContext>(provider =>
-            new AdventureWorksSqlContext(
-                _configuration.GetConnectionString(nameof(AdventureWorksSqlContext))
-            )
-        );
     }
-    ```
 
-    > **Note**: The current product service uses SQL as its database.
+18. **GetRegistrantsForEvent** 메서드 내에서 LINQ를 사용하여 ***eventKey** * 매개 변수의 값을 사용하여 특정 이벤트에 대한 등록자를 얻을 하고 **GeneralRegistration** 를 사용하여 해당 등록자를 직렬화 하는 코드 줄을 추가합니다.
 
-1.  Within the **ConfigureProductService** method, delete all existing lines of code :
+<!-- end list -->
 
-    ```
-    public void ConfigureProductService(IServiceCollection services)
+    IDocumentQuery<GeneralRegistration> query = Client.CreateDocumentQuery<GeneralRegistration>(Collection.SelfLink).Where(r => r.EventKey == eventKey).AsDocumentQuery();
+
+19. 코드의 새 블록을 추가하여 **List\<\>** 변수를 ***registrants***로 생성하여 **IDocumentQuery\<\>** 클래스의 **HasMoreResults** 속성을 반복하고 ***registrants*** 의 최종 값을 반환하는 while 루프 변수 :
+
+<!-- end list -->
+
+    List<string> registrants = new List<string>();
+    while (query.HasMoreResults)
     {
-    }
-    ```
-
-1.  Within the **ConfigureProductService** method, add the following block of code to change the products provider to the **AdventureWorksCosmosContext** implementation you created earlier in this lab:
-
-    ```
-    services.AddScoped<IAdventureWorksProductContext, AdventureWorksCosmosContext>(provider =>
-        new AdventureWorksCosmosContext(
-            _configuration.GetConnectionString(nameof(AdventureWorksCosmosContext))
-        )
-    );
-    ```
-
-1.  Save the **Startup.cs** file.
-
-#### Task 5: Validate .NET application successfully connects to Azure Cosmos DB
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Web** folder:
-
-    ```
-    cd .\AdventureWorks.Web\
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to run the .NET Core web application:
-
-    ```
-    dotnet run
-    ```
-
-    > **Note**: The ``dotnet run`` command will automatically build any changes to the project and then start the web application without a debugger attached. The command will output the URL of the running application and any assigned ports.
-
-1.  On the taskbar, select the **Microsoft Edge** icon.
-
-1.  In the open browser window, navigate to the your currently running web application (<http://localhost:5000>).
-
-1.  In the web application, observe the list of models displayed on the front page.
-
-1.  Locate the **Touring-1000** model and select **View Details**.
-
-1.  On the **Touring-1000** product detail page, perform the following actions:
-
-    1.  In the **Select options** list, select **Touring-1000 Yellow, 50, $2,384.07**.
     
-    1.  Select **Add to Cart**.
+    }
+    return registrants;
 
-1.  Observe that the checkout functionality is still disabled.
+20. while 루프 내에서 **ExecuteNextAsync\<\>** ** IDocumentQuery\<\>** 클래스의 메서드를 호출하는 코드 줄을 추가하고 그결과를 results ** *의 **FeedResponse\<\>** 로 저장합니다.
 
-    > **Note**: In the next exercise, you will implement the checkout logic.
+<!-- end list -->
 
-1.  Close the browser window showing your web application.
+    FeedResponse<GeneralRegistration> results = await query.ExecuteNextAsync<GeneralRegistration>();
 
-1.  Return to the **Visual Studio Code** window.
+21. 루프 내에서 **GeneralRegistration** 클래스의 두 속성을 싱글 문자열로 프로젝션하고 결과 유형의 **Ienumerable\<\>** 컬렉션을 형식의 resultName ** *라는 변수에 저장하기 위해 LINQ **Select** 메서드를 호출하는 코드 줄을 추가합니다.
 
-1.  Back in the **Visual Studio Code** window, select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
+<!-- end list -->
 
-#### Review
+    IEnumerable<string> resultNames = results.Select(r => $"{r.FirstName} {r.LastName}");
 
-In this exercise, you wrote C# code to query an Azure Cosmos DB collection using the .NET SDK.
+22. 루프 내에서 다른 코드 줄을 추가하여 **List\<\>** 클래스의 **AddRange** 메서드를 사용하여 **resultNames** 컬렉션의 값으로 **등록자** 컬렉션을 추가합니다.
 
-### Exercise 6: Accessing Azure Cache for Redis using .NET
+<!-- end list -->
 
-#### Task 1: Update Library with the StackExchange.Redis SDK and references
+    registrants.AddRange(resultNames);
 
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
+23. **RegistrationContext** 클래스 내에서 **UploadEventRegistrationAsync** 메서드를 찾아 메서드 내의 기존 코드를 삭제합니다.
 
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Context** folder:
+<!-- end list -->
 
-    ```
-    cd .\AdventureWorks.Context\
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to import the **Newtonsoft.Json** from NuGet:
-
-    ```
-    dotnet add package Newtonsoft.Json --version 12.0.2
-    ```
-
-    > **Note**: The ``dotnet add package`` command will add the **[Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2)** package from **NuGet**.
-
-1.  In the command prompt, enter the following command and press Enter to import the **StackExchange.Redis** from NuGet:
-
-    ```
-    dotnet add package StackExchange.Redis --version 2.0.601
-    ```
-
-    > **Note**: The ``dotnet add package`` command will add the **[StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/2.0.601)** package from **NuGet**.
-
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
-
-    ```
-    dotnet build
-    ```
-
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
-
-#### Task 2: Write .NET code to connect to Azure Cache for Redis
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Context** project.
-
-1.  Access the context menu or right-click the **AdventureWorks.Context** folder node and then select **New File**.
-
-1.  In the prompt that appears, enter the value **AdventureWorksRedisContext.cs**.
-
-1.  In the code editor tab for the **AdventureWorksRedisContext.cs** file, add the following lines of code to import the **AdventureWorks.Models** namespace from the referenced **AdventureWorks.Models** project:
-
-    ```
-    using AdventureWorks.Models;
-    ```
-
-1.  Add the following lines of code to import the **Newtonsoft.Json** namespace from the **Newtonsoft.Json** package imported from NuGet:
-
-    ```
-    using Newtonsoft.Json;
-    ```
-
-1.  Add the following lines of code to import the **StackExchange.Redis** namespace from the **StackExchange.Redis** package imported from NuGet:
-
-    ```
-    using StackExchange.Redis;
-    ```
-
-1.  Add the following lines of code to add using blocks for built-in namespaces that will be used in this file:
-
-    ```
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    ```
-
-1.  Enter the following code to add a **AdventureWorks.Context** namespace block:
-
-    ```
-    namespace AdventureWorks.Context
+    public async Task<string> UploadEventRegistrationAsync(dynamic registration)
     {
-    }
-    ```
-
-1.  Within the **AdventureWorks.Context** namespace, enter the following code to create a new **AdventureWorksRedisContext** class:
-
-    ```
-    public class AdventureWorksRedisContext
-    {
-    }
-    ```
-
-1.  Update the declaration of the **AdventureWorksRedisContext** class by adding a specification indicating that this class will implement the **IAdventureWorksCheckoutContext** interface:
-
-    ```
-    public class AdventureWorksRedisContext : IAdventureWorksCheckoutContext
-    {
-    }
-    ```
-
-1.  Within the **AdventureWorksRedisContext** class, enter the following line of code to create a new readonly **IDatabase** variable named **_database**:
-
-    ```
-    private readonly IDatabase _database;
-    ```
-
-1.  Within the **AdventureWorksRedisContext** class, add a new constructor with the following signature:
-
-    ```
-    public AdventureWorksRedisContext(string connectionString)
-    {        
-    }
-    ```
-
-1.  Within the constructor, add the following block of code to create a new instance of the **ConnectionMultiplexer** class and then get the database instance:
-
-    ```
-    ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(connectionString);
-    _database = connection.GetDatabase();
-    ```
-
-1.  Within the **AdventureWorksRedisContext** class, add a new **AddProductToCartAsync** method with the following signature:
-
-    ```
-    public async Task AddProductToCartAsync(string uniqueIdentifier, Product product)
-    {        
-    }
-    ```
-
-1.  Within the **AddProductToCartAsync** method, add the following blocks of code to get the current value from a key, create a new list if one does not already exists, add the product to the list, and then store the list as the new value for the key in the database:
     
-    ```
-    RedisValue result = await _database.StringGetAsync(uniqueIdentifier);
-    List<Product> products = new List<Product>();
-    if (!result.IsNullOrEmpty)
+    }
+
+24. **UploadEventRegistrationAsync** 메서드 내에서 **DocumentClient** 형식 및 **클라이언트** 속성 및 **CreateDocumentAsync** 메서드를 호출하고 결과를 **ResourceResponse\<Document\>** 형식의 코드 줄을 추가합니다. 이 메서드는 Azure 코스모스 DB에 문서를 업로드합니다.
+
+<!-- end list -->
+
+    ResourceResponse<Document> response = await Client.CreateDocumentAsync(Collection.SelfLink, registration);
+
+25. 도트 표기법을 사용하여 response변수의 **Resource** 속성(문서 **유형**) 과 **문서** 인스턴스의 **Id** 속성에 액세스하는 다른 코드 줄을 추가합니다. 현재 메서드의 결과로 문자열 **Id값을** 값을 반환합니다.
+
+<!-- end list -->
+
+    return response.Resource.Id;
+
+26. **RegistrationContext.cs** 파일을 저장합니다.
+
+#### 검토
+
+이 연습에서는 Azure Cosmos DB에서 문서에 액세스하고 쿼리하는 데 필요한 C\# 코드를 작성했습니다.
+
+### 연습5: Azure 저장소에 연결하는 Azure SDK 코드 작성
+
+#### 작업 1: Azure 함수에 대한 블랍 트리거 및 출력 구현
+
+1.  시각적 스튜디오 코드 창의 탐색기 ** ** 페인에서 **Contoso.Events.Worker** 프로젝트를 확장하고 **ProcessDocuments.cs** 파일을 두 번 클릭합니다.
+
+2.  **ProcessDocuments.cs** 파일의 코드 편집기 탭에서 **ProcessDocuments** 클래스를 찾습니다.
+
+<!-- end list -->
+
+    public static class ProcessDocuments
+
+3.  **ProcessDocuments** 클래스 내에서 **운영** 메서드를 찾습니다.
+
+<!-- end list -->
+
+    public static async Task Run(Stream input, string name, Stream output, TraceWriter log)
+
+4.  *BlobTrigger *매개 변수 특성을 *input *매개 변수에 추가하여 **Run** 메서드의 메서드 서명을 업데이트하여 **signinsheets-pending** 보류 중인 컨테이너의 모든 블랍에 일치하도록 지정합니다.
+
+<!-- end list -->
+
+    public static async Task Run([BlobTrigger("signinsheets-pending/{name}")] Stream input, string name, Stream output, TraceWriter log)
+
+5.  함수를  트리거한 블랍과 이름이 같은 **signinsheets** 컨테이너에 새 블랍을 만들도록 지정하는 출력 *블랍* 매개 변수 특성을 추가하여 **Run** 메서드의 서명을 *앗풋*을 실행합니다:
+
+<!-- end list -->
+
+    public static async Task Run([BlobTrigger("signinsheets-pending/{name}")] Stream input, string name, [Blob("signinsheets/{name}", FileAccess.Write)] Stream output, TraceWriter log)
+
+6.  **Run** 메서드 내에서 23줄에 새 코드 줄을 추가하여 블랍 이름에서 파일 확장명을 제거하여 **이벤트 키** 를 가집니다.
+
+<!-- end list -->
+
+    string eventKey = Path.GetFileNameWithoutExtension(name);
+
+7.  24줄에 새 코드 줄을 추가하여 **ProcessStorageMessage** 메서드 호출에서 **스트림** 결과를 사용하여 **using** 블록을 만듭니다.
+
+<!-- end list -->
+
+    using (MemoryStream stream = await ProcessStorageMessage(eventKey))
     {
-        List<Product> parsed = JsonConvert.DeserializeObject<List<Product>>(result.ToString());
-        products.AddRange(parsed);
-    }
-    products.Add(product);
-    string json = JsonConvert.SerializeObject(products);
-    await _database.StringSetAsync(uniqueIdentifier, json);
-    ```
-
-1.  Within the **AdventureWorksRedisContext** class, add a new **GetProductsInCartAsync** method with the following signature:
-
-    ```
-    public async Task<List<Product>> GetProductsInCartAsync(string uniqueIdentifier)
-    {        
-    }
-    ```
-
-1.  Within the **GetProductsInCartAsync** method, add the following lines of code to get the list from the database and parse the JSON value into a collection of **Product** instances:
     
-    ```    
-    string json = await _database.StringGetAsync(uniqueIdentifier);
-    List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json ?? "[]");
-    return products;
-    ```
-
-1.  Within the **AdventureWorksRedisContext** class, add a new **ClearCart** method with the following signature:
-
-    ```
-    public async Task ClearCart(string uniqueIdentifier)
-    {        
     }
-    ```
 
-1.  Within the **ClearCart** method, add the following line of code to remove a key and its associated values from the database:
-    
-    ```
-    await _database.KeyDeleteAsync(uniqueIdentifier);
-    ```
+8.  **Using** 블록 내에서 새 코드 줄을 추가하여 스트림의 **ToArray** 메서드를 호출하여 **byte\[\]** 의 새 변수를 만듭니다.
 
-1.  Save the **AdventureWorksRedisContext.cs** file.
+<!-- end list -->
 
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
+    byte[] byteArray = stream.ToArray();
 
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Context** folder:
+9.  **Using** 블록 내에서 다른 코드 줄을 추가하여 *byteArray* 변수와 관련된 다양한 메타데이터에 전달하는 *출력* 변수의 **WriteAsync** 메서드를 호출합니다.
 
-    ```
-    cd .\AdventureWorks.Context
-    ```
-    
-1.  In the command prompt, enter the following command and press Enter to build the .NET Core web application:
+<!-- end list -->
 
-    ```
-    dotnet build
-    ```
+    await output.WriteAsync(byteArray, 0, byteArray.Length);
 
-    > **Note**: If there are any build errors, please review the **AdventureWorksRedisContext.cs** file located in the **Allfiles (F):\\Allfiles\\Labs\\03\\Solution\\AdventureWorks\\AdventureWorks.Context** folder.
+10. **ProcessDocuments.cs** 파일을 저장합니다.
 
-1.  Select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
+#### 작업 2: BlobContext 클래스에서 블랍 업로드 구현
 
-#### Task 3: Update Redis connection string
+1.  비주얼 스튜디오 코드 창의 탐색기 페인에서 **Contoso.Events.Data** 프로젝트를 확장하고 **BlobContext.cs** 파일을 두 번 클릭합니다.
 
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Web** project.
+2.  **BlobContext.cs** 파일의 코드 편집기 탭에서 **BlobContext** 클래스를 찾습니다.
 
-1.  Double-click (or double-select) the **appsettings.json** file.
+<!-- end list -->
 
-1.  In the JSON object, in line 4, locate the **ConnectionStrings.AdventureWorksRedisContext** path. Observe that the current value is empty:
+    public class BlobContext
 
-    ```
-    "ConnectionStrings": {
-        ...
-        "AdventureWorksRedisContext": ""
-    },
-    ```
+3.  **BlobContext** 클래스 내에서 **UploadBlobAsync** 메서드를 찾아 메서드 내의 기존 코드를 삭제합니다.
 
-1.  Update the value of the **AdventureWorksRedisContext** property by setting its value to the **Primary connection string (StackExchange.Redis)** of the **Azure Cache for Redis** instance that you recorded earier in this lab.
+<!-- end list -->
 
-1.  In the JSON object, in line 9, locate the **Settings.CartAvailable** path. Observe that the current value is **false**:
-
-    ```
-    "Settings": {
-        ...
-        "CartAvailable": false,
-        ...
-    }
-    ```
-
-1.  Update the value of the **CartAvailable** property by setting its value to **true**:
-
-    ```
-    "CartAvailable": true,
-    ```
-
-1.  Save the **appsettings.json** file.
-
-#### Task 4: Update .NET application startup logic
-
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **AdventureWorks.Web** project.
-
-1.  Double-click (or double-select) the **Startup.cs** file.
-
-1.  In the **Startup** class, locate the existing **ConfigureCheckoutService** method:
-
-    ```
-    public void ConfigureCheckoutService(IServiceCollection services)
+    public async Task<ICloudBlob> UploadBlobAsync(string blobName, Stream stream)
     {
-        services.AddScoped<IAdventureWorksCheckoutContext>(provider =>
-            new Mock<IAdventureWorksCheckoutContext>().Object
-        );
-    }
-    ```
-
-    > **Note**: The current checkout service uses a mock as its database.
-
-1.  Within the **ConfigureCheckoutService** method, delete all existing lines of code :
-
-    ```
-    public void ConfigureCheckoutService(IServiceCollection services)
-    {
-    }
-    ```
-
-1.  Within the **ConfigureCheckoutService** method, add the following block of code to change the checkout provider to the **AdventureWorksRedisContext** implementation you created earlier in this lab:
-
-    ```
-    services.AddScoped<IAdventureWorksCheckoutContext, AdventureWorksRedisContext>(provider =>
-        new AdventureWorksRedisContext(
-            _configuration.GetConnectionString(nameof(AdventureWorksRedisContext))
-        )
-    );
-    ```
-
-1.  Save the **Startup.cs** file.
-
-#### Task 5: Validate .NET application successfully connects to Azure Cache for Redis
-
-1.  In the Visual Studio Code window, access the context menu or right-click the **Explorer** pane and then select **Open in Terminal**.
-
-1.  In the open command prompt, enter the following command and press Enter to switch your terminal context to the **AdventureWorks.Web** folder:
-
-    ```
-    cd .\AdventureWorks.Web\
-    ```
-
-1.  In the command prompt, enter the following command and press Enter to run the .NET Core web application:
-
-    ```
-    dotnet run
-    ```
-
-    > **Note**: The ``dotnet run`` command will automatically build any changes to the project and then start the web application without a debugger attached. The command will output the URL of the running application and any assigned ports.
-
-1.  On the taskbar, select the **Microsoft Edge** icon.
-
-1.  In the open browser window, navigate to the your currently running web application (<http://localhost:5000>).
-
-1.  In the web application, observe the list of models displayed on the front page.
-
-1.  Locate the **Mountain-400-W** model and select **View Details**.
-
-1.  On the **Mountain-400-W** product detail page, perform the following actions:
-
-    1.  In the **Select options** list, select **Mountain-400-W Silver, 40, $769.49**.
     
-    1.  Select **Add to Cart**.
+    }
 
-1.  On the shopping cart page, observe the contents of the cart and then select **Checkout**.
+4.  **UploadBlobAsync** 메서드 내에서 새 코드 줄을 추가하여 새 **CloudStorageAccount** 클래스 인스턴스를 만듭니다.
 
-1.  On the checkout page, observe the final receipt.
+<!-- end list -->
 
-1.  Select the **Shopping Cart** icon at the top of the page.
+    CloudStorageAccount account = CloudStorageAccount.Parse(StorageSettings.ConnectionString);
 
-1.  On the shopping cart page, observe the empty cart.
+5.  **CloudStorageAccount** 클래스의 **CreateCloudBlobClient** 메서드를 사용하여 **CloudBlobClient** 클래스의 새 인스턴스를 만들려면 새 코드 줄을 추가합니다.
 
-1.  Close the browser window showing your web application.
+<!-- end list -->
 
-1.  Back in the **Visual Studio Code** window, select the **Trash Can** icon to dispose of the currently open terminal and any associated processes.
+    CloudBlobClient blobClient = account.CreateCloudBlobClient();
 
-#### Review
+6.  **CloudBlobClient** 클래스의 **GetContainerReference** 서드를 사용하여 새 컨테이너 또는 기존 컨테이너에 대한 참조를 얻으려면 새 코드 줄을 추가합니다.
 
-In this exercise, you used C# code to store and retrieve data from an Azure Cache for Redis store.
+<!-- end list -->
 
-### Exercise 7: Clean up subscription 
+    CloudBlobContainer container = blobClient.GetContainerReference($"{StorageSettings.ContainerName}-pending");
 
-#### Task 1: Open Azure Cloud Shell
+7.  새 코드 줄을 추가하여 아직 존재하지 않는 경우 컨테이너를 만드는 **CloudBlobContainer** 클래스의 **CreateIfNotExistsAsync** 메서드를 호출합니다.
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+<!-- end list -->
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type in the following command and press Enter to list all resource groups in the subscription:
+    await container.CreateIfNotExistsAsync();
 
-    ```
+8.  지정된 블랍 이름을 사용하여 새 코드 줄을 추가하여 새 블랍 또는 기존 블랍에 대한 참조를 가집니다.
+
+<!-- end list -->
+
+    ICloudBlob blob = container.GetBlockBlobReference(blobName);
+
+9.  새 코드 줄을 추가하여 ***stream*** 매개 변수를 가져 와서 스트림을 원본으로 되돌리십시오.
+
+<!-- end list -->
+
+    stream.Seek(0, SeekOrigin.Begin);
+
+10. 참조된 블랍에 ***stream*** 매개 변수의 콘텐츠를 업로드하기 위해 새 코드 줄을 추가합니다.
+
+<!-- end list -->
+
+    await blob.UploadFromStreamAsync(stream);
+
+11. 메서드의 결과로 업데이트된 Blob 을 반환 하는 코드의 새 줄을 추가 합니다.
+
+<!-- end list -->
+
+    return new DownloadPayload { Stream = stream, ContentType = blob.Properties.ContentType }; 
+
+12. **BlobContext.cs** 파일을 **저장합니다**.
+
+#### 검토
+
+이 연습에서는 Azure Function 에서 Azure 저장소 Blob 을 조작하기 위해 C\# 코드를 작성했습니다.
+
+### 연습 6: 구독 정리 
+
+#### 작업 1: Azure 클라우드 셸 열기
+
+1.  포털 상단에서 **클라우드 셸** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
+
+2.  포털 하단의 **클라우드 셸** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 리소스 그룹을 나열합니다.
+
+<!-- end list -->
+
     az group list
-    ```
-1.  In the prompt, type the following command and press Enter to view a list of possible commands to delete a resource group:
 
-    ```
+3.  프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 리소스 그룹을 삭제할 수 있는 명령 목록을 봅니다.
+
+<!-- end list -->
+
     az group delete --help
-    ```
 
-#### Task 2: Delete resource groups
+#### 작업 2: 리소스 그룹 삭제
 
-1.  In the prompt, type the following command and press Enter to delete the **PolyglotData** resource group:
+1.  프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 **PolyglotData** 리소스 그룹을 삭제합니다.
 
-    ```
+<!-- end list -->
+
     az group delete --name PolyglotData --no-wait --yes
-    ```
-    
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
 
-#### Task 3: Close active applications
+2.  포털 하단의 **클라우드 셸** 페인을 닫습니다.
 
-1.  Close the currently running **Microsoft Edge** application.
+#### 작업 3: 액티브 응용 프로그램 닫기
 
-1.  Close the currently running **Visual Studio Code** application.
+1.  현재 실행 중인  **Microsoft Edge** 응용 프로그램을 닫습니다.
 
-#### Review
+2.  현재 실행 중인 **Visual Studio Code** 응용 프로그램을 닫습니다.
 
-In this exercise, you cleaned up your subscription by removing the **resource groups** used in this lab.
+#### 검토
+
+이 연습에서는이 랩에 사용된 **리소스 그룹을** 제거하여 구독을 정리했습니다.

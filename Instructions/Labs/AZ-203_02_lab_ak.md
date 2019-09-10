@@ -1,625 +1,583 @@
+﻿---
+랩:
+    제목: ‘랩: 서비스형 Azure 플랫폼에서 웹 응용 프로그램 만듭니다.
+    유형: ‘답변 키’
+    모듈: ‘모듈 2: 서비스(PaaS) 컴퓨팅 솔루션으로 Azure 플랫폼 개발합니다'
 ---
-lab:
-    title: 'Lab: Building a web application on Azure Platform-as-a-Service offerings'
-    type: 'Answer Key'
-    module: 'Module 2: Develop Azure platform as a service (PaaS) compute solutions'
----
 
-# Lab: Building a web application on Azure Platform-as-a-Service offerings
-# Student lab answer key
+# 랩: 서비스형 Azure 플랫폼에서 웹 응용 프로그램 만듭니다.
+# 학생 랩 답변 키
 
-## Microsoft Azure user interface
+## Microsoft Azure 사용자 인터페이스
 
-Given the dynamic nature of Microsoft cloud tools, you might experience Azure user interface (UI) changes after the development of this training content. These changes might cause the lab instructions and steps to not match up.
+Microsoft 클라우드 도구의 동적 특성을 감안할 때 이 교육 콘텐츠를 개발한 후 Azure 사용자 인터페이스(UI) 변경 사항이 발생할 수 있습니다. 이러한 변경으로 인해 랩 지침 및 단계가 일치하지 않을 수 있습니다.
 
-The Microsoft Worldwide Learning team updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
+Microsoft 전 세계 학습 팀은 커뮤니티에서 필요한 변경 사항을 가져오는 즉시 이 교육 과정을 업데이트합니다. 그러나 클라우드 업데이트가 자주 발생하기 때문에 이 교육 콘텐츠가 업데이트되기 전에 UI가 변경될 수 있습니다. **이 경우 변경 사항에 적응하고 필요에 따라 랩에서 작업합니다.**
 
-## Instructions
+## 지침
 
-### Before you start
+### 시작하기 전에
 
-#### Sign in to the lab virtual machine
+#### 랩 가상 기계에 로그인
 
-Sign in to your **Windows 10** virtual machine by using the following credentials:
+  - 다음 자격 증명을 사용하여 **Windows 10** 가상 기계에 로그인합니다.
     
--   **Username**: Admin
+    1.  **사용자 이름**: 관리자
     
--   **Password**: Pa55w.rd
+    2.  **비밀번호**: Pa55w.rd
 
-> **Note**: Lab virtual machine sign-in instructions will be provided to you by your instructor.
+> > **참고**: 랩 가상 기계 로그인 지침은 교수자를 통하여 제공합니다.
 
-#### Review installed applications
+#### 설치된 응용 프로그램 검토
 
-Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications that you will use in this lab:
+  - **Windows 10** 바탕 하단에 있는 작업 표시줄을 관찰합니다. 작업 표시줄에는 이 랩에서 사용할 응용 프로그램에 대한 아이콘이 포함되어 있습니다.
     
--   Microsoft Edge
+      - 마이크로소프트 에지
+    
+      - 파일 탐색기
+    
+      - Windows PowerShell
+    
+      - Visual Studio Code
 
--   File Explorer
+#### 랩 파일 다운로드
 
--   Windows PowerShell
+1.  작업 표시줄에서 **Windows PowerShell** 아이콘을 선택합니다.
 
--   Visual Studio Code
-
-#### Download the lab files
-
-1.  On the taskbar, select the **Windows PowerShell** icon.
-
-1.  In the PowerShell command prompt, change the current working directory to the **Allfiles (F):\\** path:
+2.  PowerShell 명령 프롬프트에서 현재 작업 디렉토리를 **Allfiles(F):\\** 경로로 변경합니다.
 
     ```
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsforMicrosoftAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
+3.  명령 프롬프트 내에서 다음 명령을 입력하고 Enter 를 누르며 GitHub 에서 호스팅되는 **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** 프로젝트를 **랩파일** 디렉토리로 복제합니다.
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T02** lab:
+4.  명령 프롬프트 내에서 다음 명령을 입력하고 **Enter** 를 눌러 **AZ-203.02** 랩을 완료할 때 필요한 랩 파일을 체크 아웃합니다.
 
     ```
     git checkout master -- Allfiles/*
     ```
 
-1.  Close the currently running **Windows PowerShell** command prompt application.
+5.  현재 실행 중인 **Windows PowerShell** 명령 프롬프트 응용 프로그램을 닫습니다.
 
-### Exercise 1: Build a back-end API by using Azure Storage and API Apps
+### 연습 1: Azure 저장소 및 API 어플을 사용하여 백 엔드 API 를 구축합니다.
 
-#### Task 1: Open the Azure portal
+#### 작업 1: Azure 포털 열기
 
-1.  On the taskbar, select the **Microsoft Edge** icon.
+1.  작업 표시줄에서 **Microsoft Edge** 아이콘을 선택합니다.
 
-1.  In the open browser window, navigate to the [**Azure portal**](https://portal.azure.com) (portal.azure.com).
+2.  열린 브라우저 창에서 [**Azure portal**](https://portal.azure.com)(portal.azure.com)으로 이동합니다.
 
-1.  At the sign-in page, enter the **email address** for your Microsoft account.
+3.  로그인 페이지에서 Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
 
-1.  Select **Next**.
+4.  **다음** 을 선택합니다.
 
-1.  Enter the **password** for your Microsoft account.
+5.  Microsoft 계정의 **비밀번호** 를 입력합니다.
 
-1.  Select **Sign in**.
+6.  **로그인** 을 선택합니다.
 
-    > **Note**: If this is your first time signing in to the Azure portal, a dialog box will display offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+> **참고**: Azure 포털에 처음 로그인하는 경우 포털 둘러보기를 제공하는 대화 박스가 표시됩니다. 둘러보기를 건너뛰고 포털 사용을 시작하려면 **시작하기** 를 선택합니다.
 
-#### Task 2: Create an Azure Storage account
+#### 작업 2: Azure 저장소 계정 만들기
 
-1.  In the left navigation pane of the Azure portal, select **All services**.
+1.  Azure 포털의 왼쪽 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
 
-1.  In the **All services** blade, select **Storage Accounts**.
+2.  **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
 
-1.  In the **Storage accounts** blade, view your list of Storage instances.
+3.  **저장소 계정** 블레이드에서 저장소 인스턴스 목록을 봅니다.
 
-1.  At the top of the **Storage accounts** blade, select **Add**.
+4.  **저장소 계정** 블레이드 상단에서 **추가** 를 선택합니다.
 
-1.  In the **Create storage account** blade, observe the tabs at the top of the blade, such as Basics, Tags, and Review+Create.
+5.  **저장소 계정 만들기** 블레이드에서 기본 태그 및 검토+만들기와 같은 블레이드 상단의 탭을 관찰합니다.
 
-    > **Note**: Each tab represents a step in the workflow to create a new **storage account**. At any time, you can select **Review + create** to skip the remaining tabs.
+> **참고**: 각 탭은 새 **저장소 계정** 을 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
 
-1.  Select the **Basics** tab, and within the tab area, perform the following actions:
+6.  **기본** 탭을 선택하고 탭 영역 내에서 다음 작업을 수행합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    1.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** section, select **Create new**, enter **ManagedPlatform**, and then select **OK**.
+    2.  **리소스 그룹** 섹션에서 **새 만들기** 를 선택하고 **관리 플랫폼** 을 입력한 다음 **OK** 를 선택합니다.
     
-    1.  In the **Storage account** **name** field, enter **imgstor\[*your name in lowercase*\]**.
+    3.  **저장소 계정** **이름** 필드에서 **imgstor\[*your name in lowercase*\]** 를 입력합니다.
     
-    1.  In the **Location** list, select the **(US) East US** region.
+    4.  **위치** 목록에서 **미국 동부** 지역을 선택합니다.
     
-    1.  In the **Performance** section, select **Standard**.
+    5.  **성능** 섹션에서 **표준** 을 선택합니다.
     
-    1.  In the **Account kind** list, select **StorageV2 (general purpose v2)**.
+    6.  **계정 종류** 목록에서 **StorageV2(일반용 v2)** 를 선택합니다.
     
-    1.  In the **Replication** list, select **Locally-redundant storage (LRS)**.
+    7.  **복제** 목록에서 **영역 중복 저장소(ZRS)** 를 선택합니다.
     
-    1.  In the **Access tier (default)** section, ensure that **Hot** is selected.
+    8.  **액세스 계층** 섹션에서 **핫** 이 선택되어 있는지 확인합니다.
     
-    1.  Select **Review + Create**.
+    9.  **검토 + 만들기** 를 선택합니다.
 
-1.  In the **Review + Create** tab, review the options that you specified in the previous steps.
+7.  **검토+ 만들기** 탭에서 이전 단계에서 지정한 옵션을 검토합니다.
 
-1.  Select **Create** to create the storage account by using your specified configuration.
+8.  지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
 
-1.  In the **Deployment** blade, Wait for the creation task to complete before moving forward with this lab.
+9.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1. Click the **Go to resource** button in the **Deployment** blade to go to the newly created storage account.
+10. Azure 포털의 왼쪽 네비게이션 페인에서 **모든 서비스** 를 선택합니다.
 
-1. In the **Storage account** blade, on the left side of the blade, locate the **Settings** section and select **Access keys**.
+11. **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
 
-1. In the **Access keys** blade, select any one of the keys and record the value of either of the **Connection string** fields. You will use this value later in this lab.
+12. 표시되는 **저장소 계정** 블레이드에서 이전에 랩에서 만든 **imgstor\*** 저장소 계정을 선택합니다.
 
-    > **Note**: It does not matter which connection string you choose. They are interchangeable.
+13. **저장소 계정** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션을 찾아 **액세스 키** 를 선택합니다.
 
-#### Task 3: Upload a sample blob
+14. **엑세스 키** 블레이드에서 키 중 하나를 선택하고 **연결 문자열** 필드 중 하나의 값을 기록합니다. 이 랩에서 나중에 이 값을 사용합니다.
 
-1.  On the Azure portal left navigation pane, select **Resource groups**.
+> > **참고**: 어떤 연결 문자열을 선택하든 상관없습니다. 서로 교환할 수 있습니다.
 
-1.  In the **Resource groups** blade, select the **ManagedPlatform** resource group that you created earlier in this lab.
+#### 작업 3: 샘플 블랍 업로드
 
-1.  In the **ManagedPlatform** blade, select the **imgstor\*** storage account you created earlier in this lab.
+1.  Azure 포털 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Storage Account** blade, on the left side of the blade, in the **Blob service** section, select the **Blobs** link.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1.  In the **Blobs** section, select **+ Container**.
+3.  **관리 플랫폼** 블레이드에서 이전엔 랩에서 만든 **imgstor\*** 저장소 계정을 선택합니다.
 
-1.  In the **New container** window, perform the following actions:
+4.  **저장소 계정** 블레이드에서 블레이드 왼쪽에 있는 **블랍 서비스** 섹션에서 **블랍** 링크를 선택합니다.
+
+5.  **블랍** 섹션에서 **+ 컨테이너** 를 선택합니다.
+
+6.  **새 컨테이너** 창에서 다음 작업을 수행합니다.
     
-    1.  In the **Name** field, enter **images**.
+    1.  **이름** 필드에 **이미지** 를 입력합니다.
     
-    1.  In the **Public access level** list, select **Blob (anonymous read access for blobs only)**.
+    2.  **공용 액세스 수준** 목록에서 **B블랍(블랍에 대해서만 익명 읽기 액세스**) 을 선택합니다.
     
-    1.  Select **OK**.
+    3.  **확인** 을 선택합니다.
 
-1.  In the **Blobs** section, select **+ Container** again.
+7.  **블랍** 섹션에서 + **컨테이너** 를 다시 선택합니다.
 
-1.  In the **New container** window, perform the following actions:
+8.  **새 컨테이너** 창에서 다음 작업을 수행합니다.
 
-    1.  In the **Name** field, enter **images-thumbnails**.
+<!-- end list -->
 
-    1.  In the **Public access level** list, select **Blob (anonymous read access for blobs only)**.
+1.  **이름** 필드에 **이미지-섬네일** 을 입력합니다.
 
-    1.  Select **OK**.
+2.  **공용 액세스 수준** 목록에서 **B블랍(블랍에 대해서만 익명 읽기 액세스**) 을 선택합니다.
 
-1.  In the **Blobs** section, select the newly created **images** container.
+3.  **확인** 을 선택합니다.
 
-1. In the **Container** blade, select **Upload**.
+<!-- end list -->
 
-1. In the **Upload blob** window that appears, perform the following actions:
+9.  **블랍** 섹션에서 새로 만든 **이미지** 컨테이너를 선택합니다.
 
-    1.  In the **Files** section, select the **Folder** icon.
+10. **컨테이너** 블레이드에서 **업로드** 를 선택합니다.
 
-    1.  In the File Explorer dialog box that appears, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **grilledcheese.jpg** file, and then select **Open**.
+11. 표시되는 **블랍 업로드** 창에서 다음 작업을 수행합니다.
 
-    1.  Ensure that the **Overwrite if files already exist** check box is selected.
+<!-- end list -->
 
-    1.  Select **Upload**.
+1.  **파일** 섹션에서 **폴더** 아이콘을 선택합니다.
 
-1. Wait for the blob to be uploaded before you continue with this lab.
+2.  표시되는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Images** 으로 이동하여 **grilledcheese.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
 
-#### Task 4: Create an API app
+3.  **이미 존재하는 경우 덮어쓰기** 확인란이 선택되어 있는지 확인합니다.
 
-1.  In the left navigation pane of the portal, select **+ Create a resource**.
+4.  **업로드** 를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+<!-- end list -->
 
-1.  In the search field, enter **API** and press Enter.
+12. 이 랩을 계속하기 전에 블랍이 업로드될 때까지 기다립니다.
 
-1.  In the **Everything** search results blade, select the **API App** result.
+#### 작업 4: API 어플 만들기
 
-1.  In the **API App** blade, select **Create**.
+1.  포털의 왼쪽 네비게인션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  In the second **API App** blade, perform the following actions:
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
+
+3.  검색 필드에 **API** 를 입력하고 Enter 를 누릅니다.
+
+4.  **모든검색** 결과 블레이드에서 **API 어플** 결과를 선택합니다.
+
+5.  **API 어플** 블레이드에서 **만들기** 를 선택합니다.
+
+6.  두 번째 **API 어플** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **App name** field, enter **imgapi\[*your name in lowercase*\]**.
+    1.  **어플 이름** 필드에 **i mgapi\[*your name in lowercase*\]** 를 입력합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** section, select **Use existing**, and then select **ManagedPlatform**.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택한 다음 **관리되는 플랫폼** 을 선택합니다.
     
-    1.  Leave the **App Service plan/Location** field set to its default value.
+    4.  **앱 서비스 계획/위치** 필드를 기본값으로 설정합니다.
     
-    1.  Leave the **Application Insights** field set to its default value.
+    5.  **응용 프로그램 인사이트** 필드를 기본값으로 설정합니다.
     
-    1.  Select **Create**.
+    6.  **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-#### Task 5: Configure an API app
+#### 작업 5: API 어플 구성
 
-1.  In the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **ManagedPlatform** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1.  In the **ManagedPlatform** blade, select the **imgapi\*** API app that you created earlier in this lab.
+3.  **관리 플랫폼** 블레이드에서 이전에 랩에서 만든 **imgapi\*** API 어플을 선택합니다.
 
-1.  In the **API App** blade, on the left side of the blade in the **Settings** section, select the **Configuration** link.
+4.  **API 어플** 블레이드에서 **설정** 섹션의 블레이드 왼쪽에 있는 **응용 프로그램설정** 링크를 선택합니다.
 
-1.  In the **Configuration** section, perform the following actions:
+5.  **응용 프로그램 설정** 섹션에서 다음 작업을 수행합니다.
     
-    1.  Select the **Application settings** tab.
+    1.  **응용 프로그램 설정** 하위 섹션이 표시될 때까지 아래로 스크롤합니다.
     
-    1.  Select **+ New application setting**.
+    2.  **+ 새 설정 추가** 를 선택합니다.
     
-    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **StorageConnectionString**.
+    3.  **이름 입력** 필드에 **저장소 연결 문자열** 을 입력합니다.
     
-    1.  In the **Value** field, enter the **Storage Connection String** you copied earlier in this lab.
+    4.  **값을 입력** 필드에 이전에 랩에서 복사된 **저장소 연결 문자열** 을 입력합니다.
     
-    1.  Leave the **deployment slot setting** field set to its default value.
-
-    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    5.  **슬롯 설정** 필드를 기본값으로 설정합니다.
     
-    1.  Select **Save** at the top of the blade to persist your settings.
+    6.  블레이드 상단에 **저장** 을 선택합니다.
 
-1.  Wait for your application settings to persist before you move forward with the lab.
+6.  랩을 진행하기 전에 응용 프로그램 설정이 유지될 때까지 기다립니다.
 
-1.  In the **API App** blade, on the left side of the blade in the **Settings** section, select the **Properties** link.
+7.  **API 어플** 블레이드에서 **설정** 섹션의 블레이드 왼쪽에 **속성** 링크를 선택합니다.
 
-1.  In the **Properties** section, copy the value of the **URL** field. You will use this value later in the lab.
+8.  **속성** 섹션에서 **URL** 필드의 값을 복사합니다. 이 값은 랩에서 나중에 사용합니다.
 
-#### Task 6: Deploy an ASP.NET Core web application to API App
+#### 작업 6: ASP.NET 코어 웹 응용 프로그램을 API 어플에 배치합니다.
 
-1.  On the taskbar, select the **Visual Studio Code** icon.
+1.  작업 표시줄에서 **비주얼 스튜디오 코드** 아이콘을 선택합니다.
 
-1.  On the **File** menu, select **Open Folder**.
+2.  **파일** 메뉴에서 폴더 **열기** 를 선택합니다.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\API**, and then select **Select Folder**.
+3.  열리는 파일 탐색기 창에서 **Allfiles (F):\\Labfiles\\02\\Starter\\API ** 로 이동하여 **폴더 선택** 을 선택합니다.
 
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **Controllers** folder and double-click the **ImagesController.cs** file to open the file in the editor.
+4.  비주얼 스튜디오 코드 창의 **탐색기** 페인에서 **컨트롤러** 폴더를 확장하고 **ImagesController.cs** 파일을 두 번 클릭하여 편집기에서 파일을 엽니다.
 
-1.  In the editor, in the **ImagesController** class, on line 27, observe the **GetCloudBlobContainer** method and the code used to retrieve a container.
+5.  편집기에서 **ImagesController** 클래스에서 27 줄의 **GetCloudBlobContainer** 메서드 및 컨테이너를 검색하는 경우 사용한 코드를 관찰합니다.
 
-1.  In the **ImagesController** class, on line 38, observe the **Get** method and the code used to retrieve all blobs asynchronously from the **images** container.
+6.  **ImagesController** 클래스에서 37 줄에서 **Get** 메서드 및 **이미지** 컨테이너에서 모든 블랍을 비동기적으로 검색하는 경우 사용한 코드를 관찰합니다.
 
-1.  In the **ImagesController** class, on line 74, observe the **Post** method and the code used to persist an uploaded image to Azure Storage.
+7.  **ImagesController** 클래스에서 74 줄의 **Post** 메서드와 업로드된 이미지를 Azure Storage 에 유지하는 경우 사용한 코드를 관찰합니다.
 
-1.  On the taskbar, select the **Windows** **PowerShell** icon.
+8.  작업 표시줄에서 **Windows** **PowerShell** 아이콘을 선택합니다.
 
-1.  In the open command prompt, enter the following command and press Enter to sign in to the Azure CLI:
+9.  열린 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 Azure CLI 에 로그인합니다.
 
-    ```
+<!-- end list -->
+
     az login
-    ```
 
-1. In the **Microsoft Edge** browser window that appears, perform the following actions:
+10. 표시되는 **Microsoft Edge** 브라우저 창에서 다음 작업을 수행합니다.
     
-    1.  Enter the **email address** for your Microsoft account.
+    1.  Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
     
-    2.  Select **Next**.
+    2.  **다음** 을 선택합니다.
     
-    3.  Enter the **password** for your Microsoft account.
+    3.  Microsoft 계정의 **비밀번호** 를 입력합니다.
     
-    4.  Select **Sign in**.
+    4.  **로그인** 을 선택합니다.
 
-1. Return to the currently open **Command Prompt** application. Wait for the sign-in process to finish.
+11. 현재 열려 있는 **명령 프롬프트** 응용 프로그램으로 돌아갑니다. 로그인 프로세스가 완료될 때까지 기다립니다.
 
-1. At the command prompt, enter the following command and press Enter to list all the **apps** in your **ManagedPlatform** resource group:
+12. 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 **ManagedPlatform** 리소스 그룹에 모든 **어플** 을 나열합니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform
-    ```
 
-1. Enter the following command and press Enter to find the **apps** that have the prefix **imgapi\***:
+13. 다음 명령을 입력하고 Enter 를 눌러 접두사 **imgapi\*** 가 있는 **어플** 을 찾습니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgapi')]"
-    ```
 
-1. Enter the following command and press Enter to print out only the name of the single app that has the prefix **imgapi\***:
+14. 다음 명령을 입력하고 Enter 를 눌러 접두사 **imgapi\*** 가 있는 싱글 어플의 이름만 인쇄합니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgapi')].{Name:name}" --output tsv
-    ```
 
-1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\API** directory that contains the lab files:
+15. 다음 명령을 입력하고 Enter 를 눌러 현재 디렉터리를 랩 파일을 포함된 **Allfiles (F):\\Labfiles\\02\\Starter\\API** 디렉토리로 변경합니다.
 
-    ```
+<!-- end list -->
+
     cd F:\Labfiles\02\Starter\API\
-    ```
 
-1. Enter the following command and press Enter to deploy the **api.zip** file to the **API app** you created earlier in this lab:
+16. 다음 명령을 입력하고 Enter 를 눌러 이전에 랩에서 만든 **API 어플**에 **api.zip** 파일을 배치합니다.
 
-    ```
+<!-- end list -->
+
     az webapp deployment source config-zip --resource-group ManagedPlatform --src api.zip --name <name-of-your-api-app>
-    ```
 
-    > **Note**: Replace the **\<name-of-your-api-app\>** placeholder with the name of the API app that you created earlier in this lab. You recently queried this app’s name in the previous steps.
+> > **참고**: **\<Name-of-your-api-app\>** 리플레이스 홀더를 이전에 랩에서 만든 API 어플의 이름으로 바꿉니다. 최근에 이전 단계에서 이 어플의 이름을 쿼리했습니다.
 
-1. Wait for the deployment to complete before you move forward with this lab.
+17. 이 랩을 진행하기 전에 배치가 완료될 때까지 기다립니다.
 
-1. On the left side of the portal, select the **Resource groups** link.
+18. 포털의 왼쪽에서 **리소스 그룹** 링크를 선택합니다.
 
-1. In the **Resource groups** blade, locate and select the **ManagedPlatform** resource group that you created earlier in this lab.
+19. **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 찾아 선택합니다.
 
-1. In the **ManagedPlatform** blade, select the **imgapi\*** *API App* that you created earlier in this lab.
+20. **관리 플랫폼** 블레이드에서 이전에 랩에서 만든 **imgapi\*** *API 어플* 을 선택합니다.
 
-1. In the **API App** blade, select the **Browse** button.
+21. **API 어플** 블레이드에서 **찾아보기** 버튼을 선택합니다.
 
-1. Perform a **GET** request to the root of the website and observe the JSON array that is returned. This array should contain the URL for your single uploaded image in your **Azure Storage** account.
+22. 웹사이트의 루트로 **GET** 요청을 수행하고 반환되는 JSON 배열을 관찰합니다. 이 배열에는 **Azure Storage** 계정에 업로드된 싱글 이미지의 URL이 포함되어야 합니다.
 
-1. Return to your browser window showing the **Azure portal**.
+23. **Azure portal** 을 표시하는 브라우저 창으로 돌아갑니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created an API App in Azure and then deployed your ASP.NET Core web application to the API App by using the Azure CLI and Kudu’s zip deployment utility.
+이 연습에서는 Azure 에서 API 어플을 만든 다음 Azure CLI 및 Kudu의 zip 배치 유틸리티를 사용하여 ASP.NET Core 웹 응용 프로그램을 API 어플에 배치했습니다.
 
-### Exercise 2: Build a front-end web application by using Azure Web Apps
+### 연습 2: Azure 웹 어플을 사용하여 프런트 엔드 웹 응용 프로그램 빌듭니다.
 
-#### Task 1: Create a web app
+#### 작업 1: 웹 어플 만들기
 
-1.  In the Azure portal, on the left navigation pane, select **+ Create a resource**.
+1.  Azure 포털에서 왼쪽 네비게이션 페인에서 **+ 리소스 만들기** 를 선택합니다. 
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the search field, enter **Web** and press Enter.
+3.  검색 필드에 **웹** 을 입력하고 Enter 를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Web App** result.
+4.  **모든** 검색 결과 블레이드에서 모든 **웹** **어플** 결과를 선택합니다.
 
-1.  In the **Web App** blade, select **Create**.
+5.  **웹** **어플** 블레이드에서 **만드기** 를 선택합니다.
 
-1.  In the second **Web App** blade, perform the following actions:
+6.  두 번째 **웹** **어플** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **App name** field, enter **imgweb\[*your name in lowercase*\]**.
+    1.  **어플 이름** 필드에서 **imgweb\[*your name in lowercase*\]** 를 입력합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** section, select **Use existing**, and then select **ManagedPlatform**.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택한 다음 **관리되는 플랫폼** 을 선택합니다.
     
-    1.  In the **Publish** section, select **Code**.
+    4.  **공용** 섹션에서 **코드** 를 선택합니다.
     
-    1.  In the **Runtime stack** section, select **.NET Core 2.2**.
+    5.  **런타임 스택** 섹션에서 **NET 코어 2.2** 를 선택합니다.
     
-    1.  In the **OS** section, select **Windows**.
-
-    1. In the **Region** drop-down list, select **East US**
+    6.  **OS** 섹션에서 **Windows** 를 선택합니다.
     
-    1.  Leave the **Plan (East US)** field set to its default value.
+    7.  **앱 서비스 계획/위치** 필드를 기본값으로 설정합니다.
     
-    1.  Leave the **Sku and size** field set to its default value.
+    8.  **응용 프로그램 인사이트** 필드를 기본값으로 설정합니다.
     
-    1.  Select **Review and create**.
+    9.  **만들기** 를 선택합니다.
 
-1. In the **Review and create** tab, observe the settings then click **Create**.
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+#### 작업 2: 웹 어플 구성
 
-#### Task 2: Configure a web app
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  On the left navigation pane of the portal, select **Resource groups**.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **ManagedPlatform** resource group that you created earlier in this lab.
+3.  **관리 플랫폼** 블레이드에서 이전엔 랩에서 만든 **imgweb\*** 웹 어플을 선택합니다.
 
-1.  In the **ManagedPlatform** blade, select the **imgweb\*** web app that you created earlier in this lab.
+4.  **웹 어플** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션에서**응용 프로그램** 설정 링크를 선택합니다.
 
-1.  In the **Web App** bladeblade, on the left side of the blade in the **Settings** section, select the **Configuration** link.
-
-1.  In the **Configuration** section, perform the following actions:
+5.  **응용 프로그램 설정** 섹션에서 다음 작업을 수행합니다.
     
-    1.  Select the **Application settings** tab.
+    7.  **프로그램 설정** 하위 섹션이 표시될 때까지 아래로 스크롤합니다.
     
-    1.  Select **+ New application setting**.
+    8.  **+새 설정 추가** 를 선택합니다.
     
-    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **ApiUrl**.
+    9.  **이름 입력** 필드에 **ApiUrl** 를 입력합니다.
     
-    1.  In the **Value** field, enter the API app **URL** you copied earlier in this lab.
+    10. **값 입력** 필드에 이전에 랩에서 복사된 API 어플 **URL** 을 입력합니다.
     
-    1.  Leave the **deployment slot setting** field set to its default value.
-
-    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    11. **슬롯 설정** 필드를 기본값으로 설정합니다.
     
-    1.  Select **Save** at the top of the blade to persist your settings.
+    12. 블레이드 상단에 **저장** 을 선택합니다.
 
-1.  Wait for your application settings to persist before you move forward with the lab.
+6.  랩을 진행하기 전에 응용 프로그램 설정이 유지될 때까지 기다립니다.
 
-#### Task 3: Deploy an ASP.NET Core web application to web app
+#### 작업 3: ASP.NET 코어 웹 응용 프로그램을 웹 어플에 배치합니다.
 
-1.  On the taskbar, select the **Visual Studio Code** icon.
+1.  작업 표시줄에서 **비주얼 스튜디오 코드** 아이콘을 선택합니다.
 
-1.  On the **File** menu, select **Open Folder**.
+2.  **파일** 메뉴에서 폴더 **열기** 를 선택합니다.
 
-1.  In the File Explorer pane that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Web**, and then select **Select Folder**.
+3.  열리는 파일 탐색기 페인에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Web** 으로 이동한 다음 **폴더 선택** 을 선택합니다.
 
-1.  In the **Explorer** pane of the Visual Studio Code window, expand the **Pages** folder and double-click the **Index.cshtml.cs** file to open the file in the editor.
+4.  비주얼 스튜디오 코드 창의 **탐색기** 페인에서 **페이지** 폴더를 확장하고 **Index.cshtml.cs** 파일을 두 번 클릭하여 편집기에서 파일을 엽니다.
 
-1.  In the editor, in the **IndexModel** class, on line 30, observe the **OnGetAsync** method and the code used to retrieve the list of images from the API.
+5.  편집기에서 **IndexModel** 클래스에서 30줄의 **OnGetAsync** 메서드 및 API에서 이미지 목록을 검색하는 경우 사용하는 코드를 관찰합니다.
 
-1.  In the **IndexModel** class, on line 52, observe the **OnPostAsync** method and the code used to stream an uploaded image to the back-end API.
+6.  **IndexModel** 클래스에서 52줄에 있는 **OnPostAsync** 메서드 및 업로드된 이미지를 백 엔드 API로 스트리하는 경우 사용하는 코드를 관찰합니다.
 
-1.  On the taskbar, select the **Windows** **PowerShell** icon.
+7.  작업 표시줄에서 **Windows** **PowerShell** 아이콘을 선택합니다.
 
-1.  In the open command prompt, enter the following command and press Enter to sign in to the Azure CLI:
+8.  열린 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 Azure CLI 에 로그인합니다.
 
-    ```
+<!-- end list -->
+
     az login
-    ```
 
-1.  In the browser window that appears, perform the following actions:
+9.  표시되는 브라우저 창에서 다음 작업을 수행합니다.
     
-    1.  Enter the **email address** for your Microsoft account.
+    1.  Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
     
-    1.  Select **Next**.
+    2.  **다음** 을 선택합니다.
     
-    1.  Enter the **password** for your Microsoft account.
+    3.  Microsoft 계정의 **비밀번호** 를 입력합니다.
     
-    1.  Select **Sign in**.
+    4.  **로그인** 을 선택합니다.
 
-1. Return to the currently open **Command Prompt** application. Wait for the sign-in process to finish.
+10. 현재 열려 있는 **명령 프롬프트** 응용 프로그램으로 돌아갑니다. 로그인 프로세스가 완료될 때까지 기다립니다.
 
-1. Enter the following command and press Enter to list all the **apps** in your **ManagedPlatform** resource group:
+11. 다음 명령을 입력하고 Enter 를 눌러 **ManagedPlatform** 리소스 그룹의 모든 **어플** 을 나열합니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform
-    ```
 
-1. Enter the following command and press Enter to find the **apps** that have the prefix **imgweb\***:
+12. 다음 명령을 입력하고 Enter 를 눌러 접두사 **imgweb\*** 가 있는 **어플** 을 찾습니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgweb')]"
-    ```
 
-1. Enter the following command and press Enter to print out only the name of the single app that has the prefix **imgweb\***:
+13. 다음 명령을 입력하고 Enter 를 눌러 접두사 **imgweb\*** 가 있는 싱글 어플의 이름만 인쇄합니다.
 
-    ```
+<!-- end list -->
+
     az webapp list --resource-group ManagedPlatform --query "[?starts_with(name, 'imgweb')].{Name:name}" --output tsv
-    ```
 
-1. Enter the following command and press Enter to change the current directory to the **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Web** directory that contains the lab files:
+14. 다음 명령을 입력하고 Enter 를 눌러 현재 디렉터리를 랩 파일이 포함된 **Allfiles (F):\\Labfiles\\02\\Starter\\Web** 디렉토리로 변경합니다.
 
-    ```
+<!-- end list -->
+
     cd F:\Labfiles\02\Starter\Web\
-    ```
 
-1. Enter the following command and press Enter to deploy the **web.zip** file to the **web app** you created earlier in this lab:
+15. 다음 명령을 입력하고 Enter 를 눌러 이전에 랩에서 만든 **웹 어플** 에 **web.zip** 파일을 배치합니다.
 
-    ```
+<!-- end list -->
+
     az webapp deployment source config-zip --resource-group ManagedPlatform --src web.zip --name <name-of-your-web-app>
-    ```
 
-    > **Note**: Replace the **\<name-of-your-web-app\>** placeholder with the name of the web app you created earlier in this lab. You recently queried this app’s name in the previous steps.
+> > **참고**: **\<Web-ing-your-web-app\>** 플레이스 홀더를 이전에 랩에서 만든 웹 어플의 이름으로 바꿉니다. 최근에 이전 단계에서 이 어플의 이름을 쿼리했습니다.
 
-1. Wait for the deployment to complete before you move forward with this lab.
+16. 이 랩을 진행하기 전에 배치가 완료될 때까지 기다립니다.
 
-1. On the left navigation pane of the portal, select **Resource groups**.
+17. 포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1. In the **Resource groups** blade, select the **ManagedPlatform** resource group you created earlier in this lab.
+18. **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1. In the **ManagedPlatform** blade, select the **imgweb\*** web app that you created earlier in this lab.
+19. **관리 플랫폼** 블레이드에서 이전엔 랩에서 만든 **imgweb\*** 웹 어플을 선택합니다.
 
-1. In the **Web App** blade, select **Browse**.
+20. **웹 어플** 블레이드에서 **찾아보기** 를 선택합니다.
 
-1. Observe the list of images in the gallery. The gallery should list a single image that was uploaded to Azure Storage earlier in the lab.
+21. 갤러리의 이미지 목록을 관찰합니다. 갤러리는 랩의 초기에 Azure Storage 에 업로드된 싱글 이미지를 나열해야 합니다.
 
-1. At the top of the **Contoso Photo Gallery** webpage, locate the **Upload a new image** section and perform the following actions:
+22. **Contoso 포토 갤러리** 웹 페이지 상단에서 **새 이미지 업로드** 섹션을 찾아 다음 작업을 수행합니다.
     
-    1.  Select **Browse**.
+    5.  **찾아보기** 를 선택합니다.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **bahnmi.jpg** file, and then select **Open**.
+    6.  열리는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Images** 으로 이동하여 **bahnmi.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
     
-    1.  Select **Upload**.
+    7.  **업로드** 를 선택합니다.
 
-1. Observe that the list of gallery images has been updated with your new image.
+23. 갤러리 이미지 목록이 새 이미지로 업데이트되었는지 확인합니다.
 
-    > **Note**: In some rare cases, you might need to refresh your browser window for the new image to appear.
+> > **참고**: 드문 경우지만 새 이미지가 표시되도록 브라우저 창을 새로 고쳐야 할 수도 있습니다.
 
-1. Return to your browser window showing the **Azure portal**.
+24. **Azure portal** 을 표시하는 브라우저 창으로 돌아갑니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created an Azure Web App and deployed an existing web application’s code to the resource in the cloud.
+이 연습에서는 Azure Web App 을 만들고 기존 웹 응용 프로그램의 코드를 클라우드의 리소스에 배치했습니다.
 
-### Exercise 3: Build a background processing job by using Azure Storage and Azure Functions
+### 연습 3: Azure 저장소 및 Azure 함수를 사용하여 백그라운드 처리 작업을 만듭니다.
 
-#### Task 1: Create a function app
+#### 작업 1: 함수 어플 만들기
 
-1.  On the Azure portal left navigation pane, select **+ Create a resource**.
+1.  Azure 포털 왼쪽 탐색네비게이션 페인에서 **+ 리소스 만들기** 를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** field.
+2.  **새** 블레이드 상단에서 **마켓플레이스 검색** 필드를 찾습니다.
 
-1.  In the search field, enter **Function** and press Enter.
+3.  검색 필드에 **함수** 를 입력하고 Enter 를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Function App** result.
+4.  **모든** 검색 결과 블레이드에서 **함수** **어플** 결과를 선택합니다.
 
-1.  In the **Function App** blade, select **Create**.
+5.  **함수** **어플** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the second **Function App** blade, perform the following actions:
+6.  두 번째 **함수** **어플** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **App name** field, enter **imgfunc\[*your name in lowercase*\]**.
+    1.  **어플 이름** 필드에 **imgfunc\[*your name in lowercase*\]** 를 입력합니다.
     
-    1.  Leave the **Subscription** field set to its default value.
+    2.  **구독** 필드를 기본값으로 설정합니다.
     
-    1.  In the **Resource group** section, select **Use existing**, and then select **ManagedPlatform**.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택한 다음 **관리되는 플랫폼** 을 선택합니다.
     
-    1.  In the **OS** section, select **Windows**.
+    4.  **OS** 섹션에서 **Windows** 를 선택합니다.
     
-    1.  In the **Hosting Plan** list, select **Consumption Plan**.
+    5.  **호스팅 계획** 목록에서 **소비 계획** 을 선택합니다.
     
-    1.  In the **Location** list, select **East US**.
+    6.  **위치** 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  In the **Runtime Stack** list, select **.NET Core**.
+    7.  **런타임 스택** 목록에서 **.NET** 을 선택합니다.
     
-    1.  In the **Storage** section, select **Use existing**, and then select the **imgstor\*** storage account you created earlier in this lab.
+    8.  **저장소** 섹션에서 **기존 사용** 을 선택한 다음 이전에 랩에서 만든 **imgstor\* ** 저장소 계정을 선택합니다.
     
-    1.  Leave the **Application Insights** field set to its default value.
+    9.  **응용 프로그램 인사이트** 필드를 기본값으로 설정합니다.
     
-    1. Select **Create**.
+    10. **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before moving on with this lab.
+7.  이 랩을 진행하기 전에 만들기 태스크 완료될 때까지 기다립니다.
 
-#### Task 2: Create a .NET Core application setting
+#### 작업 2: 블랍을 처리하는 함수를 작성합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **ManagedPlatform** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 찾아 선택합니다.
 
-1.  In the **ManagedPlatform** blade, select the **imgfunc\*** function app that you created earlier in this lab.
+3.  **관리 플랫폼** 블레이드에서 이전엔 랩에서 만든 **imgfunc\*** 함수 어플을 선택합니다.
 
-1.  In the **Function App** blade, select the **Platform features** tab.
+4.  **함수 어플** 블레이드에서 **+ 새 함수** 를 선택합니다.
 
-1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
-
-1.  In the **Configuration** section, perform the following actions:
+5.  **새 Azure Function** 빠른 시작에서 다음 작업을 수행합니다.
     
-    1.  Select the **Application settings** tab.
+    1.  **개발 환경 선택** 헤더에서 **포털에** 를 선택합니다.
     
-    1.  Select **+ New application setting**.
+    2.  **계속** 을 선택합니다.
     
-    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **DOTNET_SKIP_FIRST_TIME_EXPERIENCE**.
+    3.  **함수 만들기** 헤더에서 **더 많은 템플릿...** 을 선택합니다.
     
-    1.  In the **Value** field, enter **true**.
-
-        > **Note**: The ``DOTNET_SKIP_FIRST_TIME_EXPERIENCE`` application setting tells .NET Core to disable it's built-in NuGet package caching mechanisms. On a temporary compute instance, this would effectively be a waste of time and cause build issues with your Azure Function.
+    4.  **템플릿 완료 및 보기** 를 선택합니다.
     
-    1.  Leave the **deployment slot setting** field set to its default value.
-
-    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    5.  **템플릿** 목록에서 **Azure 블랍 저장소 트리거** 를 선택합니다.
     
-    1.  Select **Save** at the top of the blade to persist your settings.
+    6.  **확장이 설치되지 않음** 창에서 **설치** 를 선택합니다.
 
-1.  Wait for your application settings to persist before you move forward with the lab.
+> > **참고**: Azure 저장소 블랍을 사용하여 작업하기 위한 확장을 설치할 때 최대 2분이 걸릴 수 있습니다. 포털이 새로 고쳐지지 않으면 **설치되지 않은 확장** 팝업 창을 닫고 **Azure 블랍 저장소 트리거** 를 다시 선택하기만 하면 됩니다.
 
-#### Task 3: Author a function to process blobs
+7.  설치가 성공하면 **계속** 을 선택합니다.
 
-1.  On the left navigation pane of the portal, select **Resource groups**.
+8.  **새 함수** 창에서 **이름** 필드에 **ImageManager** 를 입력합니다.
 
-1.  In the **Resource groups** blade, locate and select the **ManagedPlatform** resource group that you created earlier in this lab.
+9.  **새 함수** 창에서 **경로** 필드에 **이미지/{이름}** 을 입력합니다.
 
-1.  In the **ManagedPlatform** blade, select the **imgfunc\*** function app that you created earlier in this lab.
+10. **새 함수** 창에서 **저장소 계정 연결** 목록에서 **AzureWebJobsStorage** 을 선택합니다.
 
-1.  In the **Function App** blade, select **+ New function**.
+11. **새 함수** 창에서 **만들기** 를 선택합니다.
 
-1.  In the **New Azure Function** quickstart, perform the following actions:
-    
-    1.  Under the **Choose a Development Environment** header, select **In-Portal**.
-    
-    1.  Select **Continue**.
-    
-    1.  Under the **Create a Function** header, select **More templates…**.
-    
-    1.  Select **Finish and view templates**.
-    
-    1.  In the **Templates** list, select **Azure Blob Storage trigger**.
-    
-    1.  In the **Extensions not Installed** window, select **Install**.
+<!-- end list -->
 
-        > **Note**: It can take up to two minutes to install the extensions needed to work with Azure Storage blobs. If the portal does not refresh, simply close the **Extensions not Installed** pop-up window and select **Azure Blob Storage trigger** again.
+6.  함수 편집기의 오른쪽에서 **파일 보기** 를 선택하여 탭을 엽니다.
 
-    1.  Once the installation has succeeded, select **Continue**.
+7.  **파일 보기** 탭에서 **업로드** 를 선택합니다.
 
-    1.  In the **New Function** window, in the **Name** field, enter **ImageManager**.
+8.  열리는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter** 으로 이동하여 **function.proj** 파일을 선택한 다음 **열기** 를 선택합니다.
 
-    1.  In the **New Function** window, in the **Path** field, enter **images/{name}**.
+9.  **파일 보기** 탭에서 **function.json** 파일을 선택하여 함수 구성에 편집기를 봅니다.
 
-    1. In the **New Function** window, in the **Storage account connection** list, select **AzureWebJobsStorage**.
+10. JSON 편집기에서 현재 구성을 관찰합니다.
 
-    1. In the **New Function** window, select **Create**.
+<!-- end list -->
 
-1.  On the right side of the function editor, select **View files** to open the tab.
-
-1.  In the **View files** tab, select **Add**.
-
-1.  In the filename dialog that appears, enter **function.proj**.
-
-1.  In the file editor, insert this configuration content:
-
-    ```
-    <Project Sdk="Microsoft.NET.Sdk">
-        <PropertyGroup>
-            <TargetFramework>netstandard2.0</TargetFramework>
-        </PropertyGroup>
-        <ItemGroup>
-            <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
-        </ItemGroup>
-    </Project>
-    ```
-
-1. In the editor, select **Save** button to persist your changes to the configuration.
-
-    > **Note**: This **.proj** file contains the NuGet package reference necessary to import the [SixLabors.ImageSharp](https://www.nuget.org/packages/SixLabors.ImageSharp/1.0.0-beta0006) package.
-    
-1.  Back in the **View files** tab, select the **function.json** file to view the editor for the function’s configuration.
-
-1. In the JSON editor, observe the current configuration:
-
-    ```
     {
       "bindings": [
         {
@@ -632,11 +590,11 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
       ],
       "disabled": false
     }
-    ```
 
-1. Replace the entire contents of the JSON configuration file with the following JSON content:
+11. Replace the entire contents of the JSON configuration file with the following JSON content:
 
-    ```
+<!-- end list -->
+
     {
       "bindings": [
         {
@@ -655,30 +613,30 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
         }
       ]
     }
-    ```
 
-1. In the editor, select **Save** to persist your changes to the configuration.
+12. 편집기에서 **저장** 을 선택하여 변경 내용을 구성에 유지합니다.
 
-1. Back in the **View files** tab, select the **run.csx** file to return to the editor for the **ImageManager** function.
+13. **파일 보기** 탭에서 **run.csx** 파일을 선택하여 **ImageManager** 함수의 편집기로 돌아갑니다.
 
-1. Minimize the **View files** tab.
+14. **파일 보기** 탭을 최소화합니다.
 
-    > **Note**: You can minimize the tab by selecting the arrow immediately to the right of the tab header.
+> > **참고**: 탭 헤더의 오른쪽에 있는 화살표를 즉시 선택하여 탭을 최소화할 수 있습니다.
 
-1. In the function editor, observe the example function script:
+15. 함수 편집기에서 예시 함수 스크립트를 관찰합니다.
 
-    ```
+<!-- end list -->
+
     public static void Run(Stream myBlob, string name, ILogger log)
     {
         log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
     }
-    ```
 
-1. **Delete** all the example code.
+16. 예시 코드를 모두 **삭제** 합니다.
 
-1. Within the editor, copy and paste the following placeholder function:
+17. 편집기 내에서 다음 자리 표시자 함수를 복사하여 붙여넣습니다.
 
-    ```
+<!-- end list -->
+
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
@@ -688,41 +646,41 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
     public static void Run(Stream inputBlob, Stream outputBlob, string name, ILogger log)
     {
     }
-    ```
 
-1. Select **Save** to save the script and compile the code.
+18. **저장** 을 선택하여 변경 내용을 저장하고 Word 를 닫습니다.
 
-1. Add the following line of code within the **Run** method to log information about the function execution:
+19. **실행** 메서드 내에 다음 코드 줄을 추가하여 함수 실행에 대한 정보를 기록합니다.
 
-    ```
+<!-- end list -->
+
     log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {inputBlob.Length} Bytes");
-    ```
 
-1. Add the following **using** block to load the **Stream** for the input blob into the image library:
+20. 입력 블랍에 대한 **스트림** 을 이미지 라이브러리에 로드하려면 다음 **사용** 블록을 추가합니다.
 
-    ```
+<!-- end list -->
+
     using (Image<Rgba32> image = Image.Load(inputBlob))
     {
     }
-    ```
 
-1. Add the following lines of code within the **using** block to mutate the image by resizing the image and applying a grayscale filter:
+21. **사용** 블록 내에 다음 코드 줄을 추가하여 이미지 크기를 조정하고 그레이스케일 필터를 적용하여 이미지를 변경합니다.
 
-    ```
+<!-- end list -->
+
     image.Mutate(i => 	
         i.Resize(new ResizeOptions { Size = new Size(250, 250), Mode = ResizeMode.Max }).Grayscale()
     );
-    ```
 
-1. Add the following line of code to save the new image to the **Stream** for the output blob:
+22. 다음 코드 줄을 추가하여 출력 블랍의 **스트림** 에 새 이미지를 저장합니다.
 
-    ```
+<!-- end list -->
+
     image.Save(outputBlob, new JpegEncoder());
-    ```
 
-1. Your **Run** method should now resemble this:
+23. **실행** 메서드는 이제 다음과 유사해야 합니다.
 
-    ```
+<!-- end list -->
+
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
@@ -740,126 +698,129 @@ In this exercise, you created an Azure Web App and deployed an existing web appl
             image.Save(outputBlob, new JpegEncoder());
         }
     }
-    ```
 
-1. Select **Save** to save the script and compile the code again.
+24. **저장** 을 선택하여 스크립트를 저장하고 코드를 다시 컴파일합니다.
 
-#### Task 4: Validate the web solution
+#### 작업 3: 웹 솔루션 검증
 
-1.  On the left navigation pane of the portal, select **Resource groups**.
+1.  포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1.  In the **Resource groups** blade, select the **ManagedPlatform** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1.  In the **ManagedPlatform** blade, select the **imgstor\*** storage account that you created earlier in this lab.
+3.  **관리플랫폼** 블레이드에서 이전에 랩에서 만든 **imgstor\*** 저장소 계정을 선택합니다.
 
-1.  In the **Storage Account** blade, on the left side of the blade, in the **Blob service** section, select the **Blobs** link.
+4.  **저장소 계정** 블레이드에서 블레이드 왼쪽에 있는 **블랍 서비스** 섹션에서 **블랍** 링크를 선택합니다.
 
-1.  In the **Blobs** section, select the **images** container.
+5.  **블랍** 섹션에서 **이미지** 컨테이너를 선택합니다.
 
-1.  In the **Container** blade, select **Upload**.
+6.  **컨테이너** 블레이드에서 **업로드** 를 선택합니다.
 
-1.  In the **Upload blob** window that appears, perform the following actions:
+7.  표시되는 **블랍 업로드** 창에서 다음 작업을 수행합니다.
 
-    1.  In the **Files** section, select the **Folder** icon.
+<!-- end list -->
 
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **veggie.jpg** file, and then select **Open**.
+1.  **파일** 섹션에서 **폴더** 아이콘을 선택합니다.
 
-    1.  Ensure the **Overwrite if files already exist** check box is selected.
+2.  열리는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Images**으로 이동하여 **veggie.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
 
-    1.  Select **Upload**.
+3.  **파일이 이미 존재하는 경우 덮어쓰기** 확인란이 선택되어 있는지 확인합니다.
 
-1.  Wait for the blob to be uploaded before you continue with this lab.
+4.  **업로드** 를 선택힙니다.
 
-1.  Close the **Container** blade.
+<!-- end list -->
 
-1. Back in the **Blobs** section, select the **images-thumbnails** container.
+8.  이 랩을 계속하기 전에 블랍이 업로드될 때까지 기다립니다.
 
-1. In the **Container** blade, observe the newly created **veggie.jpg** file in the **images-thumbnails** container.
+9.  **컨테이너** 블레이드를 닫습니다.
 
-    > **Note**: It might take one to five minutes for the new image to appear.
+10. **블랍** 섹션으로 돌아가서 **이미지-섬네일** 컨테이너를 선택합니다.
 
-1. Select the **veggie.jpg** blob in the **images-thumbnails** container.
+11. **컨테이너** 블레이드에서 **이미지-섬네일** 컨테이너에서 새로 만든 **veggie.jpg** 파일을 관찰합니다.
 
-1. In the **Blob** blade, select the **Edit blob** tab.
+> > **참고**: 새 이미지가 표시되려면 1~5분 정도 걸릴 수 있습니다.
 
-1. Observe the contents of the blob. The webpage will render the image that was uploaded to the container.
+12. **이미지-섬네일** 컨테이너에서 **veggie.jpg** 블랍을 선택합니다.
 
-1. On the left navigation pane of the portal, select **Resource groups**.
+13. **블랍** 블레이드에서 **블랍 편집** 탭을 선택합니다.
 
-1. In the **Resource groups** blade, select the **ManagedPlatform** resource group that you created earlier in this lab.
+14. 블랍의 내용을 관찰합니다. 웹 페이지는 컨테이너에 업로드된 이미지를 렌더링합니다.
 
-1. In the **ManagedPlatform** blade, select the **imgweb\*** web app that you created earlier in this lab.
+15. 포털의 왼쪽 네비게이션 페인에서 **리소스 그룹** 을 선택합니다.
 
-1. In the **Web App** blade, select **Browse**.
+16. **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **ManagedPlatform** 리소스 그룹을 선택합니다.
 
-1. Observe the list of images in the gallery. The list of thumbnails should now be updated with a new thumbnail image.
+17. **관리 플랫폼** 블레이드에서 이전엔 랩에서 만든 **imgweb\*** 웹 어플을 선택합니다.
 
-1. At the top of the **Contoso Photo Gallery** webpage, locate the **Upload a new image** section and perform the following actions:
+18. **웹 어플** 블레이드에서 **찾아보기** 를 선택합니다.
+
+19. 갤러리의 이미지 목록을 관찰합니다. 이제 새 섬네일 이미지로 섬네일 그림 목록을 업데이트해야 합니다.
+
+20. **Contoso 포토 갤러리** 웹 페이지 상단에서 **새 이미지 업로드** 섹션을 찾아 다음 작업을 수행합니다.
     
-    1.  Select **Browse**.
+    1.  **찾아보기** 를 선택합니다.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **blt.jpg** file, and then select **Open**.
+    2.  열리는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Images** 로 이동하여 **blt.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
     
-    1.  Select **Upload**.
+    3.  **업로드** 를 선택합니다.
 
-1. At the top of the **Contoso Photo Gallery** webpage, locate the **Upload a new image** section and perform the following actions:
+21. **Contoso 포토 갤러리** 웹 페이지 상단에서 **새 이미지 업로드** 섹션을 찾아 다음 작업을 수행합니다.
     
-    1.  Select **Browse**.
+    4.  **찾아보기** 를 선택합니다.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **sub.jpg** file, and then select **Open**.
+    5.  열리는 파일 탐색기 대화 박스에서 **Allfiles (F):\\Labfiles\\02\\Starter\\Images** 로 이동하여 **sub.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
     
-    1.  Select **Upload**.
+    6.  **업로드** 를 선택합니다.
 
-1. At the top of the **Contoso Photo Gallery** webpage, locate the **Upload a new image** section and perform the following actions:
+22. **Contoso 포토 갤러리** 웹 페이지 상단에서 **새 이미지 업로드** 섹션을 찾아 다음 작업을 수행합니다.
     
-    1.  Select **Browse**.
+    7.  **찾아보기** 를 선택합니다.
     
-    1.  In the File Explorer dialog box that opens, go to **Allfiles (F):\\Allfiles\\Labs\\02\\Starter\\Images**, select the **burger.jpg** file, and then select **Open**.
+    8.  열리는 파일 탐색기 대화 박스에서 ** Allfiles (F):\\Labfiles\\02\\Starter\\Images ** 로 이동하여 **burger.jpg** 파일을 선택한 다음 **열기** 를 선택합니다.
     
-    1.  Select **Upload**.
+    9.  **업로드** 를 선택합니다.
 
-1. Observe that the list of gallery images has been updated with your new image.
+23. 갤러리 이미지 목록이 새 이미지로 업데이트되었는지 확인합니다.
 
-1. Observe the list of thumbnails at the top of the page. Refresh your page every minute until your thumbnails have been generated.
+24. 페이지 상단의 미리보기 이미지 목록을 관찰합니다. 네 개의 미리보기 이미지가 모두 생성될 때까지 매분 마다 페이지를 새로 고칩니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created a background processing job in Azure Functions to handle the computationally intensive task of modifying and resizing images.
+이 연습에서는 함수에서 이미지 수정 및 크기 조정에 대한 계산 집약적인 작업을 처리하기 위해 백그라운드 처리 작업을 만들었습니다.
 
-### Exercise 4: Clean up subscription 
+### 연습 4: 구독 정리 
 
-#### Task 1: Open Cloud Shell
+#### 작업 1: 클라우드 셸 열기
 
-1.  At the top of the portal, select the **Cloud Shell** icon to open a new shell instance.
+1.  포털 상단에서 **클라우드 셸** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type in the following command and press Enter to list all resource groups in the subscription:
+2.  포털 하단의 **클라우드 셸** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 리소스 그룹을 나열합니다.
 
-    ```
+<!-- end list -->
+
     az group list
-    ```
 
-1.  Type in the following command and press Enter to view a list of possible commands to delete a resource group:
+3.  다음 명령을 입력하고 Enter 를 눌러 리소스 그룹을 삭제할 수 있는 명령 목록을 봅니다.
 
-    ```
+<!-- end list -->
+
     az group delete --help
-    ```
 
-#### Task 2: Delete resource groups
+#### 작업 2: 리소스 그룹 삭제
 
-1.  Type the following command and press Enter to delete the **ManagedPlatform** resource group:
+1.  다음 명령을 입력하고 Enter 를 눌러 **ManagedPlatform** 리소스 그룹을 삭제합니다.
 
-    ```
+<!-- end list -->
+
     az group delete --name ManagedPlatform --no-wait --yes
-    ```
 
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
+2.  포털 하단의 **클라우드 셸** 페인을 닫습니다.
 
-#### Task 3: Close active applications
+#### 작업 3: 액티브 응용 프로그램 닫기
 
-1.  Close the currently running **Microsoft Edge** application.
+1.  현재 실행 중인 **Microsoft Edge** 응용 프로그램을 닫습니다.
 
-1.  Close the currently running **Visual Studio Code** application.
+2.  현재 실행 중인 **Visual Studio Code** 응용 프로그램을 닫습니다.
 
-#### Review
+#### 검토
 
-In this exercise, you cleaned up your subscription by removing the **resource groups** used in this lab.
+이 연습에서는 이 랩에 사용된 **리소스 그룹** 을 제거하여 구독을 정리했습니다.

@@ -1,880 +1,857 @@
+﻿---
+랩:
+    제목: '랩: 서비스 전반에서 리소스 비밀에 안전하게 액세스합니다'
+    유형: '답변 키'
+    모듈: ‘모듈 4: Azure 보안 구현'
 ---
-lab:
-    title: 'Lab: Access resource secrets securely across services'
-    type: 'Answer Key'
-    module: 'Module 4: Implement Azure security'
----
 
-# Lab: Access resource secrets securely across services
-# Student lab answer key
+# 랩: 서비스 전반에서 리소스 비밀에 안전하게 액세스
+# 학생 랩 답변 키
 
-## Microsoft Azure user interface
+## 마이크로소프트 Azure 사용자 인터페이스
 
-Given the dynamic nature of Microsoft cloud tools, you might experience Azure user interface (UI) changes after the development of this training content. These changes might cause the lab instructions and lab steps to not match up.
+Microsoft 클라우드 도구의 동적 특성을 감안할 때 이 교육 콘텐츠를 개발한 후 Azure 사용자 인터페이스(UI) 변경 사항이 발생할 수 있습니다. 이러한 변경으로 인해 랩 지침 및 랩 단계가 일치하지 않을 수 있습니다.
 
-Microsoft updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
+Microsoft 는 커뮤니티에서 필요한 변경 사항을 가져오는 즉시 이 교육 과정을 업데이트합니다. 그러나 클라우드 업데이트가 자주 발생하기 때문에 이 교육 콘텐츠가 업데이트되기 전에 UI가 변경될 수 있습니다. **이 경우 변경 사항에 적응하고 필요에 따라 랩에서 작업합니다.**
 
-## Instructions
+## 지침
 
-### Before you start
+### 시작하기 전에
 
-#### Sign in to the lab virtual machine
+#### 랩 가상 기계에 로그인
 
-Sign in to your **Windows 10** virtual machine by using the following credentials:
+  - 다음 자격 증명을 사용하여 **Windows 10** 가상 기계에 로그인합니다.
     
--   **Username**: Admin
-
--   **Password**: Pa55w.rd
-
-> **Note**: Lab virtual machine sign-in instructions will be provided to you by your instructor.
-
-#### Review installed applications
-
-Observe the taskbar located at the bottom of your **Windows 10** desktop. The taskbar contains the icons for the applications you will use in this lab:
+      - **사용자 이름**: 관리자
     
--   Microsoft Edge
+      - **비밀번호**: Pa55w.rd
 
--   File Explorer
+> > **참고**: 랩 가상 기계 로그인 지침은 교수자가 제공합니다.
 
-#### Download the lab files
+#### 설치된 응용 프로그램 검토
 
-1.  On the taskbar, select the **Windows PowerShell** icon.
+  - **Windows 10** 바탕 하단에 있는 작업 표시줄을 관찰합니다. 작업 표시줄에는 이 랩에서 사용할 응용 프로그램에 대한 아이콘이 포함되어 있습니다.
+    
+      - 마이크로소프트 에지
+    
+      - 파일 탐색기
 
-1.  In the PowerShell command prompt, change the current working directory to the **Allfiles (F):\\** path:
+#### 랩 파일 다운로드
+
+1.  작업 표시줄에서 **Windows PowerShell** 아이콘을 선택합니다.
+
+2.  PowerShell 명령 프롬프트에서 현재 작업 디렉토리를 **Allfiles(F):\\** 경로로 변경합니다.
 
     ```
     cd F:
     ```
 
-1.  Within the command prompt, enter the following command and press Enter to clone the **microsoftlearning/AZ-203-DevelopingSolutionsforMicrosoftAzure** project hosted on GitHub into the **Allfiles (F):\\** drive:
+3.  명령 프롬프트 내에서 다음 명령을 입력하고 **랩파일** 디렉토리로 GitHub 에서 호스팅되는 **microsoftlearning/AZ-203-DevelopingSolutionsForAzure** 프로젝트를 복제하기 위해 Enter 를 누릅니다.
 
     ```
     git clone --depth 1 --no-checkout https://github.com/microsoftlearning/AZ-203-DevelopingSolutionsForMicrosoftAzure .
     ```
 
-1.  Within the command prompt, enter the following command and press **Enter** to check out the lab files necessary to complete the **AZ-203T04** lab:
+4.  명령 프롬프트 내에서 다음 명령을 입력하고 **AZ-203.02** 랩을 완료하기 위해 필요한 랩 파일을 체크 아웃하여 **Enter** 를 누릅니다.
 
     ```
     git checkout master -- Allfiles/*
     ```
 
-1.  Close the currently running **Windows PowerShell** command prompt application.
+5.  현재 실행 중인 **Windows PowerShell** 명령 프롬프트 응용 프로그램을 닫습니다.
 
-### Exercise 1: Create Azure resources
+### 연습 1: Azure 리소스 만들기
 
-#### Task 1: Open the Azure portal
+#### 작업 1: Azure portal 열기
 
-1.  On the taskbar, select the **Microsoft Edge** icon.
+1.  작업 표시줄에서 **Microsoft Edge** 아이콘을 선택합니다.
 
-1.  In the open browser window, navigate to the **Azure portal** ([portal.azure.com](https://portal.azure.com)).
+2.  열린 브라우저 창에서 ****Azure portal**** ([portal.azure.com](https://portal.azure.com))로 이동합니다.
 
-1.  Enter the **email address** for your Microsoft account.
+3.  Microsoft 계정의 **전자 메일 주소** 를 입력합니다.
 
-1.  Select **Next**.
+4.  **다음** 을 선택합니다.
 
-1.  Enter the **password** for your Microsoft account.
+5.  Microsoft 계정의 **비밀번호** 를 입력합니다.
 
-1.  Select **Sign in**.
+6.  **로그인** 을 선택합니다.
 
-    > **Note**: If this is your first time signing in to the **Azure Portal**, a dialog box will appear offering a tour of the portal. Select **Get Started** to skip the tour and begin using the portal.
+> > 참고: **Azure Portal** 에 처음 로그인하는 경우 포털 둘러보기를 제공하는 대화 박스가 나타납니다. 둘러보기를 건너뛰고 포털 사용을 시작하려면 **시작하기** 를 선택합니다.
 
-#### Task 2: Create an Azure Storage account
+#### 작업 2: Azure 저장소 계정 만들기
 
-1.  In the navigation pane on the left side of the Azure portal, select **All services**.
+1.  Azure portal 의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스를** 선택합니다.
 
-1.  In the **All services** blade, select **Storage Accounts**.
+2.  **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
 
-1.  In the **Storage accounts** blade, view your list of Storage instances.
+3.  **저장소 계정** 블레이드에서 저장소 인스턴스 목록을 봅니다.
 
-1.  At the top of the **Storage accounts** blade, select **+ Add**.
+4.  **저장소 계정** 블레이드 상단에서 **추가** 를 선택합니다.
 
-1.  In the **Create storage account** blade, observe the tabs at the top of the blade, such as **Basics**.
+5.  **저장소 계정 만들기** 블레이드에서 **기본** 사항과 같은 블레이드 상단의 탭을 관찰합니다.
 
-  > **Note**: Each tab represents a step in the workflow to create a new **storage account**. At any time, you can select **Review + create** to skip the remaining tabs.
+> 참고: 각 탭은 새 **저장소 계정** 을 만드는 워크플로의 단계를 나타냅니다. 언제든지 **검토 + 만들기** 를 선택하여 나머지 탭을 건너뛸 수 있습니다.
 
-1.  In the **Basics** tab, perform the following actions:
+6.  **기본** 탭에서 다음 작업을 수행합니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+    1.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Resource group** section, select **Create new**, enter **SecureFunction**, and then select **OK**.
+    2.  **리소스 그룹** 섹션에서 **새 만들기** 를 선택하고 **SecureFunction** 을 입력한 다음 **확인** 을 선택합니다.
     
-    1.  In the **Storage account** **name** text box, enter **securestor\[your name in lowercase\]**.
+    3.  **저장소 계정** **이름** 텍스트 박스에 **securestor\[소문자로 이름\]** 을 입력합니다.
     
-    1.  In the **Location** drop-down list, select the **(US) East US** region.
+    4.  **위치** 드롭다운 목록에서 **미국 동부** 지역을 선택합니다.
     
-    1.  In the **Performance** section, select **Standard**.
+    5.  **성능** 섹션에서 **표준** 을 선택합니다.
     
-    1.  In the **Account kind** drop-down list, select **StorageV2 (general purpose v2)**.
+    6.  **계정 종류** 드롭다운 목록에서 **StorageV2(일반용v2)** 를 선택합니다.
     
-    1.  In the **Replication** drop-down list, select **Locally-redundant storage (LRS)**.
+    7.  **복제** 드롭다운 목록에서 **로컬 중복 저장소(LRS)** 를 선택합니다.
     
-    1.  In the **Access tier** section, ensure that **Hot** is selected.
+    8.  **액세스 계층** 섹션에서 **핫** 가 선택되어 있는지 확인합니다.
     
-    1.  Select **Review + Create**.
+    9.  **검토 + 만들기** 를 선택합니다.
 
-1.  In the **Review + Create** tab, review the options that you selected during the previous steps.
+7.  **검토 + 만들기** 탭에서 이전 단계에서 선택한 옵션을 검토합니다.
 
-1.  Select **Create** to create the storage account by using your specified configuration.
+8.  지정된 구성을 사용하여 저장소 계정을 만들려면 **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+9.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-1. In the navigation pane on the left side of the Azure portal, select **All services**.
+10. Azure portal 의 왼쪽에 있는 네비게이션 페인에서 **모든 서비스를** 선택합니다.
 
-1. In the **All services** blade, select **Storage Accounts**.
+11. **모든 서비스** 블레이드에서 **저장소 계정** 을 선택합니다.
 
-1. In the **Storage accounts** blade, select the storage account instance with the prefix **securestor**.
+12. **저장소 계정** 블레이드에서 접두사 **securestor** 가 있는 저장소 계정 인스턴스를 선택합니다.
 
-1. In the **Storage account** blade, locate the **Settings** section on the left side of the blade and select the **Access keys** link.
+13. **저장소 계정** 블레이드에서 블레이드 왼쪽에 있는 **설정** 섹션을 찾아 **액세스 키** 링크를 선택합니다.
 
-1. In the **Access keys** blade, select any one of the keys and record the value in either of the **Connection string** fields. You will use this value later in this lab.
+14. **Access 키** 블레이드에서 키 중 하나를 선택하고 **연결 문자열** 필드 중 하나에서 값을 기록합니다. 이 랩의 나중에 이 값을 사용합니다.
 
-    > **Note**: It does not matter which connection string you choose to use. They are interchangeable.
+> > 참고: 어떤 연결 문자열을 사용하든 상관없습니다. 서로 교환할 수 있습니다.
 
-#### Task 3: Create an Azure Key Vault
+#### 작업 3: Azure 키 볼트 만들기
 
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
+1.  포털 왼쪽에 있는 네비게이션 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
+2.  **새** 블레이드 상단에서 피처 서비스 목록 위의 **마켓플레이스 검색 텍스트** 박스를 찾습니다.
 
-1.  In the search text box, enter **Vault** and then press Enter.
+3.  검색 텍스트 박스에서 **볼트** 를 입력한 다음 Enter 를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Key Vault** result.
+4.  **모든** 검색 결과 블레이드에서 **키 볼트** 결과를 선택합니다.
 
-1.  In the **Key Vault** blade, select **Create**.
+5.  **키 볼트** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Create key vault** blade, perform the following actions:
+6.  **키 볼트 만들기** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Name** text box, enter **securevault\[your name in lowercase\]**.
+    1.  **이름** 텍스트 박스에 **securevault\[소문자로 이름\] ** 을 입력합니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+    2.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Resource group** section, select **Use existing**, and then select **SecureFunction** from the list.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택한 다음 목록에서 **SecureFunction** 을 선택합니다.
     
-    1.  In the **Location** drop-down list, select **East US**.
+    4.  **위치** 드롭다운 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  Leave the **Pricing tier** text box set to its default value.
+    5.  **가격 계층** 텍스트 박스를 기본값으로 설정한 상태로 둡니다.
     
-    1.  Leave the **Access policies** text box set to its default value.
+    6.  **Access 정책** 텍스트 박스를 기본값으로 설정한 상태로 둡니다.
     
-    1.  Leave the **Virtual Network Access** text box set to its default value.
+    7.  **가상 네트워크 액세스** 텍스트 박스를 기본값으로 설정한 상태로 둡니다.
     
-    1.  Select **Create**.
+    8.  **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-#### Task 4: Create an Azure Function app
+#### 작업 4: Azure 함수 어플 만들기
 
-1.  On the navigation menu located on the left side of the portal, select the **+ Create a resource** link.
+1.  포털 왼쪽에 있는 네비게이션 메뉴에서 **+ 리소스 만들기** 링크를 선택합니다.
 
-1.  At the top of the **New** blade, locate the **Search the Marketplace** text box above the list of featured services.
+2.  **새** 블레이드 상단에서 피처 서비스 목록 위의 **마켓플레이스 검색** 텍스트 박스를 찾습니다.
 
-1.  In the search text box, enter **Function** and then press Enter.
+3.  검색 텍스트 박스에서 **함수** 를 입력한 다음 Enter 를 누릅니다.
 
-1.  In the **Everything** search results blade, select the **Function App** result.
+4.  **모든** 검색 결과 블레이드에서 **함수 어플** 결과를 선택합니다.
 
-1.  In the **Function App** blade, select **Create**.
+5.  **함수 어플** 블레이드에서 **만들기** 를 선택합니다.
 
-1.  In the **Create function app** blade, perform the following actions:
+6.  **함수 어플 만들기** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **App name** text box, enter **securefunc\[your name in lowercase\]**.
+    1.  **어플 이름** 텍스트 박스에 **securefunc\[소문자로 이름\]** 을 입력합니다.
     
-    1.  Leave the **Subscription** text box set to its default value.
+    2.  **구독** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Resource group** section, select **Use existing**, and then select **SecureFunction** from the list.
+    3.  **리소스 그룹** 섹션에서 **기존 사용** 을 선택한 다음 목록에서 **SecureFunction** 을 선택합니다.
     
-    1.  In the **OS** section, select **Windows**.
+    4.  **OS** 섹션에서 **Windows** 를 선택합니다.
     
-    1.  In the **Hosting Plan** drop-down list, select **Consumption Plan**.
+    5.  **호스팅 계획** 드롭다운 목록에서 **소비 계획** 을 선택합니다.
     
-    1.  In the **Location** drop-down list, select **East US**.
+    6.  **위치** 드롭다운 목록에서 **미국 동부** 를 선택합니다.
     
-    1.  In the **Runtime Stack** drop-down list, select **.NET Core**.
+    7.  **런타임 스택** 드롭다운 목록에서 **.NET** 을 선택합니다.
     
-    1.  In the **Storage** section, select **Use existing**, and then select **securestor\[your name in lowercase\]** from the list.
+    8.  **저장소** 섹션에서 **기존 사용** 을 선택한 다음 목록에서 **securestor\[소문자에서 이름\]** 을 선택합니다.
     
-    1.  Leave the **Application Insights** option set to its default value.
+    9.  **Application Insights** 텍스트 박스를 기본값으로 설정합니다.
     
-    1. Select **Create**.
+    10. **만들기** 를 선택합니다.
 
-1.  Wait for the creation task to complete before you move forward with this lab.
+7.  이 랩을 진행하기 전에 만들기 작업이 완료될 때까지 기다립니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created all the resources that you will use for this lab.
+이 연습에서는 이 랩에 사용할 모든 리소스를 만들었습니다.
 
-### Exercise 2: Configure secrets and identities 
+### 연습 2: 비밀 및 ID 구성 
 
-#### Task 1: Configure a system-assigned managed service identity
+#### 작업 1: 할당된 시스템 관리형 서비스 ID 구성
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securefunc\*** 함수 어플을 선택합니다.
 
-1.  In the **Function Apps** blade, select the **Platform features** tab.
+4.  **함수 어플** 블레이드에서 **플랫폼 피처** 탭을 선택합니다.
 
-1.  In the **Platform features** tab, select the **Identity** link located in the **Networking** section.
+5.  **플랫폼 피처** 탭에서 **네트워킹** 섹션에 있는 **ID** 링크를 선택합니다.
 
-1.  In the **Identity** blade, locate the **System assigned** tab and then perform the following actions:
+6.  **ID** 블레이드에서 **시스템 지정** 탭을 찾은 후에 다음 작업을 수행합니다.
     
-    1.  In the **Status** section, select **On**.
+    1.  **상태** 섹션에서 **On** 을 선택합니다.
     
-    1.  Select **Save**.
+    2.  **저장** 을 선택합니다.
     
-    1.  Select **Yes** in the confirmation dialog.
+    3.  확인 대화 박스에서 **예** 를 선택합니다.
 
-1.  Wait for the system-assigned managed identity to be created before you move forward with this lab.
+7.  이 랩을 진행하기 전에할당된 시스템에서 관리되는 ID 가 만들어질 때까지 기다립니다.
 
-#### Task 2: Create a Key Vault secret
+#### 작업 2: 키 볼트 비밀 만들기
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securevault\*** Key Vault that you created earlier in this lab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securevault\*** 키 볼트를 선택합니다.
 
-1.  In the **Key Vault** blade, select the **Secrets** link located in the **Settings** section.
+4.  **키 볼트** 블레이드에서 **설정** 섹션에 있는 **비밀** 링크를 선택합니다.
 
-1.  In the **Secrets** pane, select **+ Generate/Import**.
+5.  **비밀** 페인에서 **생성/수입** 을 선택합니다.
 
-1.  In the **Create a secret** blade, perform the following actions:
+6.  **비밀 만들기** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  In the **Upload options** drop-down list, select **Manual**.
+    1.  **업로드 옵션** 드롭다운 목록에서 **수동** 을 선택합니다.
     
-    1.  In the **Name** text box, enter **storagecredentials**.
+    2.  **이름** 텍스트 박스에 **저장소 자격 증명** 을 입력합니다.
     
-    1.  In the **Value** text box, enter the storage account **Connection String** that you recorded earlier in this lab.
+    3.  **값** 텍스트 박스에 이전에 랩에서 기록한 저장소 계정 **연결 문자열** 을 입력합니다.
     
-    1.  Leave the **Content Type** text box set to its default value.
+    4.  **콘텐츠 유형** 텍스트 박스를 기본값으로 설정합니다.
     
-    1.  Leave the **Set activation date** text box set to its default value.
+    5.  **활성화 날짜 설정** 텍스트 박스를 기본값으로 설정한 상태로 둡니다.
     
-    1.  Leave the **Set expiration date** text box set to its default value.
+    6.  **만료 날짜 설정** 텍스트 박스를 기본값으로 설정된 상태로 둡니다.
     
-    1.  In the **Enabled** section, select **Yes**.
+    7.  **사용 설정** 섹션에서 **예** 를 선택합니다.
     
-    1.  Select **Create**.
+    8.  **만들기** 를 선택합니다.
 
-1.  Wait for the secret to be created before you move forward with this lab.
+7.  이 랩으로 이동하기 전에 비밀이 만들어질 때까지 기다립니다.
 
-1.  Back in the **Secrets** pane, select the **storagecredentials** item in the list.
+8.  **비밀** 페인에서 목록의 **저장소 자격 증명** 항목을 선택합니다.
 
-1.  In the **Versions** pane, select the latest version of the **storagecredentials** secret.
+9.  **버전** 페인에서 **저장소 자격 증명** 비밀의 최신 버전을 선택합니다.
 
-1. In the **Secret Version** pane, perform the following actions.
+10. **비밀 버전** 페인에서 다음 작업을 수행합니다.
     
-    1.  Observe the metadata for the latest version of the secret.
+    9.  최신 버전의 보안 비밀에 대한 메타데이터를 관찰합니다.
     
-    1. Select **Show secret value** to view the value of the secret.
+    10. 비밀 값을 보려면 **비밀 값 표시** 를 선택합니다.
     
-    1. Record the value of the **Secret Identifier** text box because you will use this later in the lab.
+    11. 나중에 랩에서 이 값을 사용하기 때문에 **비밀 식별자** 텍스트 박스의 값을 기록합니다.
 
-      > **Note**: You are recording the value of the **Secret Identifier** field, not the **Secret Value** field.
+> > 참고: **비밀 값** 필드가 아닌 **비밀 식별자** 필드의 값을 기록하고 있습니다.
 
-#### Task 3: Configure a Key Vault access policy
+#### 작업 3: 키 볼트 액세스 정책 구성
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securevault\*** Key Vault that you created earlier in this lab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securevault\*** 키 볼트를 선택합니다.
 
-1.  In the **Key Vault** blade, select the **Access policies** link located in the **Settings** section.
+4.  **키 볼트** 블레이드에서 **설정** 섹션에 있는 **액세스 정책** 링크를 선택합니다.
 
-1.  In the **Access policies** pane, select **+ Add new**.
+5.  **액세스 정책** 페인에서 **새 추가** 를 선택합니다.
 
-1.  In the **Add access policy** blade, perform the following actions:
+6.  **액세스 추가 정책** 블레이드에서 다음 작업을 수행합니다.
     
-    1.  Select the **Select principal** link.
+    1.  **주 선택** 링크를 선택합니다.
     
-    1.  In the **Principal** blade, locate and select the service principal named **securefunc\[your name in lowercase\]**, and then select **Select**.
+    2.  **주** 블레이드에서 **securefunc\[소문자로 이름\]** 이라는 서비스 주체를 찾아 선택한 다음 **선택** 을 선택합니다.
     
-    1.  Leave the **Key permissions** list set to its default value.
+    3.  **키 사용 권한** 목록을 기본값으로 설정합니다.
     
-    1.  In the **Secret permissions** drop-down list, select the **GET** permission.
+    4.  비밀 사용 권한 드롭다운 목록에서 GET 권한을 선택합니다.
     
-    1.  Leave the **Certificate permissions** list set to its default value.
+    5.  **인증서 사용 권한** 목록을 기본값으로 설정합니다.
     
-    1.  Leave the **Authorized application** text box set to its default value.
+    6.  **승인된 응용 프로그램** 텍스트 박스를 기본값으로 설정합니다.
     
-    1.  Select **OK**.
+    7.  **확인** 을 선택합니다.
 
-1.  Back in the **Access policies** pane, select **Save**.
+7.  **액세스 정책** 페인에서 **저장** 을 선택합니다.
 
-1.  Wait for your changes to the access policies to be saved before you move forward with this lab.
+8.  이 랩을 진행하기 전에 액세스 정책에 대한 변경 내용이 저장될 때까지 기다립니다.
 
-#### Review
+#### 검토
 
-In this exercise, you created a server-assigned managed service identity for your function app and then gave that identity the appropriate permissions to get the value of a secret in your Key Vault. Finally, you created a secret that you will use within your function app.
+이 연습에서는 함수 어플에 대해 할당된 서버에서 관리되는 서비스 ID 를 만든 다음 해당 ID 에 Key Vault 에서 비밀 값을 얻을 수 있는 적절 한 권한을 부여 했습니다. 마지막으로 함수 어플 내에서 사용할 비밀을 만들었습니다.
 
-### Exercise 3: Write function app code 
+### 연습 3: 함수 어플 코드 작성 
 
-#### Task 1: Create a .NET Core application setting
+#### 작업 1: 키 볼트 파생 응용 프로그램 설정 만들기 
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securefunc\*** 함수 어플을 선택합니다.
 
-1.  In the **Function App** blade, select the **Platform features** tab.
+4.  **함수 어플** 블레이드에서 **플랫폼 피처** 탭을 선택합니다.
 
-1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
+5.  **플랫폼 피처** 탭에서 **일반 설정** 섹션에 있는 **응용 프로그램 설정** 링크를 선택합니다.
 
-1.  In the **Configuration** section, perform the following actions:
+6.  **응용 프로그램 설정** 탭에서 다음 작업을 수행합니다.
     
-    1.  Select the **Application settings** tab.
+    1.  **용어 집합 설정** 섹션이 표시될 때까지 아래로 스크롤합니다.
     
-    1.  Select **+ New application setting**.
+    2.  **+새 설정 추가** 를 선택합니다.
     
-    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **DOTNET_SKIP_FIRST_TIME_EXPERIENCE**.
+    3.  **이름 입력** 텍스트 박스에서 **StorageConnectionString** 을 입력합니다.
     
-    1.  In the **Value** field, enter **true**.
+    4.  **값 입력** 텍스트 박스에서 다음 구문을 사용하여 값을 생성합니다. **@Microsoft.KeyVault(SecretUri=\<Secret Identifier\>)**
 
-        > **Note**: The ``DOTNET_SKIP_FIRST_TIME_EXPERIENCE`` application setting tells .NET Core to disable it's built-in NuGet package caching mechanisms. On a temporary compute instance, this would effectively be a waste of time and cause build issues with your Azure Function.
-    
-    1.  Leave the **deployment slot setting** field set to its default value.
+> > 참고: 위의 구문을 사용하여 **비밀 식별자** 에 대한 참조를 작성해야 합니다. 예를 들어 비밀 식별자가 **https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf** 경우 **@Microsoft.KeyVault(SecretUri= https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf)** 값이 됩니다.
 
-    1.  Select **OK** to close the popup and return to the **Configuration** section.
-    
-    1.  Select **Save** at the top of the blade to persist your settings.
+5.  **슬롯 설정** 텍스트 박스를 기본값으로 설정한 상태로 둡니다.
+
+6.  탭 상단으로 다시 스크롤한 다음 **저장** 을 선택합니다.
 
-1.  Wait for your application settings to persist before you move forward with the lab.
+<!-- end list -->
 
-#### Task 2: Create a Key Vault-derived application setting 
+7.  이 랩을 진행하기 전에 응용 프로그램 설정이 유지될 때까지 기다립니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+#### 작업 2: HTTP 트리거 함수 만들기
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **Function App** blade, select the **Platform features** tab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securefunc\*** 함수 어플을 선택합니다.
 
-1.  In the **Platform features** tab, select the **Configuration** link located in the **General Settings** section.
+4.  **함수 어플** 블레이드에서 **+ 새 함수** 를 선택합니다.
 
-1.  In the **Configuration** section, perform the following actions:
+5.  **새 Azure Function** 빠른 시작에서 다음 작업을 수행합니다.
     
-    1.  Select the **Application settings** tab.
+    1.  **개발 환경 선택** 헤더에서 **포털에** 를 선택합니다.
     
-    1.  Select **+ New application setting**.
+    2.  **계속** 을 선택합니다.
     
-    1.  In the **Add/Edit application setting** popup that appears, in the **Name** field, enter **StorageConnectionString**.
+    3.  **함수 선택** 헤더에서 **더 많은 템플릿...** 을 선택합니다.
     
-    1.  In the **Value** field, construct a value by using the following syntax: **@Microsoft.KeyVault(SecretUri=\<Secret Identifier\>)**
-
-      > **Note**: You will need to build a reference to your **Secret Identifier** by using the above syntax. For example, if your Secret Identifier is **https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf**, then your value would be **@Microsoft.KeyVault(SecretUri= https://securevaultstudent.vault.azure.net/secrets/storagecredentials/17b41386df3e4191b92f089f5efb4cbf)**
+    4.  **템플릿 완료 및 보기** 를 선택합니다.
     
-    1.  Leave the **deployment slot setting** field set to its default value.
-
-    1.  Select **OK** to close the popup and return to the **Configuration** section.
+    5.  **템플릿** 드롭다운 목록에서 **HTTP 트리거** 를 선택합니다.
+    
+    6.  **새 함수** 팝업에서 **이름** 텍스트 박스를 찾아 **FileParser** 를 입력합니다.
     
-    1.  Select **Save** at the top of the blade to persist your settings.
+    7.  **새 함수** 팝업에서 **권한 부여 수준** 목록을 찾아 **익명** 을 선택합니다.
+    
+    8.  **새 함수** 팝업에서 **만들기** 를 선택합니다.
 
-1.  Wait for your application settings to persist before you move forward with the lab.
+6.  함수 편집기에서 예제 함수 스크립트를 관찰합니다.
 
-#### Task 3: Create a HTTP-triggered function
+\#r "Newtonsoft.Json”
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+using System.Net;
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+using Microsoft.AspNetCore.Mvc;
 
-1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+using Microsoft.Extensions.Primitives;
 
-1.  In the **Function App** blade, select **+ New function**.
+using Newtonsoft.Json;
 
-1.  In the **New Azure Function** quickstart, perform the following actions:
-    
-    1.  Under the **Choose a Development Environment** header, select **In-Portal**.
-    
-    1.  Select **Continue**.
-    
-    1.  Under the **Choose a Function** header, select **More templates…**.
-    
-    1.  Select **Finish and view templates**.
-    
-    1.  In the **Templates** drop-down list, select **HTTP trigger**.
-    
-    1.  In the **New Function** pop-up, locate the **Name** text box and enter **FileParser**.
-    
-    1.  In the **New Function** pop-up, locate the **Authorization level** list and select **Anonymous**.
-    
-    1.  In the **New Function** pop-up, select **Create**.
+public static async Task\<IActionResult\> Run(HttpRequest req, ILogger log)
 
-1.  In the function editor, observe the example function script:
+{
 
-    ```
-    #r "Newtonsoft.Json"
+log.LogInformation("C\# HTTP trigger function processed a request.");
 
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Primitives;
-    using Newtonsoft.Json;
+string name = req.Query\["name"\];
 
-    public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
-    {
+string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-        log.LogInformation("C\# HTTP trigger function processed a request.");
+dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-        string name = req.Query\["name"\];
+name = name ?? data?.name;
 
-        string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+return name \!= null
 
-        dynamic data = JsonConvert.DeserializeObject(requestBody);
+? (ActionResult)new OkObjectResult($"Hello, {name}")
 
-        name = name ?? data?.name;
+: new BadRequestObjectResult("Please pass a name on the query string or in the request body");
 
-        return name != null
-            ? (ActionResult)new OkObjectResult($"Hello, {name}")
-            : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
-    }
-    ```
+}
 
-1.  **Delete** all the example code.
+7.  예제 코드를 모두 **삭제** 합니다.
 
-1.  Within the function editor, copy and paste the following placeholder function:
+8.  함수 편집기 내에서 다음 자리 표시자 함수를 복사하여 붙여넣습니다.
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        return new OkObjectResult("Test Successful");
-    }
-    ```
+using Microsoft.AspNetCore.Mvc;
 
-1.  Select **Save and run** to save the script and perform a test execution of the function.
+public static async Task\<IActionResult\> Run(HttpRequest req)
 
-1. The **Test** and **Logs** panes will automatically appear when the script executes for the first time.
+{
 
-1. Observe the **Output** text box in the **Test** pane. You should now see the value **Test Successful** returned from the function.
+return new OkObjectResult("Test Successful");
 
-#### Task 4: Test the Key Vault-derived application setting
+}
 
-1.  Delete the existing code within the **Run** method of the script.
+9.  **저장 및 실행** 을 선택하여 스크립트를 저장하고 함수의 테스트 실행을 수행합니다.
 
-1.  The **Run** method should now look like this:
+10. 스크립트가 처음으로 실행될 때 **테스트** 및 **로그** 페인이 자동으로 나타납니다.
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
+11. **테스트** 페인에서 **출력** 텍스트 박스를 관찰합니다. 이제 함수에서 반환된 **테스트 성공** 값이 표시됩니다.
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
+#### 작업 3: 응용 프로그램 설정 테스트
 
-    }
-    ```
+1.  스크립트의 **Run** 메서드 내에서 기존 코드를 삭제합니다.
 
-1.  Add the following line of code to get the value of the **StorageConnectionString** application setting by using the **Environment.GetEnvironmentVariable** method:
+2.  이제 **Run** 메서드는 다음과 같습니다.
 
-    ```
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-    ```
+using System.Net;
 
-1.  Add the following line of code to return the value of the **connectionString** variable by using the **OkObjectResult** class constructor:
-   
-    ```
-    return new OkObjectResult(connectionString);
-    ```
-    
-1.  The **Run** method should now look like this:
+using Microsoft.AspNetCore.Mvc;
+
+public static async Task\<IActionResult\> Run(HttpRequest req)
+
+{
+
+}
+
+3.  다음 코드 줄을 추가하여 **Environment.GetEnvironmentVariable** 메서드를 사용하여 **StorageConnectionString** 응용 프로그램 설정의 값을 얻읍니다.
+
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+
+4.  다음 코드 줄을 추가하여 **OkObjectResult** 클래스 생성기를 사용하여 **connectionString** 변수의 값을 반환합니다.
+
+return new OkObjectResult(connectionString);
+
+5.  이제 **Run** 메서드는 다음과 같습니다.
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-        return new OkObjectResult(connectionString);
-    }
-    ```
+using Microsoft.AspNetCore.Mvc;
 
-1.  Select **Save and run** to save the script and perform a test execution of the function.
+public static async Task\<IActionResult\> Run(HttpRequest req)
 
-1.  Observe the **Output** text box in the **Test** pane. You should now see the connection string returned from the function.
+{
 
-#### Review
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
 
-In this exercise, you securely used a service identity to read the value of a secret stored in **Azure Key Vault** and return that value as the result of an **Azure Function**.
+return new OkObjectResult(connectionString);
 
-### Exercise 4: Access Storage Account blobs
+}
 
-#### Task 1: Upload a sample storage blob
+6.  **저장 및 실행** 을 선택하여 스크립트를 저장하고 함수의 테스트 실행을 수행합니다.
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+7.  **테스트** 페인에서 **출력** 텍스트 박스를 관찰합니다. 이제 함수에서 반환된 연결 문자열이 표시됩니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+#### 검토
 
-1.  In the **SecureFunction** blade, select the **securestor\*** storage account that you created earlier in this lab.
+이 연습에서는 서비스 ID 를 사용하여 **Azure Key Vault** 에 저장된 비밀의 값을 읽고 **Azure Function** 의 결과로 해당 값을 반환합니다.
 
-1.  In the **Storage account** blade, select the **Blobs** link located in the **Blob service** section on the left side of the blade.
+### 연습 4: 저장소 계정 블랍에 액세스
 
-1.  In the **Blobs** section, select **+ Container**.
+#### 작업 1: 샘플 저장소 블랍 업로드
 
-1.  In the **New container** pop-up, perform the following actions:
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
+
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
+
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securestor\*** 저장소 계정을 선택합니다.
+
+4.  **저장소 계정** 블레이드에서 블레이드 왼쪽의 **블랍 서비스** 섹션에 있는 **블랍** 링크를 선택합니다.
+
+5.  **블랍** 섹션에서 **+ 컨테이너** 를 선택합니다.
+
+6.  **새 컨테이너** 팝업에서 다음 작업을 수행합니다.
     
-    1.  In the **Name** text box, enter **drop**.
+    1.  **이름** 텍스트 박스에 **드롭** 를 입력합니다.
     
-    1.  In the **Public access level** drop-down list, select **Blob (anonymous read access for blobs only)**.
+    2.  **공용 액세스 수준** 드롭다운 목록에서 **블랍(블랍에 대해서만 익명 읽기액세스)** 를 선택합니다.
     
-    1.  Select **OK**.
+    3.  **확인** 을 선택합니다.
 
-1.  Back in the **Blobs** section, select the newly created **drop** container.
+7.  **블랍** 섹션으로 돌아가서 새로 만든 **드롭** 컨테이너를 선택합니다.
 
-1.  In the **Container** blade, select **Upload**.
+8.  **컨테이너** 블레이드에서 **업로드** 를 선택합니다.
 
-1.  In the **Upload blob** pop-up, perform the following actions:
+9.  **블랍 업로드** 팝업에서 다음 작업을 수행합니다.
     
-    1.  In the **Files** section, select the **Folder** icon.
+    4.  **파일** 섹션에서 **폴더** 아이콘을 선택합니다.
     
-    1.  In the File Explorer dialog box, go to **Allfiles (F):\\Allfiles\\Labs\\04\\Starter**, select the **records.json** file, and then select **Open**.
+    5.  파일 네비게이션기 대화 박스에서 **Allfiles (F):\\Labfiles\\04\\Starter** 으로 이동하여 **records.json** 파일을 선택하고 **확인** 을 선택합니다.
     
-    1.  Ensure that **Overwrite if files already exist** is selected.
+    6.  **파일이 이미 있는지 덮어쓰기** 가 선택되어 있는지 확인합니다.
     
-    1.  Select **Upload**.
+    7.  **업로드** 를 선택합니다.
 
-1. Wait for the blob to be uploaded before you continue with this lab.
+10. 이 랩을 계속하기 전에 블랍이 업로드될 때까지 기다립니다.
 
-1. Back in the **Container** blade, select the **records.json** blob from the list of blobs.
+11. **컨테이너** 블레이드에서 블랍 목록에서 **records.json** 블랍을 선택합니다.
 
-1. In the **Blob** blade, view the blob metadata.
+12. **블랍** 블레이드에서 블랍 메타데이터를 봅니다.
 
-1. Copy the **URL** for the blob.
+13. 블랍의 **URL** 을 복사합니다.
 
-1. On the taskbar, right-select the **Microsoft Edge** icon and then select **New window**.
+14. 작업 표시줄에서 **Microsoft Edge** 아이콘을 오른쪽으로 선택한 다음 **새 창** 을 선택합니다.
 
-1. In the new browser window, navigate to the **URL** that you copied for the blob.
+15. 새 브라우저 창에서 블랍에 대해 복사한 **URL** 로 이동합니다.
 
-1. You should now see the **JSON** contents of the blob. Close the browser window showing the **JSON** contents.
+16. 이제 블랍의 **JSON** 내용이 표시됩니다. **JSON** 내용을 표시하는 브라우저 창을 닫습니다.
 
-1. Return to the browser window with the **Azure portal.**
+17. **Azure portal** 을 사용하여 브라우저 창으로 돌아갑니다.
 
-1. Close the **Blob** blade.
+18. **블랍** 블레이드를 닫습니다.
 
-1. Back in the **Container** blade, select **Change access level policy** located at the top of the blade.
+19. **컨테이너** 블레이드로 돌아가서 블레이드 상단에 있는 **액세스 수준 정책 변경** 을 선택합니다.
 
-1. In the **Change access level** pop-up that appears, perform the following actions:
+20. 표시되는 **액세스 수준 변경** 팝업에서 다음 작업을 수행합니다.
     
-    1.  In the **Public access level** drop-down list, select **Private (no anonymous access)**.
+    8.  **공용 액세스 수준** 드롭다운 목록에서 **비공개(익명 액세스없음)** 를 선택합니다.
     
-    1.  Select **OK**.
+    9.  **확인** 을 선택합니다.
 
-1. On the taskbar, right-select the **Microsoft Edge** icon and then select **New window**.
+21. 작업 표시줄에서 **Microsoft Edge** 아이콘을 오른쪽으로 선택한 다음 **새 창** 을 선택합니다.
 
-1. In the new browser window, navigate to the **URL** that you copied for the blob.
+22. 새 브라우저 창에서 블랍에 대해 복사한 **URL** 로 이동합니다.
 
-1. You should now see an error message indicating that the resource was not found.
+23. 이제 리소스를 찾을 수 없다는 오류 메시지가 표시됩니다.
 
-    > **Note**: If you do not see the error message, your browser might have cached the file. Use **Ctrl+F5** to refresh the page until you see the error message.
+> > 참고: 오류 메시지가 표시되지 않으면 브라우저에서 파일을 캐치했을 수 있습니다. **Ctrl+F5** 를 사용하여 오류 메시지가 표시될 때까지 페이지를 새로 고칩니다.
 
-#### Task 2: Pull the Storage Account SDK from NuGet
+#### 작업 2: 저장소 계정 SDK 구성
 
-1.  On the navigation menu located on the left side of the portal, select the **Resource groups** link.
+1.  포털의 왼쪽에 있는 네비게이션 메뉴에서 **리소스 그룹** 링크를 선택합니다.
 
-1.  In the **Resource groups** blade, locate and select the **SecureFunction** resource group that you created earlier in this lab.
+2.  **리소스 그룹** 블레이드에서 이전에 랩에서 만든 **SecureFunction** 리소스 그룹을 찾아서 선택합니다.
 
-1.  In the **SecureFunction** blade, select the **securefunc\*** function app that you created earlier in this lab.
+3.  **SecureFunction** 블레이드에서 이전에 랩에서 만든 **securefunc\*** 함수 어플을 선택합니다.
 
-1.  In the **Function App** blade, locate and select the existing **FileParser** function to open the editor for the function.
+4.  **함수 어플** 블레이드에서 기존 **FileParser** 함수를 찾아 선택하여 함수에 대한 편집기를 엽니다.
 
-    > **Note**: You might need to expand the **Functions** option in the menu on the left side of the blade.
+> > 참고: 블레이드 왼쪽의 메뉴에서 **함수** 옵션을 확장해야 할 수 있습니다.
 
-1.  On the right side of the editor, select **View files** to open the tab.
+5.  편집기의 오른쪽에서 **파일 보기** 를 선택하여 탭을 엽니다.
 
-1.  In the **View files** tab, select **Add**.
+6.  **파일 보기** 탭에서 **업로드** 를 선택합니다.
 
-1.  In the filename dialog that appears, enter **function.proj**.
+7.  열리는 파일 네비게이션기 대화 박스에서 **Allfiles (F):\\Labfiles\\04\\Starter** 으로 이동하여 **function.proj** 파일을 선택하고 **열기** 를 선택합니다.
 
-1.  In the file editor, insert this configuration content:
+8.  **Function.proj** 파일을 선택하여 파일의 내용을 봅니다.
 
-    ```
-    <Project Sdk="Microsoft.NET.Sdk">
-        <PropertyGroup>
-            <TargetFramework>netstandard2.0</TargetFramework>
-        </PropertyGroup>
-        <ItemGroup>
-            <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.0.0" />
-        </ItemGroup>
-    </Project>
-    ```
+9.  **Run.csx ** 파일을 선택하여 **FileParser** 함수의 편집기로 돌아갑니다.
 
-1. In the editor, select **Save** button to persist your changes to the configuration.
+10. **파일 보기** 탭을 최소화합니다.
 
-    > **Note**: This **.proj** file contains the NuGet package reference necessary to import the [SixLabors.ImageSharp](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/11.0.0) package.
+> > 참고: 탭 헤더의 오른쪽에 있는 화살표를 즉시 선택하여 탭을 최소화할 수 있습니다.
 
-1.  Select the **function.proj** file to view the contents of the file.
+11. 편집기 내에서 스크립트의 **Run** 메서드 내에서 기존 코드를 삭제합니다.
 
-1.  Select the **run.csx** file to return to the editor for the **FileParser** function.
+12. 코드 파일 의 맨 위에 다음 코드 줄을 추가하여 **Microsoft.WindowsAzure.Storage** 네임스페이스에 대한 **사용** 블록을 만듭니다.
 
-1. Minimize the **View files** tab.
+using Microsoft.WindowsAzure.Storage;
 
-    > **Note**: You can minimize the tab by selecting the arrow immediately to the right of the tab header.
+13. 다음 코드 줄을 추가하여 **Microsoft.WindowsAzure.Storage.Blob** 네임스페이스에 대한 **사용** 블록을 만듭니다.
 
-1. Within the editor, delete the existing code within the **Run** method of the script.
+using Microsoft.WindowsAzure.Storage.Blob;
 
-1. At the top of the code file, add the following line of code to create a **using** block for the **Microsoft.Azure.Storage** namespace:
+14. 이제 **Run** 메서드는 다음과 같습니다.
 
-    ```
-    using Microsoft.Azure.Storage;
-    ```
+using System.Net;
 
-1. Add the following line of code to create a **using** block for the **Microsoft.Azure.Storage.Blob** namespace:
+using Microsoft.AspNetCore.Mvc;
 
-    ```
-    using Microsoft.Azure.Storage.Blob;
-    ```
+using Microsoft.WindowsAzure.Storage;
 
-1. The **Run** method should now look like this:
+using Microsoft.WindowsAzure.Storage.Blob;
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
-    
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
+public static async Task\<IActionResult\> Run(HttpRequest req)
 
-    }
-    ```
+{
 
-#### Task 3: Write storage account code
+}
 
-1.  Add the following line of code within the **Run** method to get the value of the **StorageConnectionString** application setting by using the **Environment.GetEnvironmentVariable** method:
+#### 작업 3: 저장소 계정 코드 작성
 
-    ```
-    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-    ```
+1.  **Run** 메서드에서 다음 코드 줄을 추가하여 **Environment.GetEnvironmentVariable** 메서드를 사용하여 **StorageConnectionString** 응용 프로그램 설정의 값을 얻읍니다.
 
-1.  Add the following line of code to create a new instance of the **CloudStorageAccount** class by using the **CloudStorageAccount.Parse** static method, passing in your *connectionString* variable:
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
 
-    ```
-    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-    ```
+2.  다음 코드 줄을 추가하여 **CloudStorageAccount.Parse** 스태틱 메서드를 사용하여 **CloudStorageAccount** 클래스의 새 인스턴스를 만들고 *연결문자열* 변수를 전달합니다.
 
-1.  Add the following line of code to use the **CloudStorageAccount.CreateCloudBlobClient** method to create a new instance of the **CloudBlobClient** class that will give you access to blobs in your storage account:
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
 
-    ```
-    CloudBlobClient blobClient = account.CreateCloudBlobClient();
-    ```
+3.  다음 코드 줄을 추가하여 **CloudStorageAccount.CreateCloudBlobClient** 메서드를 사용하여 저장소 계정의 블랍에 대한 액세스 권한을 부여하는 **CloudBlobClient** 클래스의 새 인스턴스를 만듭니다.
 
-1.  Add the following line of code to use the **CloudBlobClient.GetContainerReference** method, while passing in the **drop** container name to create a new instance of the **CloudBlobContainer** class that references the container that you created earlier in this lab:
+CloudBlobClient blobClient = account.CreateCloudBlobClient();
 
-    ```
-    CloudBlobContainer container = blobClient.GetContainerReference("drop");
-    ```
+4.  다음 코드 줄을 추가하여 **CloudBlobClient.GetContainerReference** 메서드를 사용하고 **drop** 컨테이너 이름을 새이전에 랩에서 만든 컨테이너를 참조하는 **CloudBlobContainer** 클래스의 인스턴스로 전달하합니다.
 
-1.  Add the following line of code to use the **CloudBlobContainer.GetBlockBlobReference** method, while passing in the **records.json** blob name to create a new instance of the **CloudBlockBlob** class that references the blob that you uploaded earlier in this lab:
+CloudBlobContainer container = blobClient.GetContainerReference("drop");
 
-    ```
-    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-    ```
-    
-1.  The **Run** method should now look like this:
+5.  다음 코드 줄을 추가하여 **CloudBlobContainer.GetBlockBlobReference** 메서드를 사용하고 **records.json** 블랍 이름을 이전에 랩에서 업로드한 블랍을 참조하는 **CloudBlockBlob** 클래스의 새 인스턴스로 만드러 전달합니다.
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
+CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-        CloudBlobClient blobClient = account.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference("drop");
-        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-    }
-    ```
+6.  이제 **Run** 메서드는 다음과 같습니다.
 
-#### Task 4: Download a blob
+using System.Net;
 
-1.  Add the following line of code to use the **CloudBlockBlob.DownloadTextAsync** method to download the contents of the referenced blob asynchronously and store the result in a string variable named *content*:
+using Microsoft.AspNetCore.Mvc;
 
-    ```
-    string content = await blob.DownloadTextAsync();
-    ```
+using Microsoft.WindowsAzure.Storage;
 
-1.  Add the following line of code to return the value of the *content* variable by using the **OkObjectResult** class constructor:
+using Microsoft.WindowsAzure.Storage.Blob;
 
-    ```
-    return new OkObjectResult(content);
-    ```
+public static async Task\<IActionResult\> Run(HttpRequest req)
 
-1.  The **Run** method should now look like this:
+{
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-        CloudBlobClient blobClient = account.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference("drop");
-        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-        string content = await blob.DownloadTextAsync();
-        return new OkObjectResult(content);
-    }
-    ```
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
 
-1.  Select **Save and run** to save the script and perform a test execution of the function.
+CloudBlobClient blobClient = account.CreateCloudBlobClient();
 
-1.  Observe the **Output** text box in the **Test** pane. You should now see the content of the **$/drop/records.json** blob stored in your **storage account**.
+CloudBlobContainer container = blobClient.GetContainerReference("drop");
 
-#### Task 5: Generate a Shared Access Signature (SAS)
+CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
 
-1.  **Delete** the following lines of code:
+}
 
-    ```
-    string content = await blob.DownloadTextAsync();
+#### 작업 4: 블랍 다운로드
 
-    return new OkObjectResult(content);
-    ```
+1.  다음 코드 줄을 추가하여 참조된 블랍의 내용을 **CloudBlockBlob.DownloadTextAsync** 메서드를 사용하여 비동기적으로 다운로드하고 *콘텐츠* 라는 문자열 변수에 결과를 저장합니다.
 
-1.  The **Run** method should now look like this:
+string content = await blob.DownloadTextAsync();
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
-    
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-        CloudBlobClient blobClient = account.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference("drop");
-        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-    }
-    ```
+2.  다음 코드 줄을 추가하여 **OkObjectResult** 클래스 생성기를 사용하여 *콘텐츠* 변수의 값을 반환합니다.
+
+return new OkObjectResult(content);
+
+3.  이제 **Run** 메서드는 다음과 같습니다.
+
+using System.Net;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.WindowsAzure.Storage;
+
+using Microsoft.WindowsAzure.Storage.Blob;
+
+public static async Task\<IActionResult\> Run(HttpRequest req)
+
+{
+
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+
+CloudBlobClient blobClient = account.CreateCloudBlobClient();
+
+CloudBlobContainer container = blobClient.GetContainerReference("drop");
+
+CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+
+string content = await blob.DownloadTextAsync();
+
+return new OkObjectResult(content);
+
+}
 
-1.  Add the following line of code to create a new instance of the **SharedAccessPolicy** class with the following settings:
+4.  **저장 및 실행** 을 선택하여 스크립트를 저장하고 함수의 테스트 실행을 수행합니다.
+
+5.  **테스트** 페인에서 **출력** 텍스트 박스를 관찰합니다. 이제 **저장소 계정** 에 저장된 **$/drop/records.json** 블랍의 내용이 표시됩니다.
+
+#### 작업 5: 공유 액세스 서명(SAS) 생성
+
+1.  기존 코드 줄을 **삭제** 합니다.
+
+string content = await blob.DownloadTextAsync();
+
+return new OkObjectResult(content);
+
+2.  이제 **Run** 메서드는 다음과 같습니다.
+
+using System.Net;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.WindowsAzure.Storage;
+
+using Microsoft.WindowsAzure.Storage.Blob;
+
+public static async Task\<IActionResult\> Run(HttpRequest req)
+
+{
+
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+
+CloudBlobClient blobClient = account.CreateCloudBlobClient();
+
+CloudBlobContainer container = blobClient.GetContainerReference("drop");
+
+CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+
+}
+
+3.  다음 코드 줄을 추가하여다음 설정을 사용하여 **SharedAccessPolicy** 클래스의 새 인스턴스를 만듭니다.
     
-      - **Permission**: Read
+      - **허가**: 읽기
     
-      - **Service Scope**: Blob
+      - **서비스 범위**: Blob
     
-      - **Resource Types**: Object
+      - **리소스유형**: 개체
     
-      - **Expiration Time**: 2 Hours
+      - **만료 시간**: 2 시간
     
-      - **Protocol:** HTTPS Only
+      - **프로토콜:** HTTPS 전용
 
-    ```
-    SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
-    {
-        Permissions = SharedAccessAccountPermissions.Read,
-        Services = SharedAccessAccountServices.Blob,
-        ResourceTypes = SharedAccessAccountResourceTypes.Object,
-        SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
-        Protocols = SharedAccessProtocol.HttpsOnly
-    };
-    ```
+SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
 
-1.  Add the following line of code to use the **CloudStorageAccount.GetSharedAcessSignature** method to generate a new **Shared Access Signature (SAS) token** by using the provided policy, and then store the result in a string variable named *sasToken*:
+{
 
-    ```
-    string sasToken = account.GetSharedAccessSignature(policy);
-    ```
+Permissions = SharedAccessAccountPermissions.Read,
 
-1.  Add the following line of code to concatenate the value of the **CloudBlockBlob.Uri** property and the *sasToken* string variable, and store the result in a new variable named *secureBlobUrl*:
+Services = SharedAccessAccountServices.Blob,
 
-    ```
-    string secureBlobUrl = $"{blob.Uri}{sasToken}";
-    ```
+ResourceTypes = SharedAccessAccountResourceTypes.Object,
 
-1.  Add the following line of code to return the value of the *secureBlobUrl* variable by using the **OkObjectResult** class constructor:
+SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
 
-    ```
-    return new OkObjectResult(secureBlobUrl);
-    ```
+Protocols = SharedAccessProtocol.HttpsOnly
 
-1.  The **Run** method should now look like this:
+};
 
-    ```
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
+4.  다음 코드 줄을 추가하여 **CloudStorageAccount.GetSharedAcessSignature** 메서드를 사용하고 제공된 정책을 사용해서 새 **SAS(공유 액세스 서명)토큰** 을 생성하고 *sasToken* 라는문자열 변수에저장합니다:
 
-    public static async Task<IActionResult> Run(HttpRequest req)
-    {
-        string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
-        CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
-        CloudBlobClient blobClient = account.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference("drop");
-        CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
-        SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
-        {
-            Permissions = SharedAccessAccountPermissions.Read,
-            Services = SharedAccessAccountServices.Blob,
-            ResourceTypes = SharedAccessAccountResourceTypes.Object,
-            SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
-            Protocols = SharedAccessProtocol.HttpsOnly
-        };
-        string sasToken = account.GetSharedAccessSignature(policy);
-        string secureBlobUrl = $"{blob.Uri}{sasToken}";
-        return new OkObjectResult(secureBlobUrl);
-    }
-    ```
+string sasToken = account.GetSharedAccessSignature(policy);
 
-1.  Select **Save and run** to save the script and perform a test execution of the function.
+5.  다음 코드 줄을 추가하여 **CloudBlockBlob.Uri** 속성 및 *sasToken* 문자열 변수의 값을 연결하고 *secureBlobUrl* 이라는 새 변수에 결과를 저장합니다:
 
-1.  Observe the **Output** text box in the **Test** pane. You should now see a unique **Secure URL** that can be used to access the secured blob. Record this **URL** because you will need to use it in the next step of this lab.
+string secureBlobUrl = $"{blob.Uri}{sasToken}";
 
-1. On the taskbar, right-select the **Microsoft Edge** icon and then select **New window**.
+6.  다음 코드 줄을 추가하여 **OkObjectResult** 클래스 생성기를 사용해서 *SecureBlobUrl* 변수의 값을 반환합니다.
 
-1. In the new browser window, navigate to the **Secure** **URL** that you copied for the blob.
+return new OkObjectResult(secureBlobUrl);
 
-1. You should now see the **JSON** contents of the blob. Close the browser window showing the **JSON** contents.
+7.  이제 **Run** 메서드는 다음과 같습니다.
 
-1. Return to the browser window with the **Azure portal.**
+using System.Net;
 
-#### Review
+using Microsoft.AspNetCore.Mvc;
 
-In this exercise, you used C\# code to access a storage account securely, download the contents of a blob, and then generate a SAS token that can be used to access the blob securely on another client.
+using Microsoft.WindowsAzure.Storage;
 
-### Exercise 5: Clean up subscription 
+using Microsoft.WindowsAzure.Storage.Blob;
 
-#### Task 1: Open Azure Cloud Shell and list resource groups
+public static async Task\<IActionResult\> Run(HttpRequest req)
 
-1.  In the top navigation bar in the Azure Portal, select the **Cloud Shell** icon to open a new shell instance.
+{
 
-1.  In the **Cloud Shell** command prompt at the bottom of the portal, type in the following command and press Enter to list all resource groups in the subscription:
+string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
 
-    ```
-    az group list
-    ```
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
 
-1.  In the prompt, type the following command and press Enter to view a list of possible commands to delete a resource group:
+CloudBlobClient blobClient = account.CreateCloudBlobClient();
 
-    ```
-    az group delete --help
-    ```
+CloudBlobContainer container = blobClient.GetContainerReference("drop");
 
-#### Task 2: Delete resource group
+CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
 
-1.  In the prompt, type the following command and press Enter to delete the **SecureFunction** resource group:
+SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
 
-    ```
-    az group delete --name SecureFunction --no-wait --yes
-    ```
-    
-1.  Close the **Cloud Shell** pane at the bottom of the portal.
+{
+
+Permissions = SharedAccessAccountPermissions.Read,
+
+Services = SharedAccessAccountServices.Blob,
+
+ResourceTypes = SharedAccessAccountResourceTypes.Object,
+
+SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
+
+Protocols = SharedAccessProtocol.HttpsOnly
+
+};
+
+string sasToken = account.GetSharedAccessSignature(policy);
+
+string secureBlobUrl = $"{blob.Uri}{sasToken}";
+
+return new OkObjectResult(secureBlobUrl);
+
+}
+
+8.  **저장 및 실행** 을 선택하여 스크립트를 저장하고 함수의 테스트 실행을 수행합니다.
+
+9.  **테스트** 페인에서 **출력** 텍스트 박스를 관찰합니다. 이제 보안 블랍에 액세스를 사용할 수 있는 유일한 **보안 URL** 이 표시됩니다. 이랩의 다음 단계에서 사용해야 하므로 이 **URL** 을 기록합니다.
+
+10. 작업 표시줄에서 **Microsoft Edge** 아이콘을 오른쪽으로 선택한 다음 **새 창** 을 선택합니다.
+
+11. 새 브라우저 창에서 블랍에 대해 복사한 **보안** **URL** 로 이동합니다.
+
+12. 이제 블랍의 **JSON** 내용이 표시됩니다. **JSON** 내용을 표시하는 브라우저 창을 닫습니다.
+
+13. **Azure portal** 을 사용하여 브라우저 창으로 돌아갑니다.
+
+#### 검토
+
+이 연습에서는 C\# 코드를 사용하여 저장소 계정에 안전하게 액세스하고, 블랍의 내용을 다운로드한 다음 다른 클라이언트에서 블랍에 안전하게 액세스를 사용할 수 있는 SAS 토큰을 생성했습니다.
+
+### 연습 5: 구독 정리 
+
+#### 작업 1: Azure 클라우드 셸 열기 및 리소스 그룹 나열
+
+1.  Azure 포털 상단 네비게인션 바에서 **Cloud Shell** 아이콘을 선택하여 새 셸 인스턴스를 엽니다.
+
+2.  포털 하단의 **Cloud Shell** 명령 프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 구독의 모든 리소스 그룹을 나열합니다.
+
+az group list
+
+3.  프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 리소스 그룹을 삭제할 수 있는 명령 목록을 봅니다.
+
+az group delete --help
+
+#### 작업 2: 그룹 만들기
+
+1.  프롬프트에서 다음 명령을 입력하고 Enter 를 눌러 **SecureFunction** 리소스 그룹을 삭제합니다.
+
+az group delete --name SecureFunction --no-wait --yes
+
+2.  포털 하단의 **클라우드 셸** 페인을 닫습니다.
 
-#### Task 3: Close active application
+#### 작업 3: 액티브 응용 프로그램 닫기
 
-> Close the currently running **Microsoft Edge** application.
+> 현재 실행 중인 **Microsoft Edge** 응용 프로그램을 닫습니다.
 
-#### Review
+#### 검토
 
-In this exercise, you cleaned up your subscription by removing the **resource groups** used in this lab.
+이 연습에서는 이 랩에 사용된 **리소스 그룹** 을 제거하여 구독을 정리했습니다.
